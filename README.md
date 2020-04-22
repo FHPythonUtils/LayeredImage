@@ -99,6 +99,7 @@ layer = ora.layersAndGroups[0] # For the sake of the e.g. this is a layer
 
 # Lets overwrite the layer with a transparent image (bit boring I know...)
 layer.image = Image.new("RGBA", imageDimensions)
+ora.layersAndGroups[0] = layer
 
 # And let's save
 layeredimage.io.saveLayerImage(THISDIR + "/image(modified).ora", ora)
