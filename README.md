@@ -53,30 +53,30 @@ the case, please open an issue and I will fix the tables.
 
 |Format|.ora|.pdn|.xcf|.psd|
 |------|----|----|----|----|
-|Read  |✔   |✔   |✔   |✔   |
-|Layers|✔   |✔   |✔   |✔   |
-|Groups|✔   |N/A |✔   |✔   |
-|Write |✔   |❌  |❌  |❌  |
+|Read  |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
+|Layers|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
+|Groups|:heavy_check_mark:|N/A |:heavy_check_mark:|:heavy_check_mark:|
+|Write |:heavy_check_mark:|:x:  |:x:  |:x:  |
 
 ### Group
 
 |Format    |.ora|.pdn|.xcf|.psd|
 |----------|----|----|----|----|
-|Name      |✔   |✔   |✔   |✔   |
-|Dimensions|⚠   |✔   |✔   |✔   |
-|Offsets   |✔   |N/A |✔   |✔   |
-|Opacity   |✔   |✔   |✔   |✔   |
-|Visibility|✔   |✔   |❌  |✔   |
+|Name      |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
+|Dimensions|:warning:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
+|Offsets   |:heavy_check_mark:|N/A |:heavy_check_mark:|:heavy_check_mark:|
+|Opacity   |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
+|Visibility|:heavy_check_mark:|:heavy_check_mark:|:x:  |:heavy_check_mark:|
 
 ### Layer
 
 |Format    |.ora|.pdn|.xcf|.psd|
 |----------|----|----|----|----|
-|Name      |✔   |✔   |✔   |✔   |
-|Dimensions|✔   |✔   |✔   |✔   |
-|Offsets   |✔   |N/A |✔   |✔   |
-|Opacity   |✔   |✔   |✔   |✔   |
-|Visibility|✔   |✔   |❌  |✔   |
+|Name      |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
+|Dimensions|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
+|Offsets   |:heavy_check_mark:|N/A |:heavy_check_mark:|:heavy_check_mark:|
+|Opacity   |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
+|Visibility|:heavy_check_mark:|:heavy_check_mark:|:x:  |:heavy_check_mark:|
 
 
 ## Example Usage
