@@ -85,7 +85,15 @@ class LayeredImage:
 			if layerOrGroup.type == LayerGroupTypes.LAYER:
 				layers.append(layerOrGroup)
 			elif layerOrGroup.type == LayerGroupTypes.GROUP:
-				layers.append(layerOrGroup.layers)
+				for layer in layerOrGroup.layers:
+					# 'Raster' the layer
+					layers.append(Layer(layer.name, layer.image,
+					(max(layer.dimensions[0], layerOrGroup.dimensions[0]),
+					max(layer.dimensions[1], layerOrGroup.dimensions[1])),
+					(layerOrGroup.offsets[0] + layer.offsets[0],
+					layerOrGroup.offsets[1] + layer.offsets[1]),
+					layerOrGroup.opacity * layer.opacity,
+					layerOrGroup.visible and layer.visible))
 		return layers
 
 	def updateLayers(self):

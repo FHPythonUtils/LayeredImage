@@ -5,10 +5,16 @@
 # pylint: disable=import-outside-toplevel
 
 from os.path import exists
-from sys import exit as sysexit
+from sys import exit as sysexit, version_info
 from metprint import LogType, Logger, FHFormatter
 from layeredimage.layergroup import LayerGroupTypes, Layer, Group
 from layeredimage.layeredimage import LayeredImage, rasterImageOA
+
+def extNotRecognised(fileName):
+	""" Output the file extension not recognised error """
+	exts = ["ora", "psd", "xcf", "pdn", "tif", "tiff"]
+	Logger(FHFormatter()).logPrint("File extension is not recognised for file: " +
+	fileName + "! Must be " + "one of \"" + ", \"".join(exts) + "\"", LogType.ERROR)
 
 def openLayerImage(file):
 	"""Open a layer image file into a layer image object
@@ -28,7 +34,11 @@ def openLayerImage(file):
 		return openLayer_XCF(file)
 	if file[-3:] == "pdn":
 		return openLayer_PDN(file)
-	return LayeredImage([], (0, 0))
+	if file[-3:] == "tif" or file[-4:] == "tiff":
+		return openLayer_TIFF(file)
+	Logger(FHFormatter()).logPrint("File extension is not recognised!", LogType.ERROR)
+	extNotRecognised(file)
+	raise ValueError
 
 def saveLayerImage(fileName, layeredImage):
 	"""Save a layered image to a file
@@ -38,13 +48,17 @@ def saveLayerImage(fileName, layeredImage):
 		layeredImage (LayeredImage): the layered image to save
 	"""
 	if fileName[-3:] == "ora":
-		saveLayer_ORA(fileName, layeredImage)
+		return saveLayer_ORA(fileName, layeredImage)
 	if fileName[-3:] == "psd":
-		saveLayer_PSD(fileName, layeredImage)
+		return saveLayer_PSD(fileName, layeredImage)
 	if fileName[-3:] == "xcf":
-		saveLayer_XCF(fileName, layeredImage)
+		return saveLayer_XCF(fileName, layeredImage)
 	if fileName[-3:] == "pdn":
-		saveLayer_PDN(fileName, layeredImage)
+		return saveLayer_PDN(fileName, layeredImage)
+	if fileName[-3:] == "tif" or fileName[-4:] == "tiff":
+		return saveLayer_TIFF(fileName, layeredImage)
+	extNotRecognised(fileName)
+	raise ValueError
 
 def checkExists(file):
 	""" Throw an error and abort if the path does not exist """
@@ -66,7 +80,8 @@ def openLayer_ORA(file):
 		else:
 			layers = []
 			for layer in list(layerOrGroup.children)[::-1]:
-				layers.append(Layer(layer.name, layer.get_image_data(True), layer.dimensions, layer.offsets,
+				layers.append(Layer(layer.name, layer.get_image_data(True),
+				layer.dimensions, layer.offsets,
 				layer.opacity, layer.visible))
 			layersAndGroups.append(Group(layerOrGroup.name, layers, project.dimensions, layerOrGroup.offsets,
 			layerOrGroup.opacity, layerOrGroup.visible))
@@ -80,18 +95,18 @@ def saveLayer_ORA(fileName, layeredImage):
 		if layerOrGroup.type == LayerGroupTypes.LAYER:
 			project = addLayer_ORA(project, layerOrGroup)
 		else:
+			group = project.add_group(layerOrGroup.name,
+			offsets=layerOrGroup.offsets, opacity=layerOrGroup.opacity,
+			visible=layerOrGroup.visible)
 			for layer in layerOrGroup.layers:
-				project = addLayer_ORA(project, layer, layerOrGroup.name + "/")
+				group = addLayer_ORA(group, layer)
 	Project.save = save_ORA_fix
 	project.save(fileName)
 
-def addLayer_ORA(project, layer, groupName=""):
+def addLayer_ORA(project, layer):
 	""" Update the project with a shiny new layer """
-	project.add_layer(layer.image,
-	groupName + layer.name,
-	offsets=(int(layer.offsets[0] / 2), int(layer.offsets[1] / 2)),
-	opacity=layer.opacity,
-	visible=layer.visible)
+	project.add_layer(layer.image, layer.name, offsets=layer.offsets,
+	opacity=layer.opacity, visible=layer.visible)
 	return project
 
 def save_ORA_fix(self, path_or_file, composite_image=None, use_original=False):
@@ -111,7 +126,6 @@ def save_ORA_fix(self, path_or_file, composite_image=None, use_original=False):
 			if use_original and self._extracted_merged_image:
 				composite_image = self._extracted_merged_image
 			else:
-				# render using our built in library
 				r = Renderer(self)
 				composite_image = r.render()
 		self._zip_store_image(zipref, 'mergedimage.png', composite_image)
@@ -120,13 +134,13 @@ def save_ORA_fix(self, path_or_file, composite_image=None, use_original=False):
 
 		for layer in self.children_recursive:
 			if layer.type == TYPE_LAYER:
-				self._zip_store_image(zipref, layer['src'], layer.get_image_data())
+				self._zip_store_image(zipref, layer['src'], layer.get_image_data(True))
 	# pylint: enable=protected-access
 
 
 #### PSD ####
 def openLayer_PSD(file):
-	""" Open an .psd file into a layered image """
+	""" Open a .psd file into a layered image """
 	from psd_tools import PSDImage
 	layersAndGroups = []
 	project = PSDImage.load(file)
@@ -201,8 +215,6 @@ def openLayer_XCF(file):
 	return LayeredImage(layersAndGroups, (project.width, project.height))
 
 
-
-
 def saveLayer_XCF(fileName, layeredImage):
 	""" Save a layered image as .xcf """
 	Logger(FHFormatter()).logPrint("Saving XCFs is not implemented in gimpformats - " +
@@ -213,11 +225,13 @@ def saveLayer_XCF(fileName, layeredImage):
 
 #### PDN ####
 def openLayer_PDN(file):
-	""" Open an .pdn file into a layered image """
+	""" Open a .pdn file into a layered image """
+	if version_info[0] >= 3 and version_info >= 8:
+		Logger(FHFormatter()).logPrint("Opening PDNs is not possible in python " +
+		"3.8+, waiting on upstream fix", LogType.ERROR)
+		raise RuntimeError
 	from pypdn import read
-	from pypdn.namedlist import _make_fn
 	from PIL import Image
-	_make_fn = makeFn_PDN_fix
 	project = read(file)
 	layers = []
 	for layer in project.layers:
@@ -232,47 +246,42 @@ def saveLayer_PDN(_fileName, _layeredImage):
 	raise NotImplementedError
 
 
-def makeFn_PDN_fix(name, chain_fn, args, defaults):
-	"""Patch the function pypdn.namedlist._make_fn with a python 3.8 compatible
-	version
-	This snippet is MIT License Copyright (c) 2018 Addison Elliott
-	"""
-	import ast
-	import sys
-	args_with_self = ['_self'] + list(args)
-	arguments = [ast.Name(id=arg, ctx=ast.Load()) for arg in args_with_self]
-	defs = [ast.Name(id='_def{0}'.format(idx), ctx=ast.Load()) for idx, _ in enumerate(defaults)]
-	# Python 3.8 version
-	if sys.version_info[0] >= 3 and sys.version_info >= 8:
-		parameters = ast.arguments(args=[ast.arg(arg=arg) for arg in args_with_self],
-		posonlyargs=[],	kwonlyargs=[], defaults=defs, kw_defaults=[])
-		module_node = ast.Module(body=[ast.FunctionDef(
-			name=name, args=parameters, body=[ast.Return(
-				value=ast.Call(
-					func=ast.Name(
-						id='_chain', ctx=ast.Load()),
-					args=arguments, keywords=[])
-				)],
-			decorator_list=[])], type_ignores=[])
-	else:
-		# Python 3 version
-		parameters = ast.arguments(args=[ast.arg(arg=arg) for arg in args_with_self],
-			kwonlyargs=[], defaults=defs, kw_defaults=[])
-		module_node = ast.Module(body=[ast.FunctionDef(
-			name=name, args=parameters, body=[ast.Return(
-				value=ast.Call(
-					func=ast.Name(
-						id='_chain', ctx=ast.Load()),
-					args=arguments, keywords=[])
-				)],
-			decorator_list=[])])
-	module_node = ast.fix_missing_locations(module_node)
-	# compile the ast
-	code = compile(module_node, '<string>', 'exec')
-	# and eval it in the right context
-	globals_ = {'_chain': chain_fn}
-	locals_ = dict(('_def{0}'.format(idx), value) for idx, value in enumerate(defaults))
-	# locals_['_def0'] = []
-	eval(code, globals_, locals_)
-	# extract our function from the newly created module
-	return locals_[name]
+#### TIFF ####
+def openLayer_TIFF(file):
+	""" Open a .tiff or a .tif file into a layered image """
+	from PIL import Image
+	project = Image.open(file)
+	layers = []
+	dimensions = [0, 0]
+	for index in range(project.n_frames):
+		# Load the correct image
+		project.seek(index)
+		# Update the project dimensions
+		for indx, dimension in enumerate(dimensions):
+			if project.size[indx] > dimension:
+				dimensions[indx] = project.size[indx]
+		ifd = project.ifd.named()
+		# Offsets
+		offsetX = 0
+		offsetY = 0
+		if 'XPosition' in ifd:
+			offsetX = int(ifd["XPosition"][0][0] / ifd["XPosition"][0][1] * ifd['XResolution'][0][0])
+		if 'YPosition' in ifd:
+			offsetY = int(ifd["YPosition"][0][0] / ifd["YPosition"][0][1] * ifd['YResolution'][0][0])
+		# Add the layer
+		layers.append(Layer(ifd['PageName'][0], project.copy(),
+		(ifd["ImageWidth"][0], ifd["ImageLength"][0]), (offsetX, offsetY), 1, True))
+	return LayeredImage(layers, (dimensions[0], dimensions[1]))
+
+
+def saveLayer_TIFF(fileName, layeredImage):
+	""" Save a layered image as .tiff or .tif """
+	if len(layeredImage.extractGroups()) > 0:
+		Logger(FHFormatter()).logPrint("TIFFs do not support groups so extracting layers",
+		LogType.WARNING)
+	layers = []
+	for layer in layeredImage.extractLayers():
+		layers.append(rasterImageOA(layer.image, layeredImage.dimensions, layer.opacity, layer.offsets))
+
+	layers[0].save(fileName, compression=None, save_all=True,
+				append_images=layers[1:])

@@ -17,8 +17,13 @@ Use this module to read, and write to a number of layered image formats
 
 - [Compatibility](#compatibility)
 	- [Overview](#overview)
-	- [Group](#group)
-	- [Layer](#layer)
+		- [Key](#key)
+	- [Reading](#reading)
+		- [Group](#group)
+		- [Layer](#layer)
+	- [Writing](#writing)
+		- [Group](#group-1)
+		- [Layer](#layer-1)
 - [Example Usage](#example-usage)
 - [Install With PIP](#install-with-pip)
 - [Language information](#language-information)
@@ -51,33 +56,70 @@ the case, please open an issue and I will fix the tables.
 
 ### Overview
 
-|Format|.ora|.pdn|.xcf|.psd|
-|------|----|----|----|----|
-|Read  |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
-|Layers|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
-|Groups|:heavy_check_mark:|N/A |:heavy_check_mark:|:heavy_check_mark:|
-|Write |:heavy_check_mark:|:x:  |:x:  |:x:  |
+#### Key
+- :heavy_check_mark: - Supported
+- :warning: - Things will look the same, but data is lost
+- :x: - This is not supported and will cause loss of data
+- N/A - The source format does not support this so treat this as a :heavy_check_mark:
 
-### Group
+|Format|.ora|.pdn|.xcf|.psd|.tiff/ .tif|
+|------|----|----|----|----|-----|
+|Read  |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
+|Layers|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
+|Groups|:heavy_check_mark:|N/A |:heavy_check_mark:|:heavy_check_mark:|N/A|
+|Write |:heavy_check_mark:|:x:  |:x:  |:x:  |:warning:|
 
-|Format    |.ora|.pdn|.xcf|.psd|
-|----------|----|----|----|----|
-|Name      |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
-|Dimensions|:warning:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
-|Offsets   |:heavy_check_mark:|N/A |:heavy_check_mark:|:heavy_check_mark:|
-|Opacity   |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
-|Visibility|:heavy_check_mark:|:heavy_check_mark:|:x:  |:heavy_check_mark:|
+### Reading
 
-### Layer
+#### Group
 
-|Format    |.ora|.pdn|.xcf|.psd|
-|----------|----|----|----|----|
-|Name      |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
-|Dimensions|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
-|Offsets   |:heavy_check_mark:|N/A |:heavy_check_mark:|:heavy_check_mark:|
-|Opacity   |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
-|Visibility|:heavy_check_mark:|:heavy_check_mark:|:x:  |:heavy_check_mark:|
+|Format    |.ora|.pdn|.xcf|.psd|.tiff/ .tif|
+|----------|----|----|----|----|-----|
+|Name      |:heavy_check_mark:|N/A |:heavy_check_mark:|:heavy_check_mark:|N/A |
+|Dimensions|:warning:|N/A |:heavy_check_mark:|:heavy_check_mark:|N/A |
+|Offsets   |:heavy_check_mark:|N/A |:heavy_check_mark:|:heavy_check_mark:|N/A |
+|Opacity   |:heavy_check_mark:|N/A |:heavy_check_mark:|:heavy_check_mark:|N/A |
+|Visibility|:heavy_check_mark:|N/A |:x:  |:heavy_check_mark:|N/A |
 
+#### Layer
+
+|Format    |.ora|.pdn|.xcf|.psd|.tiff/ .tif|
+|----------|----|----|----|----|-----|
+|Name      |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
+|Dimensions|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
+|Offsets   |:heavy_check_mark:|N/A |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
+|Opacity   |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|N/A |
+|Visibility|:heavy_check_mark:|:heavy_check_mark:|:x:  |:heavy_check_mark:|N/A |
+
+### Writing
+
+#### Group
+
+|Format    |.ora|.pdn|.xcf|.psd|.tiff/ .tif|
+|----------|----|----|----|----|-----|
+|Name      |:heavy_check_mark:|:x:|:x:|:x:|:warning:|
+|Dimensions|:heavy_check_mark:|:x:|:x:|:x:|:warning:|
+|Offsets   |:heavy_check_mark:|:x:|:x:|:x:|:warning:|
+|Opacity   |:heavy_check_mark:|:x:|:x:|:x:|:warning:|
+|Visibility|:heavy_check_mark:|:x:|:x:|:x:|:warning:|
+
+```none
+Layers are extracted from groups and saved to TIFF
+```
+
+#### Layer
+
+|Format    |.ora|.pdn|.xcf|.psd|.tiff/ .tif|
+|----------|----|----|----|----|-----|
+|Name      |:heavy_check_mark:|:x:|:x:|:x:|:x:|
+|Dimensions|:heavy_check_mark:|:x:|:x:|:x:|:warning:|
+|Offsets   |:heavy_check_mark:|:x:|:x:|:x:|:warning:|
+|Opacity   |:heavy_check_mark:|:x:|:x:|:x:|:warning:|
+|Visibility|:heavy_check_mark:|:x:|:x:|:x:|:warning:|
+
+```none
+Layers are rasterized before being written to TIFF
+```
 
 ## Example Usage
 
@@ -130,22 +172,36 @@ THISDIR = str(Path(__file__).resolve().parent)
 sys.path.insert(0, os.path.dirname(THISDIR))
 import layeredimage.io
 
-# Read various formats and output ora
+# ORA
 ora = layeredimage.io.openLayerImage(THISDIR + "/base24.ora")
-psd = layeredimage.io.openLayerImage(THISDIR + "/base24.psd")
-pdn = layeredimage.io.openLayerImage(THISDIR + "/base24.pdn")
-xcf = layeredimage.io.openLayerImage(THISDIR + "/base24.xcf")
-
 layeredimage.io.saveLayerImage(THISDIR + "/base24(ora).ora", ora)
-layeredimage.io.saveLayerImage(THISDIR + "/base24(psd).ora", psd)
-layeredimage.io.saveLayerImage(THISDIR + "/base24(pdn).ora", pdn)
-layeredimage.io.saveLayerImage(THISDIR + "/base24(xcf).ora", xcf)
-
-# Output flattened images
+layeredimage.io.saveLayerImage(THISDIR + "/base24(ora).tiff", ora)
 ora.getFlattenLayers().save(THISDIR + "/base24(ora).png")
+
+# PSD
+psd = layeredimage.io.openLayerImage(THISDIR + "/base24.psd")
+layeredimage.io.saveLayerImage(THISDIR + "/base24(psd).ora", psd)
+layeredimage.io.saveLayerImage(THISDIR + "/base24(psd).tiff", psd)
 psd.getFlattenLayers().save(THISDIR + "/base24(psd).png")
-pdn.getFlattenLayers().save(THISDIR + "/base24(pdn).png")
+
+# PDN
+if sys.version_info[0] >= 3 and sys.version_info[1] < 8:
+	pdn = layeredimage.io.openLayerImage(THISDIR + "/base24.pdn")
+	layeredimage.io.saveLayerImage(THISDIR + "/base24(pdn).ora", pdn)
+	layeredimage.io.saveLayerImage(THISDIR + "/base24(pdn).tiff", pdn)
+	pdn.getFlattenLayers().save(THISDIR + "/base24(pdn).png")
+
+# XCF
+xcf = layeredimage.io.openLayerImage(THISDIR + "/base24.xcf")
+layeredimage.io.saveLayerImage(THISDIR + "/base24(xcf).ora", xcf)
+layeredimage.io.saveLayerImage(THISDIR + "/base24(xcf).tiff", xcf)
 xcf.getFlattenLayers().save(THISDIR + "/base24(xcf).png")
+
+# TIFF
+tiff = layeredimage.io.openLayerImage(THISDIR + "/base24.tiff")
+layeredimage.io.saveLayerImage(THISDIR + "/base24(tiff).ora", tiff)
+layeredimage.io.saveLayerImage(THISDIR + "/base24(tiff).tiff", tiff)
+tiff.getFlattenLayers().save(THISDIR + "/base24(tiff).png")
 ```
 
 ## Install With PIP
