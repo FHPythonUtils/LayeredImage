@@ -2,6 +2,10 @@
 All major and minor version changes will be documented in this file. Details of
 patch-level version changes can be found in [commit messages](../../commits/master).
 
+## 2020.1.1 - 2020/04/22
+- Export to a flat image
+- Bugfix: If the file does not exist throws an error instead of exiting
+
 ## 2020.1 - 2020/04/22
 - Added TIFF support 🎉
 - Discovered that my patch for `pypdn` cannot be applied so throw an error and

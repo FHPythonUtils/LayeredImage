@@ -5,7 +5,7 @@
 # pylint: disable=import-outside-toplevel
 
 from os.path import exists
-from sys import exit as sysexit, version_info
+from sys import version_info
 from metprint import LogType, Logger, FHFormatter
 from layeredimage.layergroup import LayerGroupTypes, Layer, Group
 from layeredimage.layeredimage import LayeredImage, rasterImageOA
@@ -25,7 +25,9 @@ def openLayerImage(file):
 	Returns:
 		LayeredImage: a layered image object
 	"""
-	checkExists(file)
+	if not exists(file):
+		Logger(FHFormatter()).logPrint(file + " does not exist", LogType.ERROR)
+		raise FileExistsError
 	if file[-3:] == "ora":
 		return openLayer_ORA(file)
 	if file[-3:] == "psd":
@@ -60,11 +62,9 @@ def saveLayerImage(fileName, layeredImage):
 	extNotRecognised(fileName)
 	raise ValueError
 
-def checkExists(file):
-	""" Throw an error and abort if the path does not exist """
-	if not exists(file):
-		Logger(FHFormatter()).logPrint(file + " does not exist", LogType.ERROR)
-		sysexit(1)
+def exportFlatImage(fileName, layeredImage):
+	""" Export the layered image to a unilayer image file """
+	layeredImage.getFlattenLayers().save(fileName)
 
 #### ORA ####
 
@@ -113,7 +113,7 @@ def save_ORA_fix(self, path_or_file, composite_image=None, use_original=False):
 	""" Patch the Project.save function from pyora 3.0 with a newer version -Future
 	This snippet is MIT License Copyright (c) 2019 Paul Jewell
 	"""
-	# This is a patch, so im going to need to access what I please
+	# This is a patch, so I'm going to need to access what I please
 	# pylint: disable=protected-access
 	import zipfile
 	from defusedxml import ElementTree as ET
