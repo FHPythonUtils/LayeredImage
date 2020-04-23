@@ -2,6 +2,12 @@
 All major and minor version changes will be documented in this file. Details of
 patch-level version changes can be found in [commit messages](../../commits/master).
 
+## 2020.2 - 2020/04/23
+- Added basic support for blend modes NORMAL, MULTIPLY, ADDITIVE, COLOURBURN,
+COLOURDODGE, REFLECT, GLOW, OVERLAY, DIFFERENCE, NEGATION, LIGHTEN, DARKEN,
+SCREEN, XOR
+- Python 3.5 is no longer supported
+
 ## 2020.1.1 - 2020/04/22
 - Export to a flat image
 - Bugfix: If the file does not exist throws an error instead of exiting

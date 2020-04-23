@@ -21,9 +21,9 @@ if os.path.exists(readme_path):
 setup(
     long_description=readme,
     name='layeredimage',
-    version='2020.1.1',
+    version='2020.2',
     description='Use this module to read, and write to a number of layered image formats',
-    python_requires='==3.*,>=3.5.0',
+    python_requires='==3.*,>=3.6.0',
     project_urls={
         "documentation":
             "https://github.com/FHPythonUtils/LayeredImage/blob/master/README.md",
@@ -34,7 +34,6 @@ setup(
     },
     author='FredHappyface',
     classifiers=[
-        'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
@@ -45,7 +44,8 @@ setup(
     package_data={},
     install_requires=[
         'defusedxml==0.*,>=0.6.0', 'gimpformats-unofficial==0.*,>=0.1.0',
-        'metprint==2020.*,>=2020.5.0', 'pillow==7.*,>=7.1.1',
-        'psd-tools3==1.*,>=1.8.2', 'pyora==0.*,>=0.3.0', 'pypdn==1.*,>=1.0.3'
+        'metprint==2020.*,>=2020.5.0', 'numpy==1.*,>=1.18.3',
+        'pillow==7.*,>=7.1.1', 'psd-tools3==1.*,>=1.8.2', 'pyora==0.*,>=0.3.0',
+        'pypdn==1.*,>=1.0.3', 'scikit-image==0.*,>=0.16.2'
     ],
 )

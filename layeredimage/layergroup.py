@@ -1,6 +1,8 @@
 """ Base class """
 
 from enum import Enum
+from layeredimage.blend import BlendType
+
 class LayerGroupTypes(Enum):
 	""" Can be a LAYER, GROUP, or UNDEFINED """
 	UNDEFINED = 0
@@ -10,7 +12,7 @@ class LayerGroupTypes(Enum):
 class LayerGroup:
 	""" A representation of an image layer or group """
 	def __init__(self, name, dimensions, offsets=(0, 0), opacity=1.0, visible=True,
-	layerGroup=LayerGroupTypes.LAYER, **kwargs):
+	layerGroup=LayerGroupTypes.LAYER, blendmode=BlendType.NORMAL, **kwargs):
 		""" A representation of an image layer or group
 
 		Args:
@@ -33,15 +35,19 @@ class LayerGroup:
 		self.visible = visible
 		self.dimensions = dimensions
 		self.type = layerGroup
+		self.blendmode = blendmode
 		self.extras = kwargs
 
 	def __repr__(self):
-		return "<LayeredImage " + ("Group" if self.type == LayerGroupTypes.GROUP else "Layer") + " \"" + self.name + "\" (" + str(self.dimensions[0]) + "x" + str(self.dimensions[1]) + ")>"
+		return "<LayeredImage " + ("Group" if self.type == LayerGroupTypes.GROUP
+		else "Layer") + " \"" + self.name + "\" (" + str(self.dimensions[0]) + "x" + str(
+			self.dimensions[1]) + ")>"
 
 
 class Layer(LayerGroup):
 	""" A representation of an image layer """
-	def __init__(self, name, image, dimensions=None, offsets=(0, 0), opacity=1.0, visible=True):
+	def __init__(self, name, image, dimensions=None, offsets=(0, 0), opacity=1.0,
+	visible=True, blendmode=BlendType.NORMAL):
 		""" A representation of an image layer
 
 		Args:
@@ -57,7 +63,8 @@ class Layer(LayerGroup):
 			is often configured per layer or per group by an 'eye' icon).
 			Defaults to True.
 		"""
-		super().__init__(name, dimensions, offsets=offsets, opacity=opacity, visible=visible)
+		super().__init__(name, dimensions, offsets=offsets, opacity=opacity,
+		visible=visible, blendmode=blendmode)
 		self.image = image
 
 		# If the user does not specify the dimentions use image.size
@@ -69,7 +76,8 @@ class Layer(LayerGroup):
 
 class Group(LayerGroup):
 	""" A representation of an image group """
-	def __init__(self, name, layers, dimensions=None, offsets=(0, 0), opacity=1.0, visible=True):
+	def __init__(self, name, layers, dimensions=None, offsets=(0, 0), opacity=1.0,
+	visible=True, blendmode=BlendType.NORMAL):
 		""" A representation of an image group
 
 		Args:
@@ -87,7 +95,7 @@ class Group(LayerGroup):
 			Defaults to True.
 		"""
 		super().__init__(name, dimensions, offsets=offsets, opacity=opacity,
-		visible=visible, layerGroup=LayerGroupTypes.GROUP)
+		visible=visible, layerGroup=LayerGroupTypes.GROUP, blendmode=blendmode)
 		self.layers = layers
 
 		# If the user does not specify the dimentions use the largest x and y of

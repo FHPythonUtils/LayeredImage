@@ -9,6 +9,7 @@ from sys import version_info
 from metprint import LogType, Logger, FHFormatter
 from layeredimage.layergroup import LayerGroupTypes, Layer, Group
 from layeredimage.layeredimage import LayeredImage, rasterImageOA
+from layeredimage.blend import BlendType
 
 def extNotRecognised(fileName):
 	""" Output the file extension not recognised error """
@@ -66,47 +67,69 @@ def exportFlatImage(fileName, layeredImage):
 	""" Export the layered image to a unilayer image file """
 	layeredImage.getFlattenLayers().save(fileName)
 
-#### ORA ####
+def blendModeLookup(blendmode, blendLookup, default=BlendType.NORMAL):
+	""" Get the blendmode from a lookup table """
+	if blendmode not in blendLookup:
+		Logger(FHFormatter()).logPrint(str(blendmode) + " is not currently supported!", LogType.WARNING)
+		return default
+	return blendLookup[blendmode]
 
+#### ORA ####
 def openLayer_ORA(file):
 	""" Open an .ora file into a layered image """
 	from pyora import Project, TYPE_LAYER
+	# Not implemented hard-light soft-light color luminosity hue
+	blendLookup = {"svg:src-over": BlendType.NORMAL, "svg:multiply": BlendType.MULTIPLY,
+	"svg:color-burn": BlendType.COLOURBURN,	"svg:color-dodge": BlendType.COLOURDODGE,
+	"svg:": BlendType.REFLECT, "svg:overlay": BlendType.OVERLAY,
+	"svg:difference": BlendType.DIFFERENCE,	"svg:lighten": BlendType.LIGHTEN,
+	"svg:darken": BlendType.DARKEN, "svg:screen": BlendType.SCREEN}
 	layersAndGroups = []
 	project = Project.load(file)
 	for layerOrGroup in project.children[::-1]:
 		if layerOrGroup.type == TYPE_LAYER:
 			layersAndGroups.append(Layer(layerOrGroup.name, layerOrGroup.get_image_data(True),
-			layerOrGroup.dimensions, layerOrGroup.offsets, layerOrGroup.opacity, layerOrGroup.visible))
+			layerOrGroup.dimensions, layerOrGroup.offsets, layerOrGroup.opacity, layerOrGroup.visible,
+			blendModeLookup(layerOrGroup.composite_op, blendLookup)))
 		else:
 			layers = []
 			for layer in list(layerOrGroup.children)[::-1]:
 				layers.append(Layer(layer.name, layer.get_image_data(True),
 				layer.dimensions, layer.offsets,
-				layer.opacity, layer.visible))
+				layer.opacity, layer.visible,
+				blendModeLookup(layerOrGroup.composite_op, blendLookup)))
 			layersAndGroups.append(Group(layerOrGroup.name, layers, project.dimensions, layerOrGroup.offsets,
-			layerOrGroup.opacity, layerOrGroup.visible))
+			layerOrGroup.opacity, layerOrGroup.visible,
+			blendModeLookup(layerOrGroup.composite_op, blendLookup)))
 	return LayeredImage(layersAndGroups, project.dimensions)
 
 def saveLayer_ORA(fileName, layeredImage):
 	""" Save a layered image as .ora """
 	from pyora import Project
+	blendLookup = {BlendType.NORMAL: "svg:src-over", BlendType.MULTIPLY: "svg:multiply",
+	BlendType.COLOURBURN: "svg:color-burn",	BlendType.COLOURDODGE: "svg:color-dodge",
+	BlendType.REFLECT: "svg:",	BlendType.OVERLAY: "svg:overlay",
+	BlendType.DIFFERENCE: "svg:difference",	BlendType.LIGHTEN: "svg:lighten",
+	BlendType.DARKEN: "svg:darken", BlendType.SCREEN: "svg:screen"}
 	project = Project.new(layeredImage.dimensions[0], layeredImage.dimensions[1])
 	for layerOrGroup in layeredImage.layersAndGroups:
 		if layerOrGroup.type == LayerGroupTypes.LAYER:
-			project = addLayer_ORA(project, layerOrGroup)
+			project = addLayer_ORA(project, layerOrGroup, blendLookup)
 		else:
 			group = project.add_group(layerOrGroup.name,
 			offsets=layerOrGroup.offsets, opacity=layerOrGroup.opacity,
-			visible=layerOrGroup.visible)
+			visible=layerOrGroup.visible,
+			composite_op=blendModeLookup(layerOrGroup.blendmode, blendLookup, "svg:src-over"))
 			for layer in layerOrGroup.layers:
-				group = addLayer_ORA(group, layer)
+				group = addLayer_ORA(group, layer, blendLookup)
 	Project.save = save_ORA_fix
 	project.save(fileName)
 
-def addLayer_ORA(project, layer):
+def addLayer_ORA(project, layer, blendLookup):
 	""" Update the project with a shiny new layer """
 	project.add_layer(layer.image, layer.name, offsets=layer.offsets,
-	opacity=layer.opacity, visible=layer.visible)
+	opacity=layer.opacity, visible=layer.visible,
+	composite_op=blendModeLookup(layer.blendmode, blendLookup, "svg:src-over"))
 	return project
 
 def save_ORA_fix(self, path_or_file, composite_image=None, use_original=False):
@@ -142,6 +165,11 @@ def save_ORA_fix(self, path_or_file, composite_image=None, use_original=False):
 def openLayer_PSD(file):
 	""" Open a .psd file into a layered image """
 	from psd_tools import PSDImage
+	blendLookup = {"normal": BlendType.NORMAL, "multiply": BlendType.MULTIPLY,
+	"color burn": BlendType.COLOURBURN, "color dodge": BlendType.COLOURDODGE,
+	"overlay": BlendType.OVERLAY, "difference": BlendType.DIFFERENCE,
+	"subtract": BlendType.NEGATION, "lighten": BlendType.LIGHTEN,
+	"darken": BlendType.DARKEN, "screen": BlendType.SCREEN}
 	layersAndGroups = []
 	project = PSDImage.load(file)
 	for layerOrGroup in project.layers[::-1]:
@@ -150,15 +178,18 @@ def openLayer_PSD(file):
 			for layer in layerOrGroup.layers:
 				layers.append(Layer(layer.name, layer.as_PIL(), (layer.width,
 				layer.height), (layer.left, layer.top),
-				layer.opacity / 255, layer.visible))
+				layer.opacity / 255, layer.visible,
+				blendModeLookup(layer.blend_mode, blendLookup)))
 			layersAndGroups.append(Group(layerOrGroup.name, layers, (layerOrGroup.width,
 			layerOrGroup.height), (layerOrGroup.left, layerOrGroup.top),
-			layerOrGroup.opacity / 255, layerOrGroup.visible))
+			layerOrGroup.opacity / 255, layerOrGroup.visible,
+			blendModeLookup(layerOrGroup.blend_mode, blendLookup)))
 		else:
 			layersAndGroups.append(
 			Layer(layerOrGroup.name, layerOrGroup.as_PIL(), (layerOrGroup.width,
 			layerOrGroup.height), (layerOrGroup.left, layerOrGroup.top),
-			layerOrGroup.opacity / 255, layerOrGroup.visible))
+			layerOrGroup.opacity / 255, layerOrGroup.visible,
+			blendModeLookup(layerOrGroup.blend_mode, blendLookup)))
 	return LayeredImage(layersAndGroups, (project.width, project.height))
 
 
@@ -171,10 +202,19 @@ def saveLayer_PSD(_fileName, _layeredImage):
 
 
 #### XCF ####
-
 def openLayer_XCF(file):
 	""" Open an .xcf file into a layered image """
 	from gimpformats_unofficial.gimpXcfDocument import GimpDocument
+	blendLookup = {0: BlendType.NORMAL, 3: BlendType.MULTIPLY,
+	7: BlendType.ADDITIVE, 17: BlendType.COLOURBURN, 16: BlendType.COLOURDODGE,
+	5: BlendType.OVERLAY, 6: BlendType.DIFFERENCE,
+	8: BlendType.NEGATION, 10: BlendType.LIGHTEN,
+	9: BlendType.DARKEN, 4: BlendType.SCREEN, 52: BlendType.XOR,
+	28: BlendType.NORMAL, 30: BlendType.MULTIPLY,
+	33: BlendType.ADDITIVE, 43: BlendType.COLOURBURN, 42: BlendType.COLOURDODGE,
+	23: BlendType.OVERLAY, 32: BlendType.DIFFERENCE,
+	34: BlendType.NEGATION, 36: BlendType.LIGHTEN,
+	35: BlendType.DARKEN, 31: BlendType.SCREEN,}
 	project = GimpDocument(file)
 	# Iterate the layers and create a list of layers for each group, then remove
 	# these from the project layers
@@ -190,7 +230,8 @@ def openLayer_XCF(file):
 				layer = layers[index]
 				groupLayers[groupIndex].append(Layer(layer.name, layer.image,
 				(layer.width, layer.height), (layer.xOffset, layer.yOffset),
-				layer.opacity, layer.visible))
+				layer.opacity, layer.visible,
+				blendModeLookup(layer.blendMode, blendLookup)))
 				layers.pop(index)
 				index -= 1
 			index += 2
@@ -205,12 +246,14 @@ def openLayer_XCF(file):
 		if layerOrGroup.isGroup:
 			layersAndGroups.append(Group(layerOrGroup.name, groupLayers[groupIndex][::-1],
 				(layerOrGroup.width, layerOrGroup.height), (layerOrGroup.xOffset,
-				layerOrGroup.yOffset), layerOrGroup.opacity, layerOrGroup.visible))
+				layerOrGroup.yOffset), layerOrGroup.opacity, layerOrGroup.visible,
+				blendModeLookup(layerOrGroup.blendMode, blendLookup)))
 			groupIndex += 1
 		else:
 			layersAndGroups.append(Layer(layerOrGroup.name, layerOrGroup.image,
 				(layerOrGroup.width, layerOrGroup.height), (layerOrGroup.xOffset,
-				layerOrGroup.yOffset), layerOrGroup.opacity, layerOrGroup.visible))
+				layerOrGroup.yOffset), layerOrGroup.opacity, layerOrGroup.visible,
+				blendModeLookup(layerOrGroup.blendMode, blendLookup)))
 
 	return LayeredImage(layersAndGroups, (project.width, project.height))
 
@@ -230,14 +273,21 @@ def openLayer_PDN(file):
 		Logger(FHFormatter()).logPrint("Opening PDNs is not possible in python " +
 		"3.8+, waiting on upstream fix", LogType.ERROR)
 		raise RuntimeError
-	from pypdn import read
+	from pypdn.reader import read, BlendType as PDNBlend
 	from PIL import Image
+	blendLookup = {PDNBlend.Normal: BlendType.NORMAL, PDNBlend.Multiply: BlendType.MULTIPLY,
+	PDNBlend.Additive: BlendType.ADDITIVE, PDNBlend.ColorBurn: BlendType.COLOURBURN,
+	PDNBlend.ColorDodge: BlendType.COLOURDODGE, PDNBlend.Reflect: BlendType.REFLECT,
+	PDNBlend.Glow: BlendType.GLOW, PDNBlend.Overlay: BlendType.OVERLAY,
+	PDNBlend.Difference: BlendType.DIFFERENCE, PDNBlend.Negation: BlendType.NEGATION,
+	PDNBlend.Lighten: BlendType.LIGHTEN, PDNBlend.Darken: BlendType.DARKEN,
+	PDNBlend.Screen: BlendType.SCREEN, PDNBlend.XOR: BlendType.XOR}
 	project = read(file)
 	layers = []
 	for layer in project.layers:
 		image = Image.fromarray(layer.image)
 		layers.append(Layer(layer.name, image, image.size, (0, 0),
-		layer.opacity / 255, layer.visible))
+		layer.opacity / 255, layer.visible, blendModeLookup(layer.blendMode, blendLookup)))
 	return LayeredImage(layers, (project.width, project.height))
 
 def saveLayer_PDN(_fileName, _layeredImage):
@@ -283,5 +333,4 @@ def saveLayer_TIFF(fileName, layeredImage):
 	for layer in layeredImage.extractLayers():
 		layers.append(rasterImageOA(layer.image, layeredImage.dimensions, layer.opacity, layer.offsets))
 
-	layers[0].save(fileName, compression=None, save_all=True,
-				append_images=layers[1:])
+	layers[0].save(fileName, compression=None, save_all=True, append_images=layers[1:])

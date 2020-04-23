@@ -1,10 +1,9 @@
 [tool.poetry]
 name = "layeredimage"
-version = "2020.1.1"
+version = "2020.2"
 description = "Use this module to read, and write to a number of layered image formats"
 authors = ["FredHappyface"]
 classifiers = [
-	"Programming Language :: Python :: 3.5",
 	"Programming Language :: Python :: 3.6",
 	"Programming Language :: Python :: 3.7",
 	"Programming Language :: Python :: 3.8",
@@ -16,11 +15,13 @@ documentation = "https://github.com/FHPythonUtils/LayeredImage/blob/master/READM
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.5"
+python = "^3.6"
 defusedxml = "^0.6.0"
 metprint = "^2020.5"
 pillow = "^7.1.1"
 pyora = "^0.3.0"
+scikit-image = "^0.16.2"
+numpy = "^1.18.3"
 pypdn = { version = "^1.0.3", optional = true }
 psd-tools3 = { version = "^1.8.2", optional = true }
 gimpformats-unofficial = { version = "^0.1", optional = true }

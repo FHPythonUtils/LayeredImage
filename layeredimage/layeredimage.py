@@ -2,6 +2,7 @@
 
 from PIL import Image
 from layeredimage.layergroup import LayerGroupTypes, Layer
+from layeredimage.blend import blendLayers
 
 class LayeredImage:
 	""" A representation of a layered image such as an ora """
@@ -111,9 +112,14 @@ class LayeredImage:
 
 def rasterImageOA(image, size, alpha=1.0, offsets=(0, 0)):
 	""" Rasterise an image with offset and alpha to a given size"""
+	imageOffset = rasterImageOffset(image, size, offsets)
+	return Image.blend(Image.new("RGBA", size), imageOffset, alpha)
+
+def rasterImageOffset(image, size, offsets=(0, 0)):
+	""" Rasterise an image with offset to a given size"""
 	imageOffset = Image.new("RGBA", size)
 	imageOffset.paste(image.convert("RGBA"), offsets, image.convert("RGBA"))
-	return Image.blend(Image.new("RGBA", size), imageOffset, alpha)
+	return imageOffset
 
 def flattenLayerOrGroup(layerOrGroup, imageDimensions, flattenedSoFar=None, ignoreHidden=True):
 	"""Flatten a layer or group on to an image of what has already been
@@ -135,11 +141,12 @@ def flattenLayerOrGroup(layerOrGroup, imageDimensions, flattenedSoFar=None, igno
 	elif layerOrGroup.type == LayerGroupTypes.GROUP:
 		foregroundRaster = flattenAll(layerOrGroup.layers, imageDimensions, ignoreHidden)
 	else:
-		foregroundRaster = rasterImageOA(layerOrGroup.image, imageDimensions,
-		layerOrGroup.opacity, layerOrGroup.offsets)
+		# Get a raster image and apply blending
+		foregroundRaster = rasterImageOffset(layerOrGroup.image, imageDimensions,
+		layerOrGroup.offsets)
 		if flattenedSoFar is None:
 			return foregroundRaster
-	return Image.alpha_composite(flattenedSoFar, foregroundRaster)
+	return blendLayers(flattenedSoFar, foregroundRaster, layerOrGroup.blendmode)
 
 
 def flattenAll(layers, imageDimensions, ignoreHidden):
