@@ -136,7 +136,7 @@ def flattenLayerOrGroup(layerOrGroup, imageDimensions, flattenedSoFar=None, igno
 	Returns:
 		PIL.Image: Flattened image
 	"""
-	if not ignoreHidden and not layerOrGroup.visible:
+	if ignoreHidden and not layerOrGroup.visible:
 		foregroundRaster = Image.new("RGBA", imageDimensions)
 	elif layerOrGroup.type == LayerGroupTypes.GROUP:
 		foregroundRaster = flattenAll(layerOrGroup.layers, imageDimensions, ignoreHidden)

@@ -78,7 +78,7 @@ def blendModeLookup(blendmode, blendLookup, default=BlendType.NORMAL):
 def openLayer_ORA(file):
 	""" Open an .ora file into a layered image """
 	from pyora import Project, TYPE_LAYER
-	# Not implemented color luminosity hue
+	# Not implemented color luminosity hue saturation
 	blendLookup = {"svg:src-over": BlendType.NORMAL, "svg:multiply": BlendType.MULTIPLY,
 	"svg:color-burn": BlendType.COLOURBURN,	"svg:color-dodge": BlendType.COLOURDODGE,
 	"svg:": BlendType.REFLECT, "svg:overlay": BlendType.OVERLAY,
@@ -274,10 +274,6 @@ def saveLayer_XCF(fileName, layeredImage):
 #### PDN ####
 def openLayer_PDN(file):
 	""" Open a .pdn file into a layered image """
-	if version_info[0] >= 3 and version_info >= 8:
-		Logger(FHFormatter()).logPrint("Opening PDNs is not possible in python " +
-		"3.8+, waiting on upstream fix", LogType.ERROR)
-		raise RuntimeError
 	from pypdn.reader import read, BlendType as PDNBlend
 	from PIL import Image
 	blendLookup = {PDNBlend.Normal: BlendType.NORMAL, PDNBlend.Multiply: BlendType.MULTIPLY,
@@ -326,6 +322,7 @@ def openLayer_TIFF(file):
 		# Add the layer
 		layers.append(Layer(ifd['PageName'][0], project.copy(),
 		(ifd["ImageWidth"][0], ifd["ImageLength"][0]), (offsetX, offsetY), 1, True))
+	project.close()
 	return LayeredImage(layers, (dimensions[0], dimensions[1]))
 
 

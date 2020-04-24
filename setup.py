@@ -21,7 +21,7 @@ if os.path.exists(readme_path):
 setup(
     long_description=readme,
     name='layeredimage',
-    version='2020.2.1',
+    version='2020.3.1',
     description='Use this module to read, and write to a number of layered image formats',
     python_requires='==3.*,>=3.6.0',
     project_urls={

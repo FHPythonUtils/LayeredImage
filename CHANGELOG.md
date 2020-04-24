@@ -2,7 +2,14 @@
 All major and minor version changes will be documented in this file. Details of
 patch-level version changes can be found in [commit messages](../../commits/master).
 
-## 2020.2.1 - 2020/04/23
+## 2020.3.1 - 2020/04/24
+- Fix ResourceWarning when opening a file
+
+## 2020.3 - 2020/04/24
+- Fixed bug that caused hidden layers to be rendered by default
+- Using pypdn 1.05 - PDNs work again on python 3.8
+
+## 2020.2.1 - 2020/04/24
 - Fixed incorrect docstrings
 - Added SOFTLIGHT and HARDLIGHT
 

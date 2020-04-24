@@ -20,11 +20,10 @@ layeredimage.io.saveLayerImage(THISDIR + "/base24(psd).tiff", psd)
 psd.getFlattenLayers().save(THISDIR + "/base24(psd).png")
 
 # PDN
-if sys.version_info[0] >= 3 and sys.version_info[1] < 8:
-	pdn = layeredimage.io.openLayerImage(THISDIR + "/base24.pdn")
-	layeredimage.io.saveLayerImage(THISDIR + "/base24(pdn).ora", pdn)
-	layeredimage.io.saveLayerImage(THISDIR + "/base24(pdn).tiff", pdn)
-	pdn.getFlattenLayers().save(THISDIR + "/base24(pdn).png")
+pdn = layeredimage.io.openLayerImage(THISDIR + "/base24.pdn")
+layeredimage.io.saveLayerImage(THISDIR + "/base24(pdn).ora", pdn)
+layeredimage.io.saveLayerImage(THISDIR + "/base24(pdn).tiff", pdn)
+pdn.getFlattenLayers().save(THISDIR + "/base24(pdn).png")
 
 # XCF
 xcf = layeredimage.io.openLayerImage(THISDIR + "/base24.xcf")
