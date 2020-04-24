@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "layeredimage"
-version = "2020.2"
+version = "2020.2.1"
 description = "Use this module to read, and write to a number of layered image formats"
 authors = ["FredHappyface"]
 classifiers = [

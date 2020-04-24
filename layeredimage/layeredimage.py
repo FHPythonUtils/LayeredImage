@@ -146,7 +146,7 @@ def flattenLayerOrGroup(layerOrGroup, imageDimensions, flattenedSoFar=None, igno
 		layerOrGroup.offsets)
 		if flattenedSoFar is None:
 			return foregroundRaster
-	return blendLayers(flattenedSoFar, foregroundRaster, layerOrGroup.blendmode)
+	return blendLayers(flattenedSoFar, foregroundRaster, layerOrGroup.blendmode, layerOrGroup.opacity)
 
 
 def flattenAll(layers, imageDimensions, ignoreHidden):

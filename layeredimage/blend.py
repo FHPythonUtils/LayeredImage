@@ -28,18 +28,40 @@ class BlendType(Enum):
 	DARKEN = 11
 	SCREEN = 12
 	XOR = 13
+	SOFTLIGHT = 14
+	HARDLIGHT = 15
 
 
 def blend(background, foreground, blendType):
 	"""blend pixels
 
 	Args:
-		background (float): background px
-		foreground (float): foreground px
+		background (np.array): background
+		foreground (np.array): foreground
 		blendType (BlendType): the blend type
 
 	Returns:
-		[type]: [description]
+		np.array: new array representing the image
+
+	background, foreground and the return are in the form
+
+	[[[0. 0. 0.]
+	[0. 0. 0.]
+	[0. 0. 0.]
+	...
+	[0. 0. 0.]
+	[0. 0. 0.]
+	[0. 0. 0.]]
+
+	...
+
+	[[0. 0. 0.]
+	[0. 0. 0.]
+	[0. 0. 0.]
+	...
+	[0. 0. 0.]
+	[0. 0. 0.]
+	[0. 0. 0.]]]
 	"""
 	if blendType == BlendType.MULTIPLY:
 		return background * foreground
@@ -75,20 +97,28 @@ def blend(background, foreground, blendType):
 		with warnings.catch_warnings():
 			warnings.simplefilter('ignore')
 			return skimage.img_as_float(skimage.img_as_ubyte(background) ^ skimage.img_as_ubyte(foreground))
+	if blendType == BlendType.SOFTLIGHT:
+		return (1.0 - background) * background * foreground + background * (1.0 -
+		(1.0 - background) * (1.0 - foreground))
+	if blendType == BlendType.HARDLIGHT:
+		return np.where(foreground > 0.5, np.minimum(background * 2 * foreground, 1.0),
+		np.minimum(1.0 - ((1.0 - background) * (1.0 - (foreground - 0.5) * 2.0)),
+		1.0))
 	# BlendType.NORMAL
 	return foreground
 
 
-def blendLayers(background, foreground, blendType):
+def blendLayers(background, foreground, blendType, opacity):
 	"""Blend layers using numpy array
 
 	Args:
-		background (numpy.array): background layer
-		foreground (numpy.array): foreground layer
+		background (PIL.Image): background layer
+		foreground (PIL.Image): foreground layer
 		blendType (BlendType): The blendtype
+		opacity (float): The opacity of the foreground image
 
 	Returns:
-		numpy.array: combined image
+		PIL.Image: combined image
 	"""
 	# Convert the PIL.Image to a numpy array
 	foreground = skimage.img_as_float(np.array(foreground))
@@ -96,7 +126,7 @@ def blendLayers(background, foreground, blendType):
 
 	# Get the alpha from the layers
 	backgroundAlpha = background[:, :, 3]
-	foregroundAlpha = foreground[:, :, 3]
+	foregroundAlpha = foreground[:, :, 3] * opacity
 	combinedAlpha = backgroundAlpha * foregroundAlpha
 
 	# Get the colour from the layers

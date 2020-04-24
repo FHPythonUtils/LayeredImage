@@ -78,12 +78,13 @@ def blendModeLookup(blendmode, blendLookup, default=BlendType.NORMAL):
 def openLayer_ORA(file):
 	""" Open an .ora file into a layered image """
 	from pyora import Project, TYPE_LAYER
-	# Not implemented hard-light soft-light color luminosity hue
+	# Not implemented color luminosity hue
 	blendLookup = {"svg:src-over": BlendType.NORMAL, "svg:multiply": BlendType.MULTIPLY,
 	"svg:color-burn": BlendType.COLOURBURN,	"svg:color-dodge": BlendType.COLOURDODGE,
 	"svg:": BlendType.REFLECT, "svg:overlay": BlendType.OVERLAY,
 	"svg:difference": BlendType.DIFFERENCE,	"svg:lighten": BlendType.LIGHTEN,
-	"svg:darken": BlendType.DARKEN, "svg:screen": BlendType.SCREEN}
+	"svg:darken": BlendType.DARKEN, "svg:screen": BlendType.SCREEN,
+	"svg:hard-light": BlendType.HARDLIGHT, "svg:soft-light": BlendType.SOFTLIGHT}
 	layersAndGroups = []
 	project = Project.load(file)
 	for layerOrGroup in project.children[::-1]:
@@ -110,7 +111,8 @@ def saveLayer_ORA(fileName, layeredImage):
 	BlendType.COLOURBURN: "svg:color-burn",	BlendType.COLOURDODGE: "svg:color-dodge",
 	BlendType.REFLECT: "svg:",	BlendType.OVERLAY: "svg:overlay",
 	BlendType.DIFFERENCE: "svg:difference",	BlendType.LIGHTEN: "svg:lighten",
-	BlendType.DARKEN: "svg:darken", BlendType.SCREEN: "svg:screen"}
+	BlendType.DARKEN: "svg:darken", BlendType.SCREEN: "svg:screen",
+	BlendType.SOFTLIGHT: "svg:soft-light", BlendType.HARDLIGHT: "svg:hard-light"}
 	project = Project.new(layeredImage.dimensions[0], layeredImage.dimensions[1])
 	for layerOrGroup in layeredImage.layersAndGroups:
 		if layerOrGroup.type == LayerGroupTypes.LAYER:
@@ -169,7 +171,8 @@ def openLayer_PSD(file):
 	"color burn": BlendType.COLOURBURN, "color dodge": BlendType.COLOURDODGE,
 	"overlay": BlendType.OVERLAY, "difference": BlendType.DIFFERENCE,
 	"subtract": BlendType.NEGATION, "lighten": BlendType.LIGHTEN,
-	"darken": BlendType.DARKEN, "screen": BlendType.SCREEN}
+	"darken": BlendType.DARKEN, "screen": BlendType.SCREEN,
+	"soft light": BlendType.SOFTLIGHT, "hard light": BlendType.HARDLIGHT}
 	layersAndGroups = []
 	project = PSDImage.load(file)
 	for layerOrGroup in project.layers[::-1]:
@@ -214,7 +217,9 @@ def openLayer_XCF(file):
 	33: BlendType.ADDITIVE, 43: BlendType.COLOURBURN, 42: BlendType.COLOURDODGE,
 	23: BlendType.OVERLAY, 32: BlendType.DIFFERENCE,
 	34: BlendType.NEGATION, 36: BlendType.LIGHTEN,
-	35: BlendType.DARKEN, 31: BlendType.SCREEN,}
+	35: BlendType.DARKEN, 31: BlendType.SCREEN,
+	18: BlendType.HARDLIGHT, 19: BlendType.SOFTLIGHT,
+	44: BlendType.HARDLIGHT, 45: BlendType.SOFTLIGHT}
 	project = GimpDocument(file)
 	# Iterate the layers and create a list of layers for each group, then remove
 	# these from the project layers
