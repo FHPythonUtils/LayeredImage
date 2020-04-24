@@ -2,6 +2,10 @@
 All major and minor version changes will be documented in this file. Details of
 patch-level version changes can be found in [commit messages](../../commits/master).
 
+## 2020.3.2 - 2020/04/24
+- Modules are no longer optional as this will create excess crashes for what is
+four additional dependencies
+
 ## 2020.3.1 - 2020/04/24
 - Fix ResourceWarning when opening a file
 

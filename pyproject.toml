@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "layeredimage"
-version = "2020.3.1"
+version = "2020.3.2"
 description = "Use this module to read, and write to a number of layered image formats"
 authors = ["FredHappyface"]
 classifiers = [
@@ -19,12 +19,12 @@ python = "^3.6"
 defusedxml = "^0.6.0"
 metprint = "^2020.5"
 pillow = "^7.1.1"
-pyora = "^0.3.0"
 scikit-image = "^0.16.2"
 numpy = "^1.18.3"
+pyora = "^0.3.0"
 pypdn = "^1.0.5"
-psd-tools3 = { version = "^1.8.2", optional = true }
-gimpformats-unofficial = { version = "^0.1", optional = true }
+psd-tools3 = "^1.8.2"
+gimpformats-unofficial = "^0.1"
 
 [tool.dephell.main]
 from = "pyproject.toml"

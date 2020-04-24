@@ -5,7 +5,6 @@
 # pylint: disable=import-outside-toplevel
 
 from os.path import exists
-from sys import version_info
 from metprint import LogType, Logger, FHFormatter
 from layeredimage.layergroup import LayerGroupTypes, Layer, Group
 from layeredimage.layeredimage import LayeredImage, rasterImageOA
