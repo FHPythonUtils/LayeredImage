@@ -31,6 +31,85 @@ class BlendType(Enum):
 	SOFTLIGHT = 14
 	HARDLIGHT = 15
 
+def normal(_background, foreground):
+	""" BlendType.NORMAL """
+	return foreground
+
+def multiply(background, foreground):
+	""" BlendType.MULTIPLY """
+	return background * foreground
+
+def additive(background, foreground):
+	""" BlendType.ADDITIVE """
+	return np.minimum(background + foreground, 1.0)
+
+def colourburn(background, foreground):
+	""" BlendType.COLOURBURN """
+	with np.errstate(divide='ignore'):
+		return np.where(foreground != 0.0, np.maximum(1.0 - ((1.0 -
+		background) / foreground), 0.0), 0.0)
+
+def colourdodge(background, foreground):
+	""" BlendType.COLOURDODGE """
+	with np.errstate(divide='ignore'):
+		return np.where(foreground != 1.0, np.minimum(background / (1.0 -
+		foreground), 1.0), 1.0)
+
+def reflect(background, foreground):
+	""" BlendType.REFLECT """
+	with np.errstate(divide='ignore'):
+		return np.where(foreground != 1.0, np.minimum((background ** 2) / (1.0
+		- foreground), 1.0), 1.0)
+
+def glow(background, foreground):
+	""" BlendType.GLOW """
+	with np.errstate(divide='ignore'):
+		return np.where(background != 1.0, np.minimum((foreground ** 2) / (1.0
+		- background), 1.0), 1.0)
+
+def overlay(background, foreground):
+	""" BlendType.OVERLAY """
+	return np.where(background < 0.5, 2 * background * foreground, 1.0 - (2 *
+		(1.0 - background) * (1.0 - foreground)))
+
+def difference(background, foreground):
+	""" BlendType.DIFFERENCE """
+	return np.abs(background - foreground)
+
+def negation(background, foreground):
+	""" BlendType.NEGATION """
+	return 1.0 - np.abs(1.0 - background - foreground)
+
+def lighten(background, foreground):
+	""" BlendType.LIGHTEN """
+	return np.maximum(background, foreground)
+
+def darken(background, foreground):
+	""" BlendType.DARKEN """
+	return np.minimum(background, foreground)
+
+def screen(background, foreground):
+	""" BlendType.SCREEN """
+	return background + foreground - background * foreground
+
+def xor(background, foreground):
+	""" BlendType.XOR """
+	# XOR requires int values so convert to uint8
+	with warnings.catch_warnings():
+		warnings.simplefilter('ignore')
+		return skimage.img_as_float(skimage.img_as_ubyte(background) ^
+		skimage.img_as_ubyte(foreground))
+
+def softlight(background, foreground):
+	""" BlendType.SOFTLIGHT """
+	return (1.0 - background) * background * foreground + background * (1.0 -
+		(1.0 - background) * (1.0 - foreground))
+
+def hardlight(background, foreground):
+	""" BlendType.HARDLIGHT """
+	return np.where(foreground > 0.5, np.minimum(background * 2 * foreground, 1.0),
+		np.minimum(1.0 - ((1.0 - background) * (1.0 - (foreground - 0.5) * 2.0)),
+		1.0))
 
 def blend(background, foreground, blendType):
 	"""blend pixels
@@ -63,49 +142,16 @@ def blend(background, foreground, blendType):
 	[0. 0. 0.]
 	[0. 0. 0.]]]
 	"""
-	if blendType == BlendType.MULTIPLY:
-		return background * foreground
-	if blendType == BlendType.ADDITIVE:
-		return np.minimum(background + foreground, 1.0)
-	if blendType == BlendType.COLOURBURN:
-		with np.errstate(divide='ignore'):
-			return np.where(foreground != 0.0, np.maximum(1.0 - ((1.0 - background) / foreground), 0.0), 0.0)
-	if blendType == BlendType.COLOURDODGE:
-		with np.errstate(divide='ignore'):
-			return np.where(foreground != 1.0, np.minimum(background / (1.0 - foreground), 1.0), 1.0)
-	if blendType == BlendType.REFLECT:
-		with np.errstate(divide='ignore'):
-			return np.where(foreground != 1.0, np.minimum((background ** 2) / (1.0 - foreground), 1.0), 1.0)
-	if blendType == BlendType.GLOW:
-		with np.errstate(divide='ignore'):
-			return np.where(background != 1.0, np.minimum((foreground ** 2) / (1.0 - background), 1.0), 1.0)
-	if blendType == BlendType.OVERLAY:
-		return np.where(background < 0.5, 2 * background * foreground, 1.0 - (2 *
-		(1.0 - background) * (1.0 - foreground)))
-	if blendType == BlendType.DIFFERENCE:
-		return np.abs(background - foreground)
-	if blendType == BlendType.NEGATION:
-		return 1.0 - np.abs(1.0 - background - foreground)
-	if blendType == BlendType.LIGHTEN:
-		return np.maximum(background, foreground)
-	if blendType == BlendType.DARKEN:
-		return np.minimum(background, foreground)
-	if blendType == BlendType.SCREEN:
-		return background + foreground - background * foreground
-	if blendType == BlendType.XOR:
-		# XOR requires int values so convert to uint8
-		with warnings.catch_warnings():
-			warnings.simplefilter('ignore')
-			return skimage.img_as_float(skimage.img_as_ubyte(background) ^ skimage.img_as_ubyte(foreground))
-	if blendType == BlendType.SOFTLIGHT:
-		return (1.0 - background) * background * foreground + background * (1.0 -
-		(1.0 - background) * (1.0 - foreground))
-	if blendType == BlendType.HARDLIGHT:
-		return np.where(foreground > 0.5, np.minimum(background * 2 * foreground, 1.0),
-		np.minimum(1.0 - ((1.0 - background) * (1.0 - (foreground - 0.5) * 2.0)),
-		1.0))
-	# BlendType.NORMAL
-	return foreground
+	blendLookup = {BlendType.NORMAL: normal, BlendType.MULTIPLY: multiply,
+	BlendType.COLOURBURN: colourburn,	BlendType.COLOURDODGE: colourdodge,
+	BlendType.REFLECT: reflect,	BlendType.OVERLAY: overlay,
+	BlendType.DIFFERENCE: difference,	BlendType.LIGHTEN: lighten,
+	BlendType.DARKEN: darken, BlendType.SCREEN: screen,
+	BlendType.SOFTLIGHT: softlight, BlendType.HARDLIGHT: hardlight}
+
+	if blendType not in blendLookup:
+		return normal(background, foreground)
+	return blendLookup[blendType](background, foreground)
 
 
 def blendLayers(background, foreground, blendType, opacity):

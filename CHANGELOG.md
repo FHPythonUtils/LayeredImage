@@ -2,6 +2,10 @@
 All major and minor version changes will be documented in this file. Details of
 patch-level version changes can be found in [commit messages](../../commits/master).
 
+## 2020.3.3 - 2020/04/25
+- Updated blend.py to map blend types to functions, rather than use a series of
+if statements
+
 ## 2020.3.2 - 2020/04/24
 - Modules are no longer optional as this will create excess crashes for what is
 four additional dependencies
