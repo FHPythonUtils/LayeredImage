@@ -5,34 +5,87 @@ import os
 from pathlib import Path
 THISDIR = str(Path(__file__).resolve().parent)
 sys.path.insert(0, os.path.dirname(THISDIR))
+from imgcompare import is_equal
 import layeredimage.io
 
+#pylint: disable=missing-function-docstring
+
 # ORA
-ora = layeredimage.io.openLayerImage(THISDIR + "/base24.ora")
-layeredimage.io.saveLayerImage(THISDIR + "/base24(ora).ora", ora)
-layeredimage.io.saveLayerImage(THISDIR + "/base24(ora).tiff", ora)
-ora.getFlattenLayers().save(THISDIR + "/base24(ora).png")
+def test_ora():
+	ora = layeredimage.io.openLayerImage(THISDIR + "/base24.ora")
+	layeredimage.io.saveLayerImage(THISDIR + "/base24(ora).ora", ora)
+	layeredimage.io.saveLayerImage(THISDIR + "/base24(ora).tiff", ora)
+	layeredimage.io.saveLayerImage(THISDIR + "/base24(ora).webp", ora)
+	layeredimage.io.saveLayerImage(THISDIR + "/base24(ora).gif", ora)
+	ora.getFlattenLayers().save(THISDIR + "/base24(ora).png")
+	assert(is_equal(THISDIR + "/base24(ora).png", THISDIR + "/expected.png", tolerance=1))
 
 # PSD
-psd = layeredimage.io.openLayerImage(THISDIR + "/base24.psd")
-layeredimage.io.saveLayerImage(THISDIR + "/base24(psd).ora", psd)
-layeredimage.io.saveLayerImage(THISDIR + "/base24(psd).tiff", psd)
-psd.getFlattenLayers().save(THISDIR + "/base24(psd).png")
+def test_psd():
+	psd = layeredimage.io.openLayerImage(THISDIR + "/base24.psd")
+	layeredimage.io.saveLayerImage(THISDIR + "/base24(psd).ora", psd)
+	layeredimage.io.saveLayerImage(THISDIR + "/base24(psd).tiff", psd)
+	layeredimage.io.saveLayerImage(THISDIR + "/base24(psd).webp", psd)
+	layeredimage.io.saveLayerImage(THISDIR + "/base24(psd).gif", psd)
+	psd.getFlattenLayers().save(THISDIR + "/base24(psd).png")
+	assert(is_equal(THISDIR + "/base24(psd).png", THISDIR + "/expected.png", tolerance=1))
 
 # PDN
-pdn = layeredimage.io.openLayerImage(THISDIR + "/base24.pdn")
-layeredimage.io.saveLayerImage(THISDIR + "/base24(pdn).ora", pdn)
-layeredimage.io.saveLayerImage(THISDIR + "/base24(pdn).tiff", pdn)
-pdn.getFlattenLayers().save(THISDIR + "/base24(pdn).png")
+def test_pdn():
+	pdn = layeredimage.io.openLayerImage(THISDIR + "/base24.pdn")
+	layeredimage.io.saveLayerImage(THISDIR + "/base24(pdn).ora", pdn)
+	layeredimage.io.saveLayerImage(THISDIR + "/base24(pdn).tiff", pdn)
+	layeredimage.io.saveLayerImage(THISDIR + "/base24(pdn).webp", pdn)
+	layeredimage.io.saveLayerImage(THISDIR + "/base24(pdn).gif", pdn)
+	pdn.getFlattenLayers().save(THISDIR + "/base24(pdn).png")
+	assert(is_equal(THISDIR + "/base24(pdn).png", THISDIR + "/expected.png", tolerance=1))
 
 # XCF
-xcf = layeredimage.io.openLayerImage(THISDIR + "/base24.xcf")
-layeredimage.io.saveLayerImage(THISDIR + "/base24(xcf).ora", xcf)
-layeredimage.io.saveLayerImage(THISDIR + "/base24(xcf).tiff", xcf)
-xcf.getFlattenLayers().save(THISDIR + "/base24(xcf).png")
+def test_xcf():
+	xcf = layeredimage.io.openLayerImage(THISDIR + "/base24.xcf")
+	layeredimage.io.saveLayerImage(THISDIR + "/base24(xcf).ora", xcf)
+	layeredimage.io.saveLayerImage(THISDIR + "/base24(xcf).tiff", xcf)
+	layeredimage.io.saveLayerImage(THISDIR + "/base24(xcf).webp", xcf)
+	layeredimage.io.saveLayerImage(THISDIR + "/base24(xcf).gif", xcf)
+	xcf.getFlattenLayers().save(THISDIR + "/base24(xcf).png")
+	assert(is_equal(THISDIR + "/base24(ora).png", THISDIR + "/expected.png", tolerance=1))
 
 # TIFF
-tiff = layeredimage.io.openLayerImage(THISDIR + "/base24.tiff")
-layeredimage.io.saveLayerImage(THISDIR + "/base24(tiff).ora", tiff)
-layeredimage.io.saveLayerImage(THISDIR + "/base24(tiff).tiff", tiff)
-tiff.getFlattenLayers().save(THISDIR + "/base24(tiff).png")
+def test_tiff():
+	tiff = layeredimage.io.openLayerImage(THISDIR + "/base24.tiff")
+	layeredimage.io.saveLayerImage(THISDIR + "/base24(tiff).ora", tiff)
+	layeredimage.io.saveLayerImage(THISDIR + "/base24(tiff).tiff", tiff)
+	layeredimage.io.saveLayerImage(THISDIR + "/base24(tiff).webp", tiff)
+	layeredimage.io.saveLayerImage(THISDIR + "/base24(tiff).gif", tiff)
+	tiff.getFlattenLayers().save(THISDIR + "/base24(tiff).png")
+	assert(is_equal(THISDIR + "/base24(tiff).png", THISDIR + "/expectedNoHidden.png", tolerance=1))
+
+# WEBP
+def test_webp():
+	webp = layeredimage.io.openLayerImage(THISDIR + "/base24.webp")
+	layeredimage.io.saveLayerImage(THISDIR + "/base24(webp).ora", webp)
+	layeredimage.io.saveLayerImage(THISDIR + "/base24(webp).webp", webp)
+	layeredimage.io.saveLayerImage(THISDIR + "/base24(webp).webp", webp)
+	layeredimage.io.saveLayerImage(THISDIR + "/base24(webp).gif", webp)
+	webp.getFlattenLayers().save(THISDIR + "/base24(webp).png")
+	assert(is_equal(THISDIR + "/base24(webp).png", THISDIR + "/expectedNoHidden.png", tolerance=1))
+
+# GIF
+def test_gif():
+	gif = layeredimage.io.openLayerImage(THISDIR + "/base24.gif")
+	layeredimage.io.saveLayerImage(THISDIR + "/base24(gif).ora", gif)
+	layeredimage.io.saveLayerImage(THISDIR + "/base24(gif).gif", gif)
+	layeredimage.io.saveLayerImage(THISDIR + "/base24(gif).webp", gif)
+	layeredimage.io.saveLayerImage(THISDIR + "/base24(gif).gif", gif)
+	gif.getFlattenLayers().save(THISDIR + "/base24(gif).png")
+	assert(is_equal(THISDIR + "/base24(gif).png", THISDIR + "/expectedNoHidden.png", tolerance=1))
+
+
+if __name__ == "__main__":
+	test_ora()
+	test_psd()
+	test_pdn()
+	test_xcf()
+	test_tiff()
+	test_webp()
+	test_gif()

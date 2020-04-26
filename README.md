@@ -62,67 +62,67 @@ the case, please open an issue and I will fix the tables.
 - :x: - This is not supported and will cause loss of data
 - N/A - The source format does not support this so treat this as a :heavy_check_mark:
 
-|Format|.ora|.pdn|.xcf|.psd|.tiff/ .tif|
-|------|----|----|----|----|-----|
-|Read  |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
-|Layers|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
-|Groups|:heavy_check_mark:|N/A |:heavy_check_mark:|:heavy_check_mark:|N/A|
-|Write |:heavy_check_mark:|:x:  |:x:  |:x:  |:warning:|
+|Format|.ora|.pdn|.xcf|.psd|.tiff/ .tif|.webp|.gif|
+|------|----|----|----|----|-----|----|-----|
+|Read  |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
+|Layers|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
+|Groups|:heavy_check_mark:|N/A |:heavy_check_mark:|:heavy_check_mark:|N/A|N/A|N/A|
+|Write |:heavy_check_mark:|:x:  |:x:  |:x:  |:warning:|:warning:|:warning:|
 
 ### Reading
 
 #### Group
 
-|Format    |.ora|.pdn|.xcf|.psd|.tiff/ .tif|
-|----------|----|----|----|----|-----|
-|Name      |:heavy_check_mark:|N/A |:heavy_check_mark:|:heavy_check_mark:|N/A |
-|Dimensions|:warning:|N/A |:heavy_check_mark:|:heavy_check_mark:|N/A |
-|Offsets   |:heavy_check_mark:|N/A |:heavy_check_mark:|:heavy_check_mark:|N/A |
-|Opacity   |:heavy_check_mark:|N/A |:heavy_check_mark:|:heavy_check_mark:|N/A |
-|Visibility|:heavy_check_mark:|N/A |:x:  |:heavy_check_mark:|N/A |
-|Blend Mode|:heavy_check_mark:|N/A |:heavy_check_mark:|:heavy_check_mark:|N/A|
+|Format    |.ora|.pdn|.xcf|.psd|.tiff/ .tif|.webp|.gif|
+|----------|----|----|----|----|-----|----|-----|
+|Name      |:heavy_check_mark:|N/A |:heavy_check_mark:|:heavy_check_mark:|N/A |N/A |N/A |
+|Dimensions|:warning:|N/A |:heavy_check_mark:|:heavy_check_mark:|N/A |N/A |N/A |
+|Offsets   |:heavy_check_mark:|N/A |:heavy_check_mark:|:heavy_check_mark:|N/A |N/A |N/A |
+|Opacity   |:heavy_check_mark:|N/A |:heavy_check_mark:|:heavy_check_mark:|N/A |N/A |N/A |
+|Visibility|:heavy_check_mark:|N/A |:x:  |:heavy_check_mark:|N/A |N/A |N/A |
+|Blend Mode|:heavy_check_mark:|N/A |:heavy_check_mark:|:heavy_check_mark:|N/A|N/A |N/A |
 
 #### Layer
 
-|Format    |.ora|.pdn|.xcf|.psd|.tiff/ .tif|
-|----------|----|----|----|----|-----|
-|Name      |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
-|Dimensions|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
-|Offsets   |:heavy_check_mark:|N/A |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
-|Opacity   |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|N/A |
-|Visibility|:heavy_check_mark:|:heavy_check_mark:|:x:  |:heavy_check_mark:|N/A |
-|Blend Mode|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|N/A|
+|Format    |.ora|.pdn|.xcf|.psd|.tiff/ .tif|.webp|.gif|
+|----------|----|----|----|----|-----|----|-----|
+|Name      |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:warning:|:warning:|
+|Dimensions|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
+|Offsets   |:heavy_check_mark:|N/A |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|N/A|N/A|
+|Opacity   |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|N/A |N/A |N/A |
+|Visibility|:heavy_check_mark:|:heavy_check_mark:|:x:  |:heavy_check_mark:|N/A |N/A |N/A |
+|Blend Mode|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|N/A|N/A |N/A |
 
 ### Writing
 
 #### Group
 
-|Format    |.ora|.pdn|.xcf|.psd|.tiff/ .tif|
-|----------|----|----|----|----|-----|
-|Name      |:heavy_check_mark:|:x:|:x:|:x:|:warning:|
-|Dimensions|:heavy_check_mark:|:x:|:x:|:x:|:warning:|
-|Offsets   |:heavy_check_mark:|:x:|:x:|:x:|:warning:|
-|Opacity   |:heavy_check_mark:|:x:|:x:|:x:|:warning:|
-|Visibility|:heavy_check_mark:|:x:|:x:|:x:|:warning:|
-|Blend Mode|:heavy_check_mark:|:x:|:x:|:x:|:x:|
+|Format    |.ora|.pdn|.xcf|.psd|.tiff/ .tif|.webp|.gif|
+|----------|----|----|----|----|-----|----|-----|
+|Name      |:heavy_check_mark:|:x:|:x:|:x:|:x:|:x:|:x:|
+|Dimensions|:heavy_check_mark:|:x:|:x:|:x:|:warning:|:warning:|:warning:|
+|Offsets   |:heavy_check_mark:|:x:|:x:|:x:|:warning:|:warning:|:warning:|
+|Opacity   |:heavy_check_mark:|:x:|:x:|:x:|:warning:|:warning:|:warning:|
+|Visibility|:heavy_check_mark:|:x:|:x:|:x:|:warning:|:warning:|:warning:|
+|Blend Mode|:heavy_check_mark:|:x:|:x:|:x:|:x:|:x:|:x:|
 
 ```none
-Layers are extracted from groups and saved to TIFF
+Layers are extracted from groups and saved to TIFF/ GIF or WEBP
 ```
 
 #### Layer
 
-|Format    |.ora|.pdn|.xcf|.psd|.tiff/ .tif|
-|----------|----|----|----|----|-----|
-|Name      |:heavy_check_mark:|:x:|:x:|:x:|:x:|
-|Dimensions|:heavy_check_mark:|:x:|:x:|:x:|:warning:|
-|Offsets   |:heavy_check_mark:|:x:|:x:|:x:|:warning:|
-|Opacity   |:heavy_check_mark:|:x:|:x:|:x:|:warning:|
-|Visibility|:heavy_check_mark:|:x:|:x:|:x:|:warning:|
-|Blend Mode|:heavy_check_mark:|:x:|:x:|:x:|:x:|
+|Format    |.ora|.pdn|.xcf|.psd|.tiff/ .tif|.webp|.gif|
+|----------|----|----|----|----|-----|----|-----|
+|Name      |:heavy_check_mark:|:x:|:x:|:x:|:x:|:x:|:x:|
+|Dimensions|:heavy_check_mark:|:x:|:x:|:x:|:warning:|:warning:|:warning:|
+|Offsets   |:heavy_check_mark:|:x:|:x:|:x:|:warning:|:warning:|:warning:|
+|Opacity   |:heavy_check_mark:|:x:|:x:|:x:|:warning:|:warning:|:warning:|
+|Visibility|:heavy_check_mark:|:x:|:x:|:x:|:warning:|:warning:|:warning:|
+|Blend Mode|:heavy_check_mark:|:x:|:x:|:x:|:x:|:x:|:x:|
 
 ```none
-Layers are rasterized before being written to TIFF
+Layers are rasterized before being written to TIFF/ GIF or WEBP
 ```
 
 ## Example Usage
@@ -164,8 +164,9 @@ ora.removeLayerOrGroup(2)
 Images are PIL.Image (s) and so you can use the power of Pillow to apply
 filters, and other modifications to the images.
 
-And for those who would rather not read the test file, here are the tests. Not
-going to get 100% coverage anytime soon but hopefully this will help a little.
+See below for an old version of the tests. These provide a few examples of
+file conversions. Not going to get 100% coverage anytime soon but hopefully
+this will help a little.
 
 ```python
 """Test module """
@@ -190,11 +191,10 @@ layeredimage.io.saveLayerImage(THISDIR + "/base24(psd).tiff", psd)
 psd.getFlattenLayers().save(THISDIR + "/base24(psd).png")
 
 # PDN
-if sys.version_info[0] >= 3 and sys.version_info[1] < 8:
-	pdn = layeredimage.io.openLayerImage(THISDIR + "/base24.pdn")
-	layeredimage.io.saveLayerImage(THISDIR + "/base24(pdn).ora", pdn)
-	layeredimage.io.saveLayerImage(THISDIR + "/base24(pdn).tiff", pdn)
-	pdn.getFlattenLayers().save(THISDIR + "/base24(pdn).png")
+pdn = layeredimage.io.openLayerImage(THISDIR + "/base24.pdn")
+layeredimage.io.saveLayerImage(THISDIR + "/base24(pdn).ora", pdn)
+layeredimage.io.saveLayerImage(THISDIR + "/base24(pdn).tiff", pdn)
+pdn.getFlattenLayers().save(THISDIR + "/base24(pdn).png")
 
 # XCF
 xcf = layeredimage.io.openLayerImage(THISDIR + "/base24.xcf")

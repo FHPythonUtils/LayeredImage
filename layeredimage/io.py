@@ -12,9 +12,13 @@ from layeredimage.blend import BlendType
 
 def extNotRecognised(fileName):
 	""" Output the file extension not recognised error """
-	exts = ["ora", "psd", "xcf", "pdn", "tif", "tiff"]
+	exts = ["ora", "psd", "xcf", "pdn", "tif", "tiff", "webp", "gif"]
 	Logger(FHFormatter()).logPrint("File extension is not recognised for file: " +
 	fileName + "! Must be " + "one of \"" + ", \"".join(exts) + "\"", LogType.ERROR)
+
+def compareExt(fileName, ext):
+	""" Compare a file extension """
+	return fileName[-len(ext):].lower() == ext
 
 def openLayerImage(file):
 	"""Open a layer image file into a layer image object
@@ -28,16 +32,20 @@ def openLayerImage(file):
 	if not exists(file):
 		Logger(FHFormatter()).logPrint(file + " does not exist", LogType.ERROR)
 		raise FileExistsError
-	if file[-3:] == "ora":
+	if compareExt(file, "ora"):
 		return openLayer_ORA(file)
-	if file[-3:] == "psd":
+	if compareExt(file, "psd"):
 		return openLayer_PSD(file)
-	if file[-3:] == "xcf":
+	if compareExt(file, "xcf"):
 		return openLayer_XCF(file)
-	if file[-3:] == "pdn":
+	if compareExt(file, "pdn"):
 		return openLayer_PDN(file)
-	if file[-3:] == "tif" or file[-4:] == "tiff":
+	if compareExt(file, "tif") or compareExt(file, "tiff"):
 		return openLayer_TIFF(file)
+	if compareExt(file, "webp"):
+		return openLayer_WEBP(file)
+	if compareExt(file, "gif"):
+		return openLayer_GIF(file)
 	Logger(FHFormatter()).logPrint("File extension is not recognised!", LogType.ERROR)
 	extNotRecognised(file)
 	raise ValueError
@@ -49,16 +57,20 @@ def saveLayerImage(fileName, layeredImage):
 		fileName (string): path/ filename
 		layeredImage (LayeredImage): the layered image to save
 	"""
-	if fileName[-3:] == "ora":
+	if compareExt(fileName, "ora"):
 		return saveLayer_ORA(fileName, layeredImage)
-	if fileName[-3:] == "psd":
+	if compareExt(fileName, "psd"):
 		return saveLayer_PSD(fileName, layeredImage)
-	if fileName[-3:] == "xcf":
+	if compareExt(fileName, "xcf"):
 		return saveLayer_XCF(fileName, layeredImage)
-	if fileName[-3:] == "pdn":
+	if compareExt(fileName, "pdn"):
 		return saveLayer_PDN(fileName, layeredImage)
-	if fileName[-3:] == "tif" or fileName[-4:] == "tiff":
+	if compareExt(fileName, "tif") or compareExt(fileName, "tiff"):
 		return saveLayer_TIFF(fileName, layeredImage)
+	if compareExt(fileName, "webp"):
+		return saveLayer_WEBP(fileName, layeredImage)
+	if compareExt(fileName, "gif"):
+		return saveLayer_GIF(fileName, layeredImage)
 	extNotRecognised(fileName)
 	raise ValueError
 
@@ -327,11 +339,55 @@ def openLayer_TIFF(file):
 
 def saveLayer_TIFF(fileName, layeredImage):
 	""" Save a layered image as .tiff or .tif """
+	layers = getRasterLayers(layeredImage, "TIFF")
+	layers[0].save(fileName, compression=None, save_all=True, append_images=layers[1:])
+
+
+## GIF ##
+def openLayer_GIF(file):
+	""" Open a .gif file into a layered image """
+	from PIL import Image
+	project = Image.open(file)
+	projectSize = project.size
+	layers = []
+	for index in range(project.n_frames):
+		project.seek(index)
+		layers.append(Layer("Frame {} ({}ms)".format(len(layers) + 1,
+		project.info["duration"]), project.copy(), projectSize))
+	project.close()
+	return LayeredImage(layers, projectSize)
+
+def saveLayer_GIF(fileName, layeredImage):
+	""" Save a layered image as .gif """
+	layers = getRasterLayers(layeredImage, "GIF")
+	layers[0].save(fileName, duration=100, save_all=True, append_images=layers[1:])
+
+
+## WEBP ##
+def openLayer_WEBP(file):
+	""" Open a .webp file into a layered image """
+	from PIL import Image
+	project = Image.open(file)
+	projectSize = project.size
+	layers = []
+	for index in range(project.n_frames):
+		project.seek(index)
+		layers.append(Layer("Frame {}".format(len(layers) + 1), project.copy(), projectSize))
+	project.close()
+	return LayeredImage(layers, projectSize)
+
+def saveLayer_WEBP(fileName, layeredImage):
+	""" Save a layered image as .webp """
+	layers = getRasterLayers(layeredImage, "WEBP")
+	layers[0].save(fileName, duration=200, save_all=True, append_images=layers[1:])
+
+
+def getRasterLayers(layeredImage, imageFormat):
+	""" Return layers and throw a warning if the image has groups """
 	if len(layeredImage.extractGroups()) > 0:
-		Logger(FHFormatter()).logPrint("TIFFs do not support groups so extracting layers",
+		Logger(FHFormatter()).logPrint(imageFormat + "s do not support groups so extracting layers",
 		LogType.WARNING)
 	layers = []
 	for layer in layeredImage.extractLayers():
 		layers.append(rasterImageOA(layer.image, layeredImage.dimensions, layer.opacity, layer.offsets))
-
-	layers[0].save(fileName, compression=None, save_all=True, append_images=layers[1:])
+	return layers

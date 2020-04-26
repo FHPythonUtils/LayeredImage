@@ -2,6 +2,13 @@
 All major and minor version changes will be documented in this file. Details of
 patch-level version changes can be found in [commit messages](../../commits/master).
 
+## 2020.4.1 - 2020/04/26
+- Update documentation
+
+## 2020.4 - 2020/04/26
+- Added GIF and WEBP support
+- Automate tests
+
 ## 2020.3.3 - 2020/04/25
 - Updated blend.py to map blend types to functions, rather than use a series of
 if statements
