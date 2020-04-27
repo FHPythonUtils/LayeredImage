@@ -24,6 +24,7 @@ Use this module to read, and write to a number of layered image formats
 	- [Writing](#writing)
 		- [Group](#group-1)
 		- [Layer](#layer-1)
+- [Docs](#docs)
 - [Example Usage](#example-usage)
 - [Install With PIP](#install-with-pip)
 - [Language information](#language-information)
@@ -123,6 +124,14 @@ Layers are extracted from groups and saved to TIFF/ GIF or WEBP
 
 ```none
 Layers are rasterized before being written to TIFF/ GIF or WEBP
+```
+
+## Docs
+See the [Docs](/DOCS.md) for more information.
+
+Generate with pydoc-markdown 3
+```bash
+pydoc-markdown > DOCS.md
 ```
 
 ## Example Usage
