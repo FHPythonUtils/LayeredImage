@@ -113,8 +113,8 @@ Layers are extracted from groups and saved to TIFF/ GIF or WEBP
 
 #### Layer
 
-|Format    |.ora|.pdn|.xcf|.psd|.tiff/ .tif|.webp|.gif|
-|----------|----|----|----|----|-----|----|-----|
+|Format    |.ora|.pdn|.xcf|.psd|.tiff/ .tif|.webp|.gif|.lsr|
+|----------|----|----|----|----|-----|----|-----|----|
 |Name      |:heavy_check_mark:|:x:|:x:|:x:|:x:|:x:|:x:|:warning:|
 |Dimensions|:heavy_check_mark:|:x:|:x:|:x:|:warning:|:warning:|:warning:|:warning:|
 |Offsets   |:heavy_check_mark:|:x:|:x:|:x:|:warning:|:warning:|:warning:|:warning:|
