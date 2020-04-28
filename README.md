@@ -104,7 +104,7 @@ the case, please open an issue and I will fix the tables.
 |Dimensions|:heavy_check_mark:|:x:|:x:|:x:|:warning:|:warning:|:warning:|:heavy_check_mark:|
 |Offsets   |:heavy_check_mark:|:x:|:x:|:x:|:warning:|:warning:|:warning:|:heavy_check_mark:|
 |Opacity   |:heavy_check_mark:|:x:|:x:|:x:|:warning:|:warning:|:warning:|:warning:|
-|Visibility|:heavy_check_mark:|:x:|:x:|:x:|:warning:|:warning:|:warning:|:heavy_check_mark:|
+|Visibility|:heavy_check_mark:|:x:|:x:|:x:|:warning:|:warning:|:warning:|:warning:|
 |Blend Mode|:heavy_check_mark:|:x:|:x:|:x:|:x:|:x:|:x:|:x:|
 
 ```none
