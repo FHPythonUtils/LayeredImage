@@ -12,7 +12,7 @@ from layeredimage.blend import BlendType
 
 def extNotRecognised(fileName):
 	""" Output the file extension not recognised error """
-	exts = ["ora", "psd", "xcf", "pdn", "tif", "tiff", "webp", "gif"]
+	exts = ["ora", "psd", "xcf", "pdn", "tif", "tiff", "webp", "gif", "lsr"]
 	Logger(FHFormatter()).logPrint("File extension is not recognised for file: " +
 	fileName + "! Must be " + "one of \"" + ", \"".join(exts) + "\"", LogType.ERROR)
 
@@ -46,6 +46,8 @@ def openLayerImage(file):
 		return openLayer_WEBP(file)
 	if compareExt(file, "gif"):
 		return openLayer_GIF(file)
+	if compareExt(file, "lsr"):
+		return openLayer_LSR(file)
 	Logger(FHFormatter()).logPrint("File extension is not recognised!", LogType.ERROR)
 	extNotRecognised(file)
 	raise ValueError
@@ -71,6 +73,8 @@ def saveLayerImage(fileName, layeredImage):
 		return saveLayer_WEBP(fileName, layeredImage)
 	if compareExt(fileName, "gif"):
 		return saveLayer_GIF(fileName, layeredImage)
+	if compareExt(fileName, "lsr"):
+		return saveLayer_LSR(fileName, layeredImage)
 	extNotRecognised(fileName)
 	raise ValueError
 
@@ -191,7 +195,7 @@ def openLayer_PSD(file):
 			layers = []
 			for layer in layerOrGroup.layers:
 				layers.append(Layer(layer.name, layer.as_PIL(), (layer.width,
-				layer.height), (layer.left, layer.top),
+				layer.height), (layer.left - layerOrGroup.left, layer.top - layerOrGroup.top),
 				layer.opacity / 255, layer.visible,
 				blendModeLookup(layer.blend_mode, blendLookup)))
 			layersAndGroups.append(Group(layerOrGroup.name, layers, (layerOrGroup.width,
@@ -391,3 +395,35 @@ def getRasterLayers(layeredImage, imageFormat):
 	for layer in layeredImage.extractLayers():
 		layers.append(rasterImageOA(layer.image, layeredImage.dimensions, layer.opacity, layer.offsets))
 	return layers
+
+
+## LSR ##
+def openLayer_LSR(file):
+	""" Open a .lsr file into a layered image """
+	import pylsr
+	project = pylsr.read(file)
+	groups = []
+	for group in project.layers:
+		groups.append(Group(group.name, [Layer(layer.name, layer.scaledImage(),
+		layer.scaledImage().size) for layer in group.images], group.size,
+		(int(group.offsets()[0]), int(group.offsets()[1]))))
+	return LayeredImage(groups, project.size)
+
+
+def saveLayer_LSR(fileName, layeredImage):
+	""" Save a layered image as .lsr """
+	import pylsr
+	from os import sep
+	layers = []
+	for group in layeredImage.layersAndGroups:
+		if group.type == LayerGroupTypes.LAYER:
+			imageData = [pylsr.LSRImageData(group.image, group.name)]
+		else:
+			imageData = [pylsr.LSRImageData(rasterImageOA(layer.image,
+			group.dimensions, layer.opacity, layer.offsets), layer.name)
+			for layer in group.layers]
+		layers.append(pylsr.LSRLayer(imageData, group.name, group.dimensions,
+		(group.offsets[0] + group.dimensions[0]/2, group.offsets[1] + group.dimensions[1]/2)))
+	lsrImage = pylsr.LSRImage(layeredImage.dimensions,
+	fileName.split(sep)[-1].replace(".lsr", ""), layers)
+	pylsr.write(fileName, lsrImage)

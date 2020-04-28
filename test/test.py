@@ -80,6 +80,16 @@ def test_gif():
 	gif.getFlattenLayers().save(THISDIR + "/base24(gif).png")
 	assert(is_equal(THISDIR + "/base24(gif).png", THISDIR + "/expectedNoHidden.png", tolerance=1))
 
+# LSR
+def test_lsr():
+	lsr = layeredimage.io.openLayerImage(THISDIR + "/base24.lsr")
+	layeredimage.io.saveLayerImage(THISDIR + "/base24(lsr).ora", lsr)
+	layeredimage.io.saveLayerImage(THISDIR + "/base24(lsr).lsr", lsr)
+	layeredimage.io.saveLayerImage(THISDIR + "/base24(lsr).webp", lsr)
+	layeredimage.io.saveLayerImage(THISDIR + "/base24(lsr).lsr", lsr)
+	lsr.getFlattenLayers().save(THISDIR + "/base24(lsr).png")
+	assert(is_equal(THISDIR + "/base24(lsr).png", THISDIR + "/expectedNoHidden.png", tolerance=1))
+
 
 if __name__ == "__main__":
 	test_ora()
@@ -89,3 +99,4 @@ if __name__ == "__main__":
 	test_tiff()
 	test_webp()
 	test_gif()
+	test_lsr()

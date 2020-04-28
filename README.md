@@ -63,49 +63,49 @@ the case, please open an issue and I will fix the tables.
 - :x: - This is not supported and will cause loss of data
 - N/A - The source format does not support this so treat this as a :heavy_check_mark:
 
-|Format|.ora|.pdn|.xcf|.psd|.tiff/ .tif|.webp|.gif|
-|------|----|----|----|----|-----|----|-----|
-|Read  |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
-|Layers|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
-|Groups|:heavy_check_mark:|N/A |:heavy_check_mark:|:heavy_check_mark:|N/A|N/A|N/A|
-|Write |:heavy_check_mark:|:x:  |:x:  |:x:  |:warning:|:warning:|:warning:|
+|Format|.ora|.pdn|.xcf|.psd|.tiff/ .tif|.webp|.gif|.lsr|
+|------|----|----|----|----|-----|----|-----|----|
+|Read  |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
+|Layers|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
+|Groups|:heavy_check_mark:|N/A |:heavy_check_mark:|:heavy_check_mark:|N/A|N/A|N/A|:heavy_check_mark:|
+|Write |:heavy_check_mark:|:x:  |:x:  |:x:  |:warning:|:warning:|:warning:|:heavy_check_mark:|
 
 ### Reading
 
 #### Group
 
-|Format    |.ora|.pdn|.xcf|.psd|.tiff/ .tif|.webp|.gif|
-|----------|----|----|----|----|-----|----|-----|
-|Name      |:heavy_check_mark:|N/A |:heavy_check_mark:|:heavy_check_mark:|N/A |N/A |N/A |
-|Dimensions|:warning:|N/A |:heavy_check_mark:|:heavy_check_mark:|N/A |N/A |N/A |
-|Offsets   |:heavy_check_mark:|N/A |:heavy_check_mark:|:heavy_check_mark:|N/A |N/A |N/A |
-|Opacity   |:heavy_check_mark:|N/A |:heavy_check_mark:|:heavy_check_mark:|N/A |N/A |N/A |
-|Visibility|:heavy_check_mark:|N/A |:x:  |:heavy_check_mark:|N/A |N/A |N/A |
-|Blend Mode|:heavy_check_mark:|N/A |:heavy_check_mark:|:heavy_check_mark:|N/A|N/A |N/A |
+|Format    |.ora|.pdn|.xcf|.psd|.tiff/ .tif|.webp|.gif|.lsr|
+|----------|----|----|----|----|-----|----|-----|----|
+|Name      |:heavy_check_mark:|N/A |:heavy_check_mark:|:heavy_check_mark:|N/A |N/A |N/A |:heavy_check_mark:|
+|Dimensions|:warning:|N/A |:heavy_check_mark:|:heavy_check_mark:|N/A |N/A |N/A |:heavy_check_mark:|
+|Offsets   |:heavy_check_mark:|N/A |:heavy_check_mark:|:heavy_check_mark:|N/A |N/A |N/A |:heavy_check_mark:|
+|Opacity   |:heavy_check_mark:|N/A |:heavy_check_mark:|:heavy_check_mark:|N/A |N/A |N/A |N/A |
+|Visibility|:heavy_check_mark:|N/A |:x:  |:heavy_check_mark:|N/A |N/A |N/A |N/A |
+|Blend Mode|:heavy_check_mark:|N/A |:heavy_check_mark:|:heavy_check_mark:|N/A|N/A |N/A |N/A |
 
 #### Layer
 
-|Format    |.ora|.pdn|.xcf|.psd|.tiff/ .tif|.webp|.gif|
-|----------|----|----|----|----|-----|----|-----|
-|Name      |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:warning:|:warning:|
-|Dimensions|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
-|Offsets   |:heavy_check_mark:|N/A |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|N/A|N/A|
-|Opacity   |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|N/A |N/A |N/A |
-|Visibility|:heavy_check_mark:|:heavy_check_mark:|:x:  |:heavy_check_mark:|N/A |N/A |N/A |
-|Blend Mode|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|N/A|N/A |N/A |
+|Format    |.ora|.pdn|.xcf|.psd|.tiff/ .tif|.webp|.gif|.lsr|
+|----------|----|----|----|----|-----|----|-----|----|
+|Name      |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:warning:|:warning:|:heavy_check_mark:|
+|Dimensions|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
+|Offsets   |:heavy_check_mark:|N/A |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|N/A|N/A|N/A |
+|Opacity   |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|N/A |N/A |N/A |N/A |
+|Visibility|:heavy_check_mark:|:heavy_check_mark:|:x:  |:heavy_check_mark:|N/A |N/A |N/A |N/A |
+|Blend Mode|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|N/A|N/A |N/A |N/A |
 
 ### Writing
 
 #### Group
 
-|Format    |.ora|.pdn|.xcf|.psd|.tiff/ .tif|.webp|.gif|
-|----------|----|----|----|----|-----|----|-----|
-|Name      |:heavy_check_mark:|:x:|:x:|:x:|:x:|:x:|:x:|
-|Dimensions|:heavy_check_mark:|:x:|:x:|:x:|:warning:|:warning:|:warning:|
-|Offsets   |:heavy_check_mark:|:x:|:x:|:x:|:warning:|:warning:|:warning:|
-|Opacity   |:heavy_check_mark:|:x:|:x:|:x:|:warning:|:warning:|:warning:|
-|Visibility|:heavy_check_mark:|:x:|:x:|:x:|:warning:|:warning:|:warning:|
-|Blend Mode|:heavy_check_mark:|:x:|:x:|:x:|:x:|:x:|:x:|
+|Format    |.ora|.pdn|.xcf|.psd|.tiff/ .tif|.webp|.gif|.lsr|
+|----------|----|----|----|----|-----|----|-----|----|
+|Name      |:heavy_check_mark:|:x:|:x:|:x:|:x:|:x:|:x:|:heavy_check_mark:|
+|Dimensions|:heavy_check_mark:|:x:|:x:|:x:|:warning:|:warning:|:warning:|:heavy_check_mark:|
+|Offsets   |:heavy_check_mark:|:x:|:x:|:x:|:warning:|:warning:|:warning:|:heavy_check_mark:|
+|Opacity   |:heavy_check_mark:|:x:|:x:|:x:|:warning:|:warning:|:warning:|:warning:|
+|Visibility|:heavy_check_mark:|:x:|:x:|:x:|:warning:|:warning:|:warning:|:heavy_check_mark:|
+|Blend Mode|:heavy_check_mark:|:x:|:x:|:x:|:x:|:x:|:x:|:x:|
 
 ```none
 Layers are extracted from groups and saved to TIFF/ GIF or WEBP
@@ -115,15 +115,16 @@ Layers are extracted from groups and saved to TIFF/ GIF or WEBP
 
 |Format    |.ora|.pdn|.xcf|.psd|.tiff/ .tif|.webp|.gif|
 |----------|----|----|----|----|-----|----|-----|
-|Name      |:heavy_check_mark:|:x:|:x:|:x:|:x:|:x:|:x:|
-|Dimensions|:heavy_check_mark:|:x:|:x:|:x:|:warning:|:warning:|:warning:|
-|Offsets   |:heavy_check_mark:|:x:|:x:|:x:|:warning:|:warning:|:warning:|
-|Opacity   |:heavy_check_mark:|:x:|:x:|:x:|:warning:|:warning:|:warning:|
-|Visibility|:heavy_check_mark:|:x:|:x:|:x:|:warning:|:warning:|:warning:|
-|Blend Mode|:heavy_check_mark:|:x:|:x:|:x:|:x:|:x:|:x:|
+|Name      |:heavy_check_mark:|:x:|:x:|:x:|:x:|:x:|:x:|:warning:|
+|Dimensions|:heavy_check_mark:|:x:|:x:|:x:|:warning:|:warning:|:warning:|:warning:|
+|Offsets   |:heavy_check_mark:|:x:|:x:|:x:|:warning:|:warning:|:warning:|:warning:|
+|Opacity   |:heavy_check_mark:|:x:|:x:|:x:|:warning:|:warning:|:warning:|:warning:|
+|Visibility|:heavy_check_mark:|:x:|:x:|:x:|:warning:|:warning:|:warning:|:warning:|
+|Blend Mode|:heavy_check_mark:|:x:|:x:|:x:|:x:|:x:|:x:|:x:|
 
 ```none
 Layers are rasterized before being written to TIFF/ GIF or WEBP
+First child layers are placed in a group when written to LSR
 ```
 
 ## Docs
@@ -133,6 +134,7 @@ Generate with pydoc-markdown 3
 ```bash
 pydoc-markdown > DOCS.md
 ```
+Alternatively use `make.py` to run a load of commands
 
 ## Example Usage
 

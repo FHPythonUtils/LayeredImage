@@ -21,6 +21,10 @@ class LayeredImage:
 			max([dimensions[1] for dimentions in layerDimens]))
 		self.extras = kwargs
 
+	def __repr__(self):
+		return "<LayeredImage (" + str(self.dimensions[0]) + "x" + str(
+			self.dimensions[1]) + ") with " + str(len(self.layersAndGroups)) + " children>"
+
 	# Get, set and remove layers or groups
 	def getLayerOrGroup(self, index):
 		""" Get a LayerOrGroup """
@@ -139,13 +143,14 @@ def flattenLayerOrGroup(layerOrGroup, imageDimensions, flattenedSoFar=None, igno
 	if ignoreHidden and not layerOrGroup.visible:
 		foregroundRaster = Image.new("RGBA", imageDimensions)
 	elif layerOrGroup.type == LayerGroupTypes.GROUP:
-		foregroundRaster = flattenAll(layerOrGroup.layers, imageDimensions, ignoreHidden)
+		foregroundRaster = rasterImageOffset(flattenAll(layerOrGroup.layers,
+		imageDimensions, ignoreHidden), imageDimensions, layerOrGroup.offsets)
 	else:
 		# Get a raster image and apply blending
 		foregroundRaster = rasterImageOffset(layerOrGroup.image, imageDimensions,
 		layerOrGroup.offsets)
-		if flattenedSoFar is None:
-			return foregroundRaster
+	if flattenedSoFar is None:
+		return foregroundRaster
 	return blendLayers(flattenedSoFar, foregroundRaster, layerOrGroup.blendmode, layerOrGroup.opacity)
 
 
