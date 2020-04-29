@@ -2,7 +2,7 @@
 All major and minor version changes will be documented in this file. Details of
 patch-level version changes can be found in [commit messages](../../commits/master).
 
-## 2020.5 - 2020/04/27
+## 2020.5 - 2020/04/28
 - Added LSR support
 - Added make.py
 - Bugfix pdn layer offset in group

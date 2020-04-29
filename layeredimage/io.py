@@ -187,7 +187,8 @@ def openLayer_PSD(file):
 	"overlay": BlendType.OVERLAY, "difference": BlendType.DIFFERENCE,
 	"subtract": BlendType.NEGATION, "lighten": BlendType.LIGHTEN,
 	"darken": BlendType.DARKEN, "screen": BlendType.SCREEN,
-	"soft light": BlendType.SOFTLIGHT, "hard light": BlendType.HARDLIGHT}
+	"soft light": BlendType.SOFTLIGHT, "hard light": BlendType.HARDLIGHT,
+	"exclusion": BlendType.XOR}
 	layersAndGroups = []
 	project = PSDImage.load(file)
 	for layerOrGroup in project.layers[::-1]:
@@ -224,17 +225,15 @@ def openLayer_XCF(file):
 	""" Open an .xcf file into a layered image """
 	from gimpformats_unofficial.gimpXcfDocument import GimpDocument
 	blendLookup = {0: BlendType.NORMAL, 3: BlendType.MULTIPLY,
-	7: BlendType.ADDITIVE, 17: BlendType.COLOURBURN, 16: BlendType.COLOURDODGE,
-	5: BlendType.OVERLAY, 6: BlendType.DIFFERENCE,
-	8: BlendType.NEGATION, 10: BlendType.LIGHTEN,
-	9: BlendType.DARKEN, 4: BlendType.SCREEN, 52: BlendType.XOR,
-	28: BlendType.NORMAL, 30: BlendType.MULTIPLY,
-	33: BlendType.ADDITIVE, 43: BlendType.COLOURBURN, 42: BlendType.COLOURDODGE,
-	23: BlendType.OVERLAY, 32: BlendType.DIFFERENCE,
-	34: BlendType.NEGATION, 36: BlendType.LIGHTEN,
-	35: BlendType.DARKEN, 31: BlendType.SCREEN,
-	18: BlendType.HARDLIGHT, 19: BlendType.SOFTLIGHT,
-	44: BlendType.HARDLIGHT, 45: BlendType.SOFTLIGHT}
+	4: BlendType.SCREEN, 5: BlendType.OVERLAY, 6: BlendType.DIFFERENCE,
+	7: BlendType.ADDITIVE, 8: BlendType.NEGATION, 9: BlendType.DARKEN,
+	10: BlendType.LIGHTEN, 16: BlendType.COLOURDODGE, 17: BlendType.COLOURBURN,
+	18: BlendType.HARDLIGHT, 19: BlendType.SOFTLIGHT, 23: BlendType.OVERLAY,
+	28: BlendType.NORMAL, 30: BlendType.MULTIPLY, 31: BlendType.SCREEN,
+	32: BlendType.DIFFERENCE, 33: BlendType.ADDITIVE, 34: BlendType.NEGATION,
+	35: BlendType.DARKEN, 36: BlendType.LIGHTEN, 42: BlendType.COLOURDODGE,
+	43: BlendType.COLOURBURN, 44: BlendType.HARDLIGHT, 45: BlendType.SOFTLIGHT,
+	52: BlendType.XOR}
 	project = GimpDocument(file)
 	# Iterate the layers and create a list of layers for each group, then remove
 	# these from the project layers
