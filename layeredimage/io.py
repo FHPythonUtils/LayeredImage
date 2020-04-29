@@ -99,7 +99,9 @@ def openLayer_ORA(file):
 	"svg:": BlendType.REFLECT, "svg:overlay": BlendType.OVERLAY,
 	"svg:difference": BlendType.DIFFERENCE,	"svg:lighten": BlendType.LIGHTEN,
 	"svg:darken": BlendType.DARKEN, "svg:screen": BlendType.SCREEN,
-	"svg:hard-light": BlendType.HARDLIGHT, "svg:soft-light": BlendType.SOFTLIGHT}
+	"svg:hard-light": BlendType.HARDLIGHT, "svg:soft-light": BlendType.SOFTLIGHT,
+	"svg:hue": BlendType.HUE, "svg:saturation": BlendType.SATURATION,
+	"svg:color": BlendType.COLOUR, "svg:luminosity": BlendType.LUMINOSITY}
 	layersAndGroups = []
 	project = Project.load(file)
 	for layerOrGroup in project.children[::-1]:
@@ -127,7 +129,9 @@ def saveLayer_ORA(fileName, layeredImage):
 	BlendType.REFLECT: "svg:",	BlendType.OVERLAY: "svg:overlay",
 	BlendType.DIFFERENCE: "svg:difference",	BlendType.LIGHTEN: "svg:lighten",
 	BlendType.DARKEN: "svg:darken", BlendType.SCREEN: "svg:screen",
-	BlendType.SOFTLIGHT: "svg:soft-light", BlendType.HARDLIGHT: "svg:hard-light"}
+	BlendType.SOFTLIGHT: "svg:soft-light", BlendType.HARDLIGHT: "svg:hard-light",
+	BlendType.HUE: "svg:hue", BlendType.SATURATION: "svg:saturation",
+	BlendType.COLOUR: "svg:color", BlendType.LUMINOSITY: "svg:luminosity"}
 	project = Project.new(layeredImage.dimensions[0], layeredImage.dimensions[1])
 	for layerOrGroup in layeredImage.layersAndGroups:
 		if layerOrGroup.type == LayerGroupTypes.LAYER:
@@ -188,7 +192,9 @@ def openLayer_PSD(file):
 	"subtract": BlendType.NEGATION, "lighten": BlendType.LIGHTEN,
 	"darken": BlendType.DARKEN, "screen": BlendType.SCREEN,
 	"soft light": BlendType.SOFTLIGHT, "hard light": BlendType.HARDLIGHT,
-	"exclusion": BlendType.XOR}
+	"exclusion": BlendType.XOR, "hue": BlendType.HUE,
+	"saturation": BlendType.SATURATION, "color": BlendType.COLOUR,
+	"luminosity": BlendType.LUMINOSITY, "divide": BlendType.DIVIDE}
 	layersAndGroups = []
 	project = PSDImage.load(file)
 	for layerOrGroup in project.layers[::-1]:
@@ -227,13 +233,19 @@ def openLayer_XCF(file):
 	blendLookup = {0: BlendType.NORMAL, 3: BlendType.MULTIPLY,
 	4: BlendType.SCREEN, 5: BlendType.OVERLAY, 6: BlendType.DIFFERENCE,
 	7: BlendType.ADDITIVE, 8: BlendType.NEGATION, 9: BlendType.DARKEN,
-	10: BlendType.LIGHTEN, 16: BlendType.COLOURDODGE, 17: BlendType.COLOURBURN,
-	18: BlendType.HARDLIGHT, 19: BlendType.SOFTLIGHT, 23: BlendType.OVERLAY,
+	10: BlendType.LIGHTEN, 11: BlendType.HUE, 12: BlendType.SATURATION,
+	13: BlendType.COLOUR, 14: BlendType.LUMINOSITY, 15: BlendType.DIVIDE,
+	16: BlendType.COLOURDODGE, 17: BlendType.COLOURBURN,
+	18: BlendType.HARDLIGHT, 19: BlendType.SOFTLIGHT, 20: BlendType.GRAINEXTRACT,
+	21: BlendType.GRAINMERGE, 23: BlendType.OVERLAY, 24: BlendType.HUE,
+	25: BlendType.SATURATION, 26: BlendType.COLOUR, 27: BlendType.LUMINOSITY,
 	28: BlendType.NORMAL, 30: BlendType.MULTIPLY, 31: BlendType.SCREEN,
 	32: BlendType.DIFFERENCE, 33: BlendType.ADDITIVE, 34: BlendType.NEGATION,
-	35: BlendType.DARKEN, 36: BlendType.LIGHTEN, 42: BlendType.COLOURDODGE,
+	35: BlendType.DARKEN, 36: BlendType.LIGHTEN, 37: BlendType.HUE,
+	38: BlendType.SATURATION, 39: BlendType.COLOUR, 40: BlendType.LUMINOSITY,
+	41: BlendType.DIVIDE, 42: BlendType.COLOURDODGE,
 	43: BlendType.COLOURBURN, 44: BlendType.HARDLIGHT, 45: BlendType.SOFTLIGHT,
-	52: BlendType.XOR}
+	46: BlendType.GRAINEXTRACT, 47: BlendType.GRAINMERGE, 52: BlendType.XOR}
 	project = GimpDocument(file)
 	# Iterate the layers and create a list of layers for each group, then remove
 	# these from the project layers

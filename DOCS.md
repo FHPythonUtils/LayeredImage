@@ -9,8 +9,10 @@ Use this module to read, and write to a number of layered image formats
 Provide blending functions and types
 
 Adapted from https://github.com/addisonElliott/pypdn/blob/master/pypdn/reader.py
+and https://gitlab.com/inklabapp/pyora/-/blob/master/pyora/BlendNonSep.py
 MIT License Copyright (c) 2020 FredHappyface
 MIT License Copyright (c) 2018 Addison Elliott
+MIT License Copyright (c) 2019 Paul Jewell
 
 <a name=".layeredimage.blend.BlendType"></a>
 ### BlendType
@@ -164,6 +166,69 @@ hardlight(background, foreground)
 ```
 
 BlendType.HARDLIGHT
+
+<a name=".layeredimage.blend.grainextract"></a>
+#### grainextract
+
+```python
+grainextract(background, foreground)
+```
+
+BlendType.GRAINEXTRACT
+
+<a name=".layeredimage.blend.grainmerge"></a>
+#### grainmerge
+
+```python
+grainmerge(background, foreground)
+```
+
+BlendType.GRAINMERGE
+
+<a name=".layeredimage.blend.divide"></a>
+#### divide
+
+```python
+divide(background, foreground)
+```
+
+BlendType.DIVIDE
+
+<a name=".layeredimage.blend.hue"></a>
+#### hue
+
+```python
+hue(background, foreground)
+```
+
+BlendType.HUE
+
+<a name=".layeredimage.blend.saturation"></a>
+#### saturation
+
+```python
+saturation(background, foreground)
+```
+
+BlendType.SATURATION
+
+<a name=".layeredimage.blend.colour"></a>
+#### colour
+
+```python
+colour(background, foreground)
+```
+
+BlendType.COLOUR
+
+<a name=".layeredimage.blend.luminosity"></a>
+#### luminosity
+
+```python
+luminosity(background, foreground)
+```
+
+BlendType.LUMINOSITY
 
 <a name=".layeredimage.blend.blend"></a>
 #### blend

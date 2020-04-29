@@ -1,11 +1,13 @@
 """Provide blending functions and types
 
 Adapted from https://github.com/addisonElliott/pypdn/blob/master/pypdn/reader.py
+and https://gitlab.com/inklabapp/pyora/-/blob/master/pyora/BlendNonSep.py
 MIT License Copyright (c) 2020 FredHappyface
 MIT License Copyright (c) 2018 Addison Elliott
+MIT License Copyright (c) 2019 Paul Jewell
 """
 
-from enum import Enum
+from enum import Enum, auto
 import warnings
 import numpy as np
 import skimage
@@ -14,22 +16,29 @@ from PIL import Image
 class BlendType(Enum):
 	"""Specify supported blend types
 	"""
-	NORMAL = 0
-	MULTIPLY = 1
-	ADDITIVE = 2
-	COLOURBURN = 3
-	COLOURDODGE = 4
-	REFLECT = 5
-	GLOW = 6
-	OVERLAY = 7
-	DIFFERENCE = 8
-	NEGATION = 9
-	LIGHTEN = 10
-	DARKEN = 11
-	SCREEN = 12
-	XOR = 13
-	SOFTLIGHT = 14
-	HARDLIGHT = 15
+	NORMAL = auto()
+	MULTIPLY = auto()
+	ADDITIVE = auto()
+	COLOURBURN = auto()
+	COLOURDODGE = auto()
+	REFLECT = auto()
+	GLOW = auto()
+	OVERLAY = auto()
+	DIFFERENCE = auto()
+	NEGATION = auto()
+	LIGHTEN = auto()
+	DARKEN = auto()
+	SCREEN = auto()
+	XOR = auto()
+	SOFTLIGHT = auto()
+	HARDLIGHT = auto()
+	GRAINEXTRACT = auto()
+	GRAINMERGE = auto()
+	DIVIDE = auto()
+	HUE = auto()
+	SATURATION = auto()
+	COLOUR = auto()
+	LUMINOSITY = auto()
 
 def normal(_background, foreground):
 	""" BlendType.NORMAL """
@@ -37,7 +46,7 @@ def normal(_background, foreground):
 
 def multiply(background, foreground):
 	""" BlendType.MULTIPLY """
-	return background * foreground
+	return np.clip(foreground * background, 0.0, 1.0)
 
 def additive(background, foreground):
 	""" BlendType.ADDITIVE """
@@ -102,14 +111,116 @@ def xor(background, foreground):
 
 def softlight(background, foreground):
 	""" BlendType.SOFTLIGHT """
-	return (1.0 - background) * background * foreground + background * (1.0 -
-		(1.0 - background) * (1.0 - foreground))
+	return (1.0 - background) * background * foreground + background * \
+	(1.0 - (1.0 - background) * (1.0 - foreground))
 
 def hardlight(background, foreground):
 	""" BlendType.HARDLIGHT """
 	return np.where(foreground > 0.5, np.minimum(background * 2 * foreground, 1.0),
 		np.minimum(1.0 - ((1.0 - background) * (1.0 - (foreground - 0.5) * 2.0)),
 		1.0))
+
+def grainextract(background, foreground):
+	""" BlendType.GRAINEXTRACT """
+	return np.clip(background - foreground + 0.5, 0.0, 1.0)
+
+def grainmerge(background, foreground):
+	""" BlendType.GRAINMERGE """
+	return np.clip(background + foreground - 0.5, 0.0, 1.0)
+
+def divide(background, foreground):
+	""" BlendType.DIVIDE """
+	return np.minimum((256.0 / 255.0 * background) / (1.0 / 255.0 + foreground), 1.0)
+
+
+def _lum(colours):
+	"""
+	:param colours: x by x by 3 matrix of rgb color components of pixels
+	:return: x by x by 3 matrix of luminosity of pixels
+	"""
+	return (colours[:, :, 0] * 0.299) + (colours[:, :, 1] * 0.587) + (colours[:, :, 2] * 0.114)
+
+def _setLum(originalColours, newLuminosity):
+	"""	Set a new luminosity value for the matrix of color	"""
+	_c = originalColours.copy()
+	_l = _lum(_c)
+	d = newLuminosity - _l
+	_c[:, :, 0] += d
+	_c[:, :, 1] += d
+	_c[:, :, 2] += d
+	_l = _lum(_c)
+	_n = np.min(_c, axis=2)
+	_x = np.max(_c, axis=2)
+	for i in range(_c.shape[0]):
+		for j in range(_c.shape[1]):
+			c = _c[i][j]
+			newLuminosity = _l[i, j]
+			n = _n[i, j]
+			x = _x[i, j]
+			if n < 0:
+				_c[i][j] = newLuminosity + (((c - newLuminosity) * newLuminosity) / (newLuminosity - n))
+			if x > 1:
+				_c[i][j] = newLuminosity + (((c - newLuminosity) * (1 - newLuminosity)) / (x - newLuminosity))
+	return _c
+
+def _sat(colours):
+	"""
+	:param colours: x by x by 3 matrix of rgb color components of pixels
+	:return: int of saturation of pixels
+	"""
+	return np.max(colours, axis=2) - np.min(colours, axis=2)
+
+
+def _setSat(originalColours, newSaturation):
+	"""
+	Set a new saturation value for the matrix of color
+
+	The current implementation cannot be vectorized in an efficient manner,
+	so it is very slow, O(m*n) at least. This might be able to be improved with
+	openCL if that is the direction that the lib takes.
+	:param originalColours: x by x by 3 matrix of rgb color components of pixels
+	:param newSaturation: int of the new saturation value for the matrix
+	:return: x by x by 3 matrix of luminosity of pixels
+	"""
+	_c = originalColours.copy()
+	for i in range(_c.shape[0]):
+		for j in range(_c.shape[1]):
+			c = _c[i][j]
+			min_i = 0
+			mid_i = 1
+			max_i = 2
+			if c[mid_i] < c[min_i]:
+				min_i, mid_i = mid_i, min_i
+			if c[max_i] < c[mid_i]:
+				mid_i, max_i = max_i, mid_i
+			if c[mid_i] < c[min_i]:
+				min_i, mid_i = mid_i, min_i
+			if c[max_i] - c[min_i] > 0.0:
+				_c[i][j][mid_i] = (((c[mid_i] - c[min_i]) * newSaturation[i, j]) / (c[max_i] - c[min_i]))
+				_c[i][j][max_i] = newSaturation[i, j]
+			else:
+				_c[i][j][mid_i] = 0
+				_c[i][j][max_i] = 0
+			_c[i][j][min_i] = 0
+	return _c
+
+
+def hue(background, foreground):
+	""" BlendType.HUE """
+	return _setLum(_setSat(foreground, _sat(background)), _lum(background))
+
+def saturation(background, foreground):
+	""" BlendType.SATURATION """
+	return _setLum(_setSat(background, _sat(foreground)), _lum(background))
+
+def colour(background, foreground):
+	""" BlendType.COLOUR """
+	return _setLum(foreground, _lum(background))
+
+def luminosity(background, foreground):
+	""" BlendType.LUMINOSITY """
+	return _setLum(background, _lum(foreground))
+
 
 def blend(background, foreground, blendType):
 	"""blend pixels
@@ -147,7 +258,10 @@ def blend(background, foreground, blendType):
 	BlendType.REFLECT: reflect,	BlendType.OVERLAY: overlay,
 	BlendType.DIFFERENCE: difference,	BlendType.LIGHTEN: lighten,
 	BlendType.DARKEN: darken, BlendType.SCREEN: screen,
-	BlendType.SOFTLIGHT: softlight, BlendType.HARDLIGHT: hardlight}
+	BlendType.SOFTLIGHT: softlight, BlendType.HARDLIGHT: hardlight,
+	BlendType.GRAINEXTRACT: grainextract, BlendType.GRAINMERGE: grainmerge,
+	BlendType.DIVIDE: divide, BlendType.HUE: hue, BlendType.SATURATION: saturation,
+	BlendType.COLOUR: colour, BlendType.LUMINOSITY: luminosity}
 
 	if blendType not in blendLookup:
 		return normal(background, foreground)
