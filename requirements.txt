@@ -1,10 +1,10 @@
+blendmodes==2020.*,>=2020.1.0
 defusedxml==0.*,>=0.6.0
 gimpformats-unofficial==0.*,>=0.1.0
+imgcompare==2.*,>=2.0.1
 metprint==2020.*,>=2020.5.0
-numpy==1.*,>=1.18.3
 pillow==7.*,>=7.1.2
 psd-tools3==1.*,>=1.8.2
 pylsr==2020.*,>=2020.0.2
 pyora==0.*,>=0.3.0
 pypdn==1.*,>=1.0.5
-scikit-image==0.*,>=0.16.2

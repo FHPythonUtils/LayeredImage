@@ -192,9 +192,10 @@ def openLayer_PSD(file):
 	"subtract": BlendType.NEGATION, "lighten": BlendType.LIGHTEN,
 	"darken": BlendType.DARKEN, "screen": BlendType.SCREEN,
 	"soft light": BlendType.SOFTLIGHT, "hard light": BlendType.HARDLIGHT,
-	"exclusion": BlendType.XOR, "hue": BlendType.HUE,
+	"exclusion": BlendType.EXCLUSION, "hue": BlendType.HUE,
 	"saturation": BlendType.SATURATION, "color": BlendType.COLOUR,
-	"luminosity": BlendType.LUMINOSITY, "divide": BlendType.DIVIDE}
+	"luminosity": BlendType.LUMINOSITY, "divide": BlendType.DIVIDE,
+	"pin light": BlendType.PINLIGHT, "vivid light": BlendType.VIVIDLIGHT}
 	layersAndGroups = []
 	project = PSDImage.load(file)
 	for layerOrGroup in project.layers[::-1]:
@@ -245,7 +246,8 @@ def openLayer_XCF(file):
 	38: BlendType.SATURATION, 39: BlendType.COLOUR, 40: BlendType.LUMINOSITY,
 	41: BlendType.DIVIDE, 42: BlendType.COLOURDODGE,
 	43: BlendType.COLOURBURN, 44: BlendType.HARDLIGHT, 45: BlendType.SOFTLIGHT,
-	46: BlendType.GRAINEXTRACT, 47: BlendType.GRAINMERGE, 52: BlendType.XOR}
+	46: BlendType.GRAINEXTRACT, 47: BlendType.GRAINMERGE,
+	48: BlendType.VIVIDLIGHT, 49: BlendType.PINLIGHT, 52: BlendType.EXCLUSION}
 	project = GimpDocument(file)
 	# Iterate the layers and create a list of layers for each group, then remove
 	# these from the project layers

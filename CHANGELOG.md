@@ -2,6 +2,10 @@
 All major and minor version changes will be documented in this file. Details of
 patch-level version changes can be found in [commit messages](../../commits/master).
 
+## 2020.5.2 - 2020/05/01
+- Added PINLIGHT, VIVIDLIGHT, EXCLUSION
+- Moved blending heavy lifting to a shiny new library
+
 ## 2020.5.1 - 2020/04/29
 - Added blend modes from pyora (credited in file docstring): GRAINEXTRACT,
 GRAINMERGE, DIVIDE, HUE, SATURATION, COLOUR, LUMINOSITY

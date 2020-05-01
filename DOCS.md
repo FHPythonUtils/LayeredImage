@@ -6,13 +6,9 @@ Use this module to read, and write to a number of layered image formats
 <a name=".layeredimage.blend"></a>
 ## layeredimage.blend
 
-Provide blending functions and types
+Provide blending functions
 
-Adapted from https://github.com/addisonElliott/pypdn/blob/master/pypdn/reader.py
-and https://gitlab.com/inklabapp/pyora/-/blob/master/pyora/BlendNonSep.py
-MIT License Copyright (c) 2020 FredHappyface
-MIT License Copyright (c) 2018 Addison Elliott
-MIT License Copyright (c) 2019 Paul Jewell
+leverage blendmodes for this
 
 <a name=".layeredimage.blend.BlendType"></a>
 ### BlendType
@@ -22,253 +18,32 @@ class BlendType(Enum)
 ```
 
 Specify supported blend types
-
-<a name=".layeredimage.blend.normal"></a>
-#### normal
-
-```python
-normal(_background, foreground)
-```
-
-BlendType.NORMAL
-
-<a name=".layeredimage.blend.multiply"></a>
-#### multiply
-
-```python
-multiply(background, foreground)
-```
-
-BlendType.MULTIPLY
-
-<a name=".layeredimage.blend.additive"></a>
-#### additive
-
-```python
-additive(background, foreground)
-```
-
-BlendType.ADDITIVE
-
-<a name=".layeredimage.blend.colourburn"></a>
-#### colourburn
-
-```python
-colourburn(background, foreground)
-```
-
-BlendType.COLOURBURN
-
-<a name=".layeredimage.blend.colourdodge"></a>
-#### colourdodge
-
-```python
-colourdodge(background, foreground)
-```
-
-BlendType.COLOURDODGE
-
-<a name=".layeredimage.blend.reflect"></a>
-#### reflect
-
-```python
-reflect(background, foreground)
-```
-
-BlendType.REFLECT
-
-<a name=".layeredimage.blend.glow"></a>
-#### glow
-
-```python
-glow(background, foreground)
-```
-
-BlendType.GLOW
-
-<a name=".layeredimage.blend.overlay"></a>
-#### overlay
-
-```python
-overlay(background, foreground)
-```
-
-BlendType.OVERLAY
-
-<a name=".layeredimage.blend.difference"></a>
-#### difference
-
-```python
-difference(background, foreground)
-```
-
-BlendType.DIFFERENCE
-
-<a name=".layeredimage.blend.negation"></a>
-#### negation
-
-```python
-negation(background, foreground)
-```
-
-BlendType.NEGATION
-
-<a name=".layeredimage.blend.lighten"></a>
-#### lighten
-
-```python
-lighten(background, foreground)
-```
-
-BlendType.LIGHTEN
-
-<a name=".layeredimage.blend.darken"></a>
-#### darken
-
-```python
-darken(background, foreground)
-```
-
-BlendType.DARKEN
-
-<a name=".layeredimage.blend.screen"></a>
-#### screen
-
-```python
-screen(background, foreground)
-```
-
-BlendType.SCREEN
-
-<a name=".layeredimage.blend.xor"></a>
-#### xor
-
-```python
-xor(background, foreground)
-```
-
-BlendType.XOR
-
-<a name=".layeredimage.blend.softlight"></a>
-#### softlight
-
-```python
-softlight(background, foreground)
-```
-
-BlendType.SOFTLIGHT
-
-<a name=".layeredimage.blend.hardlight"></a>
-#### hardlight
-
-```python
-hardlight(background, foreground)
-```
-
-BlendType.HARDLIGHT
-
-<a name=".layeredimage.blend.grainextract"></a>
-#### grainextract
-
-```python
-grainextract(background, foreground)
-```
-
-BlendType.GRAINEXTRACT
-
-<a name=".layeredimage.blend.grainmerge"></a>
-#### grainmerge
-
-```python
-grainmerge(background, foreground)
-```
-
-BlendType.GRAINMERGE
-
-<a name=".layeredimage.blend.divide"></a>
-#### divide
-
-```python
-divide(background, foreground)
-```
-
-BlendType.DIVIDE
-
-<a name=".layeredimage.blend.hue"></a>
-#### hue
-
-```python
-hue(background, foreground)
-```
-
-BlendType.HUE
-
-<a name=".layeredimage.blend.saturation"></a>
-#### saturation
-
-```python
-saturation(background, foreground)
-```
-
-BlendType.SATURATION
-
-<a name=".layeredimage.blend.colour"></a>
-#### colour
-
-```python
-colour(background, foreground)
-```
-
-BlendType.COLOUR
-
-<a name=".layeredimage.blend.luminosity"></a>
-#### luminosity
-
-```python
-luminosity(background, foreground)
-```
-
-BlendType.LUMINOSITY
-
-<a name=".layeredimage.blend.blend"></a>
-#### blend
-
-```python
-blend(background, foreground, blendType)
-```
-
-blend pixels
-
-**Arguments**:
-
-- `background` _np.array_ - background
-- `foreground` _np.array_ - foreground
-- `blendType` _BlendType_ - the blend type
-  
-
-**Returns**:
-
-- `np.array` - new array representing the image
-  
-  background, foreground and the return are in the form
-  
-  [[[0. 0. 0.]
-  [0. 0. 0.]
-  [0. 0. 0.]
-  ...
-  [0. 0. 0.]
-  [0. 0. 0.]
-  [0. 0. 0.]]
-  
-  ...
-  
-  [[0. 0. 0.]
-  [0. 0. 0.]
-  [0. 0. 0.]
-  ...
-  [0. 0. 0.]
-  [0. 0. 0.]
-  [0. 0. 0.]]]
+NORMAL
+MULTIPLY
+ADDITIVE
+COLOURBURN
+COLOURDODGE
+REFLECT
+GLOW
+OVERLAY
+DIFFERENCE
+NEGATION
+LIGHTEN
+DARKEN
+SCREEN
+XOR
+SOFTLIGHT
+HARDLIGHT
+GRAINEXTRACT
+GRAINMERGE
+DIVIDE
+HUE
+SATURATION
+COLOUR
+LUMINOSITY
+PINLIGHT
+VIVIDLIGHT
+EXCLUSION
 
 <a name=".layeredimage.blend.blendLayers"></a>
 #### blendLayers
@@ -285,7 +60,7 @@ Blend layers using numpy array
 - `foreground` _PIL.Image_ - foreground layer
 - `blendType` _BlendType_ - The blendtype
 - `opacity` _float_ - The opacity of the foreground image
-  
+
 
 **Returns**:
 
@@ -326,7 +101,7 @@ Open a layer image file into a layer image object
 **Arguments**:
 
 - `file` _string_ - path/ filename
-  
+
 
 **Returns**:
 
@@ -721,7 +496,7 @@ flattened
   been flattened. Defaults to None.
 - `ignoreHidden` _bool, optional_ - ignore layers that are hidden. Defaults
   to True.
-  
+
 
 **Returns**:
 
@@ -743,7 +518,7 @@ Flatten a list of layers and groups
   been flattened. Defaults to None.
 - `ignoreHidden` _bool, optional_ - ignore layers that are hidden. Defaults
   to True.
-  
+
 
 **Returns**:
 
@@ -868,4 +643,3 @@ Makefile for python. Run one of the following subcommands:
 
 install: Poetry install
 build: Building docs, requirements.txt, setup.py, poetry build
-
