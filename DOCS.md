@@ -64,7 +64,7 @@ Blend layers using numpy array
 - `foreground` _PIL.Image_ - foreground layer
 - `blendType` _BlendType_ - The blendtype
 - `opacity` _float_ - The opacity of the foreground image
-
+  
 
 **Returns**:
 
@@ -105,7 +105,7 @@ Open a layer image file into a layer image object
 **Arguments**:
 
 - `file` _string_ - path/ filename
-
+  
 
 **Returns**:
 
@@ -500,7 +500,7 @@ flattened
   been flattened. Defaults to None.
 - `ignoreHidden` _bool, optional_ - ignore layers that are hidden. Defaults
   to True.
-
+  
 
 **Returns**:
 
@@ -522,7 +522,7 @@ Flatten a list of layers and groups
   been flattened. Defaults to None.
 - `ignoreHidden` _bool, optional_ - ignore layers that are hidden. Defaults
   to True.
-
+  
 
 **Returns**:
 
@@ -647,3 +647,4 @@ Makefile for python. Run one of the following subcommands:
 
 install: Poetry install
 build: Building docs, requirements.txt, setup.py, poetry build
+

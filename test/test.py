@@ -48,7 +48,7 @@ def test_xcf():
 	layeredimage.io.saveLayerImage(THISDIR + "/base24(xcf).webp", xcf)
 	layeredimage.io.saveLayerImage(THISDIR + "/base24(xcf).gif", xcf)
 	xcf.getFlattenLayers().save(THISDIR + "/base24(xcf).png")
-	assert(is_equal(THISDIR + "/base24(ora).png", THISDIR + "/expected.png", tolerance=1))
+	assert(is_equal(THISDIR + "/base24(xcf).png", THISDIR + "/expectedNoHidden.png", tolerance=1))
 
 # TIFF
 def test_tiff():

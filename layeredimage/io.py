@@ -268,7 +268,8 @@ def openLayer_XCF(file):
 			while layers[index].itemPath is not None:
 				layer = layers[index]
 				groupLayers[groupIndex].append(Layer(layer.name, layer.image,
-				(layer.width, layer.height), (layer.xOffset, layer.yOffset),
+				(layer.width, layer.height),
+				(layer.xOffset - layerOrGroup.xOffset, layer.yOffset - layerOrGroup.yOffset),
 				layer.opacity, layer.visible,
 				blendModeLookup(layer.blendMode, blendLookup)))
 				layers.pop(index)
