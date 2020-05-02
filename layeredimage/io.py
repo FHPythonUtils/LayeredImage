@@ -101,7 +101,10 @@ def openLayer_ORA(file):
 	"svg:darken": BlendType.DARKEN, "svg:screen": BlendType.SCREEN,
 	"svg:hard-light": BlendType.HARDLIGHT, "svg:soft-light": BlendType.SOFTLIGHT,
 	"svg:hue": BlendType.HUE, "svg:saturation": BlendType.SATURATION,
-	"svg:color": BlendType.COLOUR, "svg:luminosity": BlendType.LUMINOSITY}
+	"svg:color": BlendType.COLOUR, "svg:luminosity": BlendType.LUMINOSITY,
+	"svg:plus": BlendType.ADDITIVE, "svg:dst-in": BlendType.DESTIN,
+	"svg:dst-out": BlendType.DESTOUT, "svg:dst-atop": BlendType.DESTATOP,
+	"svg:src-atop": BlendType.SRCATOP}
 	layersAndGroups = []
 	project = Project.load(file)
 	for layerOrGroup in project.children[::-1]:
@@ -131,7 +134,10 @@ def saveLayer_ORA(fileName, layeredImage):
 	BlendType.DARKEN: "svg:darken", BlendType.SCREEN: "svg:screen",
 	BlendType.SOFTLIGHT: "svg:soft-light", BlendType.HARDLIGHT: "svg:hard-light",
 	BlendType.HUE: "svg:hue", BlendType.SATURATION: "svg:saturation",
-	BlendType.COLOUR: "svg:color", BlendType.LUMINOSITY: "svg:luminosity"}
+	BlendType.COLOUR: "svg:color", BlendType.LUMINOSITY: "svg:luminosity",
+	BlendType.ADDITIVE: "svg:plus", BlendType.DESTIN: "svg:dst-in",
+	BlendType.DESTOUT: "svg:dst-out", BlendType.DESTATOP: "svg:dst-atop",
+	BlendType.SRCATOP: "svg:src-atop"}
 	project = Project.new(layeredImage.dimensions[0], layeredImage.dimensions[1])
 	for layerOrGroup in layeredImage.layersAndGroups:
 		if layerOrGroup.type == LayerGroupTypes.LAYER:

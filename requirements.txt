@@ -1,4 +1,4 @@
-blendmodes==2020.*,>=2020.1.0
+blendmodes==2020.*,>=2020.2.0
 defusedxml==0.*,>=0.6.0
 gimpformats-unofficial==0.*,>=0.1.0
 metprint==2020.*,>=2020.5.0

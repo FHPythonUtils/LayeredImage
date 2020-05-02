@@ -34,6 +34,10 @@ class BlendType(Enum):
 	PINLIGHT
 	VIVIDLIGHT
 	EXCLUSION
+	DESTIN
+	DESTOUT
+	DESTATOP
+	SRCATOP
 	"""
 	NORMAL = auto()
 	MULTIPLY = auto()
@@ -61,6 +65,10 @@ class BlendType(Enum):
 	PINLIGHT = auto()
 	VIVIDLIGHT = auto()
 	EXCLUSION = auto()
+	DESTIN = auto()
+	DESTOUT = auto()
+	DESTATOP = auto()
+	SRCATOP = auto()
 
 
 def blendLayers(background, foreground, blendType, opacity):
@@ -86,5 +94,7 @@ def blendLayers(background, foreground, blendType, opacity):
 	BlendType.COLOUR: bType.COLOUR, BlendType.LUMINOSITY: bType.LUMINOSITY,
 	BlendType.XOR: bType.XOR, BlendType.NEGATION: bType.NEGATION,
 	BlendType.PINLIGHT: bType.PINLIGHT, BlendType.VIVIDLIGHT: bType.VIVIDLIGHT,
-	BlendType.EXCLUSION: bType.EXCLUSION}
+	BlendType.EXCLUSION: bType.EXCLUSION, BlendType.DESTIN: bType.DESTIN,
+	BlendType.DESTOUT: bType.DESTOUT, BlendType.DESTATOP: bType.DESTATOP,
+	BlendType.SRCATOP: bType.SRCATOP}
 	return bLayers(background, foreground, blendTypeMap[blendType], opacity)

@@ -44,6 +44,10 @@ LUMINOSITY
 PINLIGHT
 VIVIDLIGHT
 EXCLUSION
+DESTIN
+DESTOUT
+DESTATOP
+SRCATOP
 
 <a name=".layeredimage.blend.blendLayers"></a>
 #### blendLayers

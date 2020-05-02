@@ -2,6 +2,9 @@
 All major and minor version changes will be documented in this file. Details of
 patch-level version changes can be found in [commit messages](../../commits/master).
 
+## 2020.5.3 - 2020/05/02
+- Added full support for Open Raster Image blend modes
+
 ## 2020.5.2 - 2020/05/01
 - Added PINLIGHT, VIVIDLIGHT, EXCLUSION
 - Moved blending heavy lifting to a shiny new library
