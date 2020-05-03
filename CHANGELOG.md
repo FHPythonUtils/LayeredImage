@@ -2,6 +2,10 @@
 All major and minor version changes will be documented in this file. Details of
 patch-level version changes can be found in [commit messages](../../commits/master).
 
+## 2020.5.5 - 2020/05/03
+- Upgraded from `gimpformats_unofficial` to `gimpformats`
+- Disable some pylint errors for snippets
+
 ## 2020.5.4 - 2020/05/02
 - Bugfix openLayer_XCF: layer offsets in a group are now correct
 

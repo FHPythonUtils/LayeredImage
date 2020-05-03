@@ -20,6 +20,8 @@ def compareExt(fileName, ext):
 	""" Compare a file extension """
 	return fileName[-len(ext):].lower() == ext
 
+#pylint: disable=too-many-return-statements
+
 def openLayerImage(file):
 	"""Open a layer image file into a layer image object
 
@@ -77,6 +79,8 @@ def saveLayerImage(fileName, layeredImage):
 		return saveLayer_LSR(fileName, layeredImage)
 	extNotRecognised(fileName)
 	raise ValueError
+
+#pylint: enable=too-many-return-statements
 
 def exportFlatImage(fileName, layeredImage):
 	""" Export the layered image to a unilayer image file """
@@ -236,7 +240,7 @@ def saveLayer_PSD(_fileName, _layeredImage):
 #### XCF ####
 def openLayer_XCF(file):
 	""" Open an .xcf file into a layered image """
-	from gimpformats_unofficial.gimpXcfDocument import GimpDocument
+	from gimpformats.gimpXcfDocument import GimpDocument
 	blendLookup = {0: BlendType.NORMAL, 3: BlendType.MULTIPLY,
 	4: BlendType.SCREEN, 5: BlendType.OVERLAY, 6: BlendType.DIFFERENCE,
 	7: BlendType.ADDITIVE, 8: BlendType.NEGATION, 9: BlendType.DARKEN,
@@ -298,7 +302,7 @@ def openLayer_XCF(file):
 	return LayeredImage(layersAndGroups, (project.width, project.height))
 
 
-def saveLayer_XCF(fileName, layeredImage):
+def saveLayer_XCF(_fileName, _layeredImage):
 	""" Save a layered image as .xcf """
 	Logger(FHFormatter()).logPrint("Saving XCFs is not implemented in gimpformats - " +
 	"this is a little misleading as functions are pressent, however these are not " +

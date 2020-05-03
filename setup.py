@@ -21,7 +21,7 @@ if os.path.exists(readme_path):
 setup(
     long_description=readme,
     name='layeredimage',
-    version='2020.5.4',
+    version='2020.5.5',
     description='Use this module to read, and write to a number of layered image formats',
     python_requires='==3.*,>=3.6.0',
     project_urls={
@@ -44,7 +44,7 @@ setup(
     package_data={},
     install_requires=[
         'blendmodes==2020.*,>=2020.2.0', 'defusedxml==0.*,>=0.6.0',
-        'gimpformats-unofficial==0.*,>=0.1.0', 'metprint==2020.*,>=2020.5.0',
+        'gimpformats==2020.*,>=2020.1.0', 'metprint==2020.*,>=2020.5.0',
         'pillow==7.*,>=7.1.2', 'psd-tools3==1.*,>=1.8.2',
         'pylsr==2020.*,>=2020.0.2', 'pyora==0.*,>=0.3.0', 'pypdn==1.*,>=1.0.5'
     ],
