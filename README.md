@@ -1,5 +1,5 @@
 [![GitHub top language](https://img.shields.io/github/languages/top/FHPythonUtils/LayeredImage.svg?style=for-the-badge)](../../)
-[![Codacy grade](https://img.shields.io/codacy/grade/522bca9f9e1f49da96cb9cf6b9083d7a.svg?style=for-the-badge)](https://www.codacy.com/manual/FHPythonUtils/LayeredImage)
+[![Codacy grade](https://img.shields.io/codacy/grade/522bca9f9e1f49da96cb9cf6b9083d7a.svg?style=for-the-badge)](https://www.codacy.com/gh/FHPythonUtils/LayeredImage)
 [![Repository size](https://img.shields.io/github/repo-size/FHPythonUtils/LayeredImage.svg?style=for-the-badge)](../../)
 [![Issues](https://img.shields.io/github/issues/FHPythonUtils/LayeredImage.svg?style=for-the-badge)](../../issues)
 [![License](https://img.shields.io/github/license/FHPythonUtils/LayeredImage.svg?style=for-the-badge)](/LICENSE.md)
