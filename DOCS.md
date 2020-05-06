@@ -211,7 +211,7 @@ Open an .xcf file into a layered image
 #### saveLayer\_XCF
 
 ```python
-saveLayer_XCF(fileName, layeredImage)
+saveLayer_XCF(_fileName, _layeredImage)
 ```
 
 Save a layered image as .xcf
