@@ -7,6 +7,7 @@
 from os.path import exists
 import json
 import zipfile
+import io
 from metprint import LogType, Logger, FHFormatter
 from layeredimage.layergroup import LayerGroupTypes, Layer, Group
 from layeredimage.layeredimage import LayeredImage, rasterImageOA
@@ -14,7 +15,7 @@ from layeredimage.blend import BlendType
 
 def extNotRecognised(fileName):
 	""" Output the file extension not recognised error """
-	exts = ["ora", "psd", "xcf", "pdn", "tif", "tiff", "webp", "gif", "lsr", "layered"]
+	exts = ["ora", "psd", "xcf", "pdn", "tif", "tiff", "webp", "gif", "lsr", "layered", "layeredc"]
 	Logger(FHFormatter()).logPrint("File extension is not recognised for file: " +
 	fileName + "! Must be " + "one of \"" + ", \"".join(exts) + "\"", LogType.ERROR)
 
@@ -34,7 +35,7 @@ def openLayerImage(file):
 	functionMap = {"ora": openLayer_ORA, "psd": openLayer_PSD, "xcf": openLayer_XCF,
 	"pdn": openLayer_PDN, "tif": openLayer_TIFF, "tiff": openLayer_TIFF,
 	"webp": openLayer_WEBP, "gif": openLayer_GIF, "lsr": openLayer_LSR,
-	"layered": openLayer_LAYERED}
+	"layered": openLayer_LAYERED, "layeredc": openLayer_LAYEREDC}
 	if not exists(file):
 		Logger(FHFormatter()).logPrint(file + " does not exist", LogType.ERROR)
 		raise FileExistsError
@@ -54,7 +55,7 @@ def saveLayerImage(fileName, layeredImage):
 	functionMap = {"ora": saveLayer_ORA, "psd": saveLayer_PSD, "xcf": saveLayer_XCF,
 	"pdn": saveLayer_PDN, "tif": saveLayer_TIFF, "tiff": saveLayer_TIFF,
 	"webp": saveLayer_WEBP, "gif": saveLayer_GIF, "lsr": saveLayer_LSR,
-	"layered": saveLayer_LAYERED}
+	"layered": saveLayer_LAYERED, "layeredc": saveLayer_LAYEREDC}
 	fileExt = fileName.split(".")[-1]
 	if fileExt not in functionMap:
 		extNotRecognised(fileName)
@@ -472,22 +473,36 @@ def grabLayer_LAYERED(zipFile, layer, blendLookup):
 	layer["opacity"], layer["visible"], blendModeLookup(layer["blendmode"], blendLookup))
 
 
-def saveLayer_LAYERED(fileName, layeredImage):
+def saveLayer_LAYERED(fileName, layeredImage, compressed=False):
 	""" Save a layered image as .layered """
-	import io
-	with zipfile.ZipFile(fileName, 'w') as layered:
-		layered.writestr("stack.json", json.dumps(layeredImage.json()))
+	with zipfile.ZipFile(fileName, 'w',
+	compression=(zipfile.ZIP_DEFLATED if compressed else zipfile.ZIP_STORED)) as layered:
+		layered.writestr("stack.json", json.dumps(layeredImage.json(),
+		indent=(None if compressed else True)))
 		for layer in layeredImage.layers:
-			imgByteArr = io.BytesIO()
-			layer.image.save(imgByteArr, format='PNG')
-			imgByteArr.seek(0)
-			layered.writestr("data/" + layer.name + ".png", imgByteArr.read())
+			writeImage_LAYERED(layer.image, layered, "data/" + layer.name + ".png", compressed)
 		compositeImage = layeredImage.getFlattenLayers()
 		thumbnail = compositeImage.copy()
 		thumbnail.thumbnail((256, 256))
 		imageLookup = {"composite": compositeImage, "thumbnail": thumbnail}
 		for image in imageLookup:
-			imgByteArr = io.BytesIO()
-			imageLookup[image].save(imgByteArr, format='PNG')
-			imgByteArr.seek(0)
-			layered.writestr(image + ".png", imgByteArr.read())
+			writeImage_LAYERED(imageLookup[image], layered, image + ".png", compressed)
+
+def writeImage_LAYERED(image, zipFile, path, compressed=False):
+	""" Write an image to the archive """
+	imgByteArr = io.BytesIO()
+	imageCopy = image.copy()
+	if compressed and len(set(imageCopy.getcolors(maxcolors=256**3))) < 256:
+		imageCopy.quantize(colors=256, method=2, kmeans=1)
+	imageCopy.save(imgByteArr, format='PNG', optimize=compressed)
+	imgByteArr.seek(0)
+	zipFile.writestr(path, imgByteArr.read())
+
+## LAYEREDC ##
+def openLayer_LAYEREDC(file):
+	""" Open a .layeredc file into a layered image """
+	return openLayer_LAYERED(file)
+
+def saveLayer_LAYEREDC(fileName, layeredImage):
+	""" Save a layeredc image as .layered """
+	saveLayer_LAYERED(fileName, layeredImage, True)

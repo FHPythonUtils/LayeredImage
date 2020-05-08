@@ -337,10 +337,37 @@ Grab an image from .layered
 #### saveLayer\_LAYERED
 
 ```python
-saveLayer_LAYERED(fileName, layeredImage)
+saveLayer_LAYERED(fileName, layeredImage, compressed=False)
 ```
 
 Save a layered image as .layered
+
+<a name=".layeredimage.io.writeImage_LAYERED"></a>
+#### writeImage\_LAYERED
+
+```python
+writeImage_LAYERED(image, zipFile, path, compressed=False)
+```
+
+Write an image to the archive
+
+<a name=".layeredimage.io.openLayer_LAYEREDC"></a>
+#### openLayer\_LAYEREDC
+
+```python
+openLayer_LAYEREDC(file)
+```
+
+Open a .layeredc file into a layered image
+
+<a name=".layeredimage.io.saveLayer_LAYEREDC"></a>
+#### saveLayer\_LAYEREDC
+
+```python
+saveLayer_LAYEREDC(fileName, layeredImage)
+```
+
+Save a layeredc image as .layered
 
 <a name=".layeredimage.layeredimage"></a>
 ## layeredimage.layeredimage

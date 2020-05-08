@@ -18,6 +18,7 @@ def test_ora():
 	layeredimage.io.saveLayerImage(THISDIR + "/base24(ora).webp", ora)
 	layeredimage.io.saveLayerImage(THISDIR + "/base24(ora).gif", ora)
 	layeredimage.io.saveLayerImage(THISDIR + "/base24(ora).layered", ora)
+	layeredimage.io.saveLayerImage(THISDIR + "/base24(ora).layeredc", ora)
 	ora.getFlattenLayers().save(THISDIR + "/base24(ora).png")
 	assert(is_equal(THISDIR + "/base24(ora).png", THISDIR + "/expected.png", tolerance=1))
 
@@ -101,6 +102,16 @@ def test_layered():
 	layered.getFlattenLayers().save(THISDIR + "/base24(layered).png")
 	assert(is_equal(THISDIR + "/base24(layered).png", THISDIR + "/expected.png", tolerance=1))
 
+# LAYEREDC
+def test_layeredc():
+	layeredc = layeredimage.io.openLayerImage(THISDIR + "/base24.layeredc")
+	layeredimage.io.saveLayerImage(THISDIR + "/base24(layeredc).ora", layeredc)
+	layeredimage.io.saveLayerImage(THISDIR + "/base24(layeredc).tiff", layeredc)
+	layeredimage.io.saveLayerImage(THISDIR + "/base24(layeredc).webp", layeredc)
+	layeredimage.io.saveLayerImage(THISDIR + "/base24(layeredc).gif", layeredc)
+	layeredc.getFlattenLayers().save(THISDIR + "/base24(layeredc).png")
+	assert(is_equal(THISDIR + "/base24(layeredc).png", THISDIR + "/expected.png", tolerance=1))
+
 
 if __name__ == "__main__":
 	test_ora()
@@ -112,3 +123,4 @@ if __name__ == "__main__":
 	test_gif()
 	test_lsr()
 	test_layered()
+	test_layeredc()

@@ -2,6 +2,10 @@
 All major and minor version changes will be documented in this file. Details of
 patch-level version changes can be found in [commit messages](../../commits/master).
 
+## 2020.6.1 - 2020/05/08
+- Minor change to stack.json for .layered (no longer minified)
+- Added .layeredc that will attempt to optimize the image. Savings of 10 - 20%
+
 ## 2020.6 - 2020/05/08
 - Added .layered image spec and implementation to store blendmodes that are
   not supported by ora and some other formats that this lib can write too.

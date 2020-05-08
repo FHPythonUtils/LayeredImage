@@ -210,3 +210,18 @@ The stack.json would look something like this:
 	{"name": "layer_2", "offsets": [295, 292], "opacity": 1.0, "visible": false,
 	"dimensions": [250, 250], "type": "LAYER", "blendmode": "NORMAL"}]}
 ```
+
+
+## .layeredc
+This is a compressed version of the layered format.
+
+Changes:
+- The .zip file is compressed with 'deflate'
+- .PNGs are quantized where possible
+- stack.json is minified
+
+This makes anywhere between 10 - 20% file reduction in testing. In theory this
+may get as high as 60% (quantized images can be 1/3 of the size of unoptimized
+pngs)
+
+During testing this seems on par with the file size of xcf.
