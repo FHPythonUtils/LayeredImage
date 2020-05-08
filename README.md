@@ -24,6 +24,7 @@ Use this module to read, and write to a number of layered image formats
 	- [Writing](#writing)
 		- [Group](#group-1)
 		- [Layer](#layer-1)
+- [.layered](#layered)
 - [Docs](#docs)
 - [Example Usage](#example-usage)
 - [Install With PIP](#install-with-pip)
@@ -80,7 +81,7 @@ the case, please open an issue and I will fix the tables.
 |Dimensions|:warning:|N/A |:heavy_check_mark:|:heavy_check_mark:|N/A |N/A |N/A |:heavy_check_mark:|
 |Offsets   |:heavy_check_mark:|N/A |:heavy_check_mark:|:heavy_check_mark:|N/A |N/A |N/A |:heavy_check_mark:|
 |Opacity   |:heavy_check_mark:|N/A |:heavy_check_mark:|:heavy_check_mark:|N/A |N/A |N/A |N/A |
-|Visibility|:heavy_check_mark:|N/A |:x:  |:heavy_check_mark:|N/A |N/A |N/A |N/A |
+|Visibility|:heavy_check_mark:|N/A |:heavy_check_mark:  |:heavy_check_mark:|N/A |N/A |N/A |N/A |
 |Blend Mode|:heavy_check_mark:|N/A |:heavy_check_mark:|:heavy_check_mark:|N/A|N/A |N/A |N/A |
 
 #### Layer
@@ -91,7 +92,7 @@ the case, please open an issue and I will fix the tables.
 |Dimensions|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
 |Offsets   |:heavy_check_mark:|N/A |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|N/A|N/A|N/A |
 |Opacity   |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|N/A |N/A |N/A |N/A |
-|Visibility|:heavy_check_mark:|:heavy_check_mark:|:x:  |:heavy_check_mark:|N/A |N/A |N/A |N/A |
+|Visibility|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:  |:heavy_check_mark:|N/A |N/A |N/A |N/A |
 |Blend Mode|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|N/A|N/A |N/A |N/A |
 
 ### Writing
@@ -126,6 +127,15 @@ Layers are extracted from groups and saved to TIFF/ GIF or WEBP
 Layers are rasterized before being written to TIFF/ GIF or WEBP
 First child layers are placed in a group when written to LSR
 ```
+
+## .layered
+.layered is highly inspired by the open raster format and aims to provide an
+exchange format in the cases when saving in ora would cause unacceptable data
+loss. .layered has been designed so that if the format became deprecated and no
+readers existed for it tomorrow, the data would be easily salvageable.
+
+See the [LAYERED_SPEC](/LAYERED_SPEC.md) for more information.
+
 
 ## Docs
 See the [Docs](/DOCS.md) for more information.

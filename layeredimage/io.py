@@ -5,6 +5,8 @@
 # pylint: disable=import-outside-toplevel
 
 from os.path import exists
+import json
+import zipfile
 from metprint import LogType, Logger, FHFormatter
 from layeredimage.layergroup import LayerGroupTypes, Layer, Group
 from layeredimage.layeredimage import LayeredImage, rasterImageOA
@@ -12,15 +14,13 @@ from layeredimage.blend import BlendType
 
 def extNotRecognised(fileName):
 	""" Output the file extension not recognised error """
-	exts = ["ora", "psd", "xcf", "pdn", "tif", "tiff", "webp", "gif", "lsr"]
+	exts = ["ora", "psd", "xcf", "pdn", "tif", "tiff", "webp", "gif", "lsr", "layered"]
 	Logger(FHFormatter()).logPrint("File extension is not recognised for file: " +
 	fileName + "! Must be " + "one of \"" + ", \"".join(exts) + "\"", LogType.ERROR)
 
 def compareExt(fileName, ext):
 	""" Compare a file extension """
 	return fileName[-len(ext):].lower() == ext
-
-#pylint: disable=too-many-return-statements
 
 def openLayerImage(file):
 	"""Open a layer image file into a layer image object
@@ -31,28 +31,18 @@ def openLayerImage(file):
 	Returns:
 		LayeredImage: a layered image object
 	"""
+	functionMap = {"ora": openLayer_ORA, "psd": openLayer_PSD, "xcf": openLayer_XCF,
+	"pdn": openLayer_PDN, "tif": openLayer_TIFF, "tiff": openLayer_TIFF,
+	"webp": openLayer_WEBP, "gif": openLayer_GIF, "lsr": openLayer_LSR,
+	"layered": openLayer_LAYERED}
 	if not exists(file):
 		Logger(FHFormatter()).logPrint(file + " does not exist", LogType.ERROR)
 		raise FileExistsError
-	if compareExt(file, "ora"):
-		return openLayer_ORA(file)
-	if compareExt(file, "psd"):
-		return openLayer_PSD(file)
-	if compareExt(file, "xcf"):
-		return openLayer_XCF(file)
-	if compareExt(file, "pdn"):
-		return openLayer_PDN(file)
-	if compareExt(file, "tif") or compareExt(file, "tiff"):
-		return openLayer_TIFF(file)
-	if compareExt(file, "webp"):
-		return openLayer_WEBP(file)
-	if compareExt(file, "gif"):
-		return openLayer_GIF(file)
-	if compareExt(file, "lsr"):
-		return openLayer_LSR(file)
-	Logger(FHFormatter()).logPrint("File extension is not recognised!", LogType.ERROR)
-	extNotRecognised(file)
-	raise ValueError
+	fileExt = file.split(".")[-1]
+	if fileExt not in functionMap:
+		extNotRecognised(file)
+		raise ValueError
+	return functionMap[fileExt](file)
 
 def saveLayerImage(fileName, layeredImage):
 	"""Save a layered image to a file
@@ -61,26 +51,15 @@ def saveLayerImage(fileName, layeredImage):
 		fileName (string): path/ filename
 		layeredImage (LayeredImage): the layered image to save
 	"""
-	if compareExt(fileName, "ora"):
-		return saveLayer_ORA(fileName, layeredImage)
-	if compareExt(fileName, "psd"):
-		return saveLayer_PSD(fileName, layeredImage)
-	if compareExt(fileName, "xcf"):
-		return saveLayer_XCF(fileName, layeredImage)
-	if compareExt(fileName, "pdn"):
-		return saveLayer_PDN(fileName, layeredImage)
-	if compareExt(fileName, "tif") or compareExt(fileName, "tiff"):
-		return saveLayer_TIFF(fileName, layeredImage)
-	if compareExt(fileName, "webp"):
-		return saveLayer_WEBP(fileName, layeredImage)
-	if compareExt(fileName, "gif"):
-		return saveLayer_GIF(fileName, layeredImage)
-	if compareExt(fileName, "lsr"):
-		return saveLayer_LSR(fileName, layeredImage)
-	extNotRecognised(fileName)
-	raise ValueError
-
-#pylint: enable=too-many-return-statements
+	functionMap = {"ora": saveLayer_ORA, "psd": saveLayer_PSD, "xcf": saveLayer_XCF,
+	"pdn": saveLayer_PDN, "tif": saveLayer_TIFF, "tiff": saveLayer_TIFF,
+	"webp": saveLayer_WEBP, "gif": saveLayer_GIF, "lsr": saveLayer_LSR,
+	"layered": saveLayer_LAYERED}
+	fileExt = fileName.split(".")[-1]
+	if fileExt not in functionMap:
+		extNotRecognised(fileName)
+		raise ValueError
+	return functionMap[fileExt](fileName, layeredImage)
 
 def exportFlatImage(fileName, layeredImage):
 	""" Export the layered image to a unilayer image file """
@@ -169,7 +148,6 @@ def save_ORA_fix(self, path_or_file, composite_image=None, use_original=False):
 	"""
 	# This is a patch, so I'm going to need to access what I please
 	# pylint: disable=protected-access
-	import zipfile
 	from defusedxml import ElementTree as ET
 	from pyora.Render import Renderer, make_thumbnail
 	from pyora import TYPE_LAYER
@@ -451,3 +429,65 @@ def saveLayer_LSR(fileName, layeredImage):
 	lsrImage = pylsr.LSRImage(layeredImage.dimensions,
 	fileName.split(sep)[-1].replace(".lsr", ""), layers)
 	pylsr.write(fileName, lsrImage)
+
+
+## LAYERED ##
+def openLayer_LAYERED(file):
+	""" Open a .layered file into a layered image """
+	blendLookup = {
+	"NORMAL": BlendType.NORMAL, "MULTIPLY": BlendType.MULTIPLY, "ADDITIVE": BlendType.ADDITIVE,
+	"COLOURBURN": BlendType.COLOURBURN, "COLOURDODGE": BlendType.COLOURDODGE,
+	"REFLECT": BlendType.REFLECT, "GLOW": BlendType.GLOW, "OVERLAY": BlendType.OVERLAY,
+	"DIFFERENCE": BlendType.DIFFERENCE, "NEGATION": BlendType.NEGATION, "LIGHTEN": BlendType.LIGHTEN,
+	"DARKEN": BlendType.DARKEN, "SCREEN": BlendType.SCREEN, "XOR": BlendType.XOR,
+	"SOFTLIGHT": BlendType.SOFTLIGHT, "HARDLIGHT": BlendType.HARDLIGHT,
+	"GRAINEXTRACT": BlendType.GRAINEXTRACT, "GRAINMERGE": BlendType.GRAINMERGE,
+	"DIVIDE": BlendType.DIVIDE, "HUE": BlendType.HUE, "SATURATION": BlendType.SATURATION,
+	"COLOUR": BlendType.COLOUR, "LUMINOSITY": BlendType.LUMINOSITY,
+	"PINLIGHT": BlendType.PINLIGHT, "VIVIDLIGHT": BlendType.VIVIDLIGHT,
+	"EXCLUSION": BlendType.EXCLUSION, "DESTIN": BlendType.DESTIN,
+	"DESTOUT": BlendType.DESTOUT, "DESTATOP": BlendType.DESTATOP, "SRCATOP": BlendType.SRCATOP}
+	layersAndGroups = []
+	with zipfile.ZipFile(file, 'r') as layered:
+		stack = json.load(layered.open("stack.json"))
+		# Iterate through the layers and groups
+		for layerOrGroup in stack["layersAndGroups"]:
+			if layerOrGroup["type"] == "LAYER":
+				layersAndGroups.append(grabLayer_LAYERED(layered, layerOrGroup,
+				blendLookup))
+			else:
+				# If its a group grab the layers
+				layers = [grabLayer_LAYERED(layered, layer, blendLookup) for layer in layerOrGroup["layers"]]
+				layersAndGroups.append(Group(layerOrGroup["name"], layers, layerOrGroup["dimensions"],
+				layerOrGroup["offsets"], layerOrGroup["opacity"], layerOrGroup["visible"],
+				blendModeLookup(layerOrGroup["blendmode"], blendLookup)))
+		return LayeredImage(layersAndGroups, stack["dimensions"])
+
+def grabLayer_LAYERED(zipFile, layer, blendLookup):
+	""" Grab an image from .layered """
+	from PIL import Image
+	with zipFile.open("data/" + layer["name"] + ".png") as layerImage:
+		image = Image.open(layerImage).convert('RGBA')
+	return Layer(layer["name"], image, layer["dimensions"], layer["offsets"],
+	layer["opacity"], layer["visible"], blendModeLookup(layer["blendmode"], blendLookup))
+
+
+def saveLayer_LAYERED(fileName, layeredImage):
+	""" Save a layered image as .layered """
+	import io
+	with zipfile.ZipFile(fileName, 'w') as layered:
+		layered.writestr("stack.json", json.dumps(layeredImage.json()))
+		for layer in layeredImage.layers:
+			imgByteArr = io.BytesIO()
+			layer.image.save(imgByteArr, format='PNG')
+			imgByteArr.seek(0)
+			layered.writestr("data/" + layer.name + ".png", imgByteArr.read())
+		compositeImage = layeredImage.getFlattenLayers()
+		thumbnail = compositeImage.copy()
+		thumbnail.thumbnail((256, 256))
+		imageLookup = {"composite": compositeImage, "thumbnail": thumbnail}
+		for image in imageLookup:
+			imgByteArr = io.BytesIO()
+			imageLookup[image].save(imgByteArr, format='PNG')
+			imgByteArr.seek(0)
+			layered.writestr(image + ".png", imgByteArr.read())

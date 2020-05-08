@@ -76,6 +76,11 @@ class Layer(LayerGroup):
 		if dimensions is None:
 			self.dimensions = image.size
 
+	def json(self):
+		""" Get the object as a dict """
+		return {"name": self.name, "offsets": self.offsets, "opacity": self.opacity,
+		"visible": self.visible, "dimensions": self.dimensions, "type": self.type.name,
+		"blendmode": self.blendmode.name}
 
 
 class Group(LayerGroup):
@@ -109,3 +114,10 @@ class Group(LayerGroup):
 			layerDimens = [layer.dimensions for layer in layers]
 			self.dimensions = (max([dimensions[0] for dimentions in layerDimens]),
 			max([dimensions[1] for dimentions in layerDimens]))
+
+	def json(self):
+		""" Get the object as a dict """
+		layers = [layer.json() for layer in self.layers]
+		return {"name": self.name, "offsets": self.offsets, "opacity": self.opacity,
+		"visible": self.visible, "dimensions": self.dimensions, "type": self.type.name,
+		"blendmode": self.blendmode.name, "layers": layers}

@@ -2,6 +2,14 @@
 All major and minor version changes will be documented in this file. Details of
 patch-level version changes can be found in [commit messages](../../commits/master).
 
+## 2020.6 - 2020/05/08
+- Added .layered image spec and implementation to store blendmodes that are
+  not supported by ora and some other formats that this lib can write too.
+  Still, use ora whenever possible as this is a more supported image format.
+- Updates to `gimpformats` mean that visibility is now correctly preserved.
+- Optimizations to save functions
+- Added json functions to get data as a dictionary
+
 ## 2020.5.6 - 2020/05/06
 - Updated classifiers
 

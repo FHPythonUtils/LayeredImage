@@ -25,6 +25,12 @@ class LayeredImage:
 		return "<LayeredImage (" + str(self.dimensions[0]) + "x" + str(
 			self.dimensions[1]) + ") with " + str(len(self.layersAndGroups)) + " children>"
 
+	def json(self):
+		""" Get the object as a dict """
+		layersAndGroups = [layerOrGroup.json() for layerOrGroup in self.layersAndGroups]
+		return {"dimensions": self.dimensions, "layersAndGroups": layersAndGroups}
+
+
 	# Get, set and remove layers or groups
 	def getLayerOrGroup(self, index):
 		""" Get a LayerOrGroup """

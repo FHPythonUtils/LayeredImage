@@ -315,6 +315,33 @@ saveLayer_LSR(fileName, layeredImage)
 
 Save a layered image as .lsr
 
+<a name=".layeredimage.io.openLayer_LAYERED"></a>
+#### openLayer\_LAYERED
+
+```python
+openLayer_LAYERED(file)
+```
+
+Open a .layered file into a layered image
+
+<a name=".layeredimage.io.grabLayer_LAYERED"></a>
+#### grabLayer\_LAYERED
+
+```python
+grabLayer_LAYERED(zipFile, layer, blendLookup)
+```
+
+Grab an image from .layered
+
+<a name=".layeredimage.io.saveLayer_LAYERED"></a>
+#### saveLayer\_LAYERED
+
+```python
+saveLayer_LAYERED(fileName, layeredImage)
+```
+
+Save a layered image as .layered
+
 <a name=".layeredimage.layeredimage"></a>
 ## layeredimage.layeredimage
 
@@ -337,6 +364,15 @@ A representation of a layered image such as an ora
 ```
 
 Write here
+
+<a name=".layeredimage.layeredimage.LayeredImage.json"></a>
+#### json
+
+```python
+ | json()
+```
+
+Get the object as a dict
 
 <a name=".layeredimage.layeredimage.LayeredImage.getLayerOrGroup"></a>
 #### getLayerOrGroup
@@ -607,6 +643,15 @@ A representation of an image layer
   is often configured per layer or per group by an 'eye' icon).
   Defaults to True.
 
+<a name=".layeredimage.layergrou.Layer.json"></a>
+#### json
+
+```python
+ | json()
+```
+
+Get the object as a dict
+
 <a name=".layeredimage.layergrou.Group"></a>
 ### Group
 
@@ -639,6 +684,15 @@ A representation of an image group
 - `visible` _bool, optional_ - Is the layer visible to the user (this
   is often configured per layer or per group by an 'eye' icon).
   Defaults to True.
+
+<a name=".layeredimage.layergrou.Group.json"></a>
+#### json
+
+```python
+ | json()
+```
+
+Get the object as a dict
 
 <a name=".make"></a>
 ## make

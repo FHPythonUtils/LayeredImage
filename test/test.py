@@ -17,6 +17,7 @@ def test_ora():
 	layeredimage.io.saveLayerImage(THISDIR + "/base24(ora).tiff", ora)
 	layeredimage.io.saveLayerImage(THISDIR + "/base24(ora).webp", ora)
 	layeredimage.io.saveLayerImage(THISDIR + "/base24(ora).gif", ora)
+	layeredimage.io.saveLayerImage(THISDIR + "/base24(ora).layered", ora)
 	ora.getFlattenLayers().save(THISDIR + "/base24(ora).png")
 	assert(is_equal(THISDIR + "/base24(ora).png", THISDIR + "/expected.png", tolerance=1))
 
@@ -48,7 +49,7 @@ def test_xcf():
 	layeredimage.io.saveLayerImage(THISDIR + "/base24(xcf).webp", xcf)
 	layeredimage.io.saveLayerImage(THISDIR + "/base24(xcf).gif", xcf)
 	xcf.getFlattenLayers().save(THISDIR + "/base24(xcf).png")
-	assert(is_equal(THISDIR + "/base24(xcf).png", THISDIR + "/expectedNoHidden.png", tolerance=1))
+	assert(is_equal(THISDIR + "/base24(xcf).png", THISDIR + "/expected.png", tolerance=1))
 
 # TIFF
 def test_tiff():
@@ -90,6 +91,16 @@ def test_lsr():
 	lsr.getFlattenLayers().save(THISDIR + "/base24(lsr).png")
 	assert(is_equal(THISDIR + "/base24(lsr).png", THISDIR + "/expectedNoHidden.png", tolerance=1))
 
+# LAYERED
+def test_layered():
+	layered = layeredimage.io.openLayerImage(THISDIR + "/base24.layered")
+	layeredimage.io.saveLayerImage(THISDIR + "/base24(layered).ora", layered)
+	layeredimage.io.saveLayerImage(THISDIR + "/base24(layered).tiff", layered)
+	layeredimage.io.saveLayerImage(THISDIR + "/base24(layered).webp", layered)
+	layeredimage.io.saveLayerImage(THISDIR + "/base24(layered).gif", layered)
+	layered.getFlattenLayers().save(THISDIR + "/base24(layered).png")
+	assert(is_equal(THISDIR + "/base24(layered).png", THISDIR + "/expected.png", tolerance=1))
+
 
 if __name__ == "__main__":
 	test_ora()
@@ -100,3 +111,4 @@ if __name__ == "__main__":
 	test_webp()
 	test_gif()
 	test_lsr()
+	test_layered()
