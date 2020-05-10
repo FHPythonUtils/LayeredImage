@@ -19,10 +19,6 @@ def extNotRecognised(fileName):
 	Logger(FHFormatter()).logPrint("File extension is not recognised for file: " +
 	fileName + "! Must be " + "one of \"" + ", \"".join(exts) + "\"", LogType.ERROR)
 
-def compareExt(fileName, ext):
-	""" Compare a file extension """
-	return fileName[-len(ext):].lower() == ext
-
 def openLayerImage(file):
 	"""Open a layer image file into a layer image object
 
@@ -39,7 +35,7 @@ def openLayerImage(file):
 	if not exists(file):
 		Logger(FHFormatter()).logPrint(file + " does not exist", LogType.ERROR)
 		raise FileExistsError
-	fileExt = file.split(".")[-1]
+	fileExt = file.split(".")[-1].lower()
 	if fileExt not in functionMap:
 		extNotRecognised(file)
 		raise ValueError
@@ -56,7 +52,7 @@ def saveLayerImage(fileName, layeredImage):
 	"pdn": saveLayer_PDN, "tif": saveLayer_TIFF, "tiff": saveLayer_TIFF,
 	"webp": saveLayer_WEBP, "gif": saveLayer_GIF, "lsr": saveLayer_LSR,
 	"layered": saveLayer_LAYERED, "layeredc": saveLayer_LAYEREDC}
-	fileExt = fileName.split(".")[-1]
+	fileExt = fileName.split(".")[-1].lower()
 	if fileExt not in functionMap:
 		extNotRecognised(fileName)
 		raise ValueError

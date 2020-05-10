@@ -84,15 +84,6 @@ extNotRecognised(fileName)
 
 Output the file extension not recognised error
 
-<a name=".layeredimage.io.compareExt"></a>
-#### compareExt
-
-```python
-compareExt(fileName, ext)
-```
-
-Compare a file extension
-
 <a name=".layeredimage.io.openLayerImage"></a>
 #### openLayerImage
 
