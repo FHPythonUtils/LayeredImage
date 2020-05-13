@@ -21,7 +21,7 @@ class LayerGroup:
 
 		Args:
 			name (string): Name of the layer or group
-			dimensions ((int, int)): A tuple representing the dimentions in
+			dimensions ((int, int)): A tuple representing the dimensions in
 			pixels
 			offsets (tuple, optional): A tuple representing the left and top
 			offsets in pixels. Defaults to (0, 0).
@@ -57,7 +57,7 @@ class Layer(LayerGroup):
 		Args:
 			name (string): Name of the layer or group
 			image (PIL.Image): A PIL Image
-			dimensions ((int, int)): A tuple representing the dimentions in
+			dimensions ((int, int)): A tuple representing the dimensions in
 			pixels
 			offsets (tuple, optional): A tuple representing the left and top
 			offsets in pixels. Defaults to (0, 0).
@@ -71,7 +71,7 @@ class Layer(LayerGroup):
 		visible=visible, blendmode=blendmode)
 		self.image = image
 
-		# If the user does not specify the dimentions use image.size
+		# If the user does not specify the dimensions use image.size
 		self.dimensions = dimensions
 		if dimensions is None:
 			self.dimensions = image.size
@@ -93,7 +93,7 @@ class Group(LayerGroup):
 			name (string): Name of the layer or group
 			layers (layeredimage.Layer[]): A list of layers where the next
 			index stacks upon the previous layer
-			dimensions ((int, int)): A tuple representing the dimentions in
+			dimensions ((int, int)): A tuple representing the dimensions in
 			pixels
 			offsets (tuple, optional): A tuple representing the left and top
 			offsets in pixels. Defaults to (0, 0).
@@ -107,13 +107,13 @@ class Group(LayerGroup):
 		visible=visible, layerGroup=LayerGroupTypes.GROUP, blendmode=blendmode)
 		self.layers = layers
 
-		# If the user does not specify the dimentions use the largest x and y of
+		# If the user does not specify the dimensions use the largest x and y of
 		# the layers
 		self.dimensions = dimensions
 		if dimensions is None:
 			layerDimens = [layer.dimensions for layer in layers]
-			self.dimensions = (max([dimensions[0] for dimentions in layerDimens]),
-			max([dimensions[1] for dimentions in layerDimens]))
+			self.dimensions = (max([dimensions[0] for dimensions in layerDimens]),
+			max([dimensions[1] for dimensions in layerDimens]))
 
 	def json(self):
 		""" Get the object as a dict """

@@ -617,7 +617,7 @@ A representation of an image layer or group
 **Arguments**:
 
 - `name` _string_ - Name of the layer or group
-  dimensions ((int, int)): A tuple representing the dimentions in
+  dimensions ((int, int)): A tuple representing the dimensions in
   pixels
 - `offsets` _tuple, optional_ - A tuple representing the left and top
   offsets in pixels. Defaults to (0, 0).
@@ -651,7 +651,7 @@ A representation of an image layer
 
 - `name` _string_ - Name of the layer or group
 - `image` _PIL.Image_ - A PIL Image
-  dimensions ((int, int)): A tuple representing the dimentions in
+  dimensions ((int, int)): A tuple representing the dimensions in
   pixels
 - `offsets` _tuple, optional_ - A tuple representing the left and top
   offsets in pixels. Defaults to (0, 0).
@@ -693,7 +693,7 @@ A representation of an image group
 - `name` _string_ - Name of the layer or group
 - `layers` _layeredimage.Layer[]_ - A list of layers where the next
   index stacks upon the previous layer
-  dimensions ((int, int)): A tuple representing the dimentions in
+  dimensions ((int, int)): A tuple representing the dimensions in
   pixels
 - `offsets` _tuple, optional_ - A tuple representing the left and top
   offsets in pixels. Defaults to (0, 0).

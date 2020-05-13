@@ -12,13 +12,13 @@ class LayeredImage:
 		# Read only
 		self.groups = self.extractGroups()
 		self.layers = self.extractLayers()
-		# If the user does not specify the dimentions use the largest x and y of
+		# If the user does not specify the dimensions use the largest x and y of
 		# the layers and groups
 		self.dimensions = dimensions
 		if dimensions is None:
 			layerDimens = [layerOrGroup.dimensions for layerOrGroup in layersAndGroups]
-			self.dimensions = (max([dimensions[0] for dimentions in layerDimens]),
-			max([dimensions[1] for dimentions in layerDimens]))
+			self.dimensions = (max([dimensions[0] for dimensions in layerDimens]),
+			max([dimensions[1] for dimensions in layerDimens]))
 		self.extras = kwargs
 
 	def __repr__(self):
