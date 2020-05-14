@@ -129,7 +129,6 @@ def saveLayer_ORA(fileName, layeredImage):
 			composite_op=blendModeLookup(layerOrGroup.blendmode, blendLookup, "svg:src-over"))
 			for layer in layerOrGroup.layers:
 				group = addLayer_ORA(group, layer, blendLookup)
-	Project.save = save_ORA_fix
 	project.save(fileName)
 
 def addLayer_ORA(project, layer, blendLookup):
@@ -138,34 +137,6 @@ def addLayer_ORA(project, layer, blendLookup):
 	opacity=layer.opacity, visible=layer.visible,
 	composite_op=blendModeLookup(layer.blendmode, blendLookup, "svg:src-over"))
 	return project
-
-def save_ORA_fix(self, path_or_file, composite_image=None, use_original=False):
-	""" Patch the Project.save function from pyora 3.0 with a newer version -Future
-	This snippet is MIT License Copyright (c) 2019 Paul Jewell
-	"""
-	# This is a patch, so I'm going to need to access what I please
-	# pylint: disable=protected-access
-	from defusedxml import ElementTree as ET
-	from pyora.Render import Renderer, make_thumbnail
-	from pyora import TYPE_LAYER
-	with zipfile.ZipFile(path_or_file, 'w') as zipref:
-		zipref.writestr('mimetype', "image/openraster".encode())
-		zipref.writestr('stack.xml', ET.tostring(self._elem_root, method='xml'))
-		if not composite_image:
-			if use_original and self._extracted_merged_image:
-				composite_image = self._extracted_merged_image
-			else:
-				r = Renderer(self)
-				composite_image = r.render()
-		self._zip_store_image(zipref, 'mergedimage.png', composite_image)
-		make_thumbnail(composite_image)  # works in place
-		self._zip_store_image(zipref, 'Thumbnails/thumbnail.png', composite_image)
-
-		for layer in self.children_recursive:
-			if layer.type == TYPE_LAYER:
-				self._zip_store_image(zipref, layer['src'], layer.get_image_data(True))
-	# pylint: enable=protected-access
-
 
 #### PSD ####
 def openLayer_PSD(file):
@@ -489,7 +460,7 @@ def writeImage_LAYERED(image, zipFile, path, compressed=False):
 	imgByteArr = io.BytesIO()
 	imageCopy = image.copy()
 	if compressed and len(set(imageCopy.getcolors(maxcolors=256**3))) < 256:
-		imageCopy.quantize(colors=256, method=2, kmeans=1)
+		imageCopy = imageCopy.quantize(colors=256, method=2, kmeans=1)
 	imageCopy.save(imgByteArr, format='PNG', optimize=compressed)
 	imgByteArr.seek(0)
 	zipFile.writestr(path, imgByteArr.read())

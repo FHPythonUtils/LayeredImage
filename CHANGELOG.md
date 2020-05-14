@@ -2,6 +2,10 @@
 All major and minor version changes will be documented in this file. Details of
 patch-level version changes can be found in [commit messages](../../commits/master).
 
+## 2020.6.4 - 2020/05/14
+- Fix png minifier for layeredc
+- Fix fatal read xcf bug (upstream)
+
 ## 2020.6.3 - 2020/05/13
 - Fix bug due to spelling error
 

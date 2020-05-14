@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "layeredimage"
-version = "2020.6.3"
+version = "2020.6.4"
 description = "Use this module to read, and write to a number of layered image formats"
 authors = ["FredHappyface"]
 classifiers = [
@@ -30,12 +30,12 @@ python = "^3.6"
 defusedxml = "^0.6.0"
 metprint = "^2020.6.1"
 pillow = "^7.1.2"
-pyora = "^0.3.0"
+pyora = "^0.3.8"
 pypdn = "^1.0.5"
 psd-tools3 = "^1.8.2"
 pylsr = "^2020.0.3"
 blendmodes = "^2020.2.2"
-gimpformats = "^2020.2.1"
+gimpformats = "^2020.2.3"
 numpy = "^1.18.4"
 
 [tool.poetry.dev-dependencies]
