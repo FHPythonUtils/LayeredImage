@@ -5,6 +5,7 @@ patch-level version changes can be found in [commit messages](../../commits/mast
 ## 2020.6.4 - 2020/05/14
 - Fix png minifier for layeredc
 - Fix fatal read xcf bug (upstream)
+- Update pyora (security benefits and removal of save fix)
 
 ## 2020.6.3 - 2020/05/13
 - Fix bug due to spelling error

@@ -161,16 +161,6 @@ addLayer_ORA(project, layer, blendLookup)
 
 Update the project with a shiny new layer
 
-<a name=".layeredimage.io.save_ORA_fix"></a>
-#### save\_ORA\_fix
-
-```python
-save_ORA_fix(path_or_file, composite_image=None, use_original=False)
-```
-
-Patch the Project.save function from pyora 3.0 with a newer version -Future
-This snippet is MIT License Copyright (c) 2019 Paul Jewell
-
 <a name=".layeredimage.io.openLayer_PSD"></a>
 #### openLayer\_PSD
 
