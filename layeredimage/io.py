@@ -145,7 +145,7 @@ def addLayer_ORA(project, layer, blendLookup):
 # pylint: disable=invalid-name
 def addElem_fix(self, tag, parent_elem, name, z_index=1, offsets=(0, 0,), opacity=1.0,
 visible=True, composite_op="svg:src-over", **kwargs):
-	""" Patch the Project.save function from pyora 3.0 with a newer version -Future
+	""" Patch the Project._add_elem function from pyora 0.3.8 with a newer version
 	This snippet is MIT License Copyright (c) 2019 Paul Jewell
 	"""
 	import uuid
