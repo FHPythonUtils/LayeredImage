@@ -118,6 +118,7 @@ def saveLayer_ORA(fileName, layeredImage):
 	BlendType.ADDITIVE: "svg:plus", BlendType.DESTIN: "svg:dst-in",
 	BlendType.DESTOUT: "svg:dst-out", BlendType.DESTATOP: "svg:dst-atop",
 	BlendType.SRCATOP: "svg:src-atop"}
+	Project._add_elem = addElem_fix
 	project = Project.new(layeredImage.dimensions[0], layeredImage.dimensions[1])
 	for layerOrGroup in layeredImage.layersAndGroups:
 		if layerOrGroup.type == LayerGroupTypes.LAYER:
@@ -137,6 +138,31 @@ def addLayer_ORA(project, layer, blendLookup):
 	opacity=layer.opacity, visible=layer.visible,
 	composite_op=blendModeLookup(layer.blendmode, blendLookup, "svg:src-over"))
 	return project
+
+# This is a patch, so I'm going to need to access what I please, and preseve
+# param names
+# pylint: disable=protected-access
+# pylint: disable=invalid-name
+def addElem_fix(self, tag, parent_elem, name, z_index=1, offsets=(0, 0,), opacity=1.0,
+visible=True, composite_op="svg:src-over", **kwargs):
+	""" Patch the Project.save function from pyora 3.0 with a newer version -Future
+	This snippet is MIT License Copyright (c) 2019 Paul Jewell
+	"""
+	import uuid
+	from xml.etree.ElementTree import Element
+	if tag == 'stack' and 'isolated' not in kwargs:
+		kwargs['isolated'] = True
+	if 'uuid' not in kwargs or kwargs['uuid'] is None:
+		self._generated_uuids = True
+		kwargs['uuid'] = str(uuid.uuid4())
+	newElem = Element(tag, {'name': name, 'x': str(offsets[0]), 'y': str(offsets[1]),
+		'visibility': 'visible' if visible else 'hidden',
+		'opacity': str(opacity), 'composite-op': composite_op,
+		**{k: str(v) for k, v in kwargs.items() if v is not None}})
+	parent_elem.insert(0, newElem)
+	return newElem
+# pylint: enable=protected-access
+# pylint: enable=invalid-name
 
 #### PSD ####
 def openLayer_PSD(file):

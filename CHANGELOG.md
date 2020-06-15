@@ -2,6 +2,9 @@
 All major and minor version changes will be documented in this file. Details of
 patch-level version changes can be found in [commit messages](../../commits/master).
 
+## 2020.6.5 - 2020/06/15
+- Fix ora write bug causing the layers to be inverted (monkey patch)
+
 ## 2020.6.4 - 2020/05/14
 - Fix png minifier for layeredc
 - Fix fatal read xcf bug (upstream)

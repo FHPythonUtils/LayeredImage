@@ -138,13 +138,8 @@ See the [LAYERED_SPEC](/LAYERED_SPEC.md) for more information.
 
 
 ## Docs
-See the [Docs](/DOCS.md) for more information.
+See the [Docs](/DOCS/) for more information.
 
-Generate with pydoc-markdown 3
-```bash
-pydoc-markdown > DOCS.md
-```
-Alternatively use `make.py` to run a load of commands
 
 ## Example Usage
 

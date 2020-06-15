@@ -1,8 +1,8 @@
 blendmodes==2020.*,>=2020.2.2
 defusedxml==0.*,>=0.6.0
-gimpformats==2020.*,>=2020.2.3
+gimpformats==2020.*,>=2020.2.4
 metprint==2020.*,>=2020.6.1
-numpy==1.*,>=1.18.4
+numpy==1.*,>=1.18.5
 pillow==7.*,>=7.1.2
 psd-tools3==1.*,>=1.8.2
 pylsr==2020.*,>=2020.0.3
