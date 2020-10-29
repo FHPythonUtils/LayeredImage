@@ -2,8 +2,9 @@
 
 leverage blendmodes for this
 """
-
+from __future__ import annotations
 from enum import Enum, auto
+from PIL.Image import Image
 from blendmodes.blend import blendLayers as bLayers, BlendType as bType
 
 class BlendType(Enum):
@@ -71,7 +72,8 @@ class BlendType(Enum):
 	SRCATOP = auto()
 
 
-def blendLayers(background, foreground, blendType, opacity):
+def blendLayers(background: Image, foreground: Image, blendType: BlendType,
+opacity: float):
 	"""Blend layers using numpy array
 
 	Args:

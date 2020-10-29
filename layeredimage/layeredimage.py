@@ -1,12 +1,14 @@
 """ LayeredImage class """
-
+from __future__ import annotations
+from typing import Any, Optional, Union
 from PIL import Image
-from layeredimage.layergroup import LayerGroupTypes, Layer
+from layeredimage.layergroup import Group, Layer
 from layeredimage.blend import blendLayers
 
 class LayeredImage:
 	""" A representation of a layered image such as an ora """
-	def __init__(self, layersAndGroups, dimensions=None, **kwargs):
+	def __init__(self, layersAndGroups: list[Union[Layer, Group]],
+	dimensions: Optional[tuple[int, int]]=None, **kwargs: Any):
 		# Write here
 		self.layersAndGroups = layersAndGroups
 		# Read only
@@ -14,7 +16,7 @@ class LayeredImage:
 		self.layers = self.extractLayers()
 		# If the user does not specify the dimensions use the largest x and y of
 		# the layers and groups
-		self.dimensions = dimensions
+		self.dimensions = dimensions if dimensions is not None else (0, 0)
 		if dimensions is None:
 			layerDimens = [layerOrGroup.dimensions for layerOrGroup in layersAndGroups]
 			self.dimensions = (max([dimensions[0] for dimensions in layerDimens]),
@@ -25,65 +27,66 @@ class LayeredImage:
 		return "<LayeredImage (" + str(self.dimensions[0]) + "x" + str(
 			self.dimensions[1]) + ") with " + str(len(self.layersAndGroups)) + " children>"
 
-	def json(self):
+	def json(self) -> dict[str, Any]:
 		""" Get the object as a dict """
 		layersAndGroups = [layerOrGroup.json() for layerOrGroup in self.layersAndGroups]
 		return {"dimensions": self.dimensions, "layersAndGroups": layersAndGroups}
 
 
 	# Get, set and remove layers or groups
-	def getLayerOrGroup(self, index):
+	def getLayerOrGroup(self, index: int):
 		""" Get a LayerOrGroup """
 		return self.layersAndGroups[index]
 
-	def addLayerOrGroup(self, LayerOrGroup):
+	def addLayerOrGroup(self, layerOrGroup: Union[Layer, Group]):
 		""" Add a LayerOrGroup """
-		self.layersAndGroups.append(LayerOrGroup)
+		self.layersAndGroups.append(layerOrGroup)
 
-	def insertLayerOrGroup(self, LayerOrGroup, index):
+	def insertLayerOrGroup(self, layerOrGroup: Union[Layer, Group], index: int):
 		""" Insert a LayerOrGroup at a specific index """
-		self.layersAndGroups.insert(index, LayerOrGroup)
+		self.layersAndGroups.insert(index, layerOrGroup)
 
-	def removeLayerOrGroup(self, index):
+	def removeLayerOrGroup(self, index: int):
 		""" Remove a LayerOrGroup at a specific index """
 		self.layersAndGroups.pop(index)
 
 	# The user may wish to add an image directly
-	def addLayerRaster(self, image, name):
+	def addLayerRaster(self, image: Image.Image, name: str):
 		""" Raster an image and add as a layer """
 		layer = rasterImageOA(image, self.dimensions)
-		self.addLayerOrGroup(Layer(layer, name, self.dimensions))
+		self.addLayerOrGroup(Layer(name, layer, self.dimensions))
 
-	def insertLayerRaster(self, image, name, index):
+	def insertLayerRaster(self, image: Image.Image, name: str, index: int):
 		""" Raster an image and insert the layer """
 		layer = rasterImageOA(image, self.dimensions)
-		self.insertLayerOrGroup(Layer(layer, name, self.dimensions), index)
+		self.insertLayerOrGroup(Layer(name, layer, self.dimensions), index)
 
 
 	# The user may want to flatten the layers
-	def getFlattenLayers(self, ignoreHidden=True):
+	def getFlattenLayers(self, ignoreHidden: bool=True) -> Image.Image:
 		""" Return an image for all flattened layers """
 		return flattenAll(self.layersAndGroups, self.dimensions, ignoreHidden)
 
-	def getFlattenTwoLayers(self, background, foreground, ignoreHidden=True):
+	def getFlattenTwoLayers(self, background: int, foreground: int,
+	ignoreHidden: bool=True) -> Image.Image:
 		""" Return an image for two flattened layers """
 		flattenedSoFar = flattenLayerOrGroup(self.layersAndGroups[background],
 		self.dimensions, ignoreHidden=ignoreHidden)
 		return flattenLayerOrGroup(self.layersAndGroups[foreground], self.dimensions,
 		flattenedSoFar,	ignoreHidden=ignoreHidden)
 
-	def flattenTwoLayers(self, background, foreground, ignoreHidden=True):
+	def flattenTwoLayers(self, background: int, foreground: int, ignoreHidden: bool=True):
 		""" Flatten two layers """
 		image = self.getFlattenTwoLayers(background, foreground, ignoreHidden)
 		self.removeLayerOrGroup(foreground)
-		self.layersAndGroups[background] = Layer(image,
-		self.layersAndGroups[background].name + " (flattened)", self.dimensions)
+		self.layersAndGroups[background] = Layer(
+		self.layersAndGroups[background].name + " (flattened)", image, self.dimensions)
 
-	def flattenLayers(self, ignoreHidden=True):
+	def flattenLayers(self, ignoreHidden: bool=True):
 		""" Flatten all layers """
 		image = self.getFlattenLayers(ignoreHidden)
-		self.layersAndGroups[0] = Layer(image,
-		self.layersAndGroups[0].name + " (flattened)", self.dimensions)
+		self.layersAndGroups[0] = Layer(
+		self.layersAndGroups[0].name + " (flattened)", image, self.dimensions)
 		for layer in range(1, len(self.layersAndGroups)):
 			self.removeLayerOrGroup(layer)
 
@@ -93,9 +96,9 @@ class LayeredImage:
 		""" Extract the layers from the image """
 		layers = []
 		for layerOrGroup in	self.layersAndGroups:
-			if layerOrGroup.type == LayerGroupTypes.LAYER:
+			if isinstance(layerOrGroup, Layer):
 				layers.append(layerOrGroup)
-			elif layerOrGroup.type == LayerGroupTypes.GROUP:
+			else:
 				for layer in layerOrGroup.layers:
 					# 'Raster' the layer
 					layers.append(Layer(layer.name, layer.image,
@@ -114,41 +117,44 @@ class LayeredImage:
 	def extractGroups(self):
 		""" Extract the groups from the image """
 		return [_layerOrGroup for _layerOrGroup in
-			self.layersAndGroups if _layerOrGroup.type == LayerGroupTypes.GROUP]
+			self.layersAndGroups if isinstance(_layerOrGroup, Group)]
 
 	def updateGroups(self):
 		""" Update the groups from the image """
 		self.groups = self.extractGroups()
 
-def rasterImageOA(image, size, alpha=1.0, offsets=(0, 0)):
+def rasterImageOA(image: Image.Image, size: tuple[int, int], alpha: float=1.0,
+offsets: tuple[int, int]=(0, 0)):
 	""" Rasterise an image with offset and alpha to a given size"""
 	imageOffset = rasterImageOffset(image, size, offsets)
 	return Image.blend(Image.new("RGBA", size), imageOffset, alpha)
 
-def rasterImageOffset(image, size, offsets=(0, 0)):
+def rasterImageOffset(image: Image.Image, size: tuple[int, int],
+offsets: tuple[int, int]=(0, 0)):
 	""" Rasterise an image with offset to a given size"""
 	imageOffset = Image.new("RGBA", size)
 	imageOffset.paste(image.convert("RGBA"), offsets, image.convert("RGBA"))
 	return imageOffset
 
-def flattenLayerOrGroup(layerOrGroup, imageDimensions, flattenedSoFar=None, ignoreHidden=True):
+def flattenLayerOrGroup(layerOrGroup: Union[Layer, Group], imageDimensions: tuple[int, int],
+flattenedSoFar: Optional[Image.Image]=None, ignoreHidden: bool=True):
 	"""Flatten a layer or group on to an image of what has already been
 	flattened
 
 	Args:
-		layerOrGroup (Layer|Group): A layer or a group of layers
-		imageDimensions ((int, int)): size of the image
-		flattenedSoFar (PIL.Image, optional): the image of what has already
+		layerOrGroup (Union[Layer, Group]): A layer or a group of layers
+		imageDimensions (tuple[int, int]): size of the image
+		flattenedSoFar (Image.Image, optional): the image of what has already
 		been flattened. Defaults to None.
 		ignoreHidden (bool, optional): ignore layers that are hidden. Defaults
 		to True.
 
 	Returns:
-		PIL.Image: Flattened image
+		Image.Image: Flattened image
 	"""
 	if ignoreHidden and not layerOrGroup.visible:
 		foregroundRaster = Image.new("RGBA", imageDimensions)
-	elif layerOrGroup.type == LayerGroupTypes.GROUP:
+	elif isinstance(layerOrGroup, Group):
 		foregroundRaster = rasterImageOffset(flattenAll(layerOrGroup.layers,
 		imageDimensions, ignoreHidden), imageDimensions, layerOrGroup.offsets)
 	else:
@@ -160,18 +166,19 @@ def flattenLayerOrGroup(layerOrGroup, imageDimensions, flattenedSoFar=None, igno
 	return blendLayers(flattenedSoFar, foregroundRaster, layerOrGroup.blendmode, layerOrGroup.opacity)
 
 
-def flattenAll(layers, imageDimensions, ignoreHidden):
+def flattenAll(layers: list[Union[Layer, Group]], imageDimensions: tuple[int, int],
+ignoreHidden: bool=True):
 	"""Flatten a list of layers and groups
 
 	Args:
-		layers ([Layer|Group]): A list of layers and groups
-		imageDimensions ((int, int)): size of the image
+		layers (list[Union[Layer, Group]]): A list of layers and groups
+		imageDimensions (tuple[int, int]): size of the image
 		been flattened. Defaults to None.
 		ignoreHidden (bool, optional): ignore layers that are hidden. Defaults
 		to True.
 
 	Returns:
-		PIL.Image: Flattened image
+		Image.Image: Flattened image
 	"""
 	flattenedSoFar = flattenLayerOrGroup(layers[0], imageDimensions, ignoreHidden=ignoreHidden)
 	for layer in range(1, len(layers)):

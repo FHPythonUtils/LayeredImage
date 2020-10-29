@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "layeredimage"
-version = "2020.6.5"
+version = "2020.7.0"
 description = "Use this module to read, and write to a number of layered image formats"
 authors = ["FredHappyface"]
 classifiers = [
@@ -12,9 +12,9 @@ classifiers = [
 	"Natural Language :: English",
 	"Operating System :: OS Independent",
 	"Programming Language :: Python :: 3",
-	"Programming Language :: Python :: 3.6",
 	"Programming Language :: Python :: 3.7",
 	"Programming Language :: Python :: 3.8",
+	"Programming Language :: Python :: 3.9",
 	"Programming Language :: Python :: Implementation :: CPython",
 	"Topic :: Multimedia :: Graphics",
 	"Topic :: Software Development :: Libraries :: Python Modules",
@@ -26,25 +26,18 @@ documentation = "https://github.com/FHPythonUtils/LayeredImage/blob/master/READM
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.6"
-defusedxml = "^0.6.0"
-metprint = "^2020.6.1"
-pillow = "^7.1.2"
-pyora = "^0.3.8"
-pypdn = "^1.0.5"
-psd-tools3 = "^1.8.2"
-pylsr = "^2020.0.3"
-blendmodes = "^2020.2.2"
-gimpformats = "^2020.2.4"
-numpy = "^1.18.5"
-psd_tools3 = "^1.8.2"
+python = "^3.7"
+blendmodes = "<2022,>=2020.3.0"
+defusedxml = "<2,>=0.6.0"
+metprint = "<2022,>=2020.7.1"
+Pillow = "<10,>=8.0.1"
+pylsr = "<2022,>=2020.1.0"
+pyora = "<2,>=0.3.10"
+gimpformats = "<2022,>=2020.3.0"
+psdtoolsx = "<21,>=19.5.0"
 
 [tool.poetry.dev-dependencies]
 imgcompare = "^2.0.1"
-
-[tool.dephell.main]
-from = "pyproject.toml"
-to = "requirements.txt"
 
 [build-system]
 requires = ["poetry>=0.12"]

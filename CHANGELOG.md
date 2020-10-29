@@ -2,6 +2,14 @@
 All major and minor version changes will be documented in this file. Details of
 patch-level version changes can be found in [commit messages](../../commits/master).
 
+## 2020.7 - 2020/10/29
+- Using FHMake to build
+- Added type hinting
+- Dropped support for python < 3.7
+- Added support for python 3.9
+- pypdn has been dropped until it is compatible with python 3.9
+- replaced `psd-tools3` with `psdtoolsx`
+
 ## 2020.6.5 - 2020/06/15
 - Fix ora write bug causing the layers to be inverted (monkey patch)
 

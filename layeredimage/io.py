@@ -3,27 +3,31 @@
 # To avoid throwing import errors for the sake of it, specialised imports are
 # to be scoped to the function
 # pylint: disable=import-outside-toplevel
+# pylint: disable=invalid-name
 
 from os.path import exists
 import json
+from typing import Any
 import zipfile
 import io
+from zipfile import ZipFile
 from metprint import LogType, Logger, FHFormatter
-from layeredimage.layergroup import LayerGroupTypes, Layer, Group
+from PIL import Image
+from layeredimage.layergroup import Layer, Group
 from layeredimage.layeredimage import LayeredImage, rasterImageOA
 from layeredimage.blend import BlendType
 
-def extNotRecognised(fileName):
+def extNotRecognised(fileName: str):
 	""" Output the file extension not recognised error """
 	exts = ["ora", "psd", "xcf", "pdn", "tif", "tiff", "webp", "gif", "lsr", "layered", "layeredc"]
 	Logger(FHFormatter()).logPrint("File extension is not recognised for file: " +
 	fileName + "! Must be " + "one of \"" + ", \"".join(exts) + "\"", LogType.ERROR)
 
-def openLayerImage(file):
+def openLayerImage(file: str) -> LayeredImage:
 	"""Open a layer image file into a layer image object
 
 	Args:
-		file (string): path/ filename
+		file (str): path/ filename
 
 	Returns:
 		LayeredImage: a layered image object
@@ -41,11 +45,11 @@ def openLayerImage(file):
 		raise ValueError
 	return functionMap[fileExt](file)
 
-def saveLayerImage(fileName, layeredImage):
+def saveLayerImage(fileName: str, layeredImage: LayeredImage) -> None:
 	"""Save a layered image to a file
 
 	Args:
-		fileName (string): path/ filename
+		fileName (str): path/ filename
 		layeredImage (LayeredImage): the layered image to save
 	"""
 	functionMap = {"ora": saveLayer_ORA, "psd": saveLayer_PSD, "xcf": saveLayer_XCF,
@@ -58,11 +62,12 @@ def saveLayerImage(fileName, layeredImage):
 		raise ValueError
 	return functionMap[fileExt](fileName, layeredImage)
 
-def exportFlatImage(fileName, layeredImage):
+def exportFlatImage(fileName: str, layeredImage: LayeredImage) -> None:
 	""" Export the layered image to a unilayer image file """
 	layeredImage.getFlattenLayers().save(fileName)
 
-def blendModeLookup(blendmode, blendLookup, default=BlendType.NORMAL):
+def blendModeLookup(blendmode: Any, blendLookup: dict[Any, Any],
+default: BlendType=BlendType.NORMAL) -> BlendType:
 	""" Get the blendmode from a lookup table """
 	if blendmode not in blendLookup:
 		Logger(FHFormatter()).logPrint(str(blendmode) + " is not currently supported!", LogType.WARNING)
@@ -70,7 +75,7 @@ def blendModeLookup(blendmode, blendLookup, default=BlendType.NORMAL):
 	return blendLookup[blendmode]
 
 #### ORA ####
-def openLayer_ORA(file):
+def openLayer_ORA(file: str) -> LayeredImage:
 	""" Open an .ora file into a layered image """
 	from pyora import Project, TYPE_LAYER
 	# Not implemented color luminosity hue saturation
@@ -104,7 +109,7 @@ def openLayer_ORA(file):
 			blendModeLookup(layerOrGroup.composite_op, blendLookup)))
 	return LayeredImage(layersAndGroups, project.dimensions)
 
-def saveLayer_ORA(fileName, layeredImage):
+def saveLayer_ORA(fileName: str, layeredImage: LayeredImage) -> None:
 	""" Save a layered image as .ora """
 	from pyora import Project
 	blendLookup = {BlendType.NORMAL: "svg:src-over", BlendType.MULTIPLY: "svg:multiply",
@@ -118,10 +123,9 @@ def saveLayer_ORA(fileName, layeredImage):
 	BlendType.ADDITIVE: "svg:plus", BlendType.DESTIN: "svg:dst-in",
 	BlendType.DESTOUT: "svg:dst-out", BlendType.DESTATOP: "svg:dst-atop",
 	BlendType.SRCATOP: "svg:src-atop"}
-	Project._add_elem = addElem_fix
 	project = Project.new(layeredImage.dimensions[0], layeredImage.dimensions[1])
 	for layerOrGroup in layeredImage.layersAndGroups:
-		if layerOrGroup.type == LayerGroupTypes.LAYER:
+		if isinstance(layerOrGroup, Layer):
 			project = addLayer_ORA(project, layerOrGroup, blendLookup)
 		else:
 			group = project.add_group(layerOrGroup.name,
@@ -139,52 +143,28 @@ def addLayer_ORA(project, layer, blendLookup):
 	composite_op=blendModeLookup(layer.blendmode, blendLookup, "svg:src-over"))
 	return project
 
-# This is a patch, so I'm going to need to access what I please, and preseve
-# param names
-# pylint: disable=protected-access
-# pylint: disable=invalid-name
-def addElem_fix(self, tag, parent_elem, name, z_index=1, offsets=(0, 0,), opacity=1.0,
-visible=True, composite_op="svg:src-over", **kwargs):
-	""" Patch the Project._add_elem function from pyora 0.3.8 with a newer version
-	This snippet is MIT License Copyright (c) 2019 Paul Jewell
-	"""
-	import uuid
-	from xml.etree.ElementTree import Element
-	if tag == 'stack' and 'isolated' not in kwargs:
-		kwargs['isolated'] = True
-	if 'uuid' not in kwargs or kwargs['uuid'] is None:
-		self._generated_uuids = True
-		kwargs['uuid'] = str(uuid.uuid4())
-	newElem = Element(tag, {'name': name, 'x': str(offsets[0]), 'y': str(offsets[1]),
-		'visibility': 'visible' if visible else 'hidden',
-		'opacity': str(opacity), 'composite-op': composite_op,
-		**{k: str(v) for k, v in kwargs.items() if v is not None}})
-	parent_elem.insert(0, newElem)
-	return newElem
-# pylint: enable=protected-access
-# pylint: enable=invalid-name
-
 #### PSD ####
-def openLayer_PSD(file):
+def openLayer_PSD(file: str) -> LayeredImage:
 	""" Open a .psd file into a layered image """
-	from psd_tools import PSDImage
-	blendLookup = {"normal": BlendType.NORMAL, "multiply": BlendType.MULTIPLY,
-	"color burn": BlendType.COLOURBURN, "color dodge": BlendType.COLOURDODGE,
-	"overlay": BlendType.OVERLAY, "difference": BlendType.DIFFERENCE,
-	"subtract": BlendType.NEGATION, "lighten": BlendType.LIGHTEN,
-	"darken": BlendType.DARKEN, "screen": BlendType.SCREEN,
-	"soft light": BlendType.SOFTLIGHT, "hard light": BlendType.HARDLIGHT,
-	"exclusion": BlendType.EXCLUSION, "hue": BlendType.HUE,
-	"saturation": BlendType.SATURATION, "color": BlendType.COLOUR,
-	"luminosity": BlendType.LUMINOSITY, "divide": BlendType.DIVIDE,
-	"pin light": BlendType.PINLIGHT, "vivid light": BlendType.VIVIDLIGHT}
+	from psdtoolsx import PSDImage
+	from psdtoolsx.constants import BlendMode as psdB
+	blendLookup = {psdB.NORMAL: BlendType.NORMAL, psdB.MULTIPLY: BlendType.MULTIPLY,
+	psdB.COLOR_BURN: BlendType.COLOURBURN, psdB.COLOR_DODGE: BlendType.COLOURDODGE,
+	psdB.OVERLAY: BlendType.OVERLAY, psdB.DIFFERENCE: BlendType.DIFFERENCE,
+	psdB.SUBTRACT: BlendType.NEGATION, psdB.LIGHTEN: BlendType.LIGHTEN,
+	psdB.DARKEN: BlendType.DARKEN, psdB.SCREEN: BlendType.SCREEN,
+	psdB.SOFT_LIGHT: BlendType.SOFTLIGHT, psdB.HARD_LIGHT: BlendType.HARDLIGHT,
+	psdB.EXCLUSION: BlendType.EXCLUSION, psdB.HUE: BlendType.HUE,
+	psdB.SATURATION: BlendType.SATURATION, psdB.COLOR: BlendType.COLOUR,
+	psdB.LUMINOSITY: BlendType.LUMINOSITY, psdB.DIVIDE: BlendType.DIVIDE,
+	psdB.PIN_LIGHT: BlendType.PINLIGHT, psdB.VIVID_LIGHT: BlendType.VIVIDLIGHT}
 	layersAndGroups = []
-	project = PSDImage.load(file)
-	for layerOrGroup in project.layers[::-1]:
+	project = PSDImage.open(file)
+	for layerOrGroup in project:
 		if layerOrGroup.is_group():
 			layers = []
-			for layer in layerOrGroup.layers:
-				layers.append(Layer(layer.name, layer.as_PIL(), (layer.width,
+			for layer in layerOrGroup:
+				layers.append(Layer(layer.name, layer.topil(), (layer.width,
 				layer.height), (layer.left - layerOrGroup.left, layer.top - layerOrGroup.top),
 				layer.opacity / 255, layer.visible,
 				blendModeLookup(layer.blend_mode, blendLookup)))
@@ -194,23 +174,21 @@ def openLayer_PSD(file):
 			blendModeLookup(layerOrGroup.blend_mode, blendLookup)))
 		else:
 			layersAndGroups.append(
-			Layer(layerOrGroup.name, layerOrGroup.as_PIL(), (layerOrGroup.width,
+			Layer(layerOrGroup.name, layerOrGroup.topil(), (layerOrGroup.width,
 			layerOrGroup.height), (layerOrGroup.left, layerOrGroup.top),
 			layerOrGroup.opacity / 255, layerOrGroup.visible,
 			blendModeLookup(layerOrGroup.blend_mode, blendLookup)))
 	return LayeredImage(layersAndGroups, (project.width, project.height))
 
 
-def saveLayer_PSD(_fileName, _layeredImage):
+def saveLayer_PSD(fileName: str, layeredImage: LayeredImage) -> None:
 	""" Save a layered image as .psd """
-	Logger(FHFormatter()).logPrint("Saving PSDs is not implemented in psd-tools3 - " +
-	"this is present in psd-tools, however, installing it on Windows is difficult so " +
-	"I am not currently using this library", LogType.ERROR)
+	Logger(FHFormatter()).logPrint("Saving PSDs is not implemented in psdtoolsx", LogType.ERROR)
 	raise NotImplementedError
 
 
 #### XCF ####
-def openLayer_XCF(file):
+def openLayer_XCF(file: str) -> LayeredImage:
 	""" Open an .xcf file into a layered image """
 	from gimpformats.gimpXcfDocument import GimpDocument
 	blendLookup = {0: BlendType.NORMAL, 3: BlendType.MULTIPLY,
@@ -274,7 +252,7 @@ def openLayer_XCF(file):
 	return LayeredImage(layersAndGroups, (project.width, project.height))
 
 
-def saveLayer_XCF(_fileName, _layeredImage):
+def saveLayer_XCF(fileName: str, layeredImage: LayeredImage) -> None:
 	""" Save a layered image as .xcf """
 	Logger(FHFormatter()).logPrint("Saving XCFs is not implemented in gimpformats - " +
 	"this is a little misleading as functions are pressent, however these are not " +
@@ -283,10 +261,12 @@ def saveLayer_XCF(_fileName, _layeredImage):
 
 
 #### PDN ####
-def openLayer_PDN(file):
+def openLayer_PDN(file: str) -> LayeredImage:
 	""" Open a .pdn file into a layered image """
+	Logger(FHFormatter()).logPrint("Waiting on upstream ...pypdn", LogType.ERROR)
+	raise NotImplementedError
+
 	from pypdn.reader import read, BlendType as PDNBlend
-	from PIL import Image
 	blendLookup = {PDNBlend.Normal: BlendType.NORMAL, PDNBlend.Multiply: BlendType.MULTIPLY,
 	PDNBlend.Additive: BlendType.ADDITIVE, PDNBlend.ColorBurn: BlendType.COLOURBURN,
 	PDNBlend.ColorDodge: BlendType.COLOURDODGE, PDNBlend.Reflect: BlendType.REFLECT,
@@ -302,16 +282,15 @@ def openLayer_PDN(file):
 		layer.opacity / 255, layer.visible, blendModeLookup(layer.blendMode, blendLookup)))
 	return LayeredImage(layers, (project.width, project.height))
 
-def saveLayer_PDN(_fileName, _layeredImage):
+def saveLayer_PDN(fileName: str, layeredImage: LayeredImage) -> None:
 	""" Save a layered image as .pdn """
 	Logger(FHFormatter()).logPrint("Saving PDNs is not implemented in pypdn", LogType.ERROR)
 	raise NotImplementedError
 
 
 #### TIFF ####
-def openLayer_TIFF(file):
+def openLayer_TIFF(file: str) -> LayeredImage:
 	""" Open a .tiff or a .tif file into a layered image """
-	from PIL import Image
 	project = Image.open(file)
 	layers = []
 	dimensions = [0, 0]
@@ -337,16 +316,15 @@ def openLayer_TIFF(file):
 	return LayeredImage(layers, (dimensions[0], dimensions[1]))
 
 
-def saveLayer_TIFF(fileName, layeredImage):
+def saveLayer_TIFF(fileName: str, layeredImage: LayeredImage) -> None:
 	""" Save a layered image as .tiff or .tif """
 	layers = getRasterLayers(layeredImage, "TIFF")
 	layers[0].save(fileName, compression=None, save_all=True, append_images=layers[1:])
 
 
 ## GIF ##
-def openLayer_GIF(file):
+def openLayer_GIF(file: str) -> LayeredImage:
 	""" Open a .gif file into a layered image """
-	from PIL import Image
 	project = Image.open(file)
 	projectSize = project.size
 	layers = []
@@ -357,16 +335,15 @@ def openLayer_GIF(file):
 	project.close()
 	return LayeredImage(layers, projectSize)
 
-def saveLayer_GIF(fileName, layeredImage):
+def saveLayer_GIF(fileName: str, layeredImage: LayeredImage) -> None:
 	""" Save a layered image as .gif """
 	layers = getRasterLayers(layeredImage, "GIF")
 	layers[0].save(fileName, duration=100, save_all=True, append_images=layers[1:])
 
 
 ## WEBP ##
-def openLayer_WEBP(file):
+def openLayer_WEBP(file: str) -> LayeredImage:
 	""" Open a .webp file into a layered image """
-	from PIL import Image
 	project = Image.open(file)
 	projectSize = project.size
 	layers = []
@@ -376,13 +353,13 @@ def openLayer_WEBP(file):
 	project.close()
 	return LayeredImage(layers, projectSize)
 
-def saveLayer_WEBP(fileName, layeredImage):
+def saveLayer_WEBP(fileName: str, layeredImage: LayeredImage):
 	""" Save a layered image as .webp """
 	layers = getRasterLayers(layeredImage, "WEBP")
 	layers[0].save(fileName, duration=200, save_all=True, append_images=layers[1:])
 
 
-def getRasterLayers(layeredImage, imageFormat):
+def getRasterLayers(layeredImage: LayeredImage, imageFormat: str):
 	""" Return layers and throw a warning if the image has groups """
 	if len(layeredImage.extractGroups()) > 0:
 		Logger(FHFormatter()).logPrint(imageFormat + "s do not support groups so extracting layers",
@@ -394,7 +371,7 @@ def getRasterLayers(layeredImage, imageFormat):
 
 
 ## LSR ##
-def openLayer_LSR(file):
+def openLayer_LSR(file: str) -> LayeredImage:
 	""" Open a .lsr file into a layered image """
 	import pylsr
 	project = pylsr.read(file)
@@ -406,13 +383,13 @@ def openLayer_LSR(file):
 	return LayeredImage(groups, project.size)
 
 
-def saveLayer_LSR(fileName, layeredImage):
+def saveLayer_LSR(fileName: str, layeredImage: LayeredImage) -> None:
 	""" Save a layered image as .lsr """
 	import pylsr
 	from os import sep
 	layers = []
 	for group in layeredImage.layersAndGroups:
-		if group.type == LayerGroupTypes.LAYER:
+		if isinstance(group, Layer):
 			imageData = [pylsr.LSRImageData(group.image, group.name)]
 		else:
 			imageData = [pylsr.LSRImageData(rasterImageOA(layer.image,
@@ -426,7 +403,7 @@ def saveLayer_LSR(fileName, layeredImage):
 
 
 ## LAYERED ##
-def openLayer_LAYERED(file):
+def openLayer_LAYERED(file: str) -> LayeredImage:
 	""" Open a .layered file into a layered image """
 	blendLookup = {
 	"NORMAL": BlendType.NORMAL, "MULTIPLY": BlendType.MULTIPLY, "ADDITIVE": BlendType.ADDITIVE,
@@ -457,16 +434,20 @@ def openLayer_LAYERED(file):
 				blendModeLookup(layerOrGroup["blendmode"], blendLookup)))
 		return LayeredImage(layersAndGroups, stack["dimensions"])
 
-def grabLayer_LAYERED(zipFile, layer, blendLookup):
+def grabLayer_LAYERED(zipFile: ZipFile, layer: dict[str, Any], blendLookup: dict[str, Any]):
 	""" Grab an image from .layered """
-	from PIL import Image
 	with zipFile.open("data/" + layer["name"] + ".png") as layerImage:
 		image = Image.open(layerImage).convert('RGBA')
 	return Layer(layer["name"], image, layer["dimensions"], layer["offsets"],
 	layer["opacity"], layer["visible"], blendModeLookup(layer["blendmode"], blendLookup))
 
 
-def saveLayer_LAYERED(fileName, layeredImage, compressed=False):
+def saveLayer_LAYERED(fileName: str, layeredImage: LayeredImage) -> None:
+	""" Save a layered image as .layered """
+	_saveLayer_LAYERED(fileName, layeredImage)
+
+
+def _saveLayer_LAYERED(fileName: str, layeredImage: LayeredImage, compressed: bool=False) -> None:
 	""" Save a layered image as .layered """
 	with zipfile.ZipFile(fileName, 'w',
 	compression=(zipfile.ZIP_DEFLATED if compressed else zipfile.ZIP_STORED)) as layered:
@@ -481,7 +462,7 @@ def saveLayer_LAYERED(fileName, layeredImage, compressed=False):
 		for image in imageLookup:
 			writeImage_LAYERED(imageLookup[image], layered, image + ".png", compressed)
 
-def writeImage_LAYERED(image, zipFile, path, compressed=False):
+def writeImage_LAYERED(image: Image.Image, zipFile: ZipFile, path: str, compressed: bool=False):
 	""" Write an image to the archive """
 	imgByteArr = io.BytesIO()
 	imageCopy = image.copy()
@@ -492,10 +473,10 @@ def writeImage_LAYERED(image, zipFile, path, compressed=False):
 	zipFile.writestr(path, imgByteArr.read())
 
 ## LAYEREDC ##
-def openLayer_LAYEREDC(file):
+def openLayer_LAYEREDC(file: str) -> LayeredImage:
 	""" Open a .layeredc file into a layered image """
 	return openLayer_LAYERED(file)
 
-def saveLayer_LAYEREDC(fileName, layeredImage):
+def saveLayer_LAYEREDC(fileName: str, layeredImage: LayeredImage) -> None:
 	""" Save a layeredc image as .layered """
-	saveLayer_LAYERED(fileName, layeredImage, True)
+	_saveLayer_LAYERED(fileName, layeredImage, True)
