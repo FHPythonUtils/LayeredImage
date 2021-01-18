@@ -1,3 +1,4 @@
+from __future__ import annotations
 """ Do file io """
 
 # To avoid throwing import errors for the sake of it, specialised imports are
