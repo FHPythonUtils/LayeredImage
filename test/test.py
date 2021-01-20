@@ -33,7 +33,6 @@ def test_psd():
 	assert(is_equal(THISDIR + "/base24(psd).png", THISDIR + "/expected.png", tolerance=1))
 
 # PDN
-'''
 def test_pdn():
 	pdn = layeredimage.io.openLayerImage(THISDIR + "/base24.pdn")
 	layeredimage.io.saveLayerImage(THISDIR + "/base24(pdn).ora", pdn)
@@ -42,7 +41,7 @@ def test_pdn():
 	layeredimage.io.saveLayerImage(THISDIR + "/base24(pdn).gif", pdn)
 	pdn.getFlattenLayers().save(THISDIR + "/base24(pdn).png")
 	assert(is_equal(THISDIR + "/base24(pdn).png", THISDIR + "/expected.png", tolerance=1))
-'''
+
 # XCF
 def test_xcf():
 	xcf = layeredimage.io.openLayerImage(THISDIR + "/base24.xcf")
@@ -117,7 +116,7 @@ def test_layeredc():
 if __name__ == "__main__":
 	test_ora()
 	test_psd()
-	#test_pdn()
+	test_pdn()
 	test_xcf()
 	test_tiff()
 	test_webp()

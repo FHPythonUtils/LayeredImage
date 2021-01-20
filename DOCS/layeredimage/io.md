@@ -87,7 +87,7 @@ Output the file extension not recognised error
 
 ## getRasterLayers
 
-[[find in source code]](../../layeredimage/io.py#L363)
+[[find in source code]](../../layeredimage/io.py#L360)
 
 ```python
 def getRasterLayers(layeredImage: LayeredImage, imageFormat: str):
@@ -101,7 +101,7 @@ Return layers and throw a warning if the image has groups
 
 ## grabLayer_LAYERED
 
-[[find in source code]](../../layeredimage/io.py#L438)
+[[find in source code]](../../layeredimage/io.py#L435)
 
 ```python
 def grabLayer_LAYERED(
@@ -137,7 +137,7 @@ Open a layer image file into a layer image object
 
 ## openLayer_GIF
 
-[[find in source code]](../../layeredimage/io.py#L327)
+[[find in source code]](../../layeredimage/io.py#L324)
 
 ```python
 def openLayer_GIF(file: str) -> LayeredImage:
@@ -151,7 +151,7 @@ Open a .gif file into a layered image
 
 ## openLayer_LAYERED
 
-[[find in source code]](../../layeredimage/io.py#L407)
+[[find in source code]](../../layeredimage/io.py#L404)
 
 ```python
 def openLayer_LAYERED(file: str) -> LayeredImage:
@@ -165,7 +165,7 @@ Open a .layered file into a layered image
 
 ## openLayer_LAYEREDC
 
-[[find in source code]](../../layeredimage/io.py#L477)
+[[find in source code]](../../layeredimage/io.py#L474)
 
 ```python
 def openLayer_LAYEREDC(file: str) -> LayeredImage:
@@ -179,7 +179,7 @@ Open a .layeredc file into a layered image
 
 ## openLayer_LSR
 
-[[find in source code]](../../layeredimage/io.py#L375)
+[[find in source code]](../../layeredimage/io.py#L372)
 
 ```python
 def openLayer_LSR(file: str) -> LayeredImage:
@@ -235,7 +235,7 @@ Open a .psd file into a layered image
 
 ## openLayer_TIFF
 
-[[find in source code]](../../layeredimage/io.py#L293)
+[[find in source code]](../../layeredimage/io.py#L290)
 
 ```python
 def openLayer_TIFF(file: str) -> LayeredImage:
@@ -249,7 +249,7 @@ Open a .tiff or a .tif file into a layered image
 
 ## openLayer_WEBP
 
-[[find in source code]](../../layeredimage/io.py#L346)
+[[find in source code]](../../layeredimage/io.py#L343)
 
 ```python
 def openLayer_WEBP(file: str) -> LayeredImage:
@@ -296,7 +296,7 @@ Save a layered image to a file
 
 ## saveLayer_GIF
 
-[[find in source code]](../../layeredimage/io.py#L339)
+[[find in source code]](../../layeredimage/io.py#L336)
 
 ```python
 def saveLayer_GIF(fileName: str, layeredImage: LayeredImage) -> None:
@@ -310,7 +310,7 @@ Save a layered image as .gif
 
 ## saveLayer_LAYERED
 
-[[find in source code]](../../layeredimage/io.py#L446)
+[[find in source code]](../../layeredimage/io.py#L443)
 
 ```python
 def saveLayer_LAYERED(fileName: str, layeredImage: LayeredImage) -> None:
@@ -324,7 +324,7 @@ Save a layered image as .layered
 
 ## saveLayer_LAYEREDC
 
-[[find in source code]](../../layeredimage/io.py#L481)
+[[find in source code]](../../layeredimage/io.py#L478)
 
 ```python
 def saveLayer_LAYEREDC(fileName: str, layeredImage: LayeredImage) -> None:
@@ -338,7 +338,7 @@ Save a layeredc image as .layered
 
 ## saveLayer_LSR
 
-[[find in source code]](../../layeredimage/io.py#L387)
+[[find in source code]](../../layeredimage/io.py#L384)
 
 ```python
 def saveLayer_LSR(fileName: str, layeredImage: LayeredImage) -> None:
@@ -366,7 +366,7 @@ Save a layered image as .ora
 
 ## saveLayer_PDN
 
-[[find in source code]](../../layeredimage/io.py#L286)
+[[find in source code]](../../layeredimage/io.py#L283)
 
 ```python
 def saveLayer_PDN(fileName: str, layeredImage: LayeredImage) -> None:
@@ -394,7 +394,7 @@ Save a layered image as .psd
 
 ## saveLayer_TIFF
 
-[[find in source code]](../../layeredimage/io.py#L320)
+[[find in source code]](../../layeredimage/io.py#L317)
 
 ```python
 def saveLayer_TIFF(fileName: str, layeredImage: LayeredImage) -> None:
@@ -408,7 +408,7 @@ Save a layered image as .tiff or .tif
 
 ## saveLayer_WEBP
 
-[[find in source code]](../../layeredimage/io.py#L357)
+[[find in source code]](../../layeredimage/io.py#L354)
 
 ```python
 def saveLayer_WEBP(fileName: str, layeredImage: LayeredImage):
@@ -436,7 +436,7 @@ Save a layered image as .xcf
 
 ## writeImage_LAYERED
 
-[[find in source code]](../../layeredimage/io.py#L466)
+[[find in source code]](../../layeredimage/io.py#L463)
 
 ```python
 def writeImage_LAYERED(

@@ -264,9 +264,6 @@ def saveLayer_XCF(fileName: str, layeredImage: LayeredImage) -> None:
 #### PDN ####
 def openLayer_PDN(file: str) -> LayeredImage:
 	""" Open a .pdn file into a layered image """
-	Logger(FHFormatter()).logPrint("Waiting on upstream ...pypdn", LogType.ERROR)
-	raise NotImplementedError
-
 	from pypdn.reader import read, BlendType as PDNBlend
 	blendLookup = {PDNBlend.Normal: BlendType.NORMAL, PDNBlend.Multiply: BlendType.MULTIPLY,
 	PDNBlend.Additive: BlendType.ADDITIVE, PDNBlend.ColorBurn: BlendType.COLOURBURN,

@@ -2,6 +2,9 @@
 All major and minor version changes will be documented in this file. Details of
 patch-level version changes can be found in [commit messages](../../commits/master).
 
+## 2021.1 - 2021.01.20
+- `pypdn` compatible with py 3.9 so added back
+
 ## 2021 - 2021.01.18
 - Fix bug on python 3.7/3.8
 
