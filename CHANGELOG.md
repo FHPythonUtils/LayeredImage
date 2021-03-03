@@ -2,7 +2,11 @@
 All major and minor version changes will be documented in this file. Details of
 patch-level version changes can be found in [commit messages](../../commits/master).
 
-## 2021.1.1 - 2021.01.20
+## 2021.2 - 2021.03.03
+- Improve MI score by refactoring `layeredimage.io.py` to `layeredimage.io/`
+
+
+## 2021.1.1 - 2021.03.02
 - Try out new yapf formatting.
 - Tidy up
 - `pyupgrade`

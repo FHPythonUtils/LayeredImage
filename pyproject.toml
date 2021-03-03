@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "layeredimage"
-version = "2021.1.1"
+version = "2021.2"
 description = "Use this module to read, and write to a number of layered image formats"
 authors = ["FredHappyface"]
 classifiers = [
@@ -72,5 +72,5 @@ disable=[
 	"bad-continuation",
 	"wrong-import-position",
 	"unsubscriptable-object",
-	"no-absolute-import",
+	"python3",
 ]

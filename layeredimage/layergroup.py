@@ -5,7 +5,7 @@ from typing import Any
 
 from PIL import Image
 
-from layeredimage.blend import BlendType
+from .blend import BlendType
 
 #pylint: disable=too-few-public-methods
 #pylint: disable=too-many-arguments

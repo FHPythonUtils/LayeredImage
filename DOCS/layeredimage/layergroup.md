@@ -35,7 +35,6 @@ A representation of an image group.
 
 #### See also
 
-- [BlendType](blend.md#blendtype)
 - [LayerGroup](#layergroup)
 
 ### Group().json
@@ -69,7 +68,6 @@ A representation of an image layer.
 
 #### See also
 
-- [BlendType](blend.md#blendtype)
 - [LayerGroup](#layergroup)
 
 ### Layer().json
@@ -100,10 +98,6 @@ class LayerGroup():
 ```
 
 A representation of an image layer or group.
-
-#### See also
-
-- [BlendType](blend.md#blendtype)
 
 ### LayerGroup().\_\_repr\_\_
 

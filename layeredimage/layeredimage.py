@@ -5,8 +5,8 @@ from typing import Any
 
 from PIL import Image
 
-from layeredimage.blend import blendLayers
-from layeredimage.layergroup import Group, Layer
+from .blend import blendLayers
+from .layergroup import Group, Layer
 
 
 class LayeredImage:
