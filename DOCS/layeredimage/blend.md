@@ -2,7 +2,7 @@
 
 > Auto-generated documentation for [layeredimage.blend](../../layeredimage/blend.py) module.
 
-Provide blending functions
+Provide blending functions.
 
 - [Layeredimage](../README.md#layeredimage-index) / [Modules](../README.md#layeredimage-modules) / [layeredimage](index.md#layeredimage) / blend
     - [BlendType](#blendtype)
@@ -12,13 +12,14 @@ leverage blendmodes for this
 
 ## BlendType
 
-[[find in source code]](../../layeredimage/blend.py#L10)
+[[find in source code]](../../layeredimage/blend.py#L13)
 
 ```python
 class BlendType(Enum):
 ```
 
-Specify supported blend types
+Specify supported blend types.
+
 NORMAL
 MULTIPLY
 ADDITIVE
@@ -52,7 +53,7 @@ SRCATOP
 
 ## blendLayers
 
-[[find in source code]](../../layeredimage/blend.py#L75)
+[[find in source code]](../../layeredimage/blend.py#L79)
 
 ```python
 def blendLayers(
@@ -63,7 +64,7 @@ def blendLayers(
 ):
 ```
 
-Blend layers using numpy array
+Blend layers using numpy array.
 
 #### Arguments
 

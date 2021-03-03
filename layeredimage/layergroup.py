@@ -1,18 +1,27 @@
-""" Base class """
+"""Base class."""
 from __future__ import annotations
-from typing import Any, Optional
+
+from typing import Any
+
 from PIL import Image
+
 from layeredimage.blend import BlendType
 
 #pylint: disable=too-few-public-methods
 #pylint: disable=too-many-arguments
 
+
 class LayerGroup:
-	""" A representation of an image layer or group """
-	def __init__(self, name: str, dimensions: tuple[int, int],
-	offsets: tuple[int, int]=(0, 0), opacity: float =1.0, visible: bool=True,
-	blendmode: BlendType=BlendType.NORMAL, **kwargs: Any):
-		""" A representation of an image layer or group
+	"""A representation of an image layer or group."""
+	def __init__(self,
+	name: str,
+	dimensions: tuple[int, int],
+	offsets: tuple[int, int] = (0, 0),
+	opacity: float = 1.0,
+	visible: bool = True,
+	blendmode: BlendType = BlendType.NORMAL,
+	**kwargs: Any):
+		"""Represent an image layer or group.
 
 		Args:
 			name (str): Name of the layer or group
@@ -25,6 +34,7 @@ class LayerGroup:
 			visible (bool, optional): Is the layer visible to the user (this
 			is often configured per layer or per group by an 'eye' icon).
 			Defaults to True.
+			blendmode (Blendtype): The blending mode to use. Defaults to BlendType.NORMAL
 		"""
 		self.name = name
 		self.offsets = offsets
@@ -35,21 +45,36 @@ class LayerGroup:
 		self.extras = kwargs
 
 	def __repr__(self):
-		return "<LayeredImage " + " \"" + self.name + "\" (" + str(self.dimensions[0]) + "x" + str(
-			self.dimensions[1]) + ")>"
+		"""Get the string representation."""
+		return self.__str__()
+
+	def __str__(self):
+		"""Get the string representation."""
+		return "<LayeredImage " + " \"" + self.name + "\" (" + str(
+		self.dimensions[0]) + "x" + str(self.dimensions[1]) + ")>"
 
 	def json(self) -> dict[str, Any]:
-		""" Get the object as a dict """
-		return {"name": self.name, "offsets": self.offsets, "opacity": self.opacity,
-		"visible": self.visible, "dimensions": self.dimensions, "blendmode": self.blendmode.name}
+		"""Get the object as a dict."""
+		return {
+		"name": self.name,
+		"offsets": self.offsets,
+		"opacity": self.opacity,
+		"visible": self.visible,
+		"dimensions": self.dimensions,
+		"blendmode": self.blendmode.name}
 
 
 class Layer(LayerGroup):
-	""" A representation of an image layer """
-	def __init__(self, name: str, image: Image.Image, dimensions: tuple[int, int],
-	offsets: tuple[int, int]=(0, 0), opacity: float =1.0, visible: bool=True,
-	blendmode: BlendType=BlendType.NORMAL):
-		""" A representation of an image layer
+	"""A representation of an image layer."""
+	def __init__(self,
+	name: str,
+	image: Image.Image,
+	dimensions: tuple[int, int],
+	offsets: tuple[int, int] = (0, 0),
+	opacity: float = 1.0,
+	visible: bool = True,
+	blendmode: BlendType = BlendType.NORMAL):
+		"""Representation of an image layer.
 
 		Args:
 			name (str): Name of the layer or group
@@ -63,9 +88,14 @@ class Layer(LayerGroup):
 			visible (bool, optional): Is the layer visible to the user (this
 			is often configured per layer or per group by an 'eye' icon).
 			Defaults to True.
+			blendmode (Blendtype): The blending mode to use. Defaults to BlendType.NORMAL
 		"""
-		super().__init__(name, dimensions, offsets=offsets, opacity=opacity,
-		visible=visible, blendmode=blendmode)
+		super().__init__(name,
+		dimensions,
+		offsets=offsets,
+		opacity=opacity,
+		visible=visible,
+		blendmode=blendmode)
 		self.image = image
 
 		# If the user does not specify the dimensions use image.size
@@ -74,19 +104,28 @@ class Layer(LayerGroup):
 			self.dimensions = image.size
 
 	def json(self) -> dict[str, Any]:
-		""" Get the object as a dict """
-		return {"name": self.name, "offsets": self.offsets, "opacity": self.opacity,
-		"visible": self.visible, "dimensions": self.dimensions, "type": "LAYER",
+		"""Get the object as a dict."""
+		return {
+		"name": self.name,
+		"offsets": self.offsets,
+		"opacity": self.opacity,
+		"visible": self.visible,
+		"dimensions": self.dimensions,
+		"type": "LAYER",
 		"blendmode": self.blendmode.name}
 
 
 class Group(LayerGroup):
-	""" A representation of an image group """
-	def __init__(self, name: str, layers:list[Layer],
-	dimensions: Optional[tuple[int, int]]=None,
-	offsets: tuple[int, int]=(0, 0), opacity: float =1.0, visible: bool=True,
-	blendmode: BlendType=BlendType.NORMAL):
-		""" A representation of an image group
+	"""A representation of an image group."""
+	def __init__(self,
+	name: str,
+	layers: list[Layer],
+	dimensions: tuple[int, int] | None = None,
+	offsets: tuple[int, int] = (0, 0),
+	opacity: float = 1.0,
+	visible: bool = True,
+	blendmode: BlendType = BlendType.NORMAL):
+		"""Representation of an image group.
 
 		Args:
 			name (str): Name of the layer or group
@@ -101,10 +140,14 @@ class Group(LayerGroup):
 			visible (bool, optional): Is the layer visible to the user (this
 			is often configured per layer or per group by an 'eye' icon).
 			Defaults to True.
+			blendmode (Blendtype): The blending mode to use. Defaults to BlendType.NORMAL
 		"""
 		# Initialise dimens to 0 and then calculate as below
-		super().__init__(name, (0, 0), offsets=offsets, opacity=opacity,
-		visible=visible, blendmode=blendmode)
+		super().__init__(name, (0, 0),
+		offsets=offsets,
+		opacity=opacity,
+		visible=visible,
+		blendmode=blendmode)
 		self.layers = layers
 
 		# If the user does not specify the dimensions use the largest x and y of
@@ -117,8 +160,14 @@ class Group(LayerGroup):
 			max([dimensions[1] for dimensions in layerDimens]))
 
 	def json(self) -> dict[str, Any]:
-		""" Get the object as a dict """
+		"""Get the object as a dict."""
 		layers = [layer.json() for layer in self.layers]
-		return {"name": self.name, "offsets": self.offsets, "opacity": self.opacity,
-		"visible": self.visible, "dimensions": self.dimensions, "type": "GROUP",
-		"blendmode": self.blendmode.name, "layers": layers}
+		return {
+		"name": self.name,
+		"offsets": self.offsets,
+		"opacity": self.opacity,
+		"visible": self.visible,
+		"dimensions": self.dimensions,
+		"type": "GROUP",
+		"blendmode": self.blendmode.name,
+		"layers": layers}
