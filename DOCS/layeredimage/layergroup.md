@@ -56,7 +56,7 @@ class Layer(LayerGroup):
     def __init__(
         name: str,
         image: Image.Image,
-        dimensions: tuple[(int, int)],
+        dimensions: tuple[(int, int)] | None = None,
         offsets: tuple[(int, int)] = (0, 0),
         opacity: float = 1.0,
         visible: bool = True,

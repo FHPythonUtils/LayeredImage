@@ -83,7 +83,7 @@ class Layer(LayerGroup):
 		self,
 		name: str,
 		image: Image.Image,
-		dimensions: tuple[int, int],
+		dimensions: tuple[int, int] | None = None,
 		offsets: tuple[int, int] = (0, 0),
 		opacity: float = 1.0,
 		visible: bool = True,
@@ -106,7 +106,7 @@ class Layer(LayerGroup):
 			blendmode (Blendtype): The blending mode to use. Defaults to BlendType.NORMAL
 		"""
 		super().__init__(
-			name, dimensions, offsets=offsets, opacity=opacity, visible=visible, blendmode=blendmode
+			name, (0, 0), offsets=offsets, opacity=opacity, visible=visible, blendmode=blendmode
 		)
 		self.image = image
 

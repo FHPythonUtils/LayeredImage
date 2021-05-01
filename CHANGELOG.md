@@ -2,6 +2,8 @@
 All major and minor version changes will be documented in this file. Details of
 patch-level version changes can be found in [commit messages](../../commits/master).
 
+## 2021.2.3 - 2021/05/01
+- bugfix backwards compat
 
 ## 2021.2.2 - 2021/05/01
 - Updated formatting
