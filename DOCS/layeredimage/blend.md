@@ -53,7 +53,7 @@ SRCATOP
 
 ## blendLayers
 
-[[find in source code]](../../layeredimage/blend.py#L79)
+[[find in source code]](../../layeredimage/blend.py#L80)
 
 ```python
 def blendLayers(

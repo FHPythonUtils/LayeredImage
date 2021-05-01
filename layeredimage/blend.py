@@ -44,6 +44,7 @@ class BlendType(Enum):
 	DESTATOP
 	SRCATOP
 	"""
+
 	NORMAL = auto()
 	MULTIPLY = auto()
 	ADDITIVE = auto()
@@ -76,10 +77,7 @@ class BlendType(Enum):
 	SRCATOP = auto()
 
 
-def blendLayers(background: Image,
-foreground: Image,
-blendType: BlendType,
-opacity: float):
+def blendLayers(background: Image, foreground: Image, blendType: BlendType, opacity: float):
 	"""Blend layers using numpy array.
 
 	Args:
@@ -92,32 +90,33 @@ opacity: float):
 		PIL.Image: combined image
 	"""
 	blendTypeMap = {
-	BlendType.NORMAL: bType.NORMAL,
-	BlendType.MULTIPLY: bType.MULTIPLY,
-	BlendType.COLOURBURN: bType.COLOURBURN,
-	BlendType.COLOURDODGE: bType.COLOURDODGE,
-	BlendType.REFLECT: bType.REFLECT,
-	BlendType.OVERLAY: bType.OVERLAY,
-	BlendType.DIFFERENCE: bType.DIFFERENCE,
-	BlendType.LIGHTEN: bType.LIGHTEN,
-	BlendType.DARKEN: bType.DARKEN,
-	BlendType.SCREEN: bType.SCREEN,
-	BlendType.SOFTLIGHT: bType.SOFTLIGHT,
-	BlendType.HARDLIGHT: bType.HARDLIGHT,
-	BlendType.GRAINEXTRACT: bType.GRAINEXTRACT,
-	BlendType.GRAINMERGE: bType.GRAINMERGE,
-	BlendType.DIVIDE: bType.DIVIDE,
-	BlendType.HUE: bType.HUE,
-	BlendType.SATURATION: bType.SATURATION,
-	BlendType.COLOUR: bType.COLOUR,
-	BlendType.LUMINOSITY: bType.LUMINOSITY,
-	BlendType.XOR: bType.XOR,
-	BlendType.NEGATION: bType.NEGATION,
-	BlendType.PINLIGHT: bType.PINLIGHT,
-	BlendType.VIVIDLIGHT: bType.VIVIDLIGHT,
-	BlendType.EXCLUSION: bType.EXCLUSION,
-	BlendType.DESTIN: bType.DESTIN,
-	BlendType.DESTOUT: bType.DESTOUT,
-	BlendType.DESTATOP: bType.DESTATOP,
-	BlendType.SRCATOP: bType.SRCATOP}
+		BlendType.NORMAL: bType.NORMAL,
+		BlendType.MULTIPLY: bType.MULTIPLY,
+		BlendType.COLOURBURN: bType.COLOURBURN,
+		BlendType.COLOURDODGE: bType.COLOURDODGE,
+		BlendType.REFLECT: bType.REFLECT,
+		BlendType.OVERLAY: bType.OVERLAY,
+		BlendType.DIFFERENCE: bType.DIFFERENCE,
+		BlendType.LIGHTEN: bType.LIGHTEN,
+		BlendType.DARKEN: bType.DARKEN,
+		BlendType.SCREEN: bType.SCREEN,
+		BlendType.SOFTLIGHT: bType.SOFTLIGHT,
+		BlendType.HARDLIGHT: bType.HARDLIGHT,
+		BlendType.GRAINEXTRACT: bType.GRAINEXTRACT,
+		BlendType.GRAINMERGE: bType.GRAINMERGE,
+		BlendType.DIVIDE: bType.DIVIDE,
+		BlendType.HUE: bType.HUE,
+		BlendType.SATURATION: bType.SATURATION,
+		BlendType.COLOUR: bType.COLOUR,
+		BlendType.LUMINOSITY: bType.LUMINOSITY,
+		BlendType.XOR: bType.XOR,
+		BlendType.NEGATION: bType.NEGATION,
+		BlendType.PINLIGHT: bType.PINLIGHT,
+		BlendType.VIVIDLIGHT: bType.VIVIDLIGHT,
+		BlendType.EXCLUSION: bType.EXCLUSION,
+		BlendType.DESTIN: bType.DESTIN,
+		BlendType.DESTOUT: bType.DESTOUT,
+		BlendType.DESTATOP: bType.DESTATOP,
+		BlendType.SRCATOP: bType.SRCATOP,
+	}
 	return bLayers(background, foreground, blendTypeMap[blendType], opacity)

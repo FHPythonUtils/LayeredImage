@@ -2,6 +2,13 @@
 All major and minor version changes will be documented in this file. Details of
 patch-level version changes can be found in [commit messages](../../commits/master).
 
+
+## 2021.2.2 - 2021/05/01
+- Updated formatting
+- Deprecated 'raster' functions and replaced with more accurate naming
+- Improved docs
+
+
 ## 2021.2.1 - 2021/03/18
 - Update Pillow >= 8.1.1 due to high severity security vulnerabilities:
   - CVE-2021-27923

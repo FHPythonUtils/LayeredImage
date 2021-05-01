@@ -20,7 +20,7 @@ Open a .gif file into a layered image.
 
 ## saveLayer_GIF
 
-[[find in source code]](../../../layeredimage/io/gif.py#L29)
+[[find in source code]](../../../layeredimage/io/gif.py#L32)
 
 ```python
 def saveLayer_GIF(fileName: str, layeredImage: LayeredImage) -> None:

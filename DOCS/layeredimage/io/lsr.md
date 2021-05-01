@@ -20,7 +20,7 @@ Open a .lsr file into a layered image.
 
 ## saveLayer_LSR
 
-[[find in source code]](../../../layeredimage/io/lsr.py#L29)
+[[find in source code]](../../../layeredimage/io/lsr.py#L35)
 
 ```python
 def saveLayer_LSR(fileName: str, layeredImage: LayeredImage) -> None:

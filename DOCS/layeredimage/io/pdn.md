@@ -20,7 +20,7 @@ Open a .pdn file into a layered image.
 
 ## saveLayer_PDN
 
-[[find in source code]](../../../layeredimage/io/pdn.py#L49)
+[[find in source code]](../../../layeredimage/io/pdn.py#L55)
 
 ```python
 def saveLayer_PDN(fileName: str, layeredImage: LayeredImage) -> None:

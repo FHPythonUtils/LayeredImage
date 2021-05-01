@@ -20,7 +20,7 @@ Open a .psd file into a layered image.
 
 ## saveLayer_PSD
 
-[[find in source code]](../../../layeredimage/io/psd.py#L72)
+[[find in source code]](../../../layeredimage/io/psd.py#L86)
 
 ```python
 def saveLayer_PSD(fileName: str, layeredImage: LayeredImage) -> None:

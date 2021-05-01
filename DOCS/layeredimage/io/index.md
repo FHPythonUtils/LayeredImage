@@ -33,7 +33,7 @@ Export the layered image to a unilayer image file.
 
 ## extNotRecognised
 
-[[find in source code]](../../../layeredimage/io/__init__.py#L23)
+[[find in source code]](../../../layeredimage/io/__init__.py#L21)
 
 ```python
 def extNotRecognised(fileName: str):
@@ -43,7 +43,7 @@ Output the file extension not recognised error.
 
 ## openLayerImage
 
-[[find in source code]](../../../layeredimage/io/__init__.py#L43)
+[[find in source code]](../../../layeredimage/io/__init__.py#L31)
 
 ```python
 def openLayerImage(file: str) -> LayeredImage:
@@ -55,13 +55,18 @@ Open a layer image file into a layer image object.
 
 - `file` *str* - path/ filename
 
+#### Raises
+
+- `FileExistsError` - If the layered image does not exist
+- `ValueError` - If the extention is not recognised
+
 #### Returns
 
 - `LayeredImage` - a layered image object
 
 ## saveLayerImage
 
-[[find in source code]](../../../layeredimage/io/__init__.py#L74)
+[[find in source code]](../../../layeredimage/io/__init__.py#L67)
 
 ```python
 def saveLayerImage(fileName: str, layeredImage: LayeredImage) -> None:
@@ -73,3 +78,11 @@ Save a layered image to a file.
 
 - `fileName` *str* - path/ filename
 - `layeredImage` *LayeredImage* - the layered image to save
+
+#### Raises
+
+- `ValueError` - If the extention is not recognised
+
+#### Returns
+
+None

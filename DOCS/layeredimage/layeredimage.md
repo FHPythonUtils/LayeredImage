@@ -27,10 +27,11 @@ LayeredImage class.
     - [flattenLayerOrGroup](#flattenlayerorgroup)
     - [rasterImageOA](#rasterimageoa)
     - [rasterImageOffset](#rasterimageoffset)
+    - [renderWAlphaOffset](#renderwalphaoffset)
 
 ## LayeredImage
 
-[[find in source code]](../../layeredimage/layeredimage.py#L12)
+[[find in source code]](../../layeredimage/layeredimage.py#L13)
 
 ```python
 class LayeredImage():
@@ -45,7 +46,7 @@ A representation of a layered image such as an ora.
 
 ### LayeredImage().\_\_repr\_\_
 
-[[find in source code]](../../layeredimage/layeredimage.py#L32)
+[[find in source code]](../../layeredimage/layeredimage.py#L44)
 
 ```python
 def __repr__():
@@ -55,7 +56,7 @@ Get the string representation.
 
 ### LayeredImage().\_\_str\_\_
 
-[[find in source code]](../../layeredimage/layeredimage.py#L36)
+[[find in source code]](../../layeredimage/layeredimage.py#L48)
 
 ```python
 def __str__():
@@ -65,7 +66,7 @@ Get the string representation.
 
 ### LayeredImage().addLayerOrGroup
 
-[[find in source code]](../../layeredimage/layeredimage.py#L52)
+[[find in source code]](../../layeredimage/layeredimage.py#L70)
 
 ```python
 def addLayerOrGroup(layerOrGroup: Layer | Group):
@@ -75,7 +76,7 @@ Add a LayerOrGroup.
 
 ### LayeredImage().addLayerRaster
 
-[[find in source code]](../../layeredimage/layeredimage.py#L65)
+[[find in source code]](../../layeredimage/layeredimage.py#L83)
 
 ```python
 def addLayerRaster(image: Image.Image, name: str):
@@ -85,7 +86,7 @@ Raster an image and add as a layer.
 
 ### LayeredImage().extractGroups
 
-[[find in source code]](../../layeredimage/layeredimage.py#L140)
+[[find in source code]](../../layeredimage/layeredimage.py#L162)
 
 ```python
 def extractGroups():
@@ -95,7 +96,7 @@ Extract the groups from the image.
 
 ### LayeredImage().extractLayers
 
-[[find in source code]](../../layeredimage/layeredimage.py#L116)
+[[find in source code]](../../layeredimage/layeredimage.py#L131)
 
 ```python
 def extractLayers():
@@ -105,7 +106,7 @@ Extract the layers from the image.
 
 ### LayeredImage().flattenLayers
 
-[[find in source code]](../../layeredimage/layeredimage.py#L105)
+[[find in source code]](../../layeredimage/layeredimage.py#L120)
 
 ```python
 def flattenLayers(ignoreHidden: bool = True):
@@ -115,7 +116,7 @@ Flatten all layers.
 
 ### LayeredImage().flattenTwoLayers
 
-[[find in source code]](../../layeredimage/layeredimage.py#L93)
+[[find in source code]](../../layeredimage/layeredimage.py#L112)
 
 ```python
 def flattenTwoLayers(
@@ -129,7 +130,7 @@ Flatten two layers.
 
 ### LayeredImage().getFlattenLayers
 
-[[find in source code]](../../layeredimage/layeredimage.py#L76)
+[[find in source code]](../../layeredimage/layeredimage.py#L94)
 
 ```python
 def getFlattenLayers(ignoreHidden: bool = True) -> Image.Image:
@@ -139,7 +140,7 @@ Return an image for all flattened layers.
 
 ### LayeredImage().getFlattenTwoLayers
 
-[[find in source code]](../../layeredimage/layeredimage.py#L80)
+[[find in source code]](../../layeredimage/layeredimage.py#L98)
 
 ```python
 def getFlattenTwoLayers(
@@ -153,7 +154,7 @@ Return an image for two flattened layers.
 
 ### LayeredImage().getLayerOrGroup
 
-[[find in source code]](../../layeredimage/layeredimage.py#L48)
+[[find in source code]](../../layeredimage/layeredimage.py#L66)
 
 ```python
 def getLayerOrGroup(index: int):
@@ -163,7 +164,7 @@ Get a LayerOrGroup.
 
 ### LayeredImage().insertLayerOrGroup
 
-[[find in source code]](../../layeredimage/layeredimage.py#L56)
+[[find in source code]](../../layeredimage/layeredimage.py#L74)
 
 ```python
 def insertLayerOrGroup(layerOrGroup: Layer | Group, index: int):
@@ -173,7 +174,7 @@ Insert a LayerOrGroup at a specific index.
 
 ### LayeredImage().insertLayerRaster
 
-[[find in source code]](../../layeredimage/layeredimage.py#L70)
+[[find in source code]](../../layeredimage/layeredimage.py#L88)
 
 ```python
 def insertLayerRaster(image: Image.Image, name: str, index: int):
@@ -183,7 +184,7 @@ Raster an image and insert the layer.
 
 ### LayeredImage().json
 
-[[find in source code]](../../layeredimage/layeredimage.py#L41)
+[[find in source code]](../../layeredimage/layeredimage.py#L60)
 
 ```python
 def json() -> dict[(str, Any)]:
@@ -193,7 +194,7 @@ Get the object as a dict.
 
 ### LayeredImage().removeLayerOrGroup
 
-[[find in source code]](../../layeredimage/layeredimage.py#L60)
+[[find in source code]](../../layeredimage/layeredimage.py#L78)
 
 ```python
 def removeLayerOrGroup(index: int):
@@ -203,7 +204,7 @@ Remove a LayerOrGroup at a specific index.
 
 ### LayeredImage().updateGroups
 
-[[find in source code]](../../layeredimage/layeredimage.py#L146)
+[[find in source code]](../../layeredimage/layeredimage.py#L170)
 
 ```python
 def updateGroups():
@@ -213,7 +214,7 @@ Update the groups from the image.
 
 ### LayeredImage().updateLayers
 
-[[find in source code]](../../layeredimage/layeredimage.py#L136)
+[[find in source code]](../../layeredimage/layeredimage.py#L158)
 
 ```python
 def updateLayers():
@@ -223,7 +224,7 @@ Update the layers from the image.
 
 ## flattenAll
 
-[[find in source code]](../../layeredimage/layeredimage.py#L206)
+[[find in source code]](../../layeredimage/layeredimage.py#L242)
 
 ```python
 def flattenAll(
@@ -249,7 +250,7 @@ to True.
 
 ## flattenLayerOrGroup
 
-[[find in source code]](../../layeredimage/layeredimage.py#L169)
+[[find in source code]](../../layeredimage/layeredimage.py#L202)
 
 ```python
 def flattenLayerOrGroup(
@@ -264,7 +265,7 @@ Flatten a layer or group on to an image of what has already been flattened.
 
 #### Arguments
 
-layerOrGroup (Layer | Group): A layer or a group of layers
+layerOrGroup (Layer, Group): A layer or a group of layers
 imageDimensions (tuple[int, int]): size of the image
 - `flattenedSoFar` *Image.Image, optional* - the image of what has already
 been flattened. Defaults to None.
@@ -277,7 +278,7 @@ to True.
 
 ## rasterImageOA
 
-[[find in source code]](../../layeredimage/layeredimage.py#L151)
+[[find in source code]](../../layeredimage/layeredimage.py#L175)
 
 ```python
 def rasterImageOA(
@@ -285,21 +286,32 @@ def rasterImageOA(
     size: tuple[(int, int)],
     alpha: float = 1.0,
     offsets: tuple[(int, int)] = (0, 0),
-):
+) -> Image.Image:
 ```
-
-Rasterise an image with offset and alpha to a given size.
 
 ## rasterImageOffset
 
-[[find in source code]](../../layeredimage/layeredimage.py#L160)
+[[find in source code]](../../layeredimage/layeredimage.py#L184)
 
 ```python
 def rasterImageOffset(
     image: Image.Image,
     size: tuple[(int, int)],
     offsets: tuple[(int, int)] = (0, 0),
-):
+) -> Image.Image:
 ```
 
-Rasterise an image with offset to a given size.
+## renderWAlphaOffset
+
+[[find in source code]](../../layeredimage/layeredimage.py#L193)
+
+```python
+def renderWAlphaOffset(
+    image: Image.Image,
+    size: tuple[(int, int)],
+    alpha: float = 1.0,
+    offsets: tuple[(int, int)] = (0, 0),
+) -> Image.Image:
+```
+
+Render an image with offset and alpha to a given size.

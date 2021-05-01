@@ -11,7 +11,7 @@ Do file io - ORA.
 
 ## addLayer_ORA
 
-[[find in source code]](../../../layeredimage/io/ora.py#L116)
+[[find in source code]](../../../layeredimage/io/ora.py#L128)
 
 ```python
 def addLayer_ORA(project, layer, blendLookup):
@@ -31,7 +31,7 @@ Open an .ora file into a layered image.
 
 ## saveLayer_ORA
 
-[[find in source code]](../../../layeredimage/io/ora.py#L73)
+[[find in source code]](../../../layeredimage/io/ora.py#L84)
 
 ```python
 def saveLayer_ORA(fileName: str, layeredImage: LayeredImage) -> None:

@@ -21,73 +21,77 @@ from .common import blendModeLookup
 def openLayer_LAYERED(file: str) -> LayeredImage:
 	"""Open a .layered file into a layered image."""
 	blendLookup = {
-	"NORMAL": BlendType.NORMAL,
-	"MULTIPLY": BlendType.MULTIPLY,
-	"ADDITIVE": BlendType.ADDITIVE,
-	"COLOURBURN": BlendType.COLOURBURN,
-	"COLOURDODGE": BlendType.COLOURDODGE,
-	"REFLECT": BlendType.REFLECT,
-	"GLOW": BlendType.GLOW,
-	"OVERLAY": BlendType.OVERLAY,
-	"DIFFERENCE": BlendType.DIFFERENCE,
-	"NEGATION": BlendType.NEGATION,
-	"LIGHTEN": BlendType.LIGHTEN,
-	"DARKEN": BlendType.DARKEN,
-	"SCREEN": BlendType.SCREEN,
-	"XOR": BlendType.XOR,
-	"SOFTLIGHT": BlendType.SOFTLIGHT,
-	"HARDLIGHT": BlendType.HARDLIGHT,
-	"GRAINEXTRACT": BlendType.GRAINEXTRACT,
-	"GRAINMERGE": BlendType.GRAINMERGE,
-	"DIVIDE": BlendType.DIVIDE,
-	"HUE": BlendType.HUE,
-	"SATURATION": BlendType.SATURATION,
-	"COLOUR": BlendType.COLOUR,
-	"LUMINOSITY": BlendType.LUMINOSITY,
-	"PINLIGHT": BlendType.PINLIGHT,
-	"VIVIDLIGHT": BlendType.VIVIDLIGHT,
-	"EXCLUSION": BlendType.EXCLUSION,
-	"DESTIN": BlendType.DESTIN,
-	"DESTOUT": BlendType.DESTOUT,
-	"DESTATOP": BlendType.DESTATOP,
-	"SRCATOP": BlendType.SRCATOP}
+		"NORMAL": BlendType.NORMAL,
+		"MULTIPLY": BlendType.MULTIPLY,
+		"ADDITIVE": BlendType.ADDITIVE,
+		"COLOURBURN": BlendType.COLOURBURN,
+		"COLOURDODGE": BlendType.COLOURDODGE,
+		"REFLECT": BlendType.REFLECT,
+		"GLOW": BlendType.GLOW,
+		"OVERLAY": BlendType.OVERLAY,
+		"DIFFERENCE": BlendType.DIFFERENCE,
+		"NEGATION": BlendType.NEGATION,
+		"LIGHTEN": BlendType.LIGHTEN,
+		"DARKEN": BlendType.DARKEN,
+		"SCREEN": BlendType.SCREEN,
+		"XOR": BlendType.XOR,
+		"SOFTLIGHT": BlendType.SOFTLIGHT,
+		"HARDLIGHT": BlendType.HARDLIGHT,
+		"GRAINEXTRACT": BlendType.GRAINEXTRACT,
+		"GRAINMERGE": BlendType.GRAINMERGE,
+		"DIVIDE": BlendType.DIVIDE,
+		"HUE": BlendType.HUE,
+		"SATURATION": BlendType.SATURATION,
+		"COLOUR": BlendType.COLOUR,
+		"LUMINOSITY": BlendType.LUMINOSITY,
+		"PINLIGHT": BlendType.PINLIGHT,
+		"VIVIDLIGHT": BlendType.VIVIDLIGHT,
+		"EXCLUSION": BlendType.EXCLUSION,
+		"DESTIN": BlendType.DESTIN,
+		"DESTOUT": BlendType.DESTOUT,
+		"DESTATOP": BlendType.DESTATOP,
+		"SRCATOP": BlendType.SRCATOP,
+	}
 	layersAndGroups = []
-	with zipfile.ZipFile(file, 'r') as layered:
+	with zipfile.ZipFile(file, "r") as layered:
 		stack = json.load(layered.open("stack.json"))
 		# Iterate through the layers and groups
 		for layerOrGroup in stack["layersAndGroups"]:
 			if layerOrGroup["type"] == "LAYER":
-				layersAndGroups.append(grabLayer_LAYERED(layered, layerOrGroup,
-				blendLookup))
+				layersAndGroups.append(grabLayer_LAYERED(layered, layerOrGroup, blendLookup))
 			else:
 				# If its a group grab the layers
 				layers = [
-				grabLayer_LAYERED(layered, layer, blendLookup)
-				for layer in layerOrGroup["layers"]]
+					grabLayer_LAYERED(layered, layer, blendLookup)
+					for layer in layerOrGroup["layers"]
+				]
 				layersAndGroups.append(
-				Group(layerOrGroup["name"],
-				layers,
-				layerOrGroup["dimensions"],
-				layerOrGroup["offsets"],
-				layerOrGroup["opacity"],
-				layerOrGroup["visible"],
-				blendModeLookup(layerOrGroup["blendmode"], blendLookup)))
+					Group(
+						layerOrGroup["name"],
+						layers,
+						layerOrGroup["dimensions"],
+						layerOrGroup["offsets"],
+						layerOrGroup["opacity"],
+						layerOrGroup["visible"],
+						blendModeLookup(layerOrGroup["blendmode"], blendLookup),
+					)
+				)
 		return LayeredImage(layersAndGroups, stack["dimensions"])
 
 
-def grabLayer_LAYERED(zipFile: ZipFile,
-layer: dict[str, Any],
-blendLookup: dict[str, Any]):
+def grabLayer_LAYERED(zipFile: ZipFile, layer: dict[str, Any], blendLookup: dict[str, Any]):
 	"""Grab an image from .layered."""
 	with zipFile.open("data/" + layer["name"] + ".png") as layerImage:
-		image = Image.open(layerImage).convert('RGBA')
-	return Layer(layer["name"],
-	image,
-	layer["dimensions"],
-	layer["offsets"],
-	layer["opacity"],
-	layer["visible"],
-	blendModeLookup(layer["blendmode"], blendLookup))
+		image = Image.open(layerImage).convert("RGBA")
+	return Layer(
+		layer["name"],
+		image,
+		layer["dimensions"],
+		layer["offsets"],
+		layer["opacity"],
+		layer["visible"],
+		blendModeLookup(layer["blendmode"], blendLookup),
+	)
 
 
 def saveLayer_LAYERED(fileName: str, layeredImage: LayeredImage) -> None:
@@ -95,23 +99,16 @@ def saveLayer_LAYERED(fileName: str, layeredImage: LayeredImage) -> None:
 	_saveLayer_LAYERED(fileName, layeredImage)
 
 
-def _saveLayer_LAYERED(fileName: str,
-layeredImage: LayeredImage,
-compressed: bool = False) -> None:
+def _saveLayer_LAYERED(fileName: str, layeredImage: LayeredImage, compressed: bool = False) -> None:
 	"""Save a layered image as .layered."""
 	with zipfile.ZipFile(
-	fileName,
-	'w',
-	compression=(zipfile.ZIP_DEFLATED
-	if compressed else zipfile.ZIP_STORED)) as layered:
+		fileName, "w", compression=(zipfile.ZIP_DEFLATED if compressed else zipfile.ZIP_STORED)
+	) as layered:
 		layered.writestr(
-		"stack.json",
-		json.dumps(layeredImage.json(), indent=(None if compressed else True)))
+			"stack.json", json.dumps(layeredImage.json(), indent=(None if compressed else True))
+		)
 		for layer in layeredImage.layers:
-			writeImage_LAYERED(layer.image,
-			layered,
-			"data/" + layer.name + ".png",
-			compressed)
+			writeImage_LAYERED(layer.image, layered, "data/" + layer.name + ".png", compressed)
 		compositeImage = layeredImage.getFlattenLayers()
 		thumbnail = compositeImage.copy()
 		thumbnail.thumbnail((256, 256))
@@ -120,16 +117,13 @@ compressed: bool = False) -> None:
 			writeImage_LAYERED(imageLookup[image], layered, image + ".png", compressed)
 
 
-def writeImage_LAYERED(image: Image.Image,
-zipFile: ZipFile,
-path: str,
-compressed: bool = False):
+def writeImage_LAYERED(image: Image.Image, zipFile: ZipFile, path: str, compressed: bool = False):
 	"""Write an image to the archive."""
 	imgByteArr = io.BytesIO()
 	imageCopy = image.copy()
-	if compressed and len(set(imageCopy.getcolors(maxcolors=256**3))) < 256:
+	if compressed and len(set(imageCopy.getcolors(maxcolors=256 ** 3))) < 256:
 		imageCopy = imageCopy.quantize(colors=256, method=2, kmeans=1)
-	imageCopy.save(imgByteArr, format='PNG', optimize=compressed)
+	imageCopy.save(imgByteArr, format="PNG", optimize=compressed)
 	imgByteArr.seek(0)
 	zipFile.writestr(path, imgByteArr.read())
 

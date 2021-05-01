@@ -7,20 +7,23 @@ from PIL import Image
 
 from .blend import BlendType
 
-#pylint: disable=too-few-public-methods
-#pylint: disable=too-many-arguments
+# pylint: disable=too-few-public-methods
+# pylint: disable=too-many-arguments
 
 
 class LayerGroup:
 	"""A representation of an image layer or group."""
-	def __init__(self,
-	name: str,
-	dimensions: tuple[int, int],
-	offsets: tuple[int, int] = (0, 0),
-	opacity: float = 1.0,
-	visible: bool = True,
-	blendmode: BlendType = BlendType.NORMAL,
-	**kwargs: Any):
+
+	def __init__(
+		self,
+		name: str,
+		dimensions: tuple[int, int],
+		offsets: tuple[int, int] = (0, 0),
+		opacity: float = 1.0,
+		visible: bool = True,
+		blendmode: BlendType = BlendType.NORMAL,
+		**kwargs: Any,
+	):
 		"""Represent an image layer or group.
 
 		Args:
@@ -50,30 +53,42 @@ class LayerGroup:
 
 	def __str__(self):
 		"""Get the string representation."""
-		return "<LayeredImage " + " \"" + self.name + "\" (" + str(
-		self.dimensions[0]) + "x" + str(self.dimensions[1]) + ")>"
+		return (
+			"<LayeredImage "
+			+ ' "'
+			+ self.name
+			+ '" ('
+			+ str(self.dimensions[0])
+			+ "x"
+			+ str(self.dimensions[1])
+			+ ")>"
+		)
 
 	def json(self) -> dict[str, Any]:
 		"""Get the object as a dict."""
 		return {
-		"name": self.name,
-		"offsets": self.offsets,
-		"opacity": self.opacity,
-		"visible": self.visible,
-		"dimensions": self.dimensions,
-		"blendmode": self.blendmode.name}
+			"name": self.name,
+			"offsets": self.offsets,
+			"opacity": self.opacity,
+			"visible": self.visible,
+			"dimensions": self.dimensions,
+			"blendmode": self.blendmode.name,
+		}
 
 
 class Layer(LayerGroup):
 	"""A representation of an image layer."""
-	def __init__(self,
-	name: str,
-	image: Image.Image,
-	dimensions: tuple[int, int],
-	offsets: tuple[int, int] = (0, 0),
-	opacity: float = 1.0,
-	visible: bool = True,
-	blendmode: BlendType = BlendType.NORMAL):
+
+	def __init__(
+		self,
+		name: str,
+		image: Image.Image,
+		dimensions: tuple[int, int],
+		offsets: tuple[int, int] = (0, 0),
+		opacity: float = 1.0,
+		visible: bool = True,
+		blendmode: BlendType = BlendType.NORMAL,
+	):
 		"""Representation of an image layer.
 
 		Args:
@@ -90,12 +105,9 @@ class Layer(LayerGroup):
 			Defaults to True.
 			blendmode (Blendtype): The blending mode to use. Defaults to BlendType.NORMAL
 		"""
-		super().__init__(name,
-		dimensions,
-		offsets=offsets,
-		opacity=opacity,
-		visible=visible,
-		blendmode=blendmode)
+		super().__init__(
+			name, dimensions, offsets=offsets, opacity=opacity, visible=visible, blendmode=blendmode
+		)
 		self.image = image
 
 		# If the user does not specify the dimensions use image.size
@@ -106,25 +118,29 @@ class Layer(LayerGroup):
 	def json(self) -> dict[str, Any]:
 		"""Get the object as a dict."""
 		return {
-		"name": self.name,
-		"offsets": self.offsets,
-		"opacity": self.opacity,
-		"visible": self.visible,
-		"dimensions": self.dimensions,
-		"type": "LAYER",
-		"blendmode": self.blendmode.name}
+			"name": self.name,
+			"offsets": self.offsets,
+			"opacity": self.opacity,
+			"visible": self.visible,
+			"dimensions": self.dimensions,
+			"type": "LAYER",
+			"blendmode": self.blendmode.name,
+		}
 
 
 class Group(LayerGroup):
 	"""A representation of an image group."""
-	def __init__(self,
-	name: str,
-	layers: list[Layer],
-	dimensions: tuple[int, int] | None = None,
-	offsets: tuple[int, int] = (0, 0),
-	opacity: float = 1.0,
-	visible: bool = True,
-	blendmode: BlendType = BlendType.NORMAL):
+
+	def __init__(
+		self,
+		name: str,
+		layers: list[Layer],
+		dimensions: tuple[int, int] | None = None,
+		offsets: tuple[int, int] = (0, 0),
+		opacity: float = 1.0,
+		visible: bool = True,
+		blendmode: BlendType = BlendType.NORMAL,
+	):
 		"""Representation of an image group.
 
 		Args:
@@ -143,11 +159,9 @@ class Group(LayerGroup):
 			blendmode (Blendtype): The blending mode to use. Defaults to BlendType.NORMAL
 		"""
 		# Initialise dimens to 0 and then calculate as below
-		super().__init__(name, (0, 0),
-		offsets=offsets,
-		opacity=opacity,
-		visible=visible,
-		blendmode=blendmode)
+		super().__init__(
+			name, (0, 0), offsets=offsets, opacity=opacity, visible=visible, blendmode=blendmode
+		)
 		self.layers = layers
 
 		# If the user does not specify the dimensions use the largest x and y of
@@ -156,18 +170,21 @@ class Group(LayerGroup):
 			self.dimensions = dimensions
 		else:
 			layerDimens = [layer.dimensions for layer in layers]
-			self.dimensions = (max([dimensions[0] for dimensions in layerDimens]),
-			max([dimensions[1] for dimensions in layerDimens]))
+			self.dimensions = (
+				max([dimensions[0] for dimensions in layerDimens]),
+				max([dimensions[1] for dimensions in layerDimens]),
+			)
 
 	def json(self) -> dict[str, Any]:
 		"""Get the object as a dict."""
 		layers = [layer.json() for layer in self.layers]
 		return {
-		"name": self.name,
-		"offsets": self.offsets,
-		"opacity": self.opacity,
-		"visible": self.visible,
-		"dimensions": self.dimensions,
-		"type": "GROUP",
-		"blendmode": self.blendmode.name,
-		"layers": layers}
+			"name": self.name,
+			"offsets": self.offsets,
+			"opacity": self.opacity,
+			"visible": self.visible,
+			"dimensions": self.dimensions,
+			"type": "GROUP",
+			"blendmode": self.blendmode.name,
+			"layers": layers,
+		}

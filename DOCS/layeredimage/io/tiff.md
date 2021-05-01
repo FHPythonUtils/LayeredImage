@@ -20,7 +20,7 @@ Open a .tiff or a .tif file into a layered image.
 
 ## saveLayer_TIFF
 
-[[find in source code]](../../../layeredimage/io/tiff.py#L47)
+[[find in source code]](../../../layeredimage/io/tiff.py#L53)
 
 ```python
 def saveLayer_TIFF(fileName: str, layeredImage: LayeredImage) -> None:

@@ -16,7 +16,7 @@ Base class.
 
 ## Group
 
-[[find in source code]](../../layeredimage/layergroup.py#L118)
+[[find in source code]](../../layeredimage/layergroup.py#L131)
 
 ```python
 class Group(LayerGroup):
@@ -39,7 +39,7 @@ A representation of an image group.
 
 ### Group().json
 
-[[find in source code]](../../layeredimage/layergroup.py#L162)
+[[find in source code]](../../layeredimage/layergroup.py#L178)
 
 ```python
 def json() -> dict[(str, Any)]:
@@ -49,7 +49,7 @@ Get the object as a dict.
 
 ## Layer
 
-[[find in source code]](../../layeredimage/layergroup.py#L67)
+[[find in source code]](../../layeredimage/layergroup.py#L79)
 
 ```python
 class Layer(LayerGroup):
@@ -72,7 +72,7 @@ A representation of an image layer.
 
 ### Layer().json
 
-[[find in source code]](../../layeredimage/layergroup.py#L106)
+[[find in source code]](../../layeredimage/layergroup.py#L118)
 
 ```python
 def json() -> dict[(str, Any)]:
@@ -101,7 +101,7 @@ A representation of an image layer or group.
 
 ### LayerGroup().\_\_repr\_\_
 
-[[find in source code]](../../layeredimage/layergroup.py#L47)
+[[find in source code]](../../layeredimage/layergroup.py#L50)
 
 ```python
 def __repr__():
@@ -111,7 +111,7 @@ Get the string representation.
 
 ### LayerGroup().\_\_str\_\_
 
-[[find in source code]](../../layeredimage/layergroup.py#L51)
+[[find in source code]](../../layeredimage/layergroup.py#L54)
 
 ```python
 def __str__():
@@ -121,7 +121,7 @@ Get the string representation.
 
 ### LayerGroup().json
 
-[[find in source code]](../../layeredimage/layergroup.py#L56)
+[[find in source code]](../../layeredimage/layergroup.py#L67)
 
 ```python
 def json() -> dict[(str, Any)]:

@@ -20,7 +20,7 @@ Open a .webp file into a layered image.
 
 ## saveLayer_WEBP
 
-[[find in source code]](../../../layeredimage/io/webp.py#L27)
+[[find in source code]](../../../layeredimage/io/webp.py#L26)
 
 ```python
 def saveLayer_WEBP(fileName: str, layeredImage: LayeredImage):

@@ -5,7 +5,7 @@ from PIL import Image
 
 from ..layeredimage import LayeredImage
 from ..layergroup import Layer
-from .common import getRasterLayers
+from .common import expandLayersToCanvas
 
 # pylint: disable=invalid-name
 
@@ -18,13 +18,12 @@ def openLayer_WEBP(file: str) -> LayeredImage:
 	layers = []
 	for index in range(project.n_frames):
 		project.seek(index)
-		layers.append(
-		Layer("Frame {}".format(len(layers) + 1), project.copy(), projectSize))
+		layers.append(Layer("Frame {}".format(len(layers) + 1), project.copy(), projectSize))
 	project.close()
 	return LayeredImage(layers, projectSize)
 
 
 def saveLayer_WEBP(fileName: str, layeredImage: LayeredImage):
 	"""Save a layered image as .webp."""
-	layers = getRasterLayers(layeredImage, "WEBP")
+	layers = expandLayersToCanvas(layeredImage, "WEBP")
 	layers[0].save(fileName, duration=200, save_all=True, append_images=layers[1:])

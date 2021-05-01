@@ -20,7 +20,7 @@ Open an .xcf file into a layered image.
 
 ## saveLayer_XCF
 
-[[find in source code]](../../../layeredimage/io/xcf.py#L120)
+[[find in source code]](../../../layeredimage/io/xcf.py#L136)
 
 ```python
 def saveLayer_XCF(fileName: str, layeredImage: LayeredImage) -> None:
