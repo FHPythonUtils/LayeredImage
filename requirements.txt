@@ -1,9 +1,8 @@
-Pillow<10,>=8.1.2
-blendmodes<2022,>=2020.3.0
-defusedxml<2,>=0.6.0
-gimpformats<2022,>=2020.3.0
+Pillow<9,>=8.2.0
+blendmodes<2023,>=2021.1
+gimpformats<2023,>=2021.0.1
 metprint<2022,>=2020.7.1
-psdtoolsx<21,>=19.5.0
-pylsr<2022,>=2020.1.0
-pyora<2,>=0.3.10
-pypdn<3,>=1.0.6
+psdtoolsx<20,>=19.5.0
+pylsr<2023,>=2021
+pyora<2,>=0.3.11
+pypdn<2,>=1.0.6

@@ -1,9 +1,10 @@
 """LayeredImage class."""
 from __future__ import annotations
 
-import warnings
 from typing import Any
 
+from blendmodes.imagetools import (rasterImageOA, rasterImageOffset,
+                                   renderWAlphaOffset)
 from PIL import Image
 
 from .blend import blendLayers
@@ -81,12 +82,18 @@ class LayeredImage:
 
 	# The user may wish to add an image directly
 	def addLayerRaster(self, image: Image.Image, name: str):
-		"""Raster an image and add as a layer."""
+		return self.addImageAsLayer(image, name)
+
+	def addImageAsLayer(self, image: Image.Image, name: str):
+		"""Resize an image to the canvas and add as a layer."""
 		layer = renderWAlphaOffset(image, self.dimensions)
 		self.addLayerOrGroup(Layer(name, layer, self.dimensions))
 
 	def insertLayerRaster(self, image: Image.Image, name: str, index: int):
-		"""Raster an image and insert the layer."""
+		return self.insertImageAsLayer(image, name, index)
+
+	def insertImageAsLayer(self, image: Image.Image, name: str, index: int):
+		"""Resize an image to the canvas  and insert the layer."""
 		layer = renderWAlphaOffset(image, self.dimensions)
 		self.insertLayerOrGroup(Layer(name, layer, self.dimensions), index)
 
@@ -136,7 +143,7 @@ class LayeredImage:
 				layers.append(layerOrGroup)
 			else:
 				for layer in layerOrGroup.layers:
-					# 'Raster' the layer
+					# Render the layer
 					layers.append(
 						Layer(
 							layer.name,
@@ -172,33 +179,6 @@ class LayeredImage:
 		self.groups = self.extractGroups()
 
 
-def rasterImageOA(  # pylint:disable=missing-function-docstring
-	image: Image.Image, size: tuple[int, int], alpha: float = 1.0, offsets: tuple[int, int] = (0, 0)
-) -> Image.Image:
-	warnings.warn(
-		"Call to deprecated function rasterImageOA.", category=DeprecationWarning, stacklevel=2
-	)
-	return renderWAlphaOffset(image, size, alpha, offsets)
-
-
-def rasterImageOffset(  # pylint:disable=missing-function-docstring
-	image: Image.Image, size: tuple[int, int], offsets: tuple[int, int] = (0, 0)
-) -> Image.Image:
-	warnings.warn(
-		"Call to deprecated function rasterImageOffset.", category=DeprecationWarning, stacklevel=2
-	)
-	return renderWAlphaOffset(image, size, 1, offsets)
-
-
-def renderWAlphaOffset(
-	image: Image.Image, size: tuple[int, int], alpha: float = 1.0, offsets: tuple[int, int] = (0, 0)
-) -> Image.Image:
-	"""Render an image with offset and alpha to a given size."""
-	imageOffset = Image.new("RGBA", size)
-	imageOffset.paste(image.convert("RGBA"), offsets, image.convert("RGBA"))
-	return Image.blend(Image.new("RGBA", size), imageOffset, alpha)
-
-
 def flattenLayerOrGroup(
 	layerOrGroup: Layer | Group,
 	imageDimensions: tuple[int, int],
@@ -219,23 +199,23 @@ def flattenLayerOrGroup(
 		Image.Image: Flattened image
 	"""
 	if ignoreHidden and not layerOrGroup.visible:
-		foregroundRaster = Image.new("RGBA", imageDimensions)
+		foregroundRender = Image.new("RGBA", imageDimensions)
 	elif isinstance(layerOrGroup, Group):
-		foregroundRaster = renderWAlphaOffset(
+		foregroundRender = renderWAlphaOffset(
 			flattenAll(layerOrGroup.layers, imageDimensions, ignoreHidden),
 			imageDimensions,
 			1,
 			layerOrGroup.offsets,
 		)
 	else:
-		# Get a raster image and apply blending
-		foregroundRaster = renderWAlphaOffset(
+		# Get a rendered image and apply blending
+		foregroundRender = renderWAlphaOffset(
 			layerOrGroup.image, imageDimensions, 1, layerOrGroup.offsets
 		)
 	if flattenedSoFar is None:
-		return foregroundRaster
+		return foregroundRender
 	return blendLayers(
-		flattenedSoFar, foregroundRaster, layerOrGroup.blendmode, layerOrGroup.opacity
+		flattenedSoFar, foregroundRender, layerOrGroup.blendmode, layerOrGroup.opacity
 	)
 
 

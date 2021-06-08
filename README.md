@@ -125,7 +125,7 @@ Layers are extracted from groups and saved to TIFF/ GIF or WEBP
 |Blend Mode|:heavy_check_mark:|:x:|:x:|:x:|:x:|:x:|:x:|:x:|
 
 ```none
-Layers are rasterized before being written to TIFF/ GIF or WEBP
+Layers are rendered with offsets before being written to TIFF/ GIF or WEBP
 First child layers are placed in a group when written to LSR
 ```
 
