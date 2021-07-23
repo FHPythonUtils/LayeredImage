@@ -5,6 +5,7 @@ from typing import Any
 
 from blendmodes.imagetools import (rasterImageOA, rasterImageOffset,
                                    renderWAlphaOffset)
+from deprecated import deprecated
 from PIL import Image
 
 from .blend import blendLayers
@@ -81,7 +82,10 @@ class LayeredImage:
 		self.layersAndGroups.pop(index)
 
 	# The user may wish to add an image directly
-	def addLayerRaster(self, image: Image.Image, name: str):
+	@deprecated("use addImageAsLayer", version="2021.2.4")
+	def addLayerRaster(
+		self, image: Image.Image, name: str
+	):  # pylint:disable=missing-function-docstring
 		return self.addImageAsLayer(image, name)
 
 	def addImageAsLayer(self, image: Image.Image, name: str):
@@ -89,7 +93,10 @@ class LayeredImage:
 		layer = renderWAlphaOffset(image, self.dimensions)
 		self.addLayerOrGroup(Layer(name, layer, self.dimensions))
 
-	def insertLayerRaster(self, image: Image.Image, name: str, index: int):
+	@deprecated("use insertImageAsLayer", version="2021.2.4")
+	def insertLayerRaster(
+		self, image: Image.Image, name: str, index: int
+	):  # pylint:disable=missing-function-docstring
 		return self.insertImageAsLayer(image, name, index)
 
 	def insertImageAsLayer(self, image: Image.Image, name: str, index: int):
