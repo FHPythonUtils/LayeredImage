@@ -1,5 +1,5 @@
 Deprecated<2,>=1.2.12
-Pillow<9,>=8.2.0
+Pillow<9,>=8.3.2
 blendmodes<2023,>=2021.1
 gimpformats<2023,>=2021.0.1
 metprint<2022,>=2020.7.1
