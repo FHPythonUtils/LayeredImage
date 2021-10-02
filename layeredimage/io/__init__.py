@@ -7,8 +7,12 @@ from metprint import FHFormatter, Logger, LogType
 
 from ..layeredimage import LayeredImage
 from .gif import openLayer_GIF, saveLayer_GIF
-from .layered import (openLayer_LAYERED, openLayer_LAYEREDC, saveLayer_LAYERED,
-                      saveLayer_LAYEREDC)
+from .layered import (
+	openLayer_LAYERED,
+	openLayer_LAYEREDC,
+	saveLayer_LAYERED,
+	saveLayer_LAYEREDC,
+)
 from .lsr import openLayer_LSR, saveLayer_LSR
 from .ora import openLayer_ORA, saveLayer_ORA
 from .pdn import openLayer_PDN, saveLayer_PDN

@@ -16,7 +16,8 @@ from .common import blendModeLookup
 #### PDN ####
 def openLayer_PDN(file: str) -> LayeredImage:
 	"""Open a .pdn file into a layered image."""
-	from pypdn.reader import BlendType as PDNBlend, read
+	from pypdn.reader import BlendType as PDNBlend
+	from pypdn.reader import read
 
 	blendLookup = {
 		PDNBlend.Normal: BlendType.NORMAL,

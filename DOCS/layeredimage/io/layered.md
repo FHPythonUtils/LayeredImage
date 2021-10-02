@@ -14,7 +14,7 @@ Do file io - LAYERED(C).
 
 ## grabLayer_LAYERED
 
-[[find in source code]](../../../layeredimage/io/layered.py#L82)
+[[find in source code]](../../../layeredimage/io/layered.py#L83)
 
 ```python
 def grabLayer_LAYERED(
@@ -38,7 +38,7 @@ Open a .layered file into a layered image.
 
 ## openLayer_LAYEREDC
 
-[[find in source code]](../../../layeredimage/io/layered.py#L132)
+[[find in source code]](../../../layeredimage/io/layered.py#L133)
 
 ```python
 def openLayer_LAYEREDC(file: str) -> LayeredImage:
@@ -48,7 +48,7 @@ Open a .layeredc file into a layered image.
 
 ## saveLayer_LAYERED
 
-[[find in source code]](../../../layeredimage/io/layered.py#L97)
+[[find in source code]](../../../layeredimage/io/layered.py#L98)
 
 ```python
 def saveLayer_LAYERED(fileName: str, layeredImage: LayeredImage) -> None:
@@ -58,7 +58,7 @@ Save a layered image as .layered.
 
 ## saveLayer_LAYEREDC
 
-[[find in source code]](../../../layeredimage/io/layered.py#L137)
+[[find in source code]](../../../layeredimage/io/layered.py#L138)
 
 ```python
 def saveLayer_LAYEREDC(fileName: str, layeredImage: LayeredImage) -> None:
@@ -68,7 +68,7 @@ Save a layeredc image as .layered.
 
 ## writeImage_LAYERED
 
-[[find in source code]](../../../layeredimage/io/layered.py#L120)
+[[find in source code]](../../../layeredimage/io/layered.py#L121)
 
 ```python
 def writeImage_LAYERED(

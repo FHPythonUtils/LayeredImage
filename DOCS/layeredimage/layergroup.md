@@ -16,7 +16,7 @@ Base class.
 
 ## Group
 
-[[find in source code]](../../layeredimage/layergroup.py#L131)
+[[find in source code]](../../layeredimage/layergroup.py#L129)
 
 ```python
 class Group(LayerGroup):
@@ -39,7 +39,7 @@ A representation of an image group.
 
 ### Group().json
 
-[[find in source code]](../../layeredimage/layergroup.py#L178)
+[[find in source code]](../../layeredimage/layergroup.py#L175)
 
 ```python
 def json() -> dict[(str, Any)]:
@@ -72,7 +72,7 @@ A representation of an image layer.
 
 ### Layer().json
 
-[[find in source code]](../../layeredimage/layergroup.py#L118)
+[[find in source code]](../../layeredimage/layergroup.py#L116)
 
 ```python
 def json() -> dict[(str, Any)]:

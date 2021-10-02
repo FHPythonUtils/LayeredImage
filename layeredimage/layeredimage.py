@@ -3,9 +3,9 @@ from __future__ import annotations
 
 from typing import Any
 
-from blendmodes.imagetools import (rasterImageOA, rasterImageOffset,
-                                   renderWAlphaOffset)
-from deprecated import deprecated
+# pylint: disable=unused-import
+from blendmodes.imagetools import rasterImageOA, rasterImageOffset, renderWAlphaOffset
+from deprecation import deprecated
 from PIL import Image
 
 from .blend import blendLayers
@@ -34,12 +34,12 @@ class LayeredImage:
 		self.layers = self.extractLayers()
 		# If the user does not specify the dimensions use the largest x and y of
 		# the layers and groups
-		self.dimensions = dimensions if dimensions is not None else (0, 0)
+		self.dimensions = dimensions or (0, 0)
 		if dimensions is None:
 			layerDimens = [layerOrGroup.dimensions for layerOrGroup in layersAndGroups]
 			self.dimensions = (
-				max([dimensions[0] for dimensions in layerDimens]),
-				max([dimensions[1] for dimensions in layerDimens]),
+				max([layerDimen[0] for layerDimen in layerDimens]),
+				max([layerDimen[1] for layerDimen in layerDimens]),
 			)
 		self.extras = kwargs
 
@@ -82,7 +82,7 @@ class LayeredImage:
 		self.layersAndGroups.pop(index)
 
 	# The user may wish to add an image directly
-	@deprecated("use addImageAsLayer", version="2021.2.4")
+	@deprecated(details="use addImageAsLayer", deprecated_in="2021.2.4")
 	def addLayerRaster(
 		self, image: Image.Image, name: str
 	):  # pylint:disable=missing-function-docstring
@@ -93,7 +93,7 @@ class LayeredImage:
 		layer = renderWAlphaOffset(image, self.dimensions)
 		self.addLayerOrGroup(Layer(name, layer, self.dimensions))
 
-	@deprecated("use insertImageAsLayer", version="2021.2.4")
+	@deprecated(details="use insertImageAsLayer", deprecated_in="2021.2.4")
 	def insertLayerRaster(
 		self, image: Image.Image, name: str, index: int
 	):  # pylint:disable=missing-function-docstring

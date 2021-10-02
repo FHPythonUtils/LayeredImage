@@ -1,9 +1,9 @@
-Deprecated<2,>=1.2.12
 Pillow<9,>=8.3.2
-blendmodes<2023,>=2021.1
-gimpformats<2023,>=2021.0.1
+blendmodes<2023,>=2021.3
+deprecation<3,>=2.1.0
+gimpformats<2023,>=2021.1.1
 metprint<2022,>=2020.7.1
 psdtoolsx<20,>=19.5.0
-pylsr<2023,>=2021
+pylsr<2023,>=2021.0.1
 pyora<2,>=0.3.11
 pypdn<2,>=1.0.6

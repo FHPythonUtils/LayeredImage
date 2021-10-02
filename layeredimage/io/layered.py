@@ -54,7 +54,8 @@ def openLayer_LAYERED(file: str) -> LayeredImage:
 	}
 	layersAndGroups = []
 	with zipfile.ZipFile(file, "r") as layered:
-		stack = json.load(layered.open("stack.json"))
+		with layered.open("stack.json") as stackJson:
+			stack = json.load(stackJson)
 		# Iterate through the layers and groups
 		for layerOrGroup in stack["layersAndGroups"]:
 			if layerOrGroup["type"] == "LAYER":

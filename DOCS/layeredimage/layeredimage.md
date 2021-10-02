@@ -88,7 +88,7 @@ Add a LayerOrGroup.
 [[find in source code]](../../layeredimage/layeredimage.py#L85)
 
 ```python
-@deprecated('use addImageAsLayer', version='2021.2.4')
+@deprecated(details='use addImageAsLayer', deprecated_in='2021.2.4')
 def addLayerRaster(image: Image.Image, name: str):
 ```
 
@@ -195,7 +195,7 @@ Insert a LayerOrGroup at a specific index.
 [[find in source code]](../../layeredimage/layeredimage.py#L96)
 
 ```python
-@deprecated('use insertImageAsLayer', version='2021.2.4')
+@deprecated(details='use insertImageAsLayer', deprecated_in='2021.2.4')
 def insertLayerRaster(image: Image.Image, name: str, index: int):
 ```
 

@@ -1,14 +1,17 @@
 """Test module """
 
-import sys
 import os
+import sys
 from pathlib import Path
+
+from imgcompare import is_equal
+
 THISDIR = str(Path(__file__).resolve().parent)
 sys.path.insert(0, os.path.dirname(THISDIR))
-from imgcompare import is_equal
+
 import layeredimage.io
 
-#pylint: disable=missing-function-docstring
+# pylint: disable=missing-function-docstring
 
 # ORA
 def test_ora():
@@ -20,7 +23,8 @@ def test_ora():
 	layeredimage.io.saveLayerImage(THISDIR + "/base24(ora).layered", ora)
 	layeredimage.io.saveLayerImage(THISDIR + "/base24(ora).layeredc", ora)
 	ora.getFlattenLayers().save(THISDIR + "/base24(ora).png")
-	assert(is_equal(THISDIR + "/base24(ora).png", THISDIR + "/expected.png", tolerance=1))
+	assert is_equal(THISDIR + "/base24(ora).png", THISDIR + "/expected.png", tolerance=1)
+
 
 # PSD
 def test_psd():
@@ -30,7 +34,8 @@ def test_psd():
 	layeredimage.io.saveLayerImage(THISDIR + "/base24(psd).webp", psd)
 	layeredimage.io.saveLayerImage(THISDIR + "/base24(psd).gif", psd)
 	psd.getFlattenLayers().save(THISDIR + "/base24(psd).png")
-	assert(is_equal(THISDIR + "/base24(psd).png", THISDIR + "/expected.png", tolerance=1))
+	assert is_equal(THISDIR + "/base24(psd).png", THISDIR + "/expected.png", tolerance=1)
+
 
 # PDN
 def test_pdn():
@@ -40,7 +45,8 @@ def test_pdn():
 	layeredimage.io.saveLayerImage(THISDIR + "/base24(pdn).webp", pdn)
 	layeredimage.io.saveLayerImage(THISDIR + "/base24(pdn).gif", pdn)
 	pdn.getFlattenLayers().save(THISDIR + "/base24(pdn).png")
-	assert(is_equal(THISDIR + "/base24(pdn).png", THISDIR + "/expected.png", tolerance=1))
+	assert is_equal(THISDIR + "/base24(pdn).png", THISDIR + "/expected.png", tolerance=1)
+
 
 # XCF
 def test_xcf():
@@ -50,7 +56,8 @@ def test_xcf():
 	layeredimage.io.saveLayerImage(THISDIR + "/base24(xcf).webp", xcf)
 	layeredimage.io.saveLayerImage(THISDIR + "/base24(xcf).gif", xcf)
 	xcf.getFlattenLayers().save(THISDIR + "/base24(xcf).png")
-	assert(is_equal(THISDIR + "/base24(xcf).png", THISDIR + "/expected.png", tolerance=1))
+	assert is_equal(THISDIR + "/base24(xcf).png", THISDIR + "/expected.png", tolerance=1)
+
 
 # TIFF
 def test_tiff():
@@ -60,7 +67,8 @@ def test_tiff():
 	layeredimage.io.saveLayerImage(THISDIR + "/base24(tiff).webp", tiff)
 	layeredimage.io.saveLayerImage(THISDIR + "/base24(tiff).gif", tiff)
 	tiff.getFlattenLayers().save(THISDIR + "/base24(tiff).png")
-	assert(is_equal(THISDIR + "/base24(tiff).png", THISDIR + "/expectedNoHidden.png", tolerance=1))
+	assert is_equal(THISDIR + "/base24(tiff).png", THISDIR + "/expectedNoHidden.png", tolerance=1)
+
 
 # WEBP
 def test_webp():
@@ -70,7 +78,8 @@ def test_webp():
 	layeredimage.io.saveLayerImage(THISDIR + "/base24(webp).webp", webp)
 	layeredimage.io.saveLayerImage(THISDIR + "/base24(webp).gif", webp)
 	webp.getFlattenLayers().save(THISDIR + "/base24(webp).png")
-	assert(is_equal(THISDIR + "/base24(webp).png", THISDIR + "/expectedNoHidden.png", tolerance=1))
+	assert is_equal(THISDIR + "/base24(webp).png", THISDIR + "/expectedNoHidden.png", tolerance=1)
+
 
 # GIF
 def test_gif():
@@ -80,7 +89,8 @@ def test_gif():
 	layeredimage.io.saveLayerImage(THISDIR + "/base24(gif).webp", gif)
 	layeredimage.io.saveLayerImage(THISDIR + "/base24(gif).gif", gif)
 	gif.getFlattenLayers().save(THISDIR + "/base24(gif).png")
-	assert(is_equal(THISDIR + "/base24(gif).png", THISDIR + "/expectedNoHidden.png", tolerance=1))
+	assert is_equal(THISDIR + "/base24(gif).png", THISDIR + "/expectedNoHidden.png", tolerance=1)
+
 
 # LSR
 def test_lsr():
@@ -90,7 +100,8 @@ def test_lsr():
 	layeredimage.io.saveLayerImage(THISDIR + "/base24(lsr).webp", lsr)
 	layeredimage.io.saveLayerImage(THISDIR + "/base24(lsr).lsr", lsr)
 	lsr.getFlattenLayers().save(THISDIR + "/base24(lsr).png")
-	assert(is_equal(THISDIR + "/base24(lsr).png", THISDIR + "/expectedNoHidden.png", tolerance=1))
+	assert is_equal(THISDIR + "/base24(lsr).png", THISDIR + "/expectedNoHidden.png", tolerance=1)
+
 
 # LAYERED
 def test_layered():
@@ -100,7 +111,8 @@ def test_layered():
 	layeredimage.io.saveLayerImage(THISDIR + "/base24(layered).webp", layered)
 	layeredimage.io.saveLayerImage(THISDIR + "/base24(layered).gif", layered)
 	layered.getFlattenLayers().save(THISDIR + "/base24(layered).png")
-	assert(is_equal(THISDIR + "/base24(layered).png", THISDIR + "/expected.png", tolerance=1))
+	assert is_equal(THISDIR + "/base24(layered).png", THISDIR + "/expected.png", tolerance=1)
+
 
 # LAYEREDC
 def test_layeredc():
@@ -110,7 +122,7 @@ def test_layeredc():
 	layeredimage.io.saveLayerImage(THISDIR + "/base24(layeredc).webp", layeredc)
 	layeredimage.io.saveLayerImage(THISDIR + "/base24(layeredc).gif", layeredc)
 	layeredc.getFlattenLayers().save(THISDIR + "/base24(layeredc).png")
-	assert(is_equal(THISDIR + "/base24(layeredc).png", THISDIR + "/expected.png", tolerance=1))
+	assert is_equal(THISDIR + "/base24(layeredc).png", THISDIR + "/expected.png", tolerance=1)
 
 
 if __name__ == "__main__":

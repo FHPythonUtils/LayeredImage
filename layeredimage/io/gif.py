@@ -16,11 +16,11 @@ def openLayer_GIF(file: str) -> LayeredImage:
 	project = Image.open(file)
 	projectSize = project.size
 	layers = []
-	for index in range(project.n_frames):
+	for index in range(project.n_frames):  # type:ignore
 		project.seek(index)
 		layers.append(
 			Layer(
-				"Frame {} ({}ms)".format(len(layers) + 1, project.info["duration"]),
+				f"Frame {len(layers) + 1} ({project.info['duration']}ms)",
 				project.copy(),
 				projectSize,
 			)

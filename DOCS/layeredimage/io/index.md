@@ -23,7 +23,7 @@ Do file io.
 
 ## exportFlatImage
 
-[[find in source code]](../../../layeredimage/io/__init__.py#L100)
+[[find in source code]](../../../layeredimage/io/__init__.py#L104)
 
 ```python
 def exportFlatImage(fileName: str, layeredImage: LayeredImage) -> None:
@@ -33,7 +33,7 @@ Export the layered image to a unilayer image file.
 
 ## extNotRecognised
 
-[[find in source code]](../../../layeredimage/io/__init__.py#L21)
+[[find in source code]](../../../layeredimage/io/__init__.py#L25)
 
 ```python
 def extNotRecognised(fileName: str):
@@ -43,7 +43,7 @@ Output the file extension not recognised error.
 
 ## openLayerImage
 
-[[find in source code]](../../../layeredimage/io/__init__.py#L31)
+[[find in source code]](../../../layeredimage/io/__init__.py#L35)
 
 ```python
 def openLayerImage(file: str) -> LayeredImage:
@@ -66,7 +66,7 @@ Open a layer image file into a layer image object.
 
 ## saveLayerImage
 
-[[find in source code]](../../../layeredimage/io/__init__.py#L67)
+[[find in source code]](../../../layeredimage/io/__init__.py#L71)
 
 ```python
 def saveLayerImage(fileName: str, layeredImage: LayeredImage) -> None:

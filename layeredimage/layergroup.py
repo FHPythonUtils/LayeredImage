@@ -111,9 +111,7 @@ class Layer(LayerGroup):
 		self.image = image
 
 		# If the user does not specify the dimensions use image.size
-		self.dimensions = dimensions
-		if dimensions is None:
-			self.dimensions = image.size
+		self.dimensions = dimensions or image.size
 
 	def json(self) -> dict[str, Any]:
 		"""Get the object as a dict."""
@@ -166,9 +164,8 @@ class Group(LayerGroup):
 
 		# If the user does not specify the dimensions use the largest x and y of
 		# the layers
-		if dimensions is not None:
-			self.dimensions = dimensions
-		else:
+		self.dimensions = dimensions or (0, 0)
+		if dimensions is None:
 			layerDimens = [layer.dimensions for layer in layers]
 			self.dimensions = (
 				max([dimensions[0] for dimensions in layerDimens]),

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "layeredimage"
-version = "2021.2.6"
+version = "2021.2.7"
 description = "Use this module to read, and write to a number of layered image formats"
 authors = ["FredHappyface"]
 classifiers = [
@@ -27,15 +27,15 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.7"
-blendmodes = "<2023,>=2021.1"
+blendmodes = "<2023,>=2021.3"
 metprint = "<2022,>=2020.7.1"
 Pillow = "<9,>=8.3.2"
-pylsr = "<2023,>=2021"
+pylsr = "<2023,>=2021.0.1"
 pyora = "<2,>=0.3.11"
-gimpformats = "<2023,>=2021.0.1"
+gimpformats = "<2023,>=2021.1.1"
 psdtoolsx = "<20,>=19.5.0"
 pypdn = "<2,>=1.0.6"
-Deprecated = "<2,>=1.2.12"
+deprecation = "<3,>=2.1.0"
 
 [tool.poetry.dev-dependencies]
 imgcompare = "^2.0.1"
@@ -44,33 +44,35 @@ imgcompare = "^2.0.1"
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
-# Pylint
 [tool.pylint.basic]
-argument-naming-style ="camelCase"
-attr-naming-style ="camelCase"
-function-naming-style ="camelCase"
-method-naming-style ="camelCase"
-variable-naming-style ="camelCase"
+argument-naming-style = "camelCase"
+attr-naming-style = "camelCase"
+function-naming-style = "camelCase"
+method-naming-style = "camelCase"
+variable-naming-style = "camelCase"
 
 [tool.pylint.format]
-indent-string ="\t"
+indent-string = "\t"
 
 [tool.pylint.master]
-ignore-patterns ="test_.*?py"
+ignore-patterns = "test_.*?py"
 
 [tool.pylint.messages_control]
-enable = [
-	'F',  # Fatal
-	'E',  # Error
-	'W',  # Warning
-	'R',  # Refactor
-	'C',  # Convention
-]
-disable=[
+enable = ['F', 'E', 'W', 'R', 'C']
+disable = [
 	"pointless-string-statement",
 	"superfluous-parens",
 	"bad-continuation",
-	"wrong-import-position",
-	"unsubscriptable-object",
 	"python3",
 ]
+
+[tool.black]
+line-length = 100
+target-version = ["py37"]
+
+[tool.isort]
+profile = "black"
+
+[tool.pydocstyle]
+convention = "google"
+ignore = "D205,D415"

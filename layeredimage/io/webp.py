@@ -16,9 +16,9 @@ def openLayer_WEBP(file: str) -> LayeredImage:
 	project = Image.open(file)
 	projectSize = project.size
 	layers = []
-	for index in range(project.n_frames):
+	for index in range(project.n_frames):  # type:ignore
 		project.seek(index)
-		layers.append(Layer("Frame {}".format(len(layers) + 1), project.copy(), projectSize))
+		layers.append(Layer(f"Frame {len(layers) + 1}", project.copy(), projectSize))
 	project.close()
 	return LayeredImage(layers, projectSize)
 

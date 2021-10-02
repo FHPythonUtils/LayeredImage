@@ -18,12 +18,10 @@ Use this module to read, and write to a number of layered image formats
 - [Compatibility](#compatibility)
 	- [Overview](#overview)
 		- [Key](#key)
-	- [Reading](#reading)
-		- [Group](#group)
-		- [Layer](#layer)
-	- [Writing](#writing)
-		- [Group](#group-1)
-		- [Layer](#layer-1)
+		- [Reading - Group](#reading---group)
+		- [Reading - Layer](#reading---layer)
+		- [Writing - Group](#writing---group)
+		- [Writing - Layer](#writing---layer)
 - [.layered](#layered)
 - [Example Usage](#example-usage)
 - [Documentation](#documentation)
@@ -60,6 +58,7 @@ the case, please open an issue and I will fix the tables.
 ### Overview
 
 #### Key
+
 - :heavy_check_mark: - Supported
 - :warning: - Things will look the same, but data is lost
 - :x: - This is not supported and will cause loss of data
@@ -72,9 +71,7 @@ the case, please open an issue and I will fix the tables.
 |Groups|:heavy_check_mark:|N/A |:heavy_check_mark:|:heavy_check_mark:|N/A|N/A|N/A|:heavy_check_mark:|
 |Write |:heavy_check_mark:|:x:  |:x:  |:x:  |:warning:|:warning:|:warning:|:heavy_check_mark:|
 
-### Reading
-
-#### Group
+#### Reading - Group
 
 |Format    |.ora|.pdn|.xcf|.psd|.tiff/ .tif|.webp|.gif|.lsr|
 |----------|----|----|----|----|-----|----|-----|----|
@@ -85,7 +82,7 @@ the case, please open an issue and I will fix the tables.
 |Visibility|:heavy_check_mark:|N/A |:heavy_check_mark:  |:heavy_check_mark:|N/A |N/A |N/A |N/A |
 |Blend Mode|:heavy_check_mark:|N/A |:heavy_check_mark:|:heavy_check_mark:|N/A|N/A |N/A |N/A |
 
-#### Layer
+#### Reading - Layer
 
 |Format    |.ora|.pdn|.xcf|.psd|.tiff/ .tif|.webp|.gif|.lsr|
 |----------|----|----|----|----|-----|----|-----|----|
@@ -96,9 +93,7 @@ the case, please open an issue and I will fix the tables.
 |Visibility|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:  |:heavy_check_mark:|N/A |N/A |N/A |N/A |
 |Blend Mode|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|N/A|N/A |N/A |N/A |
 
-### Writing
-
-#### Group
+#### Writing - Group
 
 |Format    |.ora|.pdn|.xcf|.psd|.tiff/ .tif|.webp|.gif|.lsr|
 |----------|----|----|----|----|-----|----|-----|----|
@@ -113,7 +108,7 @@ the case, please open an issue and I will fix the tables.
 Layers are extracted from groups and saved to TIFF/ GIF or WEBP
 ```
 
-#### Layer
+#### Writing - Layer
 
 |Format    |.ora|.pdn|.xcf|.psd|.tiff/ .tif|.webp|.gif|.lsr|
 |----------|----|----|----|----|-----|----|-----|----|
@@ -136,7 +131,6 @@ loss. .layered has been designed so that if the format became deprecated and no
 readers existed for it tomorrow, the data would be easily salvageable.
 
 See the [LAYERED_SPEC](/LAYERED_SPEC.md) for more information.
-
 
 ## Example Usage
 
@@ -226,6 +220,7 @@ tiff.getFlattenLayers().save(THISDIR + "/base24(tiff).png")
 See the [Docs](/DOCS/) for more information.
 
 ## Install With PIP
+
 ```python
 pip install layeredimage
 ```
@@ -239,26 +234,32 @@ Python version 3.9.0 <https://www.python.org/downloads/release/python-380/>.
 
 ## Install Python on Windows
 ### Chocolatey
+
 ```powershell
 choco install python
 ```
+
 ### Download
 To install Python, go to <https://www.python.org/> and download the latest
 version.
 
 ## Install Python on Linux
 ### Apt
+
 ```bash
 sudo apt install python3.9
 ```
 
 ## How to run
 ### With VSCode
+
 1. Open the .py file in vscode
 2. Ensure a python 3.9 interpreter is selected (Ctrl+Shift+P > Python:Select
 Interpreter > Python 3.9)
 3. Run by pressing Ctrl+F5 (if you are prompted to install any modules, accept)
+
 ### From the Terminal
+
 ```bash
 ./[file].py
 ```
@@ -266,19 +267,22 @@ Interpreter > Python 3.9)
 ## Download Project
 ### Clone
 #### Using The Command Line
+
 1. Press the Clone or download button in the top right
 2. Copy the URL (link)
 3. Open the command line and change directory to where you wish to
 clone to
 4. Type 'git clone' followed by URL in step 2
-```bash
-$ git clone https://github.com/FHPythonUtils/LayeredImage
-```
+
+	```bash
+	git clone https://github.com/FHPythonUtils/LayeredImage
+	```
 
 More information can be found at
 <https://help.github.com/en/articles/cloning-a-repository>
 
 #### Using GitHub Desktop
+
 1. Press the Clone or download button in the top right
 2. Click open in desktop
 3. Choose the path for where you want and click Clone
