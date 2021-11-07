@@ -38,8 +38,8 @@ class LayeredImage:
 		if dimensions is None:
 			layerDimens = [layerOrGroup.dimensions for layerOrGroup in layersAndGroups]
 			self.dimensions = (
-				max([layerDimen[0] for layerDimen in layerDimens]),
-				max([layerDimen[1] for layerDimen in layerDimens]),
+				max(layerDimen[0] for layerDimen in layerDimens),
+				max(layerDimen[1] for layerDimen in layerDimens),
 			)
 		self.extras = kwargs
 

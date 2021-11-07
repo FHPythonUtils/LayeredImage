@@ -168,8 +168,8 @@ class Group(LayerGroup):
 		if dimensions is None:
 			layerDimens = [layer.dimensions for layer in layers]
 			self.dimensions = (
-				max([dimensions[0] for dimensions in layerDimens]),
-				max([dimensions[1] for dimensions in layerDimens]),
+				max(dimensions[0] for dimensions in layerDimens),
+				max(dimensions[1] for dimensions in layerDimens),
 			)
 
 	def json(self) -> dict[str, Any]:

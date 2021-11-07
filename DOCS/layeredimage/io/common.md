@@ -10,7 +10,7 @@ Do file io - Common Operations for file readers/writers.
 
 ## blendModeLookup
 
-[[find in source code]](../../../layeredimage/io/common.py#L13)
+[[find in source code]](../../../layeredimage/io/common.py#L14)
 
 ```python
 def blendModeLookup(
@@ -24,7 +24,7 @@ Get the blendmode from a lookup table.
 
 ## expandLayersToCanvas
 
-[[find in source code]](../../../layeredimage/io/common.py#L25)
+[[find in source code]](../../../layeredimage/io/common.py#L26)
 
 ```python
 def expandLayersToCanvas(

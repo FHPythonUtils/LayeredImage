@@ -10,7 +10,7 @@ Do file io - LSR.
 
 ## openLayer_LSR
 
-[[find in source code]](../../../layeredimage/io/lsr.py#L14)
+[[find in source code]](../../../layeredimage/io/lsr.py#L16)
 
 ```python
 def openLayer_LSR(file: str) -> LayeredImage:
@@ -20,7 +20,7 @@ Open a .lsr file into a layered image.
 
 ## saveLayer_LSR
 
-[[find in source code]](../../../layeredimage/io/lsr.py#L35)
+[[find in source code]](../../../layeredimage/io/lsr.py#L37)
 
 ```python
 def saveLayer_LSR(fileName: str, layeredImage: LayeredImage) -> None:

@@ -3,11 +3,12 @@ from __future__ import annotations
 
 from typing import Any
 
+from blendmodes.imagetools import renderWAlphaOffset
 from metprint import FHFormatter, Logger, LogType
 from PIL.Image import Image
 
 from ..blend import BlendType
-from ..layeredimage import LayeredImage, renderWAlphaOffset
+from ..layeredimage import LayeredImage
 
 
 def blendModeLookup(

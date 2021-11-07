@@ -2,6 +2,11 @@
 All major and minor version changes will be documented in this file. Details of
 patch-level version changes can be found in [commit messages](../../commits/master).
 
+## 2021.2.8 - 2021/11/07
+
+- add pre-commit
+- code quality improvements
+
 ## 2021.2.7 - 2021/10/02
 
 - code quality improvements

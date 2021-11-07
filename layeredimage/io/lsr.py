@@ -3,7 +3,9 @@ from __future__ import annotations
 
 from os import sep
 
-from ..layeredimage import LayeredImage, renderWAlphaOffset
+from blendmodes.imagetools import renderWAlphaOffset
+
+from ..layeredimage import LayeredImage
 from ..layergroup import Group, Layer
 
 # pylint: disable=invalid-name

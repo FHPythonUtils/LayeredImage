@@ -114,8 +114,8 @@ def _saveLayer_LAYERED(fileName: str, layeredImage: LayeredImage, compressed: bo
 		thumbnail = compositeImage.copy()
 		thumbnail.thumbnail((256, 256))
 		imageLookup = {"composite": compositeImage, "thumbnail": thumbnail}
-		for image in imageLookup:
-			writeImage_LAYERED(imageLookup[image], layered, image + ".png", compressed)
+		for imageName, imageData in imageLookup.items():
+			writeImage_LAYERED(imageData, layered, imageName + ".png", compressed)
 
 
 def writeImage_LAYERED(image: Image.Image, zipFile: ZipFile, path: str, compressed: bool = False):
