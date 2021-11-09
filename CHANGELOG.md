@@ -33,12 +33,12 @@ patch-level version changes can be found in [commit messages](../../commits/mast
 ## 2021.2.1 - 2021/03/18
 
 - Update Pillow >= 8.1.1 due to high severity security vulnerabilities:
-  - CVE-2021-27923
-  - CVE-2020-35654
-  - CVE-2020-35653
-  - CVE-2021-27921
-  - CVE-2021-27922
-  - CVE-2020-35655
+	- CVE-2021-27923
+	- CVE-2020-35654
+	- CVE-2020-35653
+	- CVE-2021-27921
+	- CVE-2021-27922
+	- CVE-2020-35655
 
 ## 2021.2 - 2021.03.03
 
@@ -94,8 +94,8 @@ patch-level version changes can be found in [commit messages](../../commits/mast
 ## 2020.6 - 2020/05/08
 
 - Added .layered image spec and implementation to store blendmodes that are
-  not supported by ora and some other formats that this lib can write too.
-  Still, use ora whenever possible as this is a more supported image format.
+	not supported by ora and some other formats that this lib can write too.
+	Still, use ora whenever possible as this is a more supported image format.
 - Updates to `gimpformats` mean that visibility is now correctly preserved.
 - Optimizations to save functions
 - Added json functions to get data as a dictionary
