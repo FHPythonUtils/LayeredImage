@@ -1,5 +1,7 @@
 """Example program to convert layered images to ora."""
 
+from __future__ import annotations
+
 from os import listdir
 from os.path import isfile, join
 from pathlib import Path
