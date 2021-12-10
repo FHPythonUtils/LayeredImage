@@ -63,50 +63,50 @@ the case, please open an issue and I will fix the tables.
 
 #### Key
 
-- :heavy_check_mark: - Supported
-- :warning: - Things will look the same, but data is lost
-- :x: - This is not supported and will cause loss of data
-- N/A - The source format does not support this so treat this as a :heavy_check_mark:
+- ✔ - Supported
+- ⚠ - Things will look the same, but data is lost
+- ❌ - This is not supported and will cause loss of data
+- N/A - The source format does not support this so treat this as a ✔
 
 | Format | .ora               | .pdn               | .xcf               | .psd               | .tiff/ .tif        | .webp              | .gif               | .lsr               |
 | ------ | ------------------ | ------------------ | ------------------ | ------------------ | ------------------ | ------------------ | ------------------ | ------------------ |
-| Read   | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
-| Layers | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
-| Groups | :heavy_check_mark: | N/A                | :heavy_check_mark: | :heavy_check_mark: | N/A                | N/A                | N/A                | :heavy_check_mark: |
-| Write  | :heavy_check_mark: | :x:                | :x:                | :x:                | :warning:          | :warning:          | :warning:          | :heavy_check_mark: |
+| Read   | ✔                 | ✔                 | ✔                 | ✔                 | ✔                 | ✔                 | ✔                 | ✔                 |
+| Layers | ✔                 | ✔                 | ✔                 | ✔                 | ✔                 | ✔                 | ✔                 | ✔                 |
+| Groups | ✔                 | N/A                | ✔                 | ✔                 | N/A                | N/A                | N/A                | ✔                 |
+| Write  | ✔                 | ❌                | ❌                | ❌                | ⚠                 | ⚠                 | ⚠                 | ✔                 |
 
 #### Reading - Group
 
 | Format     | .ora               | .pdn | .xcf               | .psd               | .tiff/ .tif | .webp | .gif | .lsr               |
 | ---------- | ------------------ | ---- | ------------------ | ------------------ | ----------- | ----- | ---- | ------------------ |
-| Name       | :heavy_check_mark: | N/A  | :heavy_check_mark: | :heavy_check_mark: | N/A         | N/A   | N/A  | :heavy_check_mark: |
-| Dimensions | :warning:          | N/A  | :heavy_check_mark: | :heavy_check_mark: | N/A         | N/A   | N/A  | :heavy_check_mark: |
-| Offsets    | :heavy_check_mark: | N/A  | :heavy_check_mark: | :heavy_check_mark: | N/A         | N/A   | N/A  | :heavy_check_mark: |
-| Opacity    | :heavy_check_mark: | N/A  | :heavy_check_mark: | :heavy_check_mark: | N/A         | N/A   | N/A  | N/A                |
-| Visibility | :heavy_check_mark: | N/A  | :heavy_check_mark: | :heavy_check_mark: | N/A         | N/A   | N/A  | N/A                |
-| Blend Mode | :heavy_check_mark: | N/A  | :heavy_check_mark: | :heavy_check_mark: | N/A         | N/A   | N/A  | N/A                |
+| Name       | ✔                 | N/A  | ✔                 | ✔                 | N/A         | N/A   | N/A  | ✔                 |
+| Dimensions | ⚠                 | N/A  | ✔                 | ✔                 | N/A         | N/A   | N/A  | ✔                 |
+| Offsets    | ✔                 | N/A  | ✔                 | ✔                 | N/A         | N/A   | N/A  | ✔                 |
+| Opacity    | ✔                 | N/A  | ✔                 | ✔                 | N/A         | N/A   | N/A  | N/A                |
+| Visibility | ✔                 | N/A  | ✔                 | ✔                 | N/A         | N/A   | N/A  | N/A                |
+| Blend Mode | ✔                 | N/A  | ✔                 | ✔                 | N/A         | N/A   | N/A  | N/A                |
 
 #### Reading - Layer
 
 | Format     | .ora               | .pdn               | .xcf               | .psd               | .tiff/ .tif        | .webp              | .gif               | .lsr               |
 | ---------- | ------------------ | ------------------ | ------------------ | ------------------ | ------------------ | ------------------ | ------------------ | ------------------ |
-| Name       | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :warning:          | :warning:          | :heavy_check_mark: |
-| Dimensions | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
-| Offsets    | :heavy_check_mark: | N/A                | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | N/A                | N/A                | N/A                |
-| Opacity    | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | N/A                | N/A                | N/A                | N/A                |
-| Visibility | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | N/A                | N/A                | N/A                | N/A                |
-| Blend Mode | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | N/A                | N/A                | N/A                | N/A                |
+| Name       | ✔                 | ✔                 | ✔                 | ✔                 | ✔                 | ⚠                 | ⚠                 | ✔                 |
+| Dimensions | ✔                 | ✔                 | ✔                 | ✔                 | ✔                 | ✔                 | ✔                 | ✔                 |
+| Offsets    | ✔                 | N/A                | ✔                 | ✔                 | ✔                 | N/A                | N/A                | N/A                |
+| Opacity    | ✔                 | ✔                 | ✔                 | ✔                 | N/A                | N/A                | N/A                | N/A                |
+| Visibility | ✔                 | ✔                 | ✔                 | ✔                 | N/A                | N/A                | N/A                | N/A                |
+| Blend Mode | ✔                 | ✔                 | ✔                 | ✔                 | N/A                | N/A                | N/A                | N/A                |
 
 #### Writing - Group
 
 | Format     | .ora               | .pdn | .xcf | .psd | .tiff/ .tif | .webp     | .gif      | .lsr               |
 | ---------- | ------------------ | ---- | ---- | ---- | ----------- | --------- | --------- | ------------------ |
-| Name       | :heavy_check_mark: | :x:  | :x:  | :x:  | :x:         | :x:       | :x:       | :heavy_check_mark: |
-| Dimensions | :heavy_check_mark: | :x:  | :x:  | :x:  | :warning:   | :warning: | :warning: | :heavy_check_mark: |
-| Offsets    | :heavy_check_mark: | :x:  | :x:  | :x:  | :warning:   | :warning: | :warning: | :heavy_check_mark: |
-| Opacity    | :heavy_check_mark: | :x:  | :x:  | :x:  | :warning:   | :warning: | :warning: | :warning:          |
-| Visibility | :heavy_check_mark: | :x:  | :x:  | :x:  | :warning:   | :warning: | :warning: | :warning:          |
-| Blend Mode | :heavy_check_mark: | :x:  | :x:  | :x:  | :x:         | :x:       | :x:       | :x:                |
+| Name       | ✔                 | ❌  | ❌  | ❌  | ❌         | ❌       | ❌       | ✔                 |
+| Dimensions | ✔                 | ❌  | ❌  | ❌  | ⚠          | ⚠        | ⚠        | ✔                 |
+| Offsets    | ✔                 | ❌  | ❌  | ❌  | ⚠          | ⚠        | ⚠        | ✔                 |
+| Opacity    | ✔                 | ❌  | ❌  | ❌  | ⚠          | ⚠        | ⚠        | ⚠                 |
+| Visibility | ✔                 | ❌  | ❌  | ❌  | ⚠          | ⚠        | ⚠        | ⚠                 |
+| Blend Mode | ✔                 | ❌  | ❌  | ❌  | ❌         | ❌       | ❌       | ❌                |
 
 ```none
 Layers are extracted from groups and saved to TIFF/ GIF or WEBP
@@ -116,12 +116,12 @@ Layers are extracted from groups and saved to TIFF/ GIF or WEBP
 
 | Format     | .ora               | .pdn | .xcf | .psd | .tiff/ .tif | .webp     | .gif      | .lsr      |
 | ---------- | ------------------ | ---- | ---- | ---- | ----------- | --------- | --------- | --------- |
-| Name       | :heavy_check_mark: | :x:  | :x:  | :x:  | :x:         | :x:       | :x:       | :warning: |
-| Dimensions | :heavy_check_mark: | :x:  | :x:  | :x:  | :warning:   | :warning: | :warning: | :warning: |
-| Offsets    | :heavy_check_mark: | :x:  | :x:  | :x:  | :warning:   | :warning: | :warning: | :warning: |
-| Opacity    | :heavy_check_mark: | :x:  | :x:  | :x:  | :warning:   | :warning: | :warning: | :warning: |
-| Visibility | :heavy_check_mark: | :x:  | :x:  | :x:  | :warning:   | :warning: | :warning: | :warning: |
-| Blend Mode | :heavy_check_mark: | :x:  | :x:  | :x:  | :x:         | :x:       | :x:       | :x:       |
+| Name       | ✔                 | ❌  | ❌  | ❌  | ❌         | ❌       | ❌       | ⚠        |
+| Dimensions | ✔                 | ❌  | ❌  | ❌  | ⚠          | ⚠        | ⚠        | ⚠        |
+| Offsets    | ✔                 | ❌  | ❌  | ❌  | ⚠          | ⚠        | ⚠        | ⚠        |
+| Opacity    | ✔                 | ❌  | ❌  | ❌  | ⚠          | ⚠        | ⚠        | ⚠        |
+| Visibility | ✔                 | ❌  | ❌  | ❌  | ⚠          | ⚠        | ⚠        | ⚠        |
+| Blend Mode | ✔                 | ❌  | ❌  | ❌  | ❌         | ❌       | ❌       | ❌       |
 
 ```none
 Layers are rendered with offsets before being written to TIFF/ GIF or WEBP
