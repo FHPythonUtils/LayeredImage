@@ -16,7 +16,7 @@ def openLayer_GIF(file: str) -> LayeredImage:
 	project = Image.open(file)
 	projectSize = project.size
 	layers = []
-	for index in range(project.n_frames):  # type:ignore
+	for index in range(project.n_frames):
 		project.seek(index)
 		layers.append(
 			Layer(
@@ -32,4 +32,13 @@ def openLayer_GIF(file: str) -> LayeredImage:
 def saveLayer_GIF(fileName: str, layeredImage: LayeredImage) -> None:
 	"""Save a layered image as .gif."""
 	layers = expandLayersToCanvas(layeredImage, "GIF")
-	layers[0].save(fileName, duration=100, save_all=True, append_images=layers[1:])
+	layers[0].save(
+		fileName,
+		duration=200,
+		append_images=layers[1:],
+		version="GIF89a",
+		disposal=2,
+		save_all=True,
+		loop=0,
+		transparency=0,
+	)

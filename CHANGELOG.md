@@ -3,6 +3,13 @@
 All major and minor version changes will be documented in this file. Details of
 patch-level version changes can be found in [commit messages](../../commits/master).
 
+## 2022 - 2022/01/23
+
+- Bump pillow version (CVE-2022-22815, CVE-2022-22816, CVE-2022-22817)
+- Update deps
+- Improve save layered image to gif functionality
+- Update directory structure for formal tests
+
 ## 2021.2.8 - 2021/11/07
 
 - add pre-commit
