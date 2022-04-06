@@ -1,7 +1,6 @@
 """Do file io - PDN."""
 from __future__ import annotations
 
-from metprint import FHFormatter, Logger, LogType
 from PIL import Image
 
 from ..blend import BlendType
@@ -56,5 +55,5 @@ def openLayer_PDN(file: str) -> LayeredImage:
 def saveLayer_PDN(fileName: str, layeredImage: LayeredImage) -> None:
 	"""Save a layered image as .pdn."""
 	del fileName, layeredImage
-	Logger(FHFormatter()).logPrint("Saving PDNs is not implemented in pypdn", LogType.ERROR)
+	print("ERROR: Saving PDNs is not implemented in pypdn")
 	raise NotImplementedError

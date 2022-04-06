@@ -1,8 +1,6 @@
 """Do file io - PSD."""
 from __future__ import annotations
 
-from metprint import FHFormatter, Logger, LogType
-
 from ..blend import BlendType
 from ..layeredimage import LayeredImage
 from ..layergroup import Group, Layer
@@ -86,5 +84,5 @@ def openLayer_PSD(file: str) -> LayeredImage:
 def saveLayer_PSD(fileName: str, layeredImage: LayeredImage) -> None:
 	"""Save a layered image as .psd."""
 	del fileName, layeredImage
-	Logger(FHFormatter()).logPrint("Saving PSDs is not implemented in psdtoolsx", LogType.ERROR)
+	print("ERROR: Saving PSDs is not implemented in psd-tools3")
 	raise NotImplementedError

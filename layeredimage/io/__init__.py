@@ -3,8 +3,6 @@ from __future__ import annotations
 
 from os.path import exists
 
-from metprint import FHFormatter, Logger, LogType
-
 from ..layeredimage import LayeredImage
 from .gif import openLayer_GIF, saveLayer_GIF
 from .layered import (
@@ -25,10 +23,9 @@ from .xcf import openLayer_XCF, saveLayer_XCF
 def extNotRecognised(fileName: str):
 	"""Output the file extension not recognised error."""
 	exts = ["ora", "psd", "xcf", "pdn", "tif", "tiff", "webp", "gif", "lsr", "layered", "layeredc"]
-	Logger(FHFormatter()).logPrint(
-		"File extension is not recognised for file: " + fileName + "! Must be "
-		'one of "' + ', "'.join(exts) + '"',
-		LogType.ERROR,
+	print(
+		f"ERROR: File extension is not recognised for file: {fileName}! Must be one of "
+		', "'.join(exts) + '"'
 	)
 
 
@@ -59,7 +56,7 @@ def openLayerImage(file: str) -> LayeredImage:
 		"layeredc": openLayer_LAYEREDC,
 	}
 	if not exists(file):
-		Logger(FHFormatter()).logPrint(file + " does not exist", LogType.ERROR)
+		print(f"ERROR: {file} does not exist")
 		raise FileExistsError
 	fileExt = file.split(".")[-1].lower()
 	if fileExt not in functionMap:

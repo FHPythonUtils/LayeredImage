@@ -2,7 +2,6 @@ Pillow<10,>=9.0.0
 blendmodes<2024,>=2022
 deprecation<3,>=2.1.0
 gimpformats<2024,>=2022
-metprint<2023,>=2021
 psdtoolsx<20,>=19.18.0
 pylsr<2024,>=2022
 pyora<2,>=0.3.11

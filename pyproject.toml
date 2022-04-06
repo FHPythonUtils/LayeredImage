@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "layeredimage"
-version = "2022"
+version = "2022.0.1"
 license = "mit"
 description = "Use this module to read, and write to a number of layered image formats"
 authors = ["FredHappyface"]
@@ -24,14 +24,13 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = ">=3.8,<4.0"
 blendmodes = "<2024,>=2022"
-metprint = "<2023,>=2021"
 Pillow = "<10,>=9.0.0"
 pylsr = "<2024,>=2022"
 pyora = "<2,>=0.3.11"
 gimpformats = "<2024,>=2022"
-psdtoolsx = "<20,>=19.18.0"
 pypdn = "<2,>=1.0.6"
 deprecation = "<3,>=2.1.0"
+psdtoolsx = "<20,>=19.18.0"
 
 [tool.poetry.dev-dependencies]
 imgcompare = "^2.0.1"

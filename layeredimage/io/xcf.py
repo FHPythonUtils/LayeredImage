@@ -1,8 +1,6 @@
 """Do file io - XCF."""
 from __future__ import annotations
 
-from metprint import FHFormatter, Logger, LogType
-
 from ..blend import BlendType
 from ..layeredimage import LayeredImage
 from ..layergroup import Group, Layer
@@ -136,7 +134,7 @@ def openLayer_XCF(file: str) -> LayeredImage:
 def saveLayer_XCF(fileName: str, layeredImage: LayeredImage) -> None:
 	"""Save a layered image as .xcf."""
 	del fileName, layeredImage
-	Logger(FHFormatter()).logPrint(
+	print(
 		"Saving XCFs is not implemented in gimpformats - "
 		"this is a little misleading as functions are present, however these are not "
 		"functional",

@@ -1,29 +1,29 @@
-# io
+# Io
 
-> Auto-generated documentation for [layeredimage.io](../../../layeredimage/io/__init__.py) module.
+> Auto-generated documentation for [layeredimage.io](../../../../layeredimage/io/__init__.py) module.
 
 Do file io.
 
-- [Layeredimage](../../README.md#layeredimage-index) / [Modules](../../README.md#layeredimage-modules) / [layeredimage](../index.md#layeredimage) / io
+- [Layeredimage](../../README.md#layeredimage-index) / [Modules](../../MODULES.md#layeredimage-modules) / [Layeredimage](../index.md#layeredimage) / Io
     - [exportFlatImage](#exportflatimage)
     - [extNotRecognised](#extnotrecognised)
     - [openLayerImage](#openlayerimage)
     - [saveLayerImage](#savelayerimage)
     - Modules
-        - [common](common.md#common)
-        - [gif](gif.md#gif)
-        - [layered](layered.md#layered)
-        - [lsr](lsr.md#lsr)
-        - [ora](ora.md#ora)
-        - [pdn](pdn.md#pdn)
-        - [psd](psd.md#psd)
-        - [tiff](tiff.md#tiff)
-        - [webp](webp.md#webp)
-        - [xcf](xcf.md#xcf)
+        - [Common](common.md#common)
+        - [Gif](gif.md#gif)
+        - [Layered](layered.md#layered)
+        - [Lsr](lsr.md#lsr)
+        - [Ora](ora.md#ora)
+        - [Pdn](pdn.md#pdn)
+        - [Psd](psd.md#psd)
+        - [Tiff](tiff.md#tiff)
+        - [Webp](webp.md#webp)
+        - [Xcf](xcf.md#xcf)
 
 ## exportFlatImage
 
-[[find in source code]](../../../layeredimage/io/__init__.py#L104)
+[[find in source code]](../../../../layeredimage/io/__init__.py#L101)
 
 ```python
 def exportFlatImage(fileName: str, layeredImage: LayeredImage) -> None:
@@ -33,7 +33,7 @@ Export the layered image to a unilayer image file.
 
 ## extNotRecognised
 
-[[find in source code]](../../../layeredimage/io/__init__.py#L25)
+[[find in source code]](../../../../layeredimage/io/__init__.py#L23)
 
 ```python
 def extNotRecognised(fileName: str):
@@ -43,7 +43,7 @@ Output the file extension not recognised error.
 
 ## openLayerImage
 
-[[find in source code]](../../../layeredimage/io/__init__.py#L35)
+[[find in source code]](../../../../layeredimage/io/__init__.py#L32)
 
 ```python
 def openLayerImage(file: str) -> LayeredImage:
@@ -66,7 +66,7 @@ Open a layer image file into a layer image object.
 
 ## saveLayerImage
 
-[[find in source code]](../../../layeredimage/io/__init__.py#L71)
+[[find in source code]](../../../../layeredimage/io/__init__.py#L68)
 
 ```python
 def saveLayerImage(fileName: str, layeredImage: LayeredImage) -> None:
