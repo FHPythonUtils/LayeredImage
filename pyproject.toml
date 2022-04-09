@@ -34,7 +34,9 @@ psdtoolsx = "<20,>=19.18.0"
 
 [tool.poetry.dev-dependencies]
 imgcompare = "^2.0.1"
-pytest = "^6.2.5"
+pytest = "^7.1.1"
+pylint = "^2.13.5"
+handsdown = "^1.1.0"
 
 [build-system]
 requires = ["poetry-core"]
