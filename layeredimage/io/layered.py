@@ -122,7 +122,7 @@ def writeImage_LAYERED(image: Image.Image, zipFile: ZipFile, path: str, compress
 	"""Write an image to the archive."""
 	imgByteArr = io.BytesIO()
 	imageCopy = image.copy()
-	if compressed and len(set(imageCopy.getcolors(maxcolors=256 ** 3))) < 256:
+	if compressed and len(set(imageCopy.getcolors(maxcolors=256**3))) < 256:
 		imageCopy = imageCopy.quantize(colors=256, method=2, kmeans=1)
 	imageCopy.save(imgByteArr, format="PNG", optimize=compressed)
 	imgByteArr.seek(0)

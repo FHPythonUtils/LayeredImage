@@ -137,7 +137,6 @@ def saveLayer_XCF(fileName: str, layeredImage: LayeredImage) -> None:
 	print(
 		"Saving XCFs is not implemented in gimpformats - "
 		"this is a little misleading as functions are present, however these are not "
-		"functional",
-		LogType.ERROR,
+		"functional"
 	)
 	raise NotImplementedError
