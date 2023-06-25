@@ -1,10 +1,9 @@
-# Layeredimage Modules
+# Layeredimage Index
 
-> Auto-generated documentation modules index.
+> Auto-generated documentation index.
 
-Full list of [Layeredimage](README.md#layeredimage-index) project modules.
+A full list of `Layeredimage` project modules.
 
-- [Layeredimage Index](README.md#layeredimage-index)
 - [Layeredimage](layeredimage/index.md#layeredimage)
     - [Blend](layeredimage/blend.md#blend)
     - [Io](layeredimage/io/index.md#io)

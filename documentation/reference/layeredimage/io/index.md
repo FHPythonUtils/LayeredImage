@@ -1,53 +1,51 @@
 # Io
 
+[Layeredimage Index](../../README.md#layeredimage-index) /
+[Layeredimage](../index.md#layeredimage) /
+Io
+
 > Auto-generated documentation for [layeredimage.io](../../../../layeredimage/io/__init__.py) module.
 
-Do file io.
-
-- [Layeredimage](../../README.md#layeredimage-index) / [Modules](../../MODULES.md#layeredimage-modules) / [Layeredimage](../index.md#layeredimage) / Io
-    - [exportFlatImage](#exportflatimage)
-    - [extNotRecognised](#extnotrecognised)
-    - [openLayerImage](#openlayerimage)
-    - [saveLayerImage](#savelayerimage)
-    - Modules
-        - [Common](common.md#common)
-        - [Gif](gif.md#gif)
-        - [Layered](layered.md#layered)
-        - [Lsr](lsr.md#lsr)
-        - [Ora](ora.md#ora)
-        - [Pdn](pdn.md#pdn)
-        - [Psd](psd.md#psd)
-        - [Tiff](tiff.md#tiff)
-        - [Webp](webp.md#webp)
-        - [Xcf](xcf.md#xcf)
+- [Io](#io)
+  - [exportFlatImage](#exportflatimage)
+  - [extNotRecognised](#extnotrecognised)
+  - [openLayerImage](#openlayerimage)
+  - [saveLayerImage](#savelayerimage)
+  - [Modules](#modules)
 
 ## exportFlatImage
 
-[[find in source code]](../../../../layeredimage/io/__init__.py#L101)
-
-```python
-def exportFlatImage(fileName: str, layeredImage: LayeredImage) -> None:
-```
+[Show source in __init__.py:101](../../../../layeredimage/io/__init__.py#L101)
 
 Export the layered image to a unilayer image file.
 
-## extNotRecognised
-
-[[find in source code]](../../../../layeredimage/io/__init__.py#L23)
+#### Signature
 
 ```python
-def extNotRecognised(fileName: str):
+def exportFlatImage(fileName: str, layeredImage: LayeredImage) -> None:
+    ...
 ```
+
+
+
+## extNotRecognised
+
+[Show source in __init__.py:23](../../../../layeredimage/io/__init__.py#L23)
 
 Output the file extension not recognised error.
 
-## openLayerImage
-
-[[find in source code]](../../../../layeredimage/io/__init__.py#L32)
+#### Signature
 
 ```python
-def openLayerImage(file: str) -> LayeredImage:
+def extNotRecognised(fileName: str):
+    ...
 ```
+
+
+
+## openLayerImage
+
+[Show source in __init__.py:32](../../../../layeredimage/io/__init__.py#L32)
 
 Open a layer image file into a layer image object.
 
@@ -64,13 +62,18 @@ Open a layer image file into a layer image object.
 
 - `LayeredImage` - a layered image object
 
-## saveLayerImage
-
-[[find in source code]](../../../../layeredimage/io/__init__.py#L68)
+#### Signature
 
 ```python
-def saveLayerImage(fileName: str, layeredImage: LayeredImage) -> None:
+def openLayerImage(file: str) -> LayeredImage:
+    ...
 ```
+
+
+
+## saveLayerImage
+
+[Show source in __init__.py:68](../../../../layeredimage/io/__init__.py#L68)
 
 Save a layered image to a file.
 
@@ -86,3 +89,25 @@ Save a layered image to a file.
 #### Returns
 
 None
+
+#### Signature
+
+```python
+def saveLayerImage(fileName: str, layeredImage: LayeredImage) -> None:
+    ...
+```
+
+
+
+## Modules
+
+- [Common](./common.md)
+- [Gif](./gif.md)
+- [Layered](./layered.md)
+- [Lsr](./lsr.md)
+- [Ora](./ora.md)
+- [Pdn](./pdn.md)
+- [Psd](./psd.md)
+- [Tiff](./tiff.md)
+- [Webp](./webp.md)
+- [Xcf](./xcf.md)

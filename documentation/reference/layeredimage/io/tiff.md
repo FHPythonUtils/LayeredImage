@@ -1,29 +1,42 @@
 # Tiff
 
+[Layeredimage Index](../../README.md#layeredimage-index) /
+[Layeredimage](../index.md#layeredimage) /
+[Io](./index.md#io) /
+Tiff
+
 > Auto-generated documentation for [layeredimage.io.tiff](../../../../layeredimage/io/tiff.py) module.
 
-Do file io - TIFF.
-
-- [Layeredimage](../../README.md#layeredimage-index) / [Modules](../../MODULES.md#layeredimage-modules) / [Layeredimage](../index.md#layeredimage) / [Io](index.md#io) / Tiff
-    - [openLayer_TIFF](#openlayer_tiff)
-    - [saveLayer_TIFF](#savelayer_tiff)
+- [Tiff](#tiff)
+  - [openLayer_TIFF](#openlayer_tiff)
+  - [saveLayer_TIFF](#savelayer_tiff)
 
 ## openLayer_TIFF
 
-[[find in source code]](../../../../layeredimage/io/tiff.py#L14)
-
-```python
-def openLayer_TIFF(file: str) -> LayeredImage:
-```
+[Show source in tiff.py:14](../../../../layeredimage/io/tiff.py#L14)
 
 Open a .tiff or a .tif file into a layered image.
 
+#### Signature
+
+```python
+def openLayer_TIFF(file: str) -> LayeredImage:
+    ...
+```
+
+
+
 ## saveLayer_TIFF
 
-[[find in source code]](../../../../layeredimage/io/tiff.py#L53)
+[Show source in tiff.py:53](../../../../layeredimage/io/tiff.py#L53)
+
+Save a layered image as .tiff or .tif.
+
+#### Signature
 
 ```python
 def saveLayer_TIFF(fileName: str, layeredImage: LayeredImage) -> None:
+    ...
 ```
 
-Save a layered image as .tiff or .tif.
+

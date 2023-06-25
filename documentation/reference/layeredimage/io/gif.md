@@ -1,29 +1,42 @@
 # Gif
 
+[Layeredimage Index](../../README.md#layeredimage-index) /
+[Layeredimage](../index.md#layeredimage) /
+[Io](./index.md#io) /
+Gif
+
 > Auto-generated documentation for [layeredimage.io.gif](../../../../layeredimage/io/gif.py) module.
 
-Do file io - GIF.
-
-- [Layeredimage](../../README.md#layeredimage-index) / [Modules](../../MODULES.md#layeredimage-modules) / [Layeredimage](../index.md#layeredimage) / [Io](index.md#io) / Gif
-    - [openLayer_GIF](#openlayer_gif)
-    - [saveLayer_GIF](#savelayer_gif)
+- [Gif](#gif)
+  - [openLayer_GIF](#openlayer_gif)
+  - [saveLayer_GIF](#savelayer_gif)
 
 ## openLayer_GIF
 
-[[find in source code]](../../../../layeredimage/io/gif.py#L14)
-
-```python
-def openLayer_GIF(file: str) -> LayeredImage:
-```
+[Show source in gif.py:14](../../../../layeredimage/io/gif.py#L14)
 
 Open a .gif file into a layered image.
 
+#### Signature
+
+```python
+def openLayer_GIF(file: str) -> LayeredImage:
+    ...
+```
+
+
+
 ## saveLayer_GIF
 
-[[find in source code]](../../../../layeredimage/io/gif.py#L32)
+[Show source in gif.py:32](../../../../layeredimage/io/gif.py#L32)
+
+Save a layered image as .gif.
+
+#### Signature
 
 ```python
 def saveLayer_GIF(fileName: str, layeredImage: LayeredImage) -> None:
+    ...
 ```
 
-Save a layered image as .gif.
+
