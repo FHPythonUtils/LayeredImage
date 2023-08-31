@@ -5,5 +5,4 @@
 Blend
 
 > Auto-generated documentation for [layeredimage.blend](../../../layeredimage/blend.py) module.
-
 - [Blend](#blend)

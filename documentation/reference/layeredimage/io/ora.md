@@ -54,5 +54,3 @@ Save a layered image as .ora.
 def saveLayer_ORA(fileName: str, layeredImage: LayeredImage) -> None:
     ...
 ```
-
-

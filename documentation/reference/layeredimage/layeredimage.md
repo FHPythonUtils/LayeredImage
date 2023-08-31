@@ -359,5 +359,3 @@ def flattenLayerOrGroup(
 ):
     ...
 ```
-
-

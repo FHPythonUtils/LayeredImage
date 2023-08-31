@@ -38,5 +38,3 @@ Save a layered image as .lsr.
 def saveLayer_LSR(fileName: str, layeredImage: LayeredImage) -> None:
     ...
 ```
-
-

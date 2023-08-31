@@ -38,5 +38,3 @@ Save a layered image as .gif.
 def saveLayer_GIF(fileName: str, layeredImage: LayeredImage) -> None:
     ...
 ```
-
-

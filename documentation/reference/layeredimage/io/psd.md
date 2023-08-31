@@ -38,5 +38,3 @@ Save a layered image as .psd.
 def saveLayer_PSD(fileName: str, layeredImage: LayeredImage) -> None:
     ...
 ```
-
-

@@ -38,5 +38,3 @@ Save a layered image as .pdn.
 def saveLayer_PDN(fileName: str, layeredImage: LayeredImage) -> None:
     ...
 ```
-
-

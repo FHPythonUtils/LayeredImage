@@ -38,5 +38,3 @@ Save a layered image as .webp.
 def saveLayer_WEBP(fileName: str, layeredImage: LayeredImage):
     ...
 ```
-
-

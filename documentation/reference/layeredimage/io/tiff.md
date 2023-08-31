@@ -38,5 +38,3 @@ Save a layered image as .tiff or .tif.
 def saveLayer_TIFF(fileName: str, layeredImage: LayeredImage) -> None:
     ...
 ```
-
-

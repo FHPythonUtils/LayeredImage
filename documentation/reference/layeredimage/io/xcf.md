@@ -38,5 +38,3 @@ Save a layered image as .xcf.
 def saveLayer_XCF(fileName: str, layeredImage: LayeredImage) -> None:
     ...
 ```
-
-

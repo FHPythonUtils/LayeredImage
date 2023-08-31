@@ -162,5 +162,3 @@ Get the object as a dict.
 def json(self) -> dict[str, Any]:
     ...
 ```
-
-

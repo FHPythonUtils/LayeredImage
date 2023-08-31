@@ -40,5 +40,3 @@ Return layers and throw a warning if the image has groups.
 def expandLayersToCanvas(layeredImage: LayeredImage, imageFormat: str) -> list[Image]:
     ...
 ```
-
-

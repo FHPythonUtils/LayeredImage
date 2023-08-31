@@ -106,5 +106,3 @@ def writeImage_LAYERED(
 ):
     ...
 ```
-
-

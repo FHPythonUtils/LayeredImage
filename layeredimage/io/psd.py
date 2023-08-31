@@ -13,8 +13,8 @@ from .common import blendModeLookup
 #### PSD ####
 def openLayer_PSD(file: str) -> LayeredImage:
 	"""Open a .psd file into a layered image."""
-	from psdtoolsx import PSDImage
-	from psdtoolsx.constants import BlendMode as psdB
+	from psd_tools import PSDImage
+	from psd_tools.constants import BlendMode as psdB
 
 	blendLookup = {
 		psdB.NORMAL: BlendType.NORMAL,
