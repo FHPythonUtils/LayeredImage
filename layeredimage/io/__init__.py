@@ -1,7 +1,8 @@
 """Do file io."""
 from __future__ import annotations
 
-from os.path import exists
+from pathlib import Path
+from os.path import exists, splitext
 
 from ..layeredimage import LayeredImage
 from .gif import openLayer_GIF, saveLayer_GIF
@@ -29,7 +30,7 @@ def extNotRecognised(fileName: str):
 	)
 
 
-def openLayerImage(file: str) -> LayeredImage:
+def openLayerImage(file: str | Path) -> LayeredImage:
 	"""Open a layer image file into a layer image object.
 
 	Args:
@@ -58,14 +59,14 @@ def openLayerImage(file: str) -> LayeredImage:
 	if not exists(file):
 		print(f"ERROR: {file} does not exist")
 		raise FileExistsError
-	fileExt = file.split(".")[-1].lower()
+	fileExt = splitext(file)[1].lower()
 	if fileExt not in functionMap:
 		extNotRecognised(file)
 		raise ValueError
 	return functionMap[fileExt](file)
 
 
-def saveLayerImage(fileName: str, layeredImage: LayeredImage) -> None:
+def saveLayerImage(fileName: str | Path, layeredImage: LayeredImage) -> None:
 	"""Save a layered image to a file.
 
 	Args:
@@ -91,7 +92,7 @@ def saveLayerImage(fileName: str, layeredImage: LayeredImage) -> None:
 		"layered": saveLayer_LAYERED,
 		"layeredc": saveLayer_LAYEREDC,
 	}
-	fileExt = fileName.split(".")[-1].lower()
+	fileExt = splitext(file)[1].lower()
 	if fileExt not in functionMap:
 		extNotRecognised(fileName)
 		raise ValueError
