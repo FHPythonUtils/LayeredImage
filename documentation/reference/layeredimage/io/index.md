@@ -15,7 +15,7 @@ Io
 
 ## exportFlatImage
 
-[Show source in __init__.py:102](../../../../layeredimage/io/__init__.py#L102)
+[Show source in __init__.py:103](../../../../layeredimage/io/__init__.py#L103)
 
 Export the layered image to a unilayer image file.
 
@@ -43,7 +43,7 @@ def extNotRecognised(fileName: str): ...
 
 ## openLayerImage
 
-[Show source in __init__.py:33](../../../../layeredimage/io/__init__.py#L33)
+[Show source in __init__.py:34](../../../../layeredimage/io/__init__.py#L34)
 
 Open a layer image file into a layer image object.
 
@@ -70,7 +70,7 @@ def openLayerImage(file: str | Path) -> LayeredImage: ...
 
 ## saveLayerImage
 
-[Show source in __init__.py:69](../../../../layeredimage/io/__init__.py#L69)
+[Show source in __init__.py:70](../../../../layeredimage/io/__init__.py#L70)
 
 Save a layered image to a file.
 
