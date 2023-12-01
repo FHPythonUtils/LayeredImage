@@ -1,8 +1,8 @@
 """Do file io."""
 from __future__ import annotations
 
-from pathlib import Path
 from os.path import exists, splitext
+from pathlib import Path
 
 from ..layeredimage import LayeredImage
 from .gif import openLayer_GIF, saveLayer_GIF

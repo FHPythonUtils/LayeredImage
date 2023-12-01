@@ -35,8 +35,7 @@ class Group(LayerGroup):
         opacity: float = 1.0,
         visible: bool = True,
         blendmode: BlendType = BlendType.NORMAL,
-    ):
-        ...
+    ): ...
 ```
 
 #### See also
@@ -53,8 +52,7 @@ Get the object as a dict.
 #### Signature
 
 ```python
-def json(self) -> dict[str, Any]:
-    ...
+def json(self) -> dict[str, Any]: ...
 ```
 
 
@@ -78,8 +76,7 @@ class Layer(LayerGroup):
         opacity: float = 1.0,
         visible: bool = True,
         blendmode: BlendType = BlendType.NORMAL,
-    ):
-        ...
+    ): ...
 ```
 
 #### See also
@@ -95,8 +92,7 @@ Get the object as a dict.
 #### Signature
 
 ```python
-def json(self) -> dict[str, Any]:
-    ...
+def json(self) -> dict[str, Any]: ...
 ```
 
 
@@ -120,8 +116,7 @@ class LayerGroup:
         visible: bool = True,
         blendmode: BlendType = BlendType.NORMAL,
         **kwargs: Any
-    ):
-        ...
+    ): ...
 ```
 
 ### LayerGroup().__repr__
@@ -133,8 +128,7 @@ Get the string representation.
 #### Signature
 
 ```python
-def __repr__(self):
-    ...
+def __repr__(self): ...
 ```
 
 ### LayerGroup().__str__
@@ -146,8 +140,7 @@ Get the string representation.
 #### Signature
 
 ```python
-def __str__(self):
-    ...
+def __str__(self): ...
 ```
 
 ### LayerGroup().json
@@ -159,6 +152,5 @@ Get the object as a dict.
 #### Signature
 
 ```python
-def json(self) -> dict[str, Any]:
-    ...
+def json(self) -> dict[str, Any]: ...
 ```

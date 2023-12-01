@@ -45,8 +45,7 @@ class LayeredImage:
         layersAndGroups: list[Layer | Group],
         dimensions: tuple[int, int] | None = None,
         **kwargs: Any
-    ):
-        ...
+    ): ...
 ```
 
 ### LayeredImage().__repr__
@@ -58,8 +57,7 @@ Get the string representation.
 #### Signature
 
 ```python
-def __repr__(self):
-    ...
+def __repr__(self): ...
 ```
 
 ### LayeredImage().__str__
@@ -71,8 +69,7 @@ Get the string representation.
 #### Signature
 
 ```python
-def __str__(self):
-    ...
+def __str__(self): ...
 ```
 
 ### LayeredImage().addImageAsLayer
@@ -84,8 +81,7 @@ Resize an image to the canvas and add as a layer.
 #### Signature
 
 ```python
-def addImageAsLayer(self, image: Image.Image, name: str):
-    ...
+def addImageAsLayer(self, image: Image.Image, name: str): ...
 ```
 
 ### LayeredImage().addLayerOrGroup
@@ -97,8 +93,7 @@ Add a LayerOrGroup.
 #### Signature
 
 ```python
-def addLayerOrGroup(self, layerOrGroup: Layer | Group):
-    ...
+def addLayerOrGroup(self, layerOrGroup: Layer | Group): ...
 ```
 
 ### LayeredImage().addLayerRaster
@@ -109,8 +104,7 @@ def addLayerOrGroup(self, layerOrGroup: Layer | Group):
 
 ```python
 @deprecated(details="use addImageAsLayer", deprecated_in="2021.2.4")
-def addLayerRaster(self, image: Image.Image, name: str):
-    ...
+def addLayerRaster(self, image: Image.Image, name: str): ...
 ```
 
 ### LayeredImage().extractGroups
@@ -122,8 +116,7 @@ Extract the groups from the image.
 #### Signature
 
 ```python
-def extractGroups(self):
-    ...
+def extractGroups(self): ...
 ```
 
 ### LayeredImage().extractLayers
@@ -135,8 +128,7 @@ Extract the layers from the image.
 #### Signature
 
 ```python
-def extractLayers(self):
-    ...
+def extractLayers(self): ...
 ```
 
 ### LayeredImage().flattenLayers
@@ -148,8 +140,7 @@ Flatten all layers.
 #### Signature
 
 ```python
-def flattenLayers(self, ignoreHidden: bool = True):
-    ...
+def flattenLayers(self, ignoreHidden: bool = True): ...
 ```
 
 ### LayeredImage().flattenTwoLayers
@@ -161,8 +152,9 @@ Flatten two layers.
 #### Signature
 
 ```python
-def flattenTwoLayers(self, background: int, foreground: int, ignoreHidden: bool = True):
-    ...
+def flattenTwoLayers(
+    self, background: int, foreground: int, ignoreHidden: bool = True
+): ...
 ```
 
 ### LayeredImage().getFlattenLayers
@@ -174,8 +166,7 @@ Return an image for all flattened layers.
 #### Signature
 
 ```python
-def getFlattenLayers(self, ignoreHidden: bool = True) -> Image.Image:
-    ...
+def getFlattenLayers(self, ignoreHidden: bool = True) -> Image.Image: ...
 ```
 
 ### LayeredImage().getFlattenTwoLayers
@@ -189,8 +180,7 @@ Return an image for two flattened layers.
 ```python
 def getFlattenTwoLayers(
     self, background: int, foreground: int, ignoreHidden: bool = True
-) -> Image.Image:
-    ...
+) -> Image.Image: ...
 ```
 
 ### LayeredImage().getLayerOrGroup
@@ -202,8 +192,7 @@ Get a LayerOrGroup.
 #### Signature
 
 ```python
-def getLayerOrGroup(self, index: int):
-    ...
+def getLayerOrGroup(self, index: int): ...
 ```
 
 ### LayeredImage().insertImageAsLayer
@@ -215,8 +204,7 @@ Resize an image to the canvas  and insert the layer.
 #### Signature
 
 ```python
-def insertImageAsLayer(self, image: Image.Image, name: str, index: int):
-    ...
+def insertImageAsLayer(self, image: Image.Image, name: str, index: int): ...
 ```
 
 ### LayeredImage().insertLayerOrGroup
@@ -228,8 +216,7 @@ Insert a LayerOrGroup at a specific index.
 #### Signature
 
 ```python
-def insertLayerOrGroup(self, layerOrGroup: Layer | Group, index: int):
-    ...
+def insertLayerOrGroup(self, layerOrGroup: Layer | Group, index: int): ...
 ```
 
 ### LayeredImage().insertLayerRaster
@@ -240,8 +227,7 @@ def insertLayerOrGroup(self, layerOrGroup: Layer | Group, index: int):
 
 ```python
 @deprecated(details="use insertImageAsLayer", deprecated_in="2021.2.4")
-def insertLayerRaster(self, image: Image.Image, name: str, index: int):
-    ...
+def insertLayerRaster(self, image: Image.Image, name: str, index: int): ...
 ```
 
 ### LayeredImage().json
@@ -253,8 +239,7 @@ Get the object as a dict.
 #### Signature
 
 ```python
-def json(self) -> dict[str, Any]:
-    ...
+def json(self) -> dict[str, Any]: ...
 ```
 
 ### LayeredImage().removeLayerOrGroup
@@ -266,8 +251,7 @@ Remove a LayerOrGroup at a specific index.
 #### Signature
 
 ```python
-def removeLayerOrGroup(self, index: int):
-    ...
+def removeLayerOrGroup(self, index: int): ...
 ```
 
 ### LayeredImage().updateGroups
@@ -279,8 +263,7 @@ Update the groups from the image.
 #### Signature
 
 ```python
-def updateGroups(self):
-    ...
+def updateGroups(self): ...
 ```
 
 ### LayeredImage().updateLayers
@@ -292,8 +275,7 @@ Update the layers from the image.
 #### Signature
 
 ```python
-def updateLayers(self):
-    ...
+def updateLayers(self): ...
 ```
 
 
@@ -323,8 +305,7 @@ def flattenAll(
     layers: list[Layer | Group] | list[Layer],
     imageDimensions: tuple[int, int],
     ignoreHidden: bool = True,
-):
-    ...
+): ...
 ```
 
 
@@ -356,6 +337,5 @@ def flattenLayerOrGroup(
     imageDimensions: tuple[int, int],
     flattenedSoFar: Image.Image | None = None,
     ignoreHidden: bool = True,
-):
-    ...
+): ...
 ```

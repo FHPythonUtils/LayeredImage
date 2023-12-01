@@ -22,8 +22,7 @@ Get the blendmode from a lookup table.
 ```python
 def blendModeLookup(
     blendmode: Any, blendLookup: dict[Any, Any], default: Any = BlendType.NORMAL
-) -> BlendType:
-    ...
+) -> BlendType: ...
 ```
 
 
@@ -37,6 +36,7 @@ Return layers and throw a warning if the image has groups.
 #### Signature
 
 ```python
-def expandLayersToCanvas(layeredImage: LayeredImage, imageFormat: str) -> list[Image]:
-    ...
+def expandLayersToCanvas(
+    layeredImage: LayeredImage, imageFormat: str
+) -> list[Image]: ...
 ```

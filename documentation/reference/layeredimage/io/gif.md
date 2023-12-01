@@ -20,8 +20,7 @@ Open a .gif file into a layered image.
 #### Signature
 
 ```python
-def openLayer_GIF(file: str) -> LayeredImage:
-    ...
+def openLayer_GIF(file: str) -> LayeredImage: ...
 ```
 
 
@@ -35,6 +34,5 @@ Save a layered image as .gif.
 #### Signature
 
 ```python
-def saveLayer_GIF(fileName: str, layeredImage: LayeredImage) -> None:
-    ...
+def saveLayer_GIF(fileName: str, layeredImage: LayeredImage) -> None: ...
 ```

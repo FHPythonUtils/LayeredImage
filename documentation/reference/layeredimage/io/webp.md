@@ -20,8 +20,7 @@ Open a .webp file into a layered image.
 #### Signature
 
 ```python
-def openLayer_WEBP(file: str) -> LayeredImage:
-    ...
+def openLayer_WEBP(file: str) -> LayeredImage: ...
 ```
 
 
@@ -35,6 +34,5 @@ Save a layered image as .webp.
 #### Signature
 
 ```python
-def saveLayer_WEBP(fileName: str, layeredImage: LayeredImage):
-    ...
+def saveLayer_WEBP(fileName: str, layeredImage: LayeredImage): ...
 ```

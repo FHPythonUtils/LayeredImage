@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "layeredimage"
-version = "2023"
+version = "2023.0.1"
 license = "mit"
 description = "Use this module to read, and write to a number of layered image formats"
 authors = ["FredHappyface"]

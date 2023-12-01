@@ -20,8 +20,7 @@ Open a .tiff or a .tif file into a layered image.
 #### Signature
 
 ```python
-def openLayer_TIFF(file: str) -> LayeredImage:
-    ...
+def openLayer_TIFF(file: str) -> LayeredImage: ...
 ```
 
 
@@ -35,6 +34,5 @@ Save a layered image as .tiff or .tif.
 #### Signature
 
 ```python
-def saveLayer_TIFF(fileName: str, layeredImage: LayeredImage) -> None:
-    ...
+def saveLayer_TIFF(fileName: str, layeredImage: LayeredImage) -> None: ...
 ```

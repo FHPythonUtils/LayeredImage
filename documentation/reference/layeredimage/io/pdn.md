@@ -20,8 +20,7 @@ Open a .pdn file into a layered image.
 #### Signature
 
 ```python
-def openLayer_PDN(file: str) -> LayeredImage:
-    ...
+def openLayer_PDN(file: str) -> LayeredImage: ...
 ```
 
 
@@ -35,6 +34,5 @@ Save a layered image as .pdn.
 #### Signature
 
 ```python
-def saveLayer_PDN(fileName: str, layeredImage: LayeredImage) -> None:
-    ...
+def saveLayer_PDN(fileName: str, layeredImage: LayeredImage) -> None: ...
 ```

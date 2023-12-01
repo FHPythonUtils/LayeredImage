@@ -20,8 +20,7 @@ Open an .xcf file into a layered image.
 #### Signature
 
 ```python
-def openLayer_XCF(file: str) -> LayeredImage:
-    ...
+def openLayer_XCF(file: str) -> LayeredImage: ...
 ```
 
 
@@ -35,6 +34,5 @@ Save a layered image as .xcf.
 #### Signature
 
 ```python
-def saveLayer_XCF(fileName: str, layeredImage: LayeredImage) -> None:
-    ...
+def saveLayer_XCF(fileName: str, layeredImage: LayeredImage) -> None: ...
 ```

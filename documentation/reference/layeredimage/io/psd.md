@@ -20,8 +20,7 @@ Open a .psd file into a layered image.
 #### Signature
 
 ```python
-def openLayer_PSD(file: str) -> LayeredImage:
-    ...
+def openLayer_PSD(file: str) -> LayeredImage: ...
 ```
 
 
@@ -35,6 +34,5 @@ Save a layered image as .psd.
 #### Signature
 
 ```python
-def saveLayer_PSD(fileName: str, layeredImage: LayeredImage) -> None:
-    ...
+def saveLayer_PSD(fileName: str, layeredImage: LayeredImage) -> None: ...
 ```

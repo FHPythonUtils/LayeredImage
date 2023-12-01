@@ -21,8 +21,7 @@ Update the project with a shiny new layer.
 #### Signature
 
 ```python
-def addLayer_ORA(project, layer, blendLookup):
-    ...
+def addLayer_ORA(project, layer, blendLookup): ...
 ```
 
 
@@ -36,8 +35,7 @@ Open an .ora file into a layered image.
 #### Signature
 
 ```python
-def openLayer_ORA(file: str) -> LayeredImage:
-    ...
+def openLayer_ORA(file: str) -> LayeredImage: ...
 ```
 
 
@@ -51,6 +49,5 @@ Save a layered image as .ora.
 #### Signature
 
 ```python
-def saveLayer_ORA(fileName: str, layeredImage: LayeredImage) -> None:
-    ...
+def saveLayer_ORA(fileName: str, layeredImage: LayeredImage) -> None: ...
 ```
