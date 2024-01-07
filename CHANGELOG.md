@@ -3,6 +3,10 @@
 All major and minor version changes will be documented in this file. Details of
 patch-level version changes can be found in [commit messages](../../commits/master).
 
+## 2024 - 2024/01/07
+
+- update dependencies
+
 ## 2023.0.2 - 2023/12/01
 
 - add: Using os.path.splitext() to support Path objects https://github.com/FHPythonUtils/LayeredImage/pull/6, thank you https://github.com/denilsonsa!
