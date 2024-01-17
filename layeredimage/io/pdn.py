@@ -38,13 +38,13 @@ def openLayer_PDN(file: str) -> LayeredImage:
 		image = Image.fromarray(layer.image)
 		layers.append(
 			Layer(
-				layer.name,
-				image,
-				image.size,
-				(0, 0),
-				layer.opacity / 255,
-				layer.visible,
-				blendModeLookup(layer.blendMode, blendLookup),
+				name=layer.name,
+				image=image,
+				dimensions=image.size,
+				offsets=(0, 0),
+				opacity=layer.opacity / 255,
+				visible=layer.visible,
+				blendmode=blendModeLookup(layer.blendMode, blendLookup),
 			)
 		)
 	return LayeredImage(layers, (project.width, project.height))

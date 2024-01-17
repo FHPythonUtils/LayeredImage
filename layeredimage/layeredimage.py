@@ -12,6 +12,7 @@ from .layergroup import Group, Layer
 
 _ = (rasterImageOA, rasterImageOffset)
 
+
 class LayeredImage:
 	"""A representation of a layered image such as an ora."""
 
@@ -106,12 +107,16 @@ class LayeredImage:
 		self.insertLayerOrGroup(Layer(name, layer, self.dimensions), index)
 
 	# The user may want to flatten the layers
-	def getFlattenLayers(self, ignoreHidden: bool = True) -> Image.Image:
+	def getFlattenLayers(self, *, ignoreHidden: bool = True) -> Image.Image:
 		"""Return an image for all flattened layers."""
-		return flattenAll(self.layersAndGroups, self.dimensions, ignoreHidden)
+		return flattenAll(self.layersAndGroups, self.dimensions, ignoreHidden=ignoreHidden)
 
 	def getFlattenTwoLayers(
-		self, background: int, foreground: int, ignoreHidden: bool = True
+		self,
+		background: int,
+		foreground: int,
+		*,
+		ignoreHidden: bool = True,
 	) -> Image.Image:
 		"""Return an image for two flattened layers."""
 		flattenedSoFar = flattenLayerOrGroup(
@@ -124,17 +129,19 @@ class LayeredImage:
 			ignoreHidden=ignoreHidden,
 		)
 
-	def flattenTwoLayers(self, background: int, foreground: int, ignoreHidden: bool = True) -> None:
+	def flattenTwoLayers(
+		self, background: int, foreground: int, *, ignoreHidden: bool = True
+	) -> None:
 		"""Flatten two layers."""
-		image = self.getFlattenTwoLayers(background, foreground, ignoreHidden)
+		image = self.getFlattenTwoLayers(background, foreground, ignoreHidden=ignoreHidden)
 		self.removeLayerOrGroup(foreground)
 		self.layersAndGroups[background] = Layer(
 			self.layersAndGroups[background].name + " (flattened)", image, self.dimensions
 		)
 
-	def flattenLayers(self, ignoreHidden: bool = True) -> None:
+	def flattenLayers(self, *, ignoreHidden: bool = True) -> None:
 		"""Flatten all layers."""
-		image = self.getFlattenLayers(ignoreHidden)
+		image = self.getFlattenLayers(ignoreHidden=ignoreHidden)
 		self.layersAndGroups[0] = Layer(
 			self.layersAndGroups[0].name + " (flattened)", image, self.dimensions
 		)
@@ -154,18 +161,18 @@ class LayeredImage:
 					# Render the layer
 					layers.append(
 						Layer(
-							layer.name,
-							layer.image,
-							(
+							name=layer.name,
+							image=layer.image,
+							dimensions=(
 								max(layer.dimensions[0], layerOrGroup.dimensions[0]),
 								max(layer.dimensions[1], layerOrGroup.dimensions[1]),
 							),
-							(
+							offsets=(
 								layerOrGroup.offsets[0] + layer.offsets[0],
 								layerOrGroup.offsets[1] + layer.offsets[1],
 							),
-							layerOrGroup.opacity * layer.opacity,
-							layerOrGroup.visible and layer.visible,
+							opacity=layerOrGroup.opacity * layer.opacity,
+							visible=layerOrGroup.visible and layer.visible,
 						)
 					)
 		return layers
@@ -191,6 +198,7 @@ def flattenLayerOrGroup(
 	layerOrGroup: Layer | Group,
 	imageDimensions: tuple[int, int],
 	flattenedSoFar: Image.Image | None = None,
+	*,
 	ignoreHidden: bool = True,
 ):
 	"""Flatten a layer or group on to an image of what has already been flattened.
@@ -212,7 +220,7 @@ def flattenLayerOrGroup(
 		foregroundRender = Image.new("RGBA", imageDimensions)
 	elif isinstance(layerOrGroup, Group):
 		foregroundRender = renderWAlphaOffset(
-			flattenAll(layerOrGroup.layers, imageDimensions, ignoreHidden),
+			flattenAll(layerOrGroup.layers, imageDimensions, ignoreHidden=ignoreHidden),
 			imageDimensions,
 			1,
 			layerOrGroup.offsets,
@@ -232,6 +240,7 @@ def flattenLayerOrGroup(
 def flattenAll(
 	layers: list[Layer | Group] | list[Layer],
 	imageDimensions: tuple[int, int],
+	*,
 	ignoreHidden: bool = True,
 ):
 	"""Flatten a list of layers and groups.

@@ -67,13 +67,13 @@ def openLayer_LAYERED(file: str) -> LayeredImage:
 				]
 				layersAndGroups.append(
 					Group(
-						layerOrGroup["name"],
-						layers,
-						layerOrGroup["dimensions"],
-						layerOrGroup["offsets"],
-						layerOrGroup["opacity"],
-						layerOrGroup["visible"],
-						blendModeLookup(layerOrGroup["blendmode"], blendLookup),
+						name=layerOrGroup["name"],
+						layers=layers,
+						dimensions=layerOrGroup["dimensions"],
+						offsets=layerOrGroup["offsets"],
+						opacity=layerOrGroup["opacity"],
+						visible=layerOrGroup["visible"],
+						blendmode=blendModeLookup(layerOrGroup["blendmode"], blendLookup),
 					)
 				)
 		return LayeredImage(layersAndGroups, stack["dimensions"])
@@ -81,16 +81,16 @@ def openLayer_LAYERED(file: str) -> LayeredImage:
 
 def grabLayer_LAYERED(zipFile: ZipFile, layer: dict[str, Any], blendLookup: dict[str, Any]):
 	"""Grab an image from .layered."""
-	with zipFile.open("data/" + layer["name"] + ".png") as layerImage:
+	with zipFile.open(f'data/{layer["name"]}.png') as layerImage:
 		image = Image.open(layerImage).convert("RGBA")
 	return Layer(
-		layer["name"],
-		image,
-		layer["dimensions"],
-		layer["offsets"],
-		layer["opacity"],
-		layer["visible"],
-		blendModeLookup(layer["blendmode"], blendLookup),
+		name=layer["name"],
+		image=image,
+		dimensions=layer["dimensions"],
+		offsets=layer["offsets"],
+		opacity=layer["opacity"],
+		visible=layer["visible"],
+		blendmode=blendModeLookup(layer["blendmode"], blendLookup),
 	)
 
 
@@ -117,7 +117,9 @@ def _saveLayer_LAYERED(fileName: str, layeredImage: LayeredImage, compressed: bo
 			writeImage_LAYERED(imageData, layered, imageName + ".png", compressed)
 
 
-def writeImage_LAYERED(image: Image.Image, zipFile: ZipFile, path: str, compressed: bool = False) -> None:
+def writeImage_LAYERED(
+	image: Image.Image, zipFile: ZipFile, path: str, compressed: bool = False
+) -> None:
 	"""Write an image to the archive."""
 	imgByteArr = io.BytesIO()
 	imageCopy = image.copy()

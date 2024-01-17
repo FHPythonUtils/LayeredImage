@@ -37,12 +37,12 @@ def openLayer_TIFF(file: str) -> LayeredImage:
 		# Add the layer
 		layers.append(
 			Layer(
-				ifd["PageName"][0],
-				project.copy(),
-				(ifd["ImageWidth"][0], ifd["ImageLength"][0]),
-				(offsetX, offsetY),
-				1,
-				True,
+				name=ifd["PageName"][0],
+				image=project.copy(),
+				dimensions=(ifd["ImageWidth"][0], ifd["ImageLength"][0]),
+				offsets=(offsetX, offsetY),
+				opacity=1,
+				visible=True,
 			)
 		)
 	project.close()

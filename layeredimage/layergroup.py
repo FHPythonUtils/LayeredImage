@@ -17,6 +17,7 @@ class LayerGroup:
 		dimensions: tuple[int, int],
 		offsets: tuple[int, int] = (0, 0),
 		opacity: float = 1.0,
+		*,
 		visible: bool = True,
 		blendmode: BlendType = BlendType.NORMAL,
 		**kwargs: Any,
@@ -51,16 +52,7 @@ class LayerGroup:
 
 	def __str__(self) -> str:
 		"""Get the string representation."""
-		return (
-			"<LayeredImage "
-			+ ' "'
-			+ self.name
-			+ '" ('
-			+ str(self.dimensions[0])
-			+ "x"
-			+ str(self.dimensions[1])
-			+ ")>"
-		)
+		return f'<LayeredImage "{self.name}" ({self.dimensions[0]}x{self.dimensions[1]})>'
 
 	def json(self) -> dict[str, Any]:
 		"""Get the object as a dict."""
@@ -84,6 +76,7 @@ class Layer(LayerGroup):
 		dimensions: tuple[int, int] | None = None,
 		offsets: tuple[int, int] = (0, 0),
 		opacity: float = 1.0,
+		*,
 		visible: bool = True,
 		blendmode: BlendType = BlendType.NORMAL,
 	) -> None:
@@ -135,6 +128,7 @@ class Group(LayerGroup):
 		dimensions: tuple[int, int] | None = None,
 		offsets: tuple[int, int] = (0, 0),
 		opacity: float = 1.0,
+		*,
 		visible: bool = True,
 		blendmode: BlendType = BlendType.NORMAL,
 	) -> None:

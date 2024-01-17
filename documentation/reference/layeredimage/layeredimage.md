@@ -138,7 +138,7 @@ Flatten all layers.
 #### Signature
 
 ```python
-def flattenLayers(self, ignoreHidden: bool = True): ...
+def flattenLayers(self, *, ignoreHidden: bool = True,): ...
 ```
 
 ### LayeredImage().flattenTwoLayers
@@ -151,7 +151,7 @@ Flatten two layers.
 
 ```python
 def flattenTwoLayers(
-    self, background: int, foreground: int, ignoreHidden: bool = True
+    self, background: int, foreground: int, *, ignoreHidden: bool = True,
 ): ...
 ```
 
@@ -164,7 +164,7 @@ Return an image for all flattened layers.
 #### Signature
 
 ```python
-def getFlattenLayers(self, ignoreHidden: bool = True) -> Image.Image: ...
+def getFlattenLayers(self, *, ignoreHidden: bool = True,) -> Image.Image: ...
 ```
 
 ### LayeredImage().getFlattenTwoLayers
@@ -177,7 +177,7 @@ Return an image for two flattened layers.
 
 ```python
 def getFlattenTwoLayers(
-    self, background: int, foreground: int, ignoreHidden: bool = True
+    self, background: int, foreground: int, *, ignoreHidden: bool = True,
 ) -> Image.Image: ...
 ```
 
@@ -304,7 +304,7 @@ Flatten a list of layers and groups.
 def flattenAll(
     layers: list[Layer | Group] | list[Layer],
     imageDimensions: tuple[int, int],
-    ignoreHidden: bool = True,
+    *, ignoreHidden: bool = True,
 ): ...
 ```
 
@@ -338,6 +338,6 @@ def flattenLayerOrGroup(
     layerOrGroup: Layer | Group,
     imageDimensions: tuple[int, int],
     flattenedSoFar: Image.Image | None = None,
-    ignoreHidden: bool = True,
+    *, ignoreHidden: bool = True,
 ): ...
 ```

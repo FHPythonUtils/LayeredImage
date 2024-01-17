@@ -44,36 +44,36 @@ def openLayer_PSD(file: str) -> LayeredImage:
 			for layer in layerOrGroup:
 				layers.append(
 					Layer(
-						layer.name,
-						layer.topil(),
-						(layer.width, layer.height),
-						(layer.left - layerOrGroup.left, layer.top - layerOrGroup.top),
-						layer.opacity / 255,
-						layer.visible,
-						blendModeLookup(layer.blend_mode, blendLookup),
+						name=layer.name,
+						image=layer.topil(),
+						dimensions=(layer.width, layer.height),
+						offsets=(layer.left - layerOrGroup.left, layer.top - layerOrGroup.top),
+						opacity=layer.opacity / 255,
+						visible=layer.visible,
+						blendmode=blendModeLookup(layer.blend_mode, blendLookup),
 					)
 				)
 			layersAndGroups.append(
 				Group(
-					layerOrGroup.name,
-					layers,
-					(layerOrGroup.width, layerOrGroup.height),
-					(layerOrGroup.left, layerOrGroup.top),
-					layerOrGroup.opacity / 255,
-					layerOrGroup.visible,
-					blendModeLookup(layerOrGroup.blend_mode, blendLookup),
+					name=layerOrGroup.name,
+					layers=layers,
+					dimensions=(layerOrGroup.width, layerOrGroup.height),
+					offsets=(layerOrGroup.left, layerOrGroup.top),
+					opacity=layerOrGroup.opacity / 255,
+					visible=layerOrGroup.visible,
+					blendmode=blendModeLookup(layerOrGroup.blend_mode, blendLookup),
 				)
 			)
 		else:
 			layersAndGroups.append(
 				Layer(
-					layerOrGroup.name,
-					layerOrGroup.topil(),
-					(layerOrGroup.width, layerOrGroup.height),
-					(layerOrGroup.left, layerOrGroup.top),
-					layerOrGroup.opacity / 255,
-					layerOrGroup.visible,
-					blendModeLookup(layerOrGroup.blend_mode, blendLookup),
+					name=layerOrGroup.name,
+					image=layerOrGroup.topil(),
+					dimensions=(layerOrGroup.width, layerOrGroup.height),
+					offsets=(layerOrGroup.left, layerOrGroup.top),
+					opacity=layerOrGroup.opacity / 255,
+					visible=layerOrGroup.visible,
+					blendmode=blendModeLookup(layerOrGroup.blend_mode, blendLookup),
 				)
 			)
 	return LayeredImage(layersAndGroups, (project.width, project.height))

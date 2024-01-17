@@ -19,9 +19,9 @@ def openLayer_GIF(file: str) -> LayeredImage:
 		project.seek(index)
 		layers.append(
 			Layer(
-				f"Frame {len(layers) + 1} ({project.info['duration']}ms)",
-				project.copy(),
-				projectSize,
+				name=f"Frame {len(layers) + 1} ({project.info['duration']}ms)",
+				image=project.copy(),
+				dimensions=projectSize,
 			)
 		)
 	project.close()

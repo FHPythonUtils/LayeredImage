@@ -77,16 +77,16 @@ def openLayer_XCF(file: str) -> LayeredImage:
 				layer = layers[index]
 				groupLayers[groupIndex].append(
 					Layer(
-						layer.name,
-						layer.image,
-						(layer.width, layer.height),
-						(
+						name=layer.name,
+						image=layer.image,
+						dimensions=(layer.width, layer.height),
+						offsets=(
 							layer.xOffset - layerOrGroup.xOffset,
 							layer.yOffset - layerOrGroup.yOffset,
 						),
-						layer.opacity,
-						layer.visible,
-						blendModeLookup(layer.blendMode, blendLookup),
+						opacity=layer.opacity,
+						visible=layer.visible,
+						blendmode=blendModeLookup(layer.blendMode, blendLookup),
 					)
 				)
 				layers.pop(index)
@@ -103,26 +103,26 @@ def openLayer_XCF(file: str) -> LayeredImage:
 		if layerOrGroup.isGroup:
 			layersAndGroups.append(
 				Group(
-					layerOrGroup.name,
-					groupLayers[groupIndex][::-1],
-					(layerOrGroup.width, layerOrGroup.height),
-					(layerOrGroup.xOffset, layerOrGroup.yOffset),
-					layerOrGroup.opacity,
-					layerOrGroup.visible,
-					blendModeLookup(layerOrGroup.blendMode, blendLookup),
+					name=layerOrGroup.name,
+					layers=groupLayers[groupIndex][::-1],
+					dimensions=(layerOrGroup.width, layerOrGroup.height),
+					offsets=(layerOrGroup.xOffset, layerOrGroup.yOffset),
+					opacity=layerOrGroup.opacity,
+					visible=layerOrGroup.visible,
+					blendmode=blendModeLookup(layerOrGroup.blendMode, blendLookup),
 				)
 			)
 			groupIndex += 1
 		else:
 			layersAndGroups.append(
 				Layer(
-					layerOrGroup.name,
-					layerOrGroup.image,
-					(layerOrGroup.width, layerOrGroup.height),
-					(layerOrGroup.xOffset, layerOrGroup.yOffset),
-					layerOrGroup.opacity,
-					layerOrGroup.visible,
-					blendModeLookup(layerOrGroup.blendMode, blendLookup),
+					name=layerOrGroup.name,
+					image=layerOrGroup.image,
+					dimensions=(layerOrGroup.width, layerOrGroup.height),
+					offsets=(layerOrGroup.xOffset, layerOrGroup.yOffset),
+					opacity=layerOrGroup.opacity,
+					visible=layerOrGroup.visible,
+					blendmode=blendModeLookup(layerOrGroup.blendMode, blendLookup),
 				)
 			)
 

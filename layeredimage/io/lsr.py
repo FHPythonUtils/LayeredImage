@@ -19,13 +19,17 @@ def openLayer_LSR(file: str) -> LayeredImage:
 	for group in project.layers:
 		groups.append(
 			Group(
-				group.name,
-				[
-					Layer(layer.name, layer.scaledImage(), layer.scaledImage().size)
+				name=group.name,
+				layers=[
+					Layer(
+						name=layer.name,
+						image=layer.scaledImage(),
+						dimensions=layer.scaledImage().size,
+					)
 					for layer in group.images
 				],
-				group.size,
-				(int(group.offsets()[0]), int(group.offsets()[1])),
+				dimensions=group.size,
+				offsets=(int(group.offsets()[0]), int(group.offsets()[1])),
 			)
 		)
 	return LayeredImage(groups, project.size)

@@ -42,13 +42,13 @@ def openLayer_ORA(file: str) -> LayeredImage:
 		if layerOrGroup.type == TYPE_LAYER:
 			layersAndGroups.append(
 				Layer(
-					layerOrGroup.name,
-					layerOrGroup.get_image_data(True),
-					layerOrGroup.dimensions,
-					layerOrGroup.offsets,
-					layerOrGroup.opacity,
-					layerOrGroup.visible,
-					blendModeLookup(layerOrGroup.composite_op, blendLookup),
+					name=layerOrGroup.name,
+					image=layerOrGroup.get_image_data(True),
+					dimensions=layerOrGroup.dimensions,
+					offsets=layerOrGroup.offsets,
+					opacity=layerOrGroup.opacity,
+					visible=layerOrGroup.visible,
+					blendmode=blendModeLookup(layerOrGroup.composite_op, blendLookup),
 				)
 			)
 		else:
@@ -56,24 +56,24 @@ def openLayer_ORA(file: str) -> LayeredImage:
 			for layer in list(layerOrGroup.children)[::-1]:
 				layers.append(
 					Layer(
-						layer.name,
-						layer.get_image_data(True),
-						layer.dimensions,
-						layer.offsets,
-						layer.opacity,
-						layer.visible,
-						blendModeLookup(layerOrGroup.composite_op, blendLookup),
+						name=layer.name,
+						image=layer.get_image_data(True),
+						dimensions=layer.dimensions,
+						offsets=layer.offsets,
+						opacity=layer.opacity,
+						visible=layer.visible,
+						blendmode=blendModeLookup(layerOrGroup.composite_op, blendLookup),
 					)
 				)
 			layersAndGroups.append(
 				Group(
-					layerOrGroup.name,
-					layers,
-					project.dimensions,
-					layerOrGroup.offsets,
-					layerOrGroup.opacity,
-					layerOrGroup.visible,
-					blendModeLookup(layerOrGroup.composite_op, blendLookup),
+					name=layerOrGroup.name,
+					layers=layers,
+					dimensions=project.dimensions,
+					offsets=layerOrGroup.offsets,
+					opacity=layerOrGroup.opacity,
+					visible=layerOrGroup.visible,
+					blendmode=blendModeLookup(layerOrGroup.composite_op, blendLookup),
 				)
 			)
 	return LayeredImage(layersAndGroups, project.dimensions)
