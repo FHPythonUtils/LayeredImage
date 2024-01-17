@@ -3,8 +3,9 @@ from __future__ import annotations
 
 from PIL import Image
 
-from ..layeredimage import LayeredImage
-from ..layergroup import Layer
+from layeredimage.layeredimage import LayeredImage
+from layeredimage.layergroup import Layer
+
 from .common import expandLayersToCanvas
 
 

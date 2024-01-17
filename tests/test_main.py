@@ -15,7 +15,7 @@ import layeredimage.io
 
 
 # ORA
-def test_ora():
+def test_ora() -> None:
 	ora = layeredimage.io.openLayerImage(f"{THISDIR}/data/layered_image.ora")
 	layeredimage.io.saveLayerImage(f"{THISDIR}/data/ora_output.ora", ora)
 	layeredimage.io.saveLayerImage(f"{THISDIR}/data/ora_output.tiff", ora)
@@ -32,7 +32,7 @@ def test_ora():
 
 
 # PSD
-def test_psd():
+def test_psd() -> None:
 	psd = layeredimage.io.openLayerImage(f"{THISDIR}/data/layered_image.psd")
 	layeredimage.io.saveLayerImage(f"{THISDIR}/data/psd_output.ora", psd)
 	layeredimage.io.saveLayerImage(f"{THISDIR}/data/psd_output.tiff", psd)
@@ -47,7 +47,7 @@ def test_psd():
 
 
 # PDN
-def test_pdn():
+def test_pdn() -> None:
 	pdn = layeredimage.io.openLayerImage(f"{THISDIR}/data/layered_image.pdn")
 	layeredimage.io.saveLayerImage(f"{THISDIR}/data/pdn_output.ora", pdn)
 	layeredimage.io.saveLayerImage(f"{THISDIR}/data/pdn_output.tiff", pdn)
@@ -62,7 +62,7 @@ def test_pdn():
 
 
 # XCF
-def test_xcf():
+def test_xcf() -> None:
 	xcf = layeredimage.io.openLayerImage(f"{THISDIR}/data/layered_image.xcf")
 	layeredimage.io.saveLayerImage(f"{THISDIR}/data/xcf_output.ora", xcf)
 	layeredimage.io.saveLayerImage(f"{THISDIR}/data/xcf_output.tiff", xcf)
@@ -77,7 +77,7 @@ def test_xcf():
 
 
 # TIFF
-def test_tiff():
+def test_tiff() -> None:
 	tiff = layeredimage.io.openLayerImage(f"{THISDIR}/data/layered_image.tiff")
 	layeredimage.io.saveLayerImage(f"{THISDIR}/data/tiff_output.ora", tiff)
 	layeredimage.io.saveLayerImage(f"{THISDIR}/data/tiff_output.tiff", tiff)
@@ -92,7 +92,7 @@ def test_tiff():
 
 
 # WEBP
-def test_webp():
+def test_webp() -> None:
 	webp = layeredimage.io.openLayerImage(f"{THISDIR}/data/layered_image.webp")
 	layeredimage.io.saveLayerImage(f"{THISDIR}/data/webp_output.ora", webp)
 	layeredimage.io.saveLayerImage(f"{THISDIR}/data/webp_output.webp", webp)
@@ -107,7 +107,7 @@ def test_webp():
 
 
 # GIF
-def test_gif():
+def test_gif() -> None:
 	gif = layeredimage.io.openLayerImage(f"{THISDIR}/data/layered_image.gif")
 	layeredimage.io.saveLayerImage(f"{THISDIR}/data/gif_output.ora", gif)
 	layeredimage.io.saveLayerImage(f"{THISDIR}/data/gif_output.gif", gif)
@@ -120,7 +120,7 @@ def test_gif():
 
 
 # LSR
-def test_lsr():
+def test_lsr() -> None:
 	lsr = layeredimage.io.openLayerImage(f"{THISDIR}/data/layered_image.lsr")
 	layeredimage.io.saveLayerImage(f"{THISDIR}/data/lsr_output.ora", lsr)
 	layeredimage.io.saveLayerImage(f"{THISDIR}/data/lsr_output.lsr", lsr)
@@ -135,7 +135,7 @@ def test_lsr():
 
 
 # LAYERED
-def test_layered():
+def test_layered() -> None:
 	layered = layeredimage.io.openLayerImage(f"{THISDIR}/data/layered_image.layered")
 	layeredimage.io.saveLayerImage(f"{THISDIR}/data/layered_output.ora", layered)
 	layeredimage.io.saveLayerImage(f"{THISDIR}/data/layered_output.tiff", layered)
@@ -150,7 +150,7 @@ def test_layered():
 
 
 # LAYEREDC
-def test_layeredc():
+def test_layeredc() -> None:
 	layeredc = layeredimage.io.openLayerImage(f"{THISDIR}/data/layered_image.layeredc")
 	layeredimage.io.saveLayerImage(f"{THISDIR}/data/layeredc_output.ora", layeredc)
 	layeredimage.io.saveLayerImage(f"{THISDIR}/data/layeredc_output.tiff", layeredc)

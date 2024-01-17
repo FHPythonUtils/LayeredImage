@@ -6,8 +6,8 @@ from typing import Any
 from blendmodes.imagetools import renderWAlphaOffset
 from PIL.Image import Image
 
-from ..blend import BlendType
-from ..layeredimage import LayeredImage
+from layeredimage.blend import BlendType
+from layeredimage.layeredimage import LayeredImage
 
 
 def blendModeLookup(

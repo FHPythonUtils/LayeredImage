@@ -20,7 +20,7 @@ class LayeredImage:
 		layersAndGroups: list[Layer | Group],
 		dimensions: tuple[int, int] | None = None,
 		**kwargs: Any,
-	):
+	) -> None:
 		"""LayeredImage - representation of a layered image.
 
 		Args:
@@ -44,11 +44,11 @@ class LayeredImage:
 			)
 		self.extras = kwargs
 
-	def __repr__(self):
+	def __repr__(self) -> str:
 		"""Get the string representation."""
 		return self.__str__()
 
-	def __str__(self):
+	def __str__(self) -> str:
 		"""Get the string representation."""
 		return (
 			"<LayeredImage ("
@@ -70,15 +70,15 @@ class LayeredImage:
 		"""Get a LayerOrGroup."""
 		return self.layersAndGroups[index]
 
-	def addLayerOrGroup(self, layerOrGroup: Layer | Group):
+	def addLayerOrGroup(self, layerOrGroup: Layer | Group) -> None:
 		"""Add a LayerOrGroup."""
 		self.layersAndGroups.append(layerOrGroup)
 
-	def insertLayerOrGroup(self, layerOrGroup: Layer | Group, index: int):
+	def insertLayerOrGroup(self, layerOrGroup: Layer | Group, index: int) -> None:
 		"""Insert a LayerOrGroup at a specific index."""
 		self.layersAndGroups.insert(index, layerOrGroup)
 
-	def removeLayerOrGroup(self, index: int):
+	def removeLayerOrGroup(self, index: int) -> None:
 		"""Remove a LayerOrGroup at a specific index."""
 		self.layersAndGroups.pop(index)
 
@@ -89,7 +89,7 @@ class LayeredImage:
 	):  # pylint:disable=missing-function-docstring
 		return self.addImageAsLayer(image, name)
 
-	def addImageAsLayer(self, image: Image.Image, name: str):
+	def addImageAsLayer(self, image: Image.Image, name: str) -> None:
 		"""Resize an image to the canvas and add as a layer."""
 		layer = renderWAlphaOffset(image, self.dimensions)
 		self.addLayerOrGroup(Layer(name, layer, self.dimensions))
@@ -100,7 +100,7 @@ class LayeredImage:
 	):  # pylint:disable=missing-function-docstring
 		return self.insertImageAsLayer(image, name, index)
 
-	def insertImageAsLayer(self, image: Image.Image, name: str, index: int):
+	def insertImageAsLayer(self, image: Image.Image, name: str, index: int) -> None:
 		"""Resize an image to the canvas  and insert the layer."""
 		layer = renderWAlphaOffset(image, self.dimensions)
 		self.insertLayerOrGroup(Layer(name, layer, self.dimensions), index)
@@ -124,7 +124,7 @@ class LayeredImage:
 			ignoreHidden=ignoreHidden,
 		)
 
-	def flattenTwoLayers(self, background: int, foreground: int, ignoreHidden: bool = True):
+	def flattenTwoLayers(self, background: int, foreground: int, ignoreHidden: bool = True) -> None:
 		"""Flatten two layers."""
 		image = self.getFlattenTwoLayers(background, foreground, ignoreHidden)
 		self.removeLayerOrGroup(foreground)
@@ -132,7 +132,7 @@ class LayeredImage:
 			self.layersAndGroups[background].name + " (flattened)", image, self.dimensions
 		)
 
-	def flattenLayers(self, ignoreHidden: bool = True):
+	def flattenLayers(self, ignoreHidden: bool = True) -> None:
 		"""Flatten all layers."""
 		image = self.getFlattenLayers(ignoreHidden)
 		self.layersAndGroups[0] = Layer(
@@ -170,7 +170,7 @@ class LayeredImage:
 					)
 		return layers
 
-	def updateLayers(self):
+	def updateLayers(self) -> None:
 		"""Update the layers from the image."""
 		self.layers = self.extractLayers()
 
@@ -182,7 +182,7 @@ class LayeredImage:
 			if isinstance(_layerOrGroup, Group)
 		]
 
-	def updateGroups(self):
+	def updateGroups(self) -> None:
 		"""Update the groups from the image."""
 		self.groups = self.extractGroups()
 

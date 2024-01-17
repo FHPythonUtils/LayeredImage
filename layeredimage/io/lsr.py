@@ -5,8 +5,8 @@ from os import sep
 
 from blendmodes.imagetools import renderWAlphaOffset
 
-from ..layeredimage import LayeredImage
-from ..layergroup import Group, Layer
+from layeredimage.layeredimage import LayeredImage
+from layeredimage.layergroup import Group, Layer
 
 
 ## LSR ##

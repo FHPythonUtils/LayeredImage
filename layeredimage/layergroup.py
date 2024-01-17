@@ -20,7 +20,7 @@ class LayerGroup:
 		visible: bool = True,
 		blendmode: BlendType = BlendType.NORMAL,
 		**kwargs: Any,
-	):
+	) -> None:
 		"""Represent an image layer or group.
 
 		Args:
@@ -45,11 +45,11 @@ class LayerGroup:
 		self.blendmode = blendmode
 		self.extras = kwargs
 
-	def __repr__(self):
+	def __repr__(self) -> str:
 		"""Get the string representation."""
 		return self.__str__()
 
-	def __str__(self):
+	def __str__(self) -> str:
 		"""Get the string representation."""
 		return (
 			"<LayeredImage "
@@ -86,7 +86,7 @@ class Layer(LayerGroup):
 		opacity: float = 1.0,
 		visible: bool = True,
 		blendmode: BlendType = BlendType.NORMAL,
-	):
+	) -> None:
 		"""Representation of an image layer.
 
 		Args:
@@ -137,7 +137,7 @@ class Group(LayerGroup):
 		opacity: float = 1.0,
 		visible: bool = True,
 		blendmode: BlendType = BlendType.NORMAL,
-	):
+	) -> None:
 		"""Representation of an image group.
 
 		Args:

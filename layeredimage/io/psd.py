@@ -1,9 +1,10 @@
 """Do file io - PSD."""
 from __future__ import annotations
 
-from ..blend import BlendType
-from ..layeredimage import LayeredImage
-from ..layergroup import Group, Layer
+from layeredimage.blend import BlendType
+from layeredimage.layeredimage import LayeredImage
+from layeredimage.layergroup import Group, Layer
+
 from .common import blendModeLookup
 
 

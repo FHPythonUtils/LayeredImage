@@ -4,7 +4,8 @@ from __future__ import annotations
 from os.path import exists, splitext
 from pathlib import Path
 
-from ..layeredimage import LayeredImage
+from layeredimage.layeredimage import LayeredImage
+
 from .gif import openLayer_GIF, saveLayer_GIF
 from .layered import (
 	openLayer_LAYERED,
@@ -21,7 +22,7 @@ from .webp import openLayer_WEBP, saveLayer_WEBP
 from .xcf import openLayer_XCF, saveLayer_XCF
 
 
-def extNotRecognised(fileName: str):
+def extNotRecognised(fileName: str) -> None:
 	"""Output the file extension not recognised error."""
 	exts = ["ora", "psd", "xcf", "pdn", "tif", "tiff", "webp", "gif", "lsr", "layered", "layeredc"]
 	print(

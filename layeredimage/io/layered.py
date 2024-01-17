@@ -9,9 +9,10 @@ from zipfile import ZipFile
 
 from PIL import Image
 
-from ..blend import BlendType
-from ..layeredimage import LayeredImage
-from ..layergroup import Group, Layer
+from layeredimage.blend import BlendType
+from layeredimage.layeredimage import LayeredImage
+from layeredimage.layergroup import Group, Layer
+
 from .common import blendModeLookup
 
 
@@ -116,7 +117,7 @@ def _saveLayer_LAYERED(fileName: str, layeredImage: LayeredImage, compressed: bo
 			writeImage_LAYERED(imageData, layered, imageName + ".png", compressed)
 
 
-def writeImage_LAYERED(image: Image.Image, zipFile: ZipFile, path: str, compressed: bool = False):
+def writeImage_LAYERED(image: Image.Image, zipFile: ZipFile, path: str, compressed: bool = False) -> None:
 	"""Write an image to the archive."""
 	imgByteArr = io.BytesIO()
 	imageCopy = image.copy()

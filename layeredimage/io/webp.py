@@ -3,8 +3,9 @@ from __future__ import annotations
 
 from PIL import Image
 
-from ..layeredimage import LayeredImage
-from ..layergroup import Layer
+from layeredimage.layeredimage import LayeredImage
+from layeredimage.layergroup import Layer
+
 from .common import expandLayersToCanvas
 
 
@@ -21,7 +22,7 @@ def openLayer_WEBP(file: str) -> LayeredImage:
 	return LayeredImage(layers, projectSize)
 
 
-def saveLayer_WEBP(fileName: str, layeredImage: LayeredImage):
+def saveLayer_WEBP(fileName: str, layeredImage: LayeredImage) -> None:
 	"""Save a layered image as .webp."""
 	layers = expandLayersToCanvas(layeredImage, "WEBP")
 	layers[0].save(fileName, duration=200, save_all=True, append_images=layers[1:])
