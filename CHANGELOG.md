@@ -3,6 +3,18 @@
 All major and minor version changes will be documented in this file. Details of
 patch-level version changes can be found in [commit messages](../../commits/master).
 
+## 2024.1 - 2024/01/17
+
+- update tooling
+	- ruff
+	- pyright
+- use loguru to replace print statements
+- use pathlib in place of os.path
+- absolute imports in the place of relative imports
+- Address “The Boolean Trap” with kw only args
+- More type hints
+- remove deprecated functions from `2021.2.4`
+
 ## 2024 - 2024/01/07
 
 - update dependencies
