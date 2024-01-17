@@ -2,14 +2,13 @@
 
 from __future__ import annotations
 
-import os
 import sys
 from pathlib import Path
 
 from imgcompare import is_equal
 
-THISDIR = str(Path(__file__).resolve().parent)
-sys.path.insert(0, os.path.dirname(THISDIR))
+THISDIR = Path(__file__).resolve().parent
+sys.path.insert(0, str(THISDIR.parent))
 
 import layeredimage.io
 

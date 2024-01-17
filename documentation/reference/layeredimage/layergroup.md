@@ -16,7 +16,7 @@
 
 ## Group
 
-[Show source in layergroup.py:128](../../../layeredimage/layergroup.py#L128)
+[Show source in layergroup.py:122](../../../layeredimage/layergroup.py#L122)
 
 A representation of an image group.
 
@@ -31,9 +31,9 @@ class Group(LayerGroup):
         dimensions: tuple[int, int] | None = None,
         offsets: tuple[int, int] = (0, 0),
         opacity: float = 1.0,
-        *, visible: bool = True,
+        visible: bool = True,
         blendmode: BlendType = BlendType.NORMAL,
-    ): ...
+    ) -> None: ...
 ```
 
 #### See also
@@ -43,7 +43,7 @@ class Group(LayerGroup):
 
 ### Group().json
 
-[Show source in layergroup.py:175](../../../layeredimage/layergroup.py#L175)
+[Show source in layergroup.py:170](../../../layeredimage/layergroup.py#L170)
 
 Get the object as a dict.
 
@@ -57,7 +57,7 @@ def json(self) -> dict[str, Any]: ...
 
 ## Layer
 
-[Show source in layergroup.py:77](../../../layeredimage/layergroup.py#L77)
+[Show source in layergroup.py:70](../../../layeredimage/layergroup.py#L70)
 
 A representation of an image layer.
 
@@ -72,9 +72,9 @@ class Layer(LayerGroup):
         dimensions: tuple[int, int] | None = None,
         offsets: tuple[int, int] = (0, 0),
         opacity: float = 1.0,
-        *, visible: bool = True,
+        visible: bool = True,
         blendmode: BlendType = BlendType.NORMAL,
-    ): ...
+    ) -> None: ...
 ```
 
 #### See also
@@ -83,7 +83,7 @@ class Layer(LayerGroup):
 
 ### Layer().json
 
-[Show source in layergroup.py:115](../../../layeredimage/layergroup.py#L115)
+[Show source in layergroup.py:109](../../../layeredimage/layergroup.py#L109)
 
 Get the object as a dict.
 
@@ -111,39 +111,39 @@ class LayerGroup:
         dimensions: tuple[int, int],
         offsets: tuple[int, int] = (0, 0),
         opacity: float = 1.0,
-        *, visible: bool = True,
+        visible: bool = True,
         blendmode: BlendType = BlendType.NORMAL,
         **kwargs: Any
-    ): ...
+    ) -> None: ...
 ```
 
 ### LayerGroup().__repr__
 
-[Show source in layergroup.py:48](../../../layeredimage/layergroup.py#L48)
+[Show source in layergroup.py:50](../../../layeredimage/layergroup.py#L50)
 
 Get the string representation.
 
 #### Signature
 
 ```python
-def __repr__(self): ...
+def __repr__(self) -> str: ...
 ```
 
 ### LayerGroup().__str__
 
-[Show source in layergroup.py:52](../../../layeredimage/layergroup.py#L52)
+[Show source in layergroup.py:54](../../../layeredimage/layergroup.py#L54)
 
 Get the string representation.
 
 #### Signature
 
 ```python
-def __str__(self): ...
+def __str__(self) -> str: ...
 ```
 
 ### LayerGroup().json
 
-[Show source in layergroup.py:65](../../../layeredimage/layergroup.py#L65)
+[Show source in layergroup.py:58](../../../layeredimage/layergroup.py#L58)
 
 Get the object as a dict.
 

@@ -149,7 +149,7 @@ THISDIR = str(Path(__file__).resolve().parent)
 import layeredimage.io
 
 # Do stuff
-ora = layeredimage.io.openLayerImage(THISDIR + "/image.ora")
+ora = layeredimage.io.openLayerImage(f"{THISDIR}/image.ora")
 
 imageDimensions = ora.dimensions
 # There are a load of handy functions for getting layers, and adding new
@@ -161,10 +161,10 @@ layer.image = Image.new("RGBA", imageDimensions)
 ora.layersAndGroups[0] = layer
 
 # And let's save
-layeredimage.io.saveLayerImage(THISDIR + "/image(modified).ora", ora)
+layeredimage.io.saveLayerImage(f"{THISDIR}/image(modified).ora", ora)
 
 # Let's save a flattened version too
-ora.getFlattenLayers().save(THISDIR + "/image(modified).png")
+ora.getFlattenLayers().save(f"{THISDIR}/image(modified).png")
 
 # Doing stuff with a group
 group = ora.getLayerOrGroup(1) # For the sake of the e.g. this is a group
@@ -192,34 +192,34 @@ sys.path.insert(0, os.path.dirname(THISDIR))
 import layeredimage.io
 
 # ORA
-ora = layeredimage.io.openLayerImage(THISDIR + "/base24.ora")
-layeredimage.io.saveLayerImage(THISDIR + "/base24(ora).ora", ora)
-layeredimage.io.saveLayerImage(THISDIR + "/base24(ora).tiff", ora)
-ora.getFlattenLayers().save(THISDIR + "/base24(ora).png")
+ora = layeredimage.io.openLayerImage(f"{THISDIR}/base24.ora")
+layeredimage.io.saveLayerImage(f"{THISDIR}/base24(ora).ora", ora)
+layeredimage.io.saveLayerImage(f"{THISDIR}/base24(ora).tiff", ora)
+ora.getFlattenLayers().save(f"{THISDIR}/base24(ora).png")
 
 # PSD
-psd = layeredimage.io.openLayerImage(THISDIR + "/base24.psd")
-layeredimage.io.saveLayerImage(THISDIR + "/base24(psd).ora", psd)
-layeredimage.io.saveLayerImage(THISDIR + "/base24(psd).tiff", psd)
-psd.getFlattenLayers().save(THISDIR + "/base24(psd).png")
+psd = layeredimage.io.openLayerImage(f"{THISDIR}/base24.psd")
+layeredimage.io.saveLayerImage(f"{THISDIR}/base24(psd).ora", psd)
+layeredimage.io.saveLayerImage(f"{THISDIR}/base24(psd).tiff", psd)
+psd.getFlattenLayers().save(f"{THISDIR}/base24(psd).png")
 
 # PDN
-pdn = layeredimage.io.openLayerImage(THISDIR + "/base24.pdn")
-layeredimage.io.saveLayerImage(THISDIR + "/base24(pdn).ora", pdn)
-layeredimage.io.saveLayerImage(THISDIR + "/base24(pdn).tiff", pdn)
-pdn.getFlattenLayers().save(THISDIR + "/base24(pdn).png")
+pdn = layeredimage.io.openLayerImage(f"{THISDIR}/base24.pdn")
+layeredimage.io.saveLayerImage(f"{THISDIR}/base24(pdn).ora", pdn)
+layeredimage.io.saveLayerImage(f"{THISDIR}/base24(pdn).tiff", pdn)
+pdn.getFlattenLayers().save(f"{THISDIR}/base24(pdn).png")
 
 # XCF
-xcf = layeredimage.io.openLayerImage(THISDIR + "/base24.xcf")
-layeredimage.io.saveLayerImage(THISDIR + "/base24(xcf).ora", xcf)
-layeredimage.io.saveLayerImage(THISDIR + "/base24(xcf).tiff", xcf)
-xcf.getFlattenLayers().save(THISDIR + "/base24(xcf).png")
+xcf = layeredimage.io.openLayerImage(f"{THISDIR}/base24.xcf")
+layeredimage.io.saveLayerImage(f"{THISDIR}/base24(xcf).ora", xcf)
+layeredimage.io.saveLayerImage(f"{THISDIR}/base24(xcf).tiff", xcf)
+xcf.getFlattenLayers().save(f"{THISDIR}/base24(xcf).png")
 
 # TIFF
-tiff = layeredimage.io.openLayerImage(THISDIR + "/base24.tiff")
-layeredimage.io.saveLayerImage(THISDIR + "/base24(tiff).ora", tiff)
-layeredimage.io.saveLayerImage(THISDIR + "/base24(tiff).tiff", tiff)
-tiff.getFlattenLayers().save(THISDIR + "/base24(tiff).png")
+tiff = layeredimage.io.openLayerImage(f"{THISDIR}/base24.tiff")
+layeredimage.io.saveLayerImage(f"{THISDIR}/base24(tiff).ora", tiff)
+layeredimage.io.saveLayerImage(f"{THISDIR}/base24(tiff).tiff", tiff)
+tiff.getFlattenLayers().save(f"{THISDIR}/base24(tiff).png")
 ```
 
 ## Documentation

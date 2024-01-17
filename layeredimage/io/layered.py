@@ -101,7 +101,9 @@ def saveLayer_LAYERED(fileName: str, layeredImage: LayeredImage) -> None:
 	_saveLayer_LAYERED(fileName, layeredImage)
 
 
-def _saveLayer_LAYERED(fileName: str, layeredImage: LayeredImage, compressed: bool = False) -> None:
+def _saveLayer_LAYERED(
+	fileName: str, layeredImage: LayeredImage, *, compressed: bool = False
+) -> None:
 	"""Save a layered image as .layered."""
 	with zipfile.ZipFile(
 		fileName, "w", compression=(zipfile.ZIP_DEFLATED if compressed else zipfile.ZIP_STORED)
@@ -110,17 +112,19 @@ def _saveLayer_LAYERED(fileName: str, layeredImage: LayeredImage, compressed: bo
 			"stack.json", json.dumps(layeredImage.json(), indent=(None if compressed else True))
 		)
 		for layer in layeredImage.layers:
-			writeImage_LAYERED(layer.image, layered, "data/" + layer.name + ".png", compressed)
+			writeImage_LAYERED(
+				layer.image, layered, f"data/{layer.name}.png", compressed=compressed
+			)
 		compositeImage = layeredImage.getFlattenLayers()
 		thumbnail = compositeImage.copy()
 		thumbnail.thumbnail((256, 256))
 		imageLookup = {"composite": compositeImage, "thumbnail": thumbnail}
 		for imageName, imageData in imageLookup.items():
-			writeImage_LAYERED(imageData, layered, imageName + ".png", compressed)
+			writeImage_LAYERED(imageData, layered, f"{imageName}.png", compressed=compressed)
 
 
 def writeImage_LAYERED(
-	image: Image.Image, zipFile: ZipFile, path: str, compressed: bool = False
+	image: Image.Image, zipFile: ZipFile, path: str, *, compressed: bool = False
 ) -> None:
 	"""Write an image to the archive."""
 	imgByteArr = io.BytesIO()
@@ -141,4 +145,4 @@ def openLayer_LAYEREDC(file: str) -> LayeredImage:
 
 def saveLayer_LAYEREDC(fileName: str, layeredImage: LayeredImage) -> None:
 	"""Save a layeredc image as .layered."""
-	_saveLayer_LAYERED(fileName, layeredImage, True)
+	_saveLayer_LAYERED(fileName, layeredImage, compressed=True)

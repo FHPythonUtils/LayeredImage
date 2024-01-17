@@ -10,7 +10,7 @@
 
 ## openLayer_PDN
 
-[Show source in pdn.py:13](../../../../layeredimage/io/pdn.py#L13)
+[Show source in pdn.py:15](../../../../layeredimage/io/pdn.py#L15)
 
 Open a .pdn file into a layered image.
 
@@ -20,11 +20,15 @@ Open a .pdn file into a layered image.
 def openLayer_PDN(file: str) -> LayeredImage: ...
 ```
 
+#### See also
+
+- [LayeredImage](../layeredimage.md#layeredimage)
+
 
 
 ## saveLayer_PDN
 
-[Show source in pdn.py:52](../../../../layeredimage/io/pdn.py#L52)
+[Show source in pdn.py:54](../../../../layeredimage/io/pdn.py#L54)
 
 Save a layered image as .pdn.
 
@@ -33,3 +37,7 @@ Save a layered image as .pdn.
 ```python
 def saveLayer_PDN(fileName: str, layeredImage: LayeredImage) -> None: ...
 ```
+
+#### See also
+
+- [LayeredImage](../layeredimage.md#layeredimage)

@@ -10,7 +10,6 @@
     - [LayeredImage().__str__](#layeredimage()__str__)
     - [LayeredImage().addImageAsLayer](#layeredimage()addimageaslayer)
     - [LayeredImage().addLayerOrGroup](#layeredimage()addlayerorgroup)
-    - [LayeredImage().addLayerRaster](#layeredimage()addlayerraster)
     - [LayeredImage().extractGroups](#layeredimage()extractgroups)
     - [LayeredImage().extractLayers](#layeredimage()extractlayers)
     - [LayeredImage().flattenLayers](#layeredimage()flattenlayers)
@@ -20,7 +19,6 @@
     - [LayeredImage().getLayerOrGroup](#layeredimage()getlayerorgroup)
     - [LayeredImage().insertImageAsLayer](#layeredimage()insertimageaslayer)
     - [LayeredImage().insertLayerOrGroup](#layeredimage()insertlayerorgroup)
-    - [LayeredImage().insertLayerRaster](#layeredimage()insertlayerraster)
     - [LayeredImage().json](#layeredimage()json)
     - [LayeredImage().removeLayerOrGroup](#layeredimage()removelayerorgroup)
     - [LayeredImage().updateGroups](#layeredimage()updategroups)
@@ -43,107 +41,96 @@ class LayeredImage:
         layersAndGroups: list[Layer | Group],
         dimensions: tuple[int, int] | None = None,
         **kwargs: Any
-    ): ...
+    ) -> None: ...
 ```
 
 ### LayeredImage().__repr__
 
-[Show source in layeredimage.py:47](../../../layeredimage/layeredimage.py#L47)
+[Show source in layeredimage.py:48](../../../layeredimage/layeredimage.py#L48)
 
 Get the string representation.
 
 #### Signature
 
 ```python
-def __repr__(self): ...
+def __repr__(self) -> str: ...
 ```
 
 ### LayeredImage().__str__
 
-[Show source in layeredimage.py:51](../../../layeredimage/layeredimage.py#L51)
+[Show source in layeredimage.py:52](../../../layeredimage/layeredimage.py#L52)
 
 Get the string representation.
 
 #### Signature
 
 ```python
-def __str__(self): ...
+def __str__(self) -> str: ...
 ```
 
 ### LayeredImage().addImageAsLayer
 
-[Show source in layeredimage.py:92](../../../layeredimage/layeredimage.py#L92)
+[Show source in layeredimage.py:86](../../../layeredimage/layeredimage.py#L86)
 
 Resize an image to the canvas and add as a layer.
 
 #### Signature
 
 ```python
-def addImageAsLayer(self, image: Image.Image, name: str): ...
+def addImageAsLayer(self, image: Image.Image, name: str) -> None: ...
 ```
 
 ### LayeredImage().addLayerOrGroup
 
-[Show source in layeredimage.py:73](../../../layeredimage/layeredimage.py#L73)
+[Show source in layeredimage.py:74](../../../layeredimage/layeredimage.py#L74)
 
 Add a LayerOrGroup.
 
 #### Signature
 
 ```python
-def addLayerOrGroup(self, layerOrGroup: Layer | Group): ...
-```
-
-### LayeredImage().addLayerRaster
-
-[Show source in layeredimage.py:86](../../../layeredimage/layeredimage.py#L86)
-
-#### Signature
-
-```python
-@deprecated(details="use addImageAsLayer", deprecated_in="2021.2.4")
-def addLayerRaster(self, image: Image.Image, name: str): ...
+def addLayerOrGroup(self, layerOrGroup: Layer | Group) -> None: ...
 ```
 
 ### LayeredImage().extractGroups
 
-[Show source in layeredimage.py:177](../../../layeredimage/layeredimage.py#L177)
+[Show source in layeredimage.py:171](../../../layeredimage/layeredimage.py#L171)
 
 Extract the groups from the image.
 
 #### Signature
 
 ```python
-def extractGroups(self): ...
+def extractGroups(self) -> list[Group]: ...
 ```
 
 ### LayeredImage().extractLayers
 
-[Show source in layeredimage.py:146](../../../layeredimage/layeredimage.py#L146)
+[Show source in layeredimage.py:140](../../../layeredimage/layeredimage.py#L140)
 
 Extract the layers from the image.
 
 #### Signature
 
 ```python
-def extractLayers(self): ...
+def extractLayers(self) -> list[Layer]: ...
 ```
 
 ### LayeredImage().flattenLayers
 
-[Show source in layeredimage.py:135](../../../layeredimage/layeredimage.py#L135)
+[Show source in layeredimage.py:129](../../../layeredimage/layeredimage.py#L129)
 
 Flatten all layers.
 
 #### Signature
 
 ```python
-def flattenLayers(self, *, ignoreHidden: bool = True,): ...
+def flattenLayers(self, ignoreHidden: bool = True) -> None: ...
 ```
 
 ### LayeredImage().flattenTwoLayers
 
-[Show source in layeredimage.py:127](../../../layeredimage/layeredimage.py#L127)
+[Show source in layeredimage.py:119](../../../layeredimage/layeredimage.py#L119)
 
 Flatten two layers.
 
@@ -151,25 +138,25 @@ Flatten two layers.
 
 ```python
 def flattenTwoLayers(
-    self, background: int, foreground: int, *, ignoreHidden: bool = True,
-): ...
+    self, background: int, foreground: int, ignoreHidden: bool = True
+) -> None: ...
 ```
 
 ### LayeredImage().getFlattenLayers
 
-[Show source in layeredimage.py:109](../../../layeredimage/layeredimage.py#L109)
+[Show source in layeredimage.py:97](../../../layeredimage/layeredimage.py#L97)
 
 Return an image for all flattened layers.
 
 #### Signature
 
 ```python
-def getFlattenLayers(self, *, ignoreHidden: bool = True,) -> Image.Image: ...
+def getFlattenLayers(self, ignoreHidden: bool = True) -> Image.Image: ...
 ```
 
 ### LayeredImage().getFlattenTwoLayers
 
-[Show source in layeredimage.py:113](../../../layeredimage/layeredimage.py#L113)
+[Show source in layeredimage.py:101](../../../layeredimage/layeredimage.py#L101)
 
 Return an image for two flattened layers.
 
@@ -177,60 +164,49 @@ Return an image for two flattened layers.
 
 ```python
 def getFlattenTwoLayers(
-    self, background: int, foreground: int, *, ignoreHidden: bool = True,
+    self, background: int, foreground: int, ignoreHidden: bool = True
 ) -> Image.Image: ...
 ```
 
 ### LayeredImage().getLayerOrGroup
 
-[Show source in layeredimage.py:69](../../../layeredimage/layeredimage.py#L69)
+[Show source in layeredimage.py:70](../../../layeredimage/layeredimage.py#L70)
 
 Get a LayerOrGroup.
 
 #### Signature
 
 ```python
-def getLayerOrGroup(self, index: int): ...
+def getLayerOrGroup(self, index: int) -> Layer | Group: ...
 ```
 
 ### LayeredImage().insertImageAsLayer
 
-[Show source in layeredimage.py:103](../../../layeredimage/layeredimage.py#L103)
+[Show source in layeredimage.py:91](../../../layeredimage/layeredimage.py#L91)
 
 Resize an image to the canvas  and insert the layer.
 
 #### Signature
 
 ```python
-def insertImageAsLayer(self, image: Image.Image, name: str, index: int): ...
+def insertImageAsLayer(self, image: Image.Image, name: str, index: int) -> None: ...
 ```
 
 ### LayeredImage().insertLayerOrGroup
 
-[Show source in layeredimage.py:77](../../../layeredimage/layeredimage.py#L77)
+[Show source in layeredimage.py:78](../../../layeredimage/layeredimage.py#L78)
 
 Insert a LayerOrGroup at a specific index.
 
 #### Signature
 
 ```python
-def insertLayerOrGroup(self, layerOrGroup: Layer | Group, index: int): ...
-```
-
-### LayeredImage().insertLayerRaster
-
-[Show source in layeredimage.py:97](../../../layeredimage/layeredimage.py#L97)
-
-#### Signature
-
-```python
-@deprecated(details="use insertImageAsLayer", deprecated_in="2021.2.4")
-def insertLayerRaster(self, image: Image.Image, name: str, index: int): ...
+def insertLayerOrGroup(self, layerOrGroup: Layer | Group, index: int) -> None: ...
 ```
 
 ### LayeredImage().json
 
-[Show source in layeredimage.py:63](../../../layeredimage/layeredimage.py#L63)
+[Show source in layeredimage.py:64](../../../layeredimage/layeredimage.py#L64)
 
 Get the object as a dict.
 
@@ -242,45 +218,45 @@ def json(self) -> dict[str, Any]: ...
 
 ### LayeredImage().removeLayerOrGroup
 
-[Show source in layeredimage.py:81](../../../layeredimage/layeredimage.py#L81)
+[Show source in layeredimage.py:82](../../../layeredimage/layeredimage.py#L82)
 
 Remove a LayerOrGroup at a specific index.
 
 #### Signature
 
 ```python
-def removeLayerOrGroup(self, index: int): ...
+def removeLayerOrGroup(self, index: int) -> None: ...
 ```
 
 ### LayeredImage().updateGroups
 
-[Show source in layeredimage.py:185](../../../layeredimage/layeredimage.py#L185)
+[Show source in layeredimage.py:179](../../../layeredimage/layeredimage.py#L179)
 
 Update the groups from the image.
 
 #### Signature
 
 ```python
-def updateGroups(self): ...
+def updateGroups(self) -> None: ...
 ```
 
 ### LayeredImage().updateLayers
 
-[Show source in layeredimage.py:173](../../../layeredimage/layeredimage.py#L173)
+[Show source in layeredimage.py:167](../../../layeredimage/layeredimage.py#L167)
 
 Update the layers from the image.
 
 #### Signature
 
 ```python
-def updateLayers(self): ...
+def updateLayers(self) -> None: ...
 ```
 
 
 
 ## flattenAll
 
-[Show source in layeredimage.py:232](../../../layeredimage/layeredimage.py#L232)
+[Show source in layeredimage.py:227](../../../layeredimage/layeredimage.py#L227)
 
 Flatten a list of layers and groups.
 
@@ -304,15 +280,15 @@ Flatten a list of layers and groups.
 def flattenAll(
     layers: list[Layer | Group] | list[Layer],
     imageDimensions: tuple[int, int],
-    *, ignoreHidden: bool = True,
-): ...
+    ignoreHidden: bool = True,
+) -> Image.Image: ...
 ```
 
 
 
 ## flattenLayerOrGroup
 
-[Show source in layeredimage.py:190](../../../layeredimage/layeredimage.py#L190)
+[Show source in layeredimage.py:184](../../../layeredimage/layeredimage.py#L184)
 
 Flatten a layer or group on to an image of what has already been flattened.
 
@@ -338,6 +314,6 @@ def flattenLayerOrGroup(
     layerOrGroup: Layer | Group,
     imageDimensions: tuple[int, int],
     flattenedSoFar: Image.Image | None = None,
-    *, ignoreHidden: bool = True,
-): ...
+    ignoreHidden: bool = True,
+) -> Image.Image: ...
 ```

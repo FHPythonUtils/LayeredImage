@@ -13,7 +13,7 @@
 
 ## exportFlatImage
 
-[Show source in __init__.py:109](../../../../layeredimage/io/__init__.py#L109)
+[Show source in __init__.py:111](../../../../layeredimage/io/__init__.py#L111)
 
 Export the layered image to a unilayer image file.
 
@@ -23,25 +23,29 @@ Export the layered image to a unilayer image file.
 def exportFlatImage(fileName: str, layeredImage: LayeredImage) -> None: ...
 ```
 
+#### See also
+
+- [LayeredImage](../layeredimage.md#layeredimage)
+
 
 
 ## extNotRecognised
 
-[Show source in __init__.py:24](../../../../layeredimage/io/__init__.py#L24)
+[Show source in __init__.py:26](../../../../layeredimage/io/__init__.py#L26)
 
 Output the file extension not recognised error.
 
 #### Signature
 
 ```python
-def extNotRecognised(fileName: str): ...
+def extNotRecognised(fileName: str) -> None: ...
 ```
 
 
 
 ## openLayerImage
 
-[Show source in __init__.py:34](../../../../layeredimage/io/__init__.py#L34)
+[Show source in __init__.py:35](../../../../layeredimage/io/__init__.py#L35)
 
 Open a layer image file into a layer image object.
 
@@ -67,11 +71,15 @@ Open a layer image file into a layer image object.
 def openLayerImage(file: str | Path) -> LayeredImage: ...
 ```
 
+#### See also
+
+- [LayeredImage](../layeredimage.md#layeredimage)
+
 
 
 ## saveLayerImage
 
-[Show source in __init__.py:73](../../../../layeredimage/io/__init__.py#L73)
+[Show source in __init__.py:75](../../../../layeredimage/io/__init__.py#L75)
 
 Save a layered image to a file.
 
@@ -96,6 +104,10 @@ Save a layered image to a file.
 ```python
 def saveLayerImage(fileName: str | Path, layeredImage: LayeredImage) -> None: ...
 ```
+
+#### See also
+
+- [LayeredImage](../layeredimage.md#layeredimage)
 
 
 

@@ -11,21 +11,21 @@
 
 ## addLayer_ORA
 
-[Show source in ora.py:125](../../../../layeredimage/io/ora.py#L125)
+[Show source in ora.py:128](../../../../layeredimage/io/ora.py#L128)
 
 Update the project with a shiny new layer.
 
 #### Signature
 
 ```python
-def addLayer_ORA(project, layer, blendLookup): ...
+def addLayer_ORA(project: Any, layer: Any, blendLookup: dict[BlendType, str]) -> Any: ...
 ```
 
 
 
 ## openLayer_ORA
 
-[Show source in ora.py:11](../../../../layeredimage/io/ora.py#L11)
+[Show source in ora.py:14](../../../../layeredimage/io/ora.py#L14)
 
 Open an .ora file into a layered image.
 
@@ -35,11 +35,15 @@ Open an .ora file into a layered image.
 def openLayer_ORA(file: str) -> LayeredImage: ...
 ```
 
+#### See also
+
+- [LayeredImage](../layeredimage.md#layeredimage)
+
 
 
 ## saveLayer_ORA
 
-[Show source in ora.py:81](../../../../layeredimage/io/ora.py#L81)
+[Show source in ora.py:84](../../../../layeredimage/io/ora.py#L84)
 
 Save a layered image as .ora.
 
@@ -48,3 +52,7 @@ Save a layered image as .ora.
 ```python
 def saveLayer_ORA(fileName: str, layeredImage: LayeredImage) -> None: ...
 ```
+
+#### See also
+
+- [LayeredImage](../layeredimage.md#layeredimage)

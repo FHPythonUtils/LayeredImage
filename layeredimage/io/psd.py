@@ -1,6 +1,8 @@
 """Do file io - PSD."""
 from __future__ import annotations
 
+from loguru import logger
+
 from layeredimage.blend import BlendType
 from layeredimage.layeredimage import LayeredImage
 from layeredimage.layergroup import Group, Layer
@@ -82,5 +84,5 @@ def openLayer_PSD(file: str) -> LayeredImage:
 def saveLayer_PSD(fileName: str, layeredImage: LayeredImage) -> None:
 	"""Save a layered image as .psd."""
 	del fileName, layeredImage
-	print("ERROR: Saving PSDs is not implemented in psd-tools3")
+	logger.error("Saving PSDs is not implemented in psd-tools3")
 	raise NotImplementedError

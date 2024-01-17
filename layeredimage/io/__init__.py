@@ -3,6 +3,8 @@ from __future__ import annotations
 
 from pathlib import Path
 
+from loguru import logger
+
 from layeredimage.layeredimage import LayeredImage
 
 from .gif import openLayer_GIF, saveLayer_GIF
@@ -24,10 +26,9 @@ from .xcf import openLayer_XCF, saveLayer_XCF
 def extNotRecognised(fileName: str) -> None:
 	"""Output the file extension not recognised error."""
 	exts = ["ora", "psd", "xcf", "pdn", "tif", "tiff", "webp", "gif", "lsr", "layered", "layeredc"]
-	print(
-		f"ERROR: File extension is not recognised for file: {fileName}! Must be one of "
-		+ ', "'.join(exts)
-		+ '"'
+	logger.error(
+		"File extension is not recognised for file! Must be one of " + ', "'.join(exts) + '"',
+		extra={"fileName": fileName},
 	)
 
 
@@ -48,21 +49,21 @@ def openLayerImage(file: str | Path) -> LayeredImage:
 		LayeredImage: a layered image object
 	"""
 	functionMap = {
-		".ora": openLayer_ORA,
-		".psd": openLayer_PSD,
-		".xcf": openLayer_XCF,
-		".pdn": openLayer_PDN,
-		".tif": openLayer_TIFF,
-		".tiff": openLayer_TIFF,
-		".webp": openLayer_WEBP,
-		".gif": openLayer_GIF,
-		".lsr": openLayer_LSR,
-		".layered": openLayer_LAYERED,
-		".layeredc": openLayer_LAYEREDC,
+		"ora": openLayer_ORA,
+		"psd": openLayer_PSD,
+		"xcf": openLayer_XCF,
+		"pdn": openLayer_PDN,
+		"tif": openLayer_TIFF,
+		"tiff": openLayer_TIFF,
+		"webp": openLayer_WEBP,
+		"gif": openLayer_GIF,
+		"lsr": openLayer_LSR,
+		"layered": openLayer_LAYERED,
+		"layeredc": openLayer_LAYEREDC,
 	}
 	fp = Path(file)
 	if not fp.is_file():
-		print(f"ERROR: {file} does not exist")
+		logger.error("File does not exist", extra={"file": file})
 		raise FileExistsError
 	fileExt = fp.suffix.lower()
 	if fileExt not in functionMap:
@@ -88,17 +89,17 @@ def saveLayerImage(fileName: str | Path, layeredImage: LayeredImage) -> None:
 		None
 	"""
 	functionMap = {
-		".ora": saveLayer_ORA,
-		".psd": saveLayer_PSD,
-		".xcf": saveLayer_XCF,
-		".pdn": saveLayer_PDN,
-		".tif": saveLayer_TIFF,
-		".tiff": saveLayer_TIFF,
-		".webp": saveLayer_WEBP,
-		".gif": saveLayer_GIF,
-		".lsr": saveLayer_LSR,
-		".layered": saveLayer_LAYERED,
-		".layeredc": saveLayer_LAYEREDC,
+		"ora": saveLayer_ORA,
+		"psd": saveLayer_PSD,
+		"xcf": saveLayer_XCF,
+		"pdn": saveLayer_PDN,
+		"tif": saveLayer_TIFF,
+		"tiff": saveLayer_TIFF,
+		"webp": saveLayer_WEBP,
+		"gif": saveLayer_GIF,
+		"lsr": saveLayer_LSR,
+		"layered": saveLayer_LAYERED,
+		"layeredc": saveLayer_LAYEREDC,
 	}
 	fileExt = Path(fileName).suffix.lower()
 	if fileExt not in functionMap:

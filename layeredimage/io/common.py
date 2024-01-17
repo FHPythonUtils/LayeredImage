@@ -4,6 +4,7 @@ from __future__ import annotations
 from typing import Any
 
 from blendmodes.imagetools import renderWAlphaOffset
+from loguru import logger
 from PIL.Image import Image
 
 from layeredimage.blend import BlendType
@@ -15,7 +16,7 @@ def blendModeLookup(
 ) -> BlendType:
 	"""Get the blendmode from a lookup table."""
 	if blendmode not in blendLookup:
-		print(f"WARNING: {blendmode} is not currently supported!")
+		logger.warning("Blendmode is not currently supported!", extra={"blendmode": blendmode})
 		return default
 	return blendLookup[blendmode]
 
@@ -23,7 +24,10 @@ def blendModeLookup(
 def expandLayersToCanvas(layeredImage: LayeredImage, imageFormat: str) -> list[Image]:
 	"""Return layers and throw a warning if the image has groups."""
 	if len(layeredImage.extractGroups()) > 0:
-		print(f"WARNING: {imageFormat}s do not " "support groups so extracting layers")
+		logger.warning(
+			"This image format does not support groups so extracting layers",
+			extra={"imageFormat": imageFormat},
+		)
 	layers = []
 	for layer in layeredImage.extractLayers():
 		layers.append(

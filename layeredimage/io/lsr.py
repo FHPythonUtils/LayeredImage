@@ -1,7 +1,7 @@
 """Do file io - LSR."""
 from __future__ import annotations
 
-from os import sep
+from pathlib import Path
 
 from blendmodes.imagetools import renderWAlphaOffset
 
@@ -63,6 +63,6 @@ def saveLayer_LSR(fileName: str, layeredImage: LayeredImage) -> None:
 			)
 		)
 	lsrImage = pylsr.LSRImage(
-		layeredImage.dimensions, fileName.split(sep)[-1].replace(".lsr", ""), layers
+		size=layeredImage.dimensions, name=Path(fileName).name.replace(".lsr", ""), layers=layers
 	)
 	pylsr.write(fileName, lsrImage)

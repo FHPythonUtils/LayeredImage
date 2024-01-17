@@ -123,14 +123,14 @@ class LayeredImage:
 		image = self.getFlattenTwoLayers(background, foreground, ignoreHidden=ignoreHidden)
 		self.removeLayerOrGroup(foreground)
 		self.layersAndGroups[background] = Layer(
-			self.layersAndGroups[background].name + " (flattened)", image, self.dimensions
+			f"{self.layersAndGroups[background].name} (flattened)", image, self.dimensions
 		)
 
 	def flattenLayers(self, *, ignoreHidden: bool = True) -> None:
 		"""Flatten all layers."""
 		image = self.getFlattenLayers(ignoreHidden=ignoreHidden)
 		self.layersAndGroups[0] = Layer(
-			self.layersAndGroups[0].name + " (flattened)", image, self.dimensions
+			f"{self.layersAndGroups[0].name} (flattened)", image, self.dimensions
 		)
 		for layer in range(1, len(self.layersAndGroups)):
 			self.removeLayerOrGroup(layer)

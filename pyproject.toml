@@ -23,14 +23,15 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = ">=3.8,<4.0"
-blendmodes = "^2024"
-pylsr = "^2024"
-pyora = "^0.3.11"
-pypdn = "^1.0.6"
-deprecation = "^2.1.0"
-psd-tools = "^1.9.30"
-pillow = "^10.2.0"
-gimpformats = "^2023.1"
+blendmodes = "<2026,>=2024"
+pylsr = "<2026,>=2024"
+pyora = "<2,>=0.3.11"
+pypdn = "<2,>=1.0.6"
+deprecation = "<3,>=2.1.0"
+psd-tools = "<2,>=1.9.30"
+pillow = "<11,>=10.2.0"
+gimpformats = "<2025,>=2023.1"
+loguru = "<2,>=0.7.2"
 
 [tool.poetry.group.dev.dependencies]
 imgcompare = "^2.0.1"

@@ -15,7 +15,7 @@
 
 ## _saveLayer_LAYERED
 
-[Show source in layered.py:101](../../../../layeredimage/io/layered.py#L101)
+[Show source in layered.py:104](../../../../layeredimage/io/layered.py#L104)
 
 Save a layered image as .layered.
 
@@ -27,11 +27,15 @@ def _saveLayer_LAYERED(
 ) -> None: ...
 ```
 
+#### See also
+
+- [LayeredImage](../layeredimage.md#layeredimage)
+
 
 
 ## grabLayer_LAYERED
 
-[Show source in layered.py:81](../../../../layeredimage/io/layered.py#L81)
+[Show source in layered.py:82](../../../../layeredimage/io/layered.py#L82)
 
 Grab an image from .layered.
 
@@ -40,14 +44,18 @@ Grab an image from .layered.
 ```python
 def grabLayer_LAYERED(
     zipFile: ZipFile, layer: dict[str, Any], blendLookup: dict[str, Any]
-): ...
+) -> Layer: ...
 ```
+
+#### See also
+
+- [Layer](../layergroup.md#layer)
 
 
 
 ## openLayer_LAYERED
 
-[Show source in layered.py:19](../../../../layeredimage/io/layered.py#L19)
+[Show source in layered.py:20](../../../../layeredimage/io/layered.py#L20)
 
 Open a .layered file into a layered image.
 
@@ -57,11 +65,15 @@ Open a .layered file into a layered image.
 def openLayer_LAYERED(file: str) -> LayeredImage: ...
 ```
 
+#### See also
+
+- [LayeredImage](../layeredimage.md#layeredimage)
+
 
 
 ## openLayer_LAYEREDC
 
-[Show source in layered.py:131](../../../../layeredimage/io/layered.py#L131)
+[Show source in layered.py:141](../../../../layeredimage/io/layered.py#L141)
 
 Open a .layeredc file into a layered image.
 
@@ -71,11 +83,15 @@ Open a .layeredc file into a layered image.
 def openLayer_LAYEREDC(file: str) -> LayeredImage: ...
 ```
 
+#### See also
+
+- [LayeredImage](../layeredimage.md#layeredimage)
+
 
 
 ## saveLayer_LAYERED
 
-[Show source in layered.py:96](../../../../layeredimage/io/layered.py#L96)
+[Show source in layered.py:99](../../../../layeredimage/io/layered.py#L99)
 
 Save a layered image as .layered.
 
@@ -85,11 +101,15 @@ Save a layered image as .layered.
 def saveLayer_LAYERED(fileName: str, layeredImage: LayeredImage) -> None: ...
 ```
 
+#### See also
+
+- [LayeredImage](../layeredimage.md#layeredimage)
+
 
 
 ## saveLayer_LAYEREDC
 
-[Show source in layered.py:136](../../../../layeredimage/io/layered.py#L136)
+[Show source in layered.py:146](../../../../layeredimage/io/layered.py#L146)
 
 Save a layeredc image as .layered.
 
@@ -99,11 +119,15 @@ Save a layeredc image as .layered.
 def saveLayer_LAYEREDC(fileName: str, layeredImage: LayeredImage) -> None: ...
 ```
 
+#### See also
+
+- [LayeredImage](../layeredimage.md#layeredimage)
+
 
 
 ## writeImage_LAYERED
 
-[Show source in layered.py:119](../../../../layeredimage/io/layered.py#L119)
+[Show source in layered.py:126](../../../../layeredimage/io/layered.py#L126)
 
 Write an image to the archive.
 
@@ -112,5 +136,5 @@ Write an image to the archive.
 ```python
 def writeImage_LAYERED(
     image: Image.Image, zipFile: ZipFile, path: str, compressed: bool = False
-): ...
+) -> None: ...
 ```

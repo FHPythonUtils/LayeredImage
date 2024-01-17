@@ -10,7 +10,7 @@
 
 ## openLayer_PSD
 
-[Show source in psd.py:11](../../../../layeredimage/io/psd.py#L11)
+[Show source in psd.py:14](../../../../layeredimage/io/psd.py#L14)
 
 Open a .psd file into a layered image.
 
@@ -20,11 +20,15 @@ Open a .psd file into a layered image.
 def openLayer_PSD(file: str) -> LayeredImage: ...
 ```
 
+#### See also
+
+- [LayeredImage](../layeredimage.md#layeredimage)
+
 
 
 ## saveLayer_PSD
 
-[Show source in psd.py:81](../../../../layeredimage/io/psd.py#L81)
+[Show source in psd.py:84](../../../../layeredimage/io/psd.py#L84)
 
 Save a layered image as .psd.
 
@@ -33,3 +37,7 @@ Save a layered image as .psd.
 ```python
 def saveLayer_PSD(fileName: str, layeredImage: LayeredImage) -> None: ...
 ```
+
+#### See also
+
+- [LayeredImage](../layeredimage.md#layeredimage)

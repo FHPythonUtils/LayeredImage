@@ -10,7 +10,7 @@
 
 ## openLayer_GIF
 
-[Show source in gif.py:12](../../../../layeredimage/io/gif.py#L12)
+[Show source in gif.py:13](../../../../layeredimage/io/gif.py#L13)
 
 Open a .gif file into a layered image.
 
@@ -20,11 +20,15 @@ Open a .gif file into a layered image.
 def openLayer_GIF(file: str) -> LayeredImage: ...
 ```
 
+#### See also
+
+- [LayeredImage](../layeredimage.md#layeredimage)
+
 
 
 ## saveLayer_GIF
 
-[Show source in gif.py:30](../../../../layeredimage/io/gif.py#L30)
+[Show source in gif.py:31](../../../../layeredimage/io/gif.py#L31)
 
 Save a layered image as .gif.
 
@@ -33,3 +37,7 @@ Save a layered image as .gif.
 ```python
 def saveLayer_GIF(fileName: str, layeredImage: LayeredImage) -> None: ...
 ```
+
+#### See also
+
+- [LayeredImage](../layeredimage.md#layeredimage)

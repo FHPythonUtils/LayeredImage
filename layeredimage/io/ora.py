@@ -45,7 +45,7 @@ def openLayer_ORA(file: str) -> LayeredImage:
 			layersAndGroups.append(
 				Layer(
 					name=layerOrGroup.name,
-					image=layerOrGroup.get_image_data(True),
+					image=layerOrGroup.get_image_data(raw=True),
 					dimensions=layerOrGroup.dimensions,
 					offsets=layerOrGroup.offsets,
 					opacity=layerOrGroup.opacity,
@@ -59,7 +59,7 @@ def openLayer_ORA(file: str) -> LayeredImage:
 				layers.append(
 					Layer(
 						name=layer.name,
-						image=layer.get_image_data(True),
+						image=layer.get_image_data(raw=True),
 						dimensions=layer.dimensions,
 						offsets=layer.offsets,
 						opacity=layer.opacity,
