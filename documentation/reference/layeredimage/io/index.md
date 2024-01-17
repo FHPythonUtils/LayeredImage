@@ -1,8 +1,6 @@
 # Io
 
-[Layeredimage Index](../../README.md#layeredimage-index) /
-[Layeredimage](../index.md#layeredimage) /
-Io
+[Layeredimage Index](../../README.md#layeredimage-index) / [Layeredimage](../index.md#layeredimage) / Io
 
 > Auto-generated documentation for [layeredimage.io](../../../../layeredimage/io/__init__.py) module.
 
@@ -15,7 +13,7 @@ Io
 
 ## exportFlatImage
 
-[Show source in __init__.py:103](../../../../layeredimage/io/__init__.py#L103)
+[Show source in __init__.py:109](../../../../layeredimage/io/__init__.py#L109)
 
 Export the layered image to a unilayer image file.
 
@@ -49,16 +47,19 @@ Open a layer image file into a layer image object.
 
 #### Arguments
 
-- `file` *str* - path/ filename
+----
+ - `file` *str* - path/ filename
 
 #### Raises
 
-- `FileExistsError` - If the layered image does not exist
-- `ValueError` - If the extention is not recognised
+------
+ - `FileExistsError` - If the layered image does not exist
+ - `ValueError` - If the extention is not recognised
 
 #### Returns
 
-- `LayeredImage` - a layered image object
+-------
+ - `LayeredImage` - a layered image object
 
 #### Signature
 
@@ -70,22 +71,25 @@ def openLayerImage(file: str | Path) -> LayeredImage: ...
 
 ## saveLayerImage
 
-[Show source in __init__.py:70](../../../../layeredimage/io/__init__.py#L70)
+[Show source in __init__.py:73](../../../../layeredimage/io/__init__.py#L73)
 
 Save a layered image to a file.
 
 #### Arguments
 
-- `fileName` *str* - path/ filename
-- `layeredImage` *LayeredImage* - the layered image to save
+----
+ - `fileName` *str* - path/ filename
+ - `layeredImage` *LayeredImage* - the layered image to save
 
 #### Raises
 
-- `ValueError` - If the extention is not recognised
+------
+ - `ValueError` - If the extention is not recognised
 
 #### Returns
 
-None
+-------
+ None
 
 #### Signature
 

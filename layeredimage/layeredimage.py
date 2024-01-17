@@ -3,7 +3,6 @@ from __future__ import annotations
 
 from typing import Any
 
-# pylint: disable=unused-import
 from blendmodes.imagetools import rasterImageOA, rasterImageOffset, renderWAlphaOffset
 from deprecation import deprecated
 from PIL import Image
@@ -11,6 +10,7 @@ from PIL import Image
 from .blend import blendLayers
 from .layergroup import Group, Layer
 
+_ = (rasterImageOA, rasterImageOffset)
 
 class LayeredImage:
 	"""A representation of a layered image such as an ora."""
@@ -24,6 +24,7 @@ class LayeredImage:
 		"""LayeredImage - representation of a layered image.
 
 		Args:
+		----
 			layersAndGroups (list[Layer, Group]): List of layers and groups
 			dimensions (tuple[int, int], optional): dimensions of the canvas. Defaults to None.
 		"""
@@ -195,6 +196,7 @@ def flattenLayerOrGroup(
 	"""Flatten a layer or group on to an image of what has already been flattened.
 
 	Args:
+	----
 		layerOrGroup (Layer, Group): A layer or a group of layers
 		imageDimensions (tuple[int, int]): size of the image
 		flattenedSoFar (Image.Image, optional): the image of what has already
@@ -203,6 +205,7 @@ def flattenLayerOrGroup(
 		to True.
 
 	Returns:
+	-------
 		Image.Image: Flattened image
 	"""
 	if ignoreHidden and not layerOrGroup.visible:
@@ -234,6 +237,7 @@ def flattenAll(
 	"""Flatten a list of layers and groups.
 
 	Args:
+	----
 		layers (list[Layer | Group] | list[Layer]): A list of layers and groups
 		imageDimensions (tuple[int, int]): size of the image
 		been flattened. Defaults to None.
@@ -241,6 +245,7 @@ def flattenAll(
 		to True.
 
 	Returns:
+	-------
 		Image.Image: Flattened image
 	"""
 	flattenedSoFar = flattenLayerOrGroup(layers[0], imageDimensions, ignoreHidden=ignoreHidden)

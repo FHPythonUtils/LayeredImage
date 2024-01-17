@@ -1,9 +1,6 @@
 # Webp
 
-[Layeredimage Index](../../README.md#layeredimage-index) /
-[Layeredimage](../index.md#layeredimage) /
-[Io](./index.md#io) /
-Webp
+[Layeredimage Index](../../README.md#layeredimage-index) / [Layeredimage](../index.md#layeredimage) / [Io](./index.md#io) / Webp
 
 > Auto-generated documentation for [layeredimage.io.webp](../../../../layeredimage/io/webp.py) module.
 
@@ -13,7 +10,7 @@ Webp
 
 ## openLayer_WEBP
 
-[Show source in webp.py:14](../../../../layeredimage/io/webp.py#L14)
+[Show source in webp.py:12](../../../../layeredimage/io/webp.py#L12)
 
 Open a .webp file into a layered image.
 
@@ -27,7 +24,7 @@ def openLayer_WEBP(file: str) -> LayeredImage: ...
 
 ## saveLayer_WEBP
 
-[Show source in webp.py:26](../../../../layeredimage/io/webp.py#L26)
+[Show source in webp.py:24](../../../../layeredimage/io/webp.py#L24)
 
 Save a layered image as .webp.
 

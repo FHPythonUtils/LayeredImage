@@ -1,9 +1,6 @@
 # Common
 
-[Layeredimage Index](../../README.md#layeredimage-index) /
-[Layeredimage](../index.md#layeredimage) /
-[Io](./index.md#io) /
-Common
+[Layeredimage Index](../../README.md#layeredimage-index) / [Layeredimage](../index.md#layeredimage) / [Io](./index.md#io) / Common
 
 > Auto-generated documentation for [layeredimage.io.common](../../../../layeredimage/io/common.py) module.
 

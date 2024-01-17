@@ -1,9 +1,6 @@
 # Tiff
 
-[Layeredimage Index](../../README.md#layeredimage-index) /
-[Layeredimage](../index.md#layeredimage) /
-[Io](./index.md#io) /
-Tiff
+[Layeredimage Index](../../README.md#layeredimage-index) / [Layeredimage](../index.md#layeredimage) / [Io](./index.md#io) / Tiff
 
 > Auto-generated documentation for [layeredimage.io.tiff](../../../../layeredimage/io/tiff.py) module.
 
@@ -13,7 +10,7 @@ Tiff
 
 ## openLayer_TIFF
 
-[Show source in tiff.py:14](../../../../layeredimage/io/tiff.py#L14)
+[Show source in tiff.py:12](../../../../layeredimage/io/tiff.py#L12)
 
 Open a .tiff or a .tif file into a layered image.
 
@@ -27,7 +24,7 @@ def openLayer_TIFF(file: str) -> LayeredImage: ...
 
 ## saveLayer_TIFF
 
-[Show source in tiff.py:53](../../../../layeredimage/io/tiff.py#L53)
+[Show source in tiff.py:51](../../../../layeredimage/io/tiff.py#L51)
 
 Save a layered image as .tiff or .tif.
 

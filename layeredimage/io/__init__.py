@@ -35,13 +35,16 @@ def openLayerImage(file: str | Path) -> LayeredImage:
 	"""Open a layer image file into a layer image object.
 
 	Args:
+	----
 		file (str): path/ filename
 
 	Raises:
+	------
 		FileExistsError: If the layered image does not exist
 		ValueError: If the extention is not recognised
 
 	Returns:
+	-------
 		LayeredImage: a layered image object
 	"""
 	functionMap = {
@@ -71,13 +74,16 @@ def saveLayerImage(fileName: str | Path, layeredImage: LayeredImage) -> None:
 	"""Save a layered image to a file.
 
 	Args:
+	----
 		fileName (str): path/ filename
 		layeredImage (LayeredImage): the layered image to save
 
 	Raises:
+	------
 		ValueError: If the extention is not recognised
 
 	Returns:
+	-------
 		None
 	"""
 	functionMap = {

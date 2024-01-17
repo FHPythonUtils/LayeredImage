@@ -13,7 +13,6 @@ sys.path.insert(0, os.path.dirname(THISDIR))
 
 import layeredimage.io
 
-# pylint: disable=missing-function-docstring
 
 # ORA
 def test_ora():

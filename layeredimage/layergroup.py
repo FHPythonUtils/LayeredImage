@@ -7,9 +7,6 @@ from PIL import Image
 
 from .blend import BlendType
 
-# pylint: disable=too-few-public-methods
-# pylint: disable=too-many-arguments
-
 
 class LayerGroup:
 	"""A representation of an image layer or group."""
@@ -27,6 +24,7 @@ class LayerGroup:
 		"""Represent an image layer or group.
 
 		Args:
+		----
 			name (str): Name of the layer or group
 			dimensions ((int, int)): A tuple representing the dimensions in
 			pixels
@@ -92,6 +90,7 @@ class Layer(LayerGroup):
 		"""Representation of an image layer.
 
 		Args:
+		----
 			name (str): Name of the layer or group
 			image (Image.Image): A PIL Image
 			dimensions (tuple[int, int]): A tuple representing the dimensions in
@@ -142,6 +141,7 @@ class Group(LayerGroup):
 		"""Representation of an image group.
 
 		Args:
+		----
 			name (str): Name of the layer or group
 			layers (layeredimage.Layer[]): A list of layers where the next
 			index stacks upon the previous layer

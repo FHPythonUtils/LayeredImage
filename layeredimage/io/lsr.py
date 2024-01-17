@@ -8,9 +8,6 @@ from blendmodes.imagetools import renderWAlphaOffset
 from ..layeredimage import LayeredImage
 from ..layergroup import Group, Layer
 
-# pylint: disable=invalid-name
-# pylint: disable=import-outside-toplevel
-
 
 ## LSR ##
 def openLayer_LSR(file: str) -> LayeredImage:

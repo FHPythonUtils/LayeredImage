@@ -7,8 +7,6 @@ from ..layeredimage import LayeredImage
 from ..layergroup import Layer
 from .common import expandLayersToCanvas
 
-# pylint: disable=invalid-name
-
 
 ## WEBP ##
 def openLayer_WEBP(file: str) -> LayeredImage:

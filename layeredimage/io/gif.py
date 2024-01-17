@@ -7,8 +7,6 @@ from ..layeredimage import LayeredImage
 from ..layergroup import Layer
 from .common import expandLayersToCanvas
 
-# pylint: disable=invalid-name
-
 
 ## GIF ##
 def openLayer_GIF(file: str) -> LayeredImage:

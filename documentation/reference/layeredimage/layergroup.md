@@ -1,8 +1,6 @@
 # LayerGroup
 
-[Layeredimage Index](../README.md#layeredimage-index) /
-[Layeredimage](./index.md#layeredimage) /
-LayerGroup
+[Layeredimage Index](../README.md#layeredimage-index) / [Layeredimage](./index.md#layeredimage) / LayerGroup
 
 > Auto-generated documentation for [layeredimage.layergroup](../../../layeredimage/layergroup.py) module.
 
@@ -18,7 +16,7 @@ LayerGroup
 
 ## Group
 
-[Show source in layergroup.py:129](../../../layeredimage/layergroup.py#L129)
+[Show source in layergroup.py:128](../../../layeredimage/layergroup.py#L128)
 
 A representation of an image group.
 
@@ -59,7 +57,7 @@ def json(self) -> dict[str, Any]: ...
 
 ## Layer
 
-[Show source in layergroup.py:79](../../../layeredimage/layergroup.py#L79)
+[Show source in layergroup.py:77](../../../layeredimage/layergroup.py#L77)
 
 A representation of an image layer.
 
@@ -85,7 +83,7 @@ class Layer(LayerGroup):
 
 ### Layer().json
 
-[Show source in layergroup.py:116](../../../layeredimage/layergroup.py#L116)
+[Show source in layergroup.py:115](../../../layeredimage/layergroup.py#L115)
 
 Get the object as a dict.
 
@@ -99,7 +97,7 @@ def json(self) -> dict[str, Any]: ...
 
 ## LayerGroup
 
-[Show source in layergroup.py:14](../../../layeredimage/layergroup.py#L14)
+[Show source in layergroup.py:11](../../../layeredimage/layergroup.py#L11)
 
 A representation of an image layer or group.
 
@@ -121,7 +119,7 @@ class LayerGroup:
 
 ### LayerGroup().__repr__
 
-[Show source in layergroup.py:50](../../../layeredimage/layergroup.py#L50)
+[Show source in layergroup.py:48](../../../layeredimage/layergroup.py#L48)
 
 Get the string representation.
 
@@ -133,7 +131,7 @@ def __repr__(self): ...
 
 ### LayerGroup().__str__
 
-[Show source in layergroup.py:54](../../../layeredimage/layergroup.py#L54)
+[Show source in layergroup.py:52](../../../layeredimage/layergroup.py#L52)
 
 Get the string representation.
 
@@ -145,7 +143,7 @@ def __str__(self): ...
 
 ### LayerGroup().json
 
-[Show source in layergroup.py:67](../../../layeredimage/layergroup.py#L67)
+[Show source in layergroup.py:65](../../../layeredimage/layergroup.py#L65)
 
 Get the object as a dict.
 

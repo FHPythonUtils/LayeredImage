@@ -23,54 +23,55 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = ">=3.8,<4.0"
-blendmodes = "<2025,>=2023"
-pylsr = "<2025,>=2023"
-pyora = "<2,>=0.3.11"
-pypdn = "<2,>=1.0.6"
-deprecation = "<3,>=2.1.0"
-psd-tools = "<2,>=1.9.30"
-pillow = "<11,>=10.2.0"
-gimpformats = "<2025,>=2023.1"
+blendmodes = "^2024"
+pylsr = "^2024"
+pyora = "^0.3.11"
+pypdn = "^1.0.6"
+deprecation = "^2.1.0"
+psd-tools = "^1.9.30"
+pillow = "^10.2.0"
+gimpformats = "^2023.1"
 
 [tool.poetry.group.dev.dependencies]
 imgcompare = "^2.0.1"
 pytest = "^7.4.4"
-pylint = "^3.0.3"
 handsdown = "^2.1.0"
 coverage = "^7.4.0"
+ruff = "^0.1.13"
+blackt = "^2024"
+pyright = "^1.1.347"
 
-[tool.black]
+[tool.cercis]
 line-length = 100
+single-quote = false
+use-tabs = true
 target-version = ["py38"]
-
-[tool.isort]
-profile = "black"
-indent = "Tab"
-
-[tool.pydocstyle]
-convention = "google"
-ignore = "D205,D415"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
-[tool.pylint.basic]
-argument-naming-style = "camelCase"
-attr-naming-style = "camelCase"
-function-naming-style = "camelCase"
-method-naming-style = "camelCase"
-variable-naming-style = "camelCase"
+[tool.ruff]
+line-length = 100
+indent-width = 4
+target-version = "py38"
 
-[tool.pylint.format]
-indent-string = "\t"
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = ["D2", "COM812", "ISC001", "W191", "N", "TCH", "PLR09", "ANN101"]
+fixable = ["ALL"]
 
-[tool.pylint.master]
-ignore-paths = ["tests"]
 
-[tool.pylint.messages_control]
-enable = ["F", "E", "W", "R", "C"]
-disable = ["pointless-string-statement", "superfluous-parens"]
+[tool.ruff.lint.per-file-ignores]
+"**/{tests,docs,tools}/*" = ["D", "S101", "E402"]
+
+[tool.black]
+line-length = 100
+target-version = ["py38"]
+
+[tool.pyright]
+venvPath = "."
+venv = ".venv"
 
 [tool.tox]
 legacy_tox_ini = """

@@ -1,7 +1,6 @@
 # Layeredimage
 
-[Layeredimage Index](../README.md#layeredimage-index) /
-Layeredimage
+[Layeredimage Index](../README.md#layeredimage-index) / Layeredimage
 
 > Auto-generated documentation for [layeredimage](../../../layeredimage/__init__.py) module.
 

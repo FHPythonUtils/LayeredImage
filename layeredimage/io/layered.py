@@ -14,8 +14,6 @@ from ..layeredimage import LayeredImage
 from ..layergroup import Group, Layer
 from .common import blendModeLookup
 
-# pylint: disable=invalid-name
-
 
 ## LAYERED ##
 def openLayer_LAYERED(file: str) -> LayeredImage:

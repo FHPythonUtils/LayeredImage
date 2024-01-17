@@ -1,9 +1,6 @@
 # Xcf
 
-[Layeredimage Index](../../README.md#layeredimage-index) /
-[Layeredimage](../index.md#layeredimage) /
-[Io](./index.md#io) /
-Xcf
+[Layeredimage Index](../../README.md#layeredimage-index) / [Layeredimage](../index.md#layeredimage) / [Io](./index.md#io) / Xcf
 
 > Auto-generated documentation for [layeredimage.io.xcf](../../../../layeredimage/io/xcf.py) module.
 
@@ -13,7 +10,7 @@ Xcf
 
 ## openLayer_XCF
 
-[Show source in xcf.py:14](../../../../layeredimage/io/xcf.py#L14)
+[Show source in xcf.py:11](../../../../layeredimage/io/xcf.py#L11)
 
 Open an .xcf file into a layered image.
 
@@ -27,7 +24,7 @@ def openLayer_XCF(file: str) -> LayeredImage: ...
 
 ## saveLayer_XCF
 
-[Show source in xcf.py:134](../../../../layeredimage/io/xcf.py#L134)
+[Show source in xcf.py:131](../../../../layeredimage/io/xcf.py#L131)
 
 Save a layered image as .xcf.
 

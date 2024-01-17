@@ -6,9 +6,6 @@ from ..layeredimage import LayeredImage
 from ..layergroup import Group, Layer
 from .common import blendModeLookup
 
-# pylint: disable=invalid-name
-# pylint: disable=import-outside-toplevel
-
 
 #### ORA ####
 def openLayer_ORA(file: str) -> LayeredImage:

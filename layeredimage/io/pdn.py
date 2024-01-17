@@ -8,9 +8,6 @@ from ..layeredimage import LayeredImage
 from ..layergroup import Layer
 from .common import blendModeLookup
 
-# pylint: disable=invalid-name
-# pylint: disable=import-outside-toplevel
-
 
 #### PDN ####
 def openLayer_PDN(file: str) -> LayeredImage:

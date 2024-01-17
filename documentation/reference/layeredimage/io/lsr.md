@@ -1,9 +1,6 @@
 # Lsr
 
-[Layeredimage Index](../../README.md#layeredimage-index) /
-[Layeredimage](../index.md#layeredimage) /
-[Io](./index.md#io) /
-Lsr
+[Layeredimage Index](../../README.md#layeredimage-index) / [Layeredimage](../index.md#layeredimage) / [Io](./index.md#io) / Lsr
 
 > Auto-generated documentation for [layeredimage.io.lsr](../../../../layeredimage/io/lsr.py) module.
 
@@ -13,7 +10,7 @@ Lsr
 
 ## openLayer_LSR
 
-[Show source in lsr.py:16](../../../../layeredimage/io/lsr.py#L16)
+[Show source in lsr.py:13](../../../../layeredimage/io/lsr.py#L13)
 
 Open a .lsr file into a layered image.
 
@@ -27,7 +24,7 @@ def openLayer_LSR(file: str) -> LayeredImage: ...
 
 ## saveLayer_LSR
 
-[Show source in lsr.py:37](../../../../layeredimage/io/lsr.py#L37)
+[Show source in lsr.py:34](../../../../layeredimage/io/lsr.py#L34)
 
 Save a layered image as .lsr.
 
