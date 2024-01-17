@@ -1,7 +1,6 @@
 """Do file io."""
 from __future__ import annotations
 
-from os.path import exists, splitext
 from pathlib import Path
 
 from layeredimage.layeredimage import LayeredImage
@@ -61,10 +60,11 @@ def openLayerImage(file: str | Path) -> LayeredImage:
 		".layered": openLayer_LAYERED,
 		".layeredc": openLayer_LAYEREDC,
 	}
-	if not exists(file):
+	fp = Path(file)
+	if not fp.is_file():
 		print(f"ERROR: {file} does not exist")
 		raise FileExistsError
-	fileExt = splitext(file)[1].lower()
+	fileExt = fp.suffix.lower()
 	if fileExt not in functionMap:
 		extNotRecognised(file)
 		raise ValueError
@@ -100,7 +100,7 @@ def saveLayerImage(fileName: str | Path, layeredImage: LayeredImage) -> None:
 		".layered": saveLayer_LAYERED,
 		".layeredc": saveLayer_LAYEREDC,
 	}
-	fileExt = splitext(fileName)[1].lower()
+	fileExt = Path(fileName).suffix.lower()
 	if fileExt not in functionMap:
 		extNotRecognised(fileName)
 		raise ValueError

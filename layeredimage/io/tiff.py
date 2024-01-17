@@ -15,14 +15,14 @@ def openLayer_TIFF(file: str) -> LayeredImage:
 	project = Image.open(file)
 	layers = []
 	dimensions = [0, 0]
-	for index in range(project.n_frames):  # type:ignore
+	for index in range(project.n_frames):
 		# Load the correct image
 		project.seek(index)
 		# Update the project dimensions
 		for indx, dimension in enumerate(dimensions):
 			if project.size[indx] > dimension:
 				dimensions[indx] = project.size[indx]
-		ifd = project.ifd.named()  # type:ignore
+		ifd = project.ifd.named()
 		# Offsets
 		offsetX = 0
 		offsetY = 0

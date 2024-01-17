@@ -37,6 +37,7 @@ class LayerGroup:
 			is often configured per layer or per group by an 'eye' icon).
 			Defaults to True.
 			blendmode (Blendtype): The blending mode to use. Defaults to BlendType.NORMAL
+			**kwargs (Any): add any keyword args to self.extras
 		"""
 		self.name = name
 		self.offsets = offsets

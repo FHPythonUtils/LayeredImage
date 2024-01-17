@@ -79,7 +79,9 @@ def openLayer_LAYERED(file: str) -> LayeredImage:
 		return LayeredImage(layersAndGroups, stack["dimensions"])
 
 
-def grabLayer_LAYERED(zipFile: ZipFile, layer: dict[str, Any], blendLookup: dict[str, Any]):
+def grabLayer_LAYERED(
+	zipFile: ZipFile, layer: dict[str, Any], blendLookup: dict[str, Any]
+) -> Layer:
 	"""Grab an image from .layered."""
 	with zipFile.open(f'data/{layer["name"]}.png') as layerImage:
 		image = Image.open(layerImage).convert("RGBA")
@@ -123,8 +125,9 @@ def writeImage_LAYERED(
 	"""Write an image to the archive."""
 	imgByteArr = io.BytesIO()
 	imageCopy = image.copy()
-	if compressed and len(set(imageCopy.getcolors(maxcolors=256**3))) < 256:
-		imageCopy = imageCopy.quantize(colors=256, method=2, kmeans=1)
+	paletteSize = 256
+	if compressed and len(set(imageCopy.getcolors(maxcolors=paletteSize**3))) < paletteSize:
+		imageCopy = imageCopy.quantize(colors=paletteSize, method=2, kmeans=1)
 	imageCopy.save(imgByteArr, format="PNG", optimize=compressed)
 	imgByteArr.seek(0)
 	zipFile.writestr(path, imgByteArr.read())

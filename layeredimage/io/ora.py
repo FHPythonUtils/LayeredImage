@@ -1,6 +1,8 @@
 """Do file io - ORA."""
 from __future__ import annotations
 
+from typing import Any
+
 from layeredimage.blend import BlendType
 from layeredimage.layeredimage import LayeredImage
 from layeredimage.layergroup import Group, Layer
@@ -123,7 +125,7 @@ def saveLayer_ORA(fileName: str, layeredImage: LayeredImage) -> None:
 	project.save(fileName)
 
 
-def addLayer_ORA(project, layer, blendLookup):
+def addLayer_ORA(project: Any, layer: Any, blendLookup: dict[BlendType, str]) -> Any:
 	"""Update the project with a shiny new layer."""
 	project.add_layer(
 		layer.image,

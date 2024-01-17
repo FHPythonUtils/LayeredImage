@@ -4,7 +4,6 @@ from __future__ import annotations
 from typing import Any
 
 from blendmodes.imagetools import rasterImageOA, rasterImageOffset, renderWAlphaOffset
-from deprecation import deprecated
 from PIL import Image
 
 from .blend import blendLayers
@@ -28,6 +27,7 @@ class LayeredImage:
 		----
 			layersAndGroups (list[Layer, Group]): List of layers and groups
 			dimensions (tuple[int, int], optional): dimensions of the canvas. Defaults to None.
+			**kwargs (Any): add any keyword args to self.extras
 		"""
 		# Write here
 		self.layersAndGroups = layersAndGroups
@@ -67,7 +67,7 @@ class LayeredImage:
 		return {"dimensions": self.dimensions, "layersAndGroups": layersAndGroups}
 
 	# Get, set and remove layers or groups
-	def getLayerOrGroup(self, index: int):
+	def getLayerOrGroup(self, index: int) -> Layer | Group:
 		"""Get a LayerOrGroup."""
 		return self.layersAndGroups[index]
 
@@ -83,23 +83,10 @@ class LayeredImage:
 		"""Remove a LayerOrGroup at a specific index."""
 		self.layersAndGroups.pop(index)
 
-	# The user may wish to add an image directly
-	@deprecated(details="use addImageAsLayer", deprecated_in="2021.2.4")
-	def addLayerRaster(
-		self, image: Image.Image, name: str
-	):  # pylint:disable=missing-function-docstring
-		return self.addImageAsLayer(image, name)
-
 	def addImageAsLayer(self, image: Image.Image, name: str) -> None:
 		"""Resize an image to the canvas and add as a layer."""
 		layer = renderWAlphaOffset(image, self.dimensions)
 		self.addLayerOrGroup(Layer(name, layer, self.dimensions))
-
-	@deprecated(details="use insertImageAsLayer", deprecated_in="2021.2.4")
-	def insertLayerRaster(
-		self, image: Image.Image, name: str, index: int
-	):  # pylint:disable=missing-function-docstring
-		return self.insertImageAsLayer(image, name, index)
 
 	def insertImageAsLayer(self, image: Image.Image, name: str, index: int) -> None:
 		"""Resize an image to the canvas  and insert the layer."""
@@ -150,7 +137,7 @@ class LayeredImage:
 
 	# The user may hate groups and just want the layers... or just want the
 	# groups
-	def extractLayers(self):
+	def extractLayers(self) -> list[Layer]:
 		"""Extract the layers from the image."""
 		layers = []
 		for layerOrGroup in self.layersAndGroups:
@@ -181,7 +168,7 @@ class LayeredImage:
 		"""Update the layers from the image."""
 		self.layers = self.extractLayers()
 
-	def extractGroups(self):
+	def extractGroups(self) -> list[Group]:
 		"""Extract the groups from the image."""
 		return [
 			_layerOrGroup
@@ -200,7 +187,7 @@ def flattenLayerOrGroup(
 	flattenedSoFar: Image.Image | None = None,
 	*,
 	ignoreHidden: bool = True,
-):
+) -> Image.Image:
 	"""Flatten a layer or group on to an image of what has already been flattened.
 
 	Args:
@@ -242,7 +229,7 @@ def flattenAll(
 	imageDimensions: tuple[int, int],
 	*,
 	ignoreHidden: bool = True,
-):
+) -> Image.Image:
 	"""Flatten a list of layers and groups.
 
 	Args:
