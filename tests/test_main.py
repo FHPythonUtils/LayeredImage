@@ -114,7 +114,9 @@ def test_gif() -> None:
 	layeredimage.io.saveLayerImage(f"{THISDIR}/data/gif_output.gif", gif)
 	gif.getFlattenLayers().save(f"{THISDIR}/data/gif_output.png")
 	assert is_equal(
-		f"{THISDIR}/data/gif_output.png", f"{THISDIR}/data/gif_output_expected.png", tolerance=0.2
+		f"{THISDIR}/data/gif_output.png",
+		f"{THISDIR}/data/gif_output_expected.png",
+		tolerance=0.2,
 	)
 
 

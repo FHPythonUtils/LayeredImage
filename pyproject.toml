@@ -14,7 +14,7 @@ classifiers = [
 	"Programming Language :: Python :: Implementation :: CPython",
 	"Topic :: Multimedia :: Graphics",
 	"Topic :: Software Development :: Libraries :: Python Modules",
-	"Topic :: Utilities"
+	"Topic :: Utilities",
 ]
 homepage = "https://github.com/FHPythonUtils/LayeredImage"
 repository = "https://github.com/FHPythonUtils/LayeredImage"
@@ -42,12 +42,6 @@ ruff = "^0.1.13"
 blackt = "^2024"
 pyright = "^1.1.347"
 
-[tool.cercis]
-line-length = 100
-single-quote = false
-use-tabs = true
-target-version = ["py38"]
-
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
@@ -59,7 +53,15 @@ target-version = "py38"
 
 [tool.ruff.lint]
 select = ["ALL"]
-ignore = ["D2", "COM812", "ISC001", "W191", "N", "TCH", "PLR09", "ANN101"]
+ignore = [
+    "ANN101",  # type annotation for self in method
+    "COM812",  # enforce trailing comma
+	"D2",  # pydocstyle formatting
+    "N",  # pep8 naming
+    "PLR09",  # pylint refactor too many
+    "TCH",  # type check blocks
+    "W191"  # ignore this to allow tabs
+]
 fixable = ["ALL"]
 
 
