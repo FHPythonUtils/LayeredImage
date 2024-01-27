@@ -5,6 +5,8 @@ patch-level version changes can be found in [commit messages](../../commits/mast
 
 ## 2024.2 - 2024/01/27
 
+- bug fixes
+- use new blendmodes
 
 ## 2024.1 - 2024/01/17
 

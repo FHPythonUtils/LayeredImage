@@ -6,11 +6,12 @@
 
 - [Common](#common)
   - [blendModeLookup](#blendmodelookup)
+  - [expandLayer](#expandlayer)
   - [expandLayersToCanvas](#expandlayerstocanvas)
 
 ## blendModeLookup
 
-[Show source in common.py:13](../../../../layeredimage/io/common.py#L13)
+[Show source in common.py:14](../../../../layeredimage/io/common.py#L14)
 
 Get the blendmode from a lookup table.
 
@@ -26,9 +27,38 @@ def blendModeLookup(
 
 
 
+## expandLayer
+
+[Show source in common.py:44](../../../../layeredimage/io/common.py#L44)
+
+#### Arguments
+
+----
+ foreground (np.ndarray | Image.Image): The foreground layer (must be the same size as the background).
+ - `opacity` *float, optional* - The opacity of the foreground image. Defaults to 1.0.
+ offsets (Tuple[int, int], optional): Offsets for the foreground layer. Defaults to (0, 0).
+
+#### Returns
+
+-------
+ - `Image.Image` - The image.
+
+#### Signature
+
+```python
+def expandLayer(
+    dimensions: tuple[int, int],
+    foreground: np.ndarray | Image.Image,
+    opacity: float = 1.0,
+    offsets: tuple[int, int] = (0, 0),
+) -> Image.Image: ...
+```
+
+
+
 ## expandLayersToCanvas
 
-[Show source in common.py:25](../../../../layeredimage/io/common.py#L25)
+[Show source in common.py:26](../../../../layeredimage/io/common.py#L26)
 
 Return layers and throw a warning if the image has groups.
 
