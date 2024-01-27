@@ -1,10 +1,10 @@
 """Do file io - PDN."""
 from __future__ import annotations
 
+from blendmodes.blend import BlendType
 from loguru import logger
 from PIL import Image
 
-from layeredimage.blend import BlendType
 from layeredimage.layeredimage import LayeredImage
 from layeredimage.layergroup import Layer
 

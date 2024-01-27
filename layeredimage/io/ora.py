@@ -3,7 +3,8 @@ from __future__ import annotations
 
 from typing import Any
 
-from layeredimage.blend import BlendType
+from blendmodes.blend import BlendType
+
 from layeredimage.layeredimage import LayeredImage
 from layeredimage.layergroup import Group, Layer
 

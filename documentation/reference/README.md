@@ -5,7 +5,6 @@
 A full list of `Layeredimage` project modules.
 
 - [Layeredimage](layeredimage/index.md#layeredimage)
-    - [Blend](layeredimage/blend.md#blend)
     - [Io](layeredimage/io/index.md#io)
         - [Common](layeredimage/io/common.md#common)
         - [Gif](layeredimage/io/gif.md#gif)

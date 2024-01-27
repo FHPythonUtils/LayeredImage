@@ -16,7 +16,7 @@
 
 ## Group
 
-[Show source in layergroup.py:122](../../../layeredimage/layergroup.py#L122)
+[Show source in layergroup.py:121](../../../layeredimage/layergroup.py#L121)
 
 A representation of an image group.
 
@@ -32,7 +32,7 @@ class Group(LayerGroup):
         offsets: tuple[int, int] = (0, 0),
         opacity: float = 1.0,
         visible: bool = True,
-        blendmode: BlendType = BlendType.NORMAL,
+        blendmode: BlendType | tuple[str, ...] = BlendType.NORMAL,
     ) -> None: ...
 ```
 
@@ -43,7 +43,7 @@ class Group(LayerGroup):
 
 ### Group().json
 
-[Show source in layergroup.py:170](../../../layeredimage/layergroup.py#L170)
+[Show source in layergroup.py:169](../../../layeredimage/layergroup.py#L169)
 
 Get the object as a dict.
 
@@ -57,7 +57,7 @@ def json(self) -> dict[str, Any]: ...
 
 ## Layer
 
-[Show source in layergroup.py:70](../../../layeredimage/layergroup.py#L70)
+[Show source in layergroup.py:69](../../../layeredimage/layergroup.py#L69)
 
 A representation of an image layer.
 
@@ -73,7 +73,7 @@ class Layer(LayerGroup):
         offsets: tuple[int, int] = (0, 0),
         opacity: float = 1.0,
         visible: bool = True,
-        blendmode: BlendType = BlendType.NORMAL,
+        blendmode: BlendType | tuple[str, ...] = BlendType.NORMAL,
     ) -> None: ...
 ```
 
@@ -83,7 +83,7 @@ class Layer(LayerGroup):
 
 ### Layer().json
 
-[Show source in layergroup.py:109](../../../layeredimage/layergroup.py#L109)
+[Show source in layergroup.py:108](../../../layeredimage/layergroup.py#L108)
 
 Get the object as a dict.
 
@@ -97,7 +97,7 @@ def json(self) -> dict[str, Any]: ...
 
 ## LayerGroup
 
-[Show source in layergroup.py:11](../../../layeredimage/layergroup.py#L11)
+[Show source in layergroup.py:10](../../../layeredimage/layergroup.py#L10)
 
 A representation of an image layer or group.
 
@@ -112,14 +112,14 @@ class LayerGroup:
         offsets: tuple[int, int] = (0, 0),
         opacity: float = 1.0,
         visible: bool = True,
-        blendmode: BlendType = BlendType.NORMAL,
-        **kwargs: Any
+        blendmode: BlendType | tuple[str, ...] = BlendType.NORMAL,
+        **kwargs: dict[str, Any]
     ) -> None: ...
 ```
 
 ### LayerGroup().__repr__
 
-[Show source in layergroup.py:50](../../../layeredimage/layergroup.py#L50)
+[Show source in layergroup.py:49](../../../layeredimage/layergroup.py#L49)
 
 Get the string representation.
 
@@ -131,7 +131,7 @@ def __repr__(self) -> str: ...
 
 ### LayerGroup().__str__
 
-[Show source in layergroup.py:54](../../../layeredimage/layergroup.py#L54)
+[Show source in layergroup.py:53](../../../layeredimage/layergroup.py#L53)
 
 Get the string representation.
 
@@ -143,7 +143,7 @@ def __str__(self) -> str: ...
 
 ### LayerGroup().json
 
-[Show source in layergroup.py:58](../../../layeredimage/layergroup.py#L58)
+[Show source in layergroup.py:57](../../../layeredimage/layergroup.py#L57)
 
 Get the object as a dict.
 

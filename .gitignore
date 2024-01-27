@@ -2,6 +2,7 @@
 README.rst
 requirements_optional.txt
 tmp
+profile.*
 
 # DepHell stuff
 poetry.lock

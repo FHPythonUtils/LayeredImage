@@ -13,7 +13,7 @@
 
 ## exportFlatImage
 
-[Show source in __init__.py:111](../../../../layeredimage/io/__init__.py#L111)
+[Show source in __init__.py:112](../../../../layeredimage/io/__init__.py#L112)
 
 Export the layered image to a unilayer image file.
 

@@ -1,9 +1,9 @@
 """Do file io - XCF."""
 from __future__ import annotations
 
+from blendmodes.blend import BlendType
 from loguru import logger
 
-from layeredimage.blend import BlendType
 from layeredimage.layeredimage import LayeredImage
 from layeredimage.layergroup import Group, Layer
 

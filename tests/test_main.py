@@ -166,13 +166,8 @@ def test_layeredc() -> None:
 
 
 if __name__ == "__main__":
-	test_ora()
-	test_psd()
-	test_pdn()
-	test_xcf()
-	test_tiff()
-	test_webp()
-	test_gif()
-	test_lsr()
-	test_layered()
-	test_layeredc()
+	import sys
+
+	import pytest
+
+	pytest.main(sys.argv)

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "layeredimage"
-version = "2024.1"
+version = "2024.2"
 license = "mit"
 description = "Use this module to read, and write to a number of layered image formats"
 authors = ["FredHappyface"]
@@ -22,12 +22,11 @@ documentation = "https://github.com/FHPythonUtils/LayeredImage/blob/master/READM
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = ">=3.8,<4.0"
-blendmodes = "<2026,>=2024"
+python = ">=3.9,<4.0"
+blendmodes = "<2026,>=2024.1"
 pylsr = "<2026,>=2024"
 pyora = "<2,>=0.3.11"
 pypdn = "<2,>=1.0.6"
-deprecation = "<3,>=2.1.0"
 psd-tools = "<2,>=1.9.30"
 pillow = "<11,>=10.2.0"
 gimpformats = "<2025,>=2023.1"
@@ -37,10 +36,10 @@ loguru = "<2,>=0.7.2"
 imgcompare = "^2.0.1"
 pytest = "^7.4.4"
 handsdown = "^2.1.0"
-coverage = "^7.4.0"
+coverage = "^7.4.1"
 ruff = "^0.1.13"
-blackt = "^2024"
-pyright = "^1.1.347"
+blackt = "^2024.0.1"
+pyright = "^1.1.348"
 
 [build-system]
 requires = ["poetry-core"]

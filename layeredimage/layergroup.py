@@ -3,9 +3,8 @@ from __future__ import annotations
 
 from typing import Any
 
+from blendmodes.blend import BlendType
 from PIL import Image
-
-from .blend import BlendType
 
 
 class LayerGroup:
@@ -19,8 +18,8 @@ class LayerGroup:
 		opacity: float = 1.0,
 		*,
 		visible: bool = True,
-		blendmode: BlendType = BlendType.NORMAL,
-		**kwargs: Any,
+		blendmode: BlendType | tuple[str, ...] = BlendType.NORMAL,
+		**kwargs: dict[str, Any],
 	) -> None:
 		"""Represent an image layer or group.
 
@@ -79,7 +78,7 @@ class Layer(LayerGroup):
 		opacity: float = 1.0,
 		*,
 		visible: bool = True,
-		blendmode: BlendType = BlendType.NORMAL,
+		blendmode: BlendType | tuple[str, ...] = BlendType.NORMAL,
 	) -> None:
 		"""Representation of an image layer.
 
@@ -131,7 +130,7 @@ class Group(LayerGroup):
 		opacity: float = 1.0,
 		*,
 		visible: bool = True,
-		blendmode: BlendType = BlendType.NORMAL,
+		blendmode: BlendType | tuple[str, ...] = BlendType.NORMAL,
 	) -> None:
 		"""Representation of an image group.
 

@@ -27,7 +27,7 @@ def extNotRecognised(fileName: str) -> None:
 	"""Output the file extension not recognised error."""
 	exts = ["ora", "psd", "xcf", "pdn", "tif", "tiff", "webp", "gif", "lsr", "layered", "layeredc"]
 	logger.error(
-		"File extension is not recognised for file! Must be one of " + ', "'.join(exts) + '"',
+		".File extension is not recognised for file! Must be one of " + ', "'.join(exts) + '"',
 		extra={"fileName": fileName},
 	)
 
@@ -49,17 +49,17 @@ def openLayerImage(file: str | Path) -> LayeredImage:
 		LayeredImage: a layered image object
 	"""
 	functionMap = {
-		"ora": openLayer_ORA,
-		"psd": openLayer_PSD,
-		"xcf": openLayer_XCF,
-		"pdn": openLayer_PDN,
-		"tif": openLayer_TIFF,
-		"tiff": openLayer_TIFF,
-		"webp": openLayer_WEBP,
-		"gif": openLayer_GIF,
-		"lsr": openLayer_LSR,
-		"layered": openLayer_LAYERED,
-		"layeredc": openLayer_LAYEREDC,
+		".ora": openLayer_ORA,
+		".psd": openLayer_PSD,
+		".xcf": openLayer_XCF,
+		".pdn": openLayer_PDN,
+		".tif": openLayer_TIFF,
+		".tiff": openLayer_TIFF,
+		".webp": openLayer_WEBP,
+		".gif": openLayer_GIF,
+		".lsr": openLayer_LSR,
+		".layered": openLayer_LAYERED,
+		".layeredc": openLayer_LAYEREDC,
 	}
 	fp = Path(file)
 	if not fp.is_file():
@@ -67,9 +67,9 @@ def openLayerImage(file: str | Path) -> LayeredImage:
 		raise FileExistsError
 	fileExt = fp.suffix.lower()
 	if fileExt not in functionMap:
-		extNotRecognised(file)
+		extNotRecognised(fp.name)
 		raise ValueError
-	return functionMap[fileExt](file)
+	return functionMap[fileExt](fp.as_posix())
 
 
 def saveLayerImage(fileName: str | Path, layeredImage: LayeredImage) -> None:
@@ -89,23 +89,24 @@ def saveLayerImage(fileName: str | Path, layeredImage: LayeredImage) -> None:
 		None
 	"""
 	functionMap = {
-		"ora": saveLayer_ORA,
-		"psd": saveLayer_PSD,
-		"xcf": saveLayer_XCF,
-		"pdn": saveLayer_PDN,
-		"tif": saveLayer_TIFF,
-		"tiff": saveLayer_TIFF,
-		"webp": saveLayer_WEBP,
-		"gif": saveLayer_GIF,
-		"lsr": saveLayer_LSR,
-		"layered": saveLayer_LAYERED,
-		"layeredc": saveLayer_LAYEREDC,
+		".ora": saveLayer_ORA,
+		".psd": saveLayer_PSD,
+		".xcf": saveLayer_XCF,
+		".pdn": saveLayer_PDN,
+		".tif": saveLayer_TIFF,
+		".tiff": saveLayer_TIFF,
+		".webp": saveLayer_WEBP,
+		".gif": saveLayer_GIF,
+		".lsr": saveLayer_LSR,
+		".layered": saveLayer_LAYERED,
+		".layeredc": saveLayer_LAYEREDC,
 	}
-	fileExt = Path(fileName).suffix.lower()
+	pth = Path(fileName)
+	fileExt = pth.suffix.lower()
 	if fileExt not in functionMap:
-		extNotRecognised(fileName)
+		extNotRecognised(pth.name)
 		raise ValueError
-	return functionMap[fileExt](fileName, layeredImage)
+	return functionMap[fileExt](pth.as_posix(), layeredImage)
 
 
 def exportFlatImage(fileName: str, layeredImage: LayeredImage) -> None:

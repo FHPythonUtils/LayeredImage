@@ -3,16 +3,17 @@ from __future__ import annotations
 
 from typing import Any
 
-from blendmodes.imagetools import renderWAlphaOffset
+from blendmodes.blend import BlendType, blendLayers
 from loguru import logger
-from PIL.Image import Image
+from PIL import Image
 
-from layeredimage.blend import BlendType
 from layeredimage.layeredimage import LayeredImage
 
 
 def blendModeLookup(
-	blendmode: Any, blendLookup: dict[Any, Any], default: Any = BlendType.NORMAL
+	blendmode: Any,
+	blendLookup: dict[Any, Any],
+	default: BlendType | tuple[str, ...] = BlendType.NORMAL,
 ) -> BlendType:
 	"""Get the blendmode from a lookup table."""
 	if blendmode not in blendLookup:
@@ -21,16 +22,20 @@ def blendModeLookup(
 	return blendLookup[blendmode]
 
 
-def expandLayersToCanvas(layeredImage: LayeredImage, imageFormat: str) -> list[Image]:
+def expandLayersToCanvas(layeredImage: LayeredImage, imageFormat: str) -> list[Image.Image]:
 	"""Return layers and throw a warning if the image has groups."""
 	if len(layeredImage.extractGroups()) > 0:
 		logger.warning(
 			"This image format does not support groups so extracting layers",
 			extra={"imageFormat": imageFormat},
 		)
-	layers = []
-	for layer in layeredImage.extractLayers():
-		layers.append(
-			renderWAlphaOffset(layer.image, layeredImage.dimensions, layer.opacity, layer.offsets)
+	return [
+		blendLayers(
+			background=Image.new("RGBA", layeredImage.dimensions, (0, 0, 0, 0)),
+			foreground=layer.image,
+			blendType=layer.blendmode,
+			opacity=layer.opacity,
+			offsets=layer.offsets,
 		)
-	return layers
+		for layer in layeredImage.extractLayers()
+	]

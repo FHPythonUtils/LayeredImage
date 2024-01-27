@@ -7,9 +7,9 @@ import zipfile
 from typing import Any
 from zipfile import ZipFile
 
+from blendmodes.blend import BlendType
 from PIL import Image
 
-from layeredimage.blend import BlendType
 from layeredimage.layeredimage import LayeredImage
 from layeredimage.layergroup import Group, Layer
 

@@ -10,7 +10,7 @@
 
 ## blendModeLookup
 
-[Show source in common.py:14](../../../../layeredimage/io/common.py#L14)
+[Show source in common.py:13](../../../../layeredimage/io/common.py#L13)
 
 Get the blendmode from a lookup table.
 
@@ -18,7 +18,9 @@ Get the blendmode from a lookup table.
 
 ```python
 def blendModeLookup(
-    blendmode: Any, blendLookup: dict[Any, Any], default: Any = BlendType.NORMAL
+    blendmode: Any,
+    blendLookup: dict[Any, Any],
+    default: BlendType | tuple[str, ...] = BlendType.NORMAL,
 ) -> BlendType: ...
 ```
 
@@ -26,7 +28,7 @@ def blendModeLookup(
 
 ## expandLayersToCanvas
 
-[Show source in common.py:24](../../../../layeredimage/io/common.py#L24)
+[Show source in common.py:25](../../../../layeredimage/io/common.py#L25)
 
 Return layers and throw a warning if the image has groups.
 
@@ -35,7 +37,7 @@ Return layers and throw a warning if the image has groups.
 ```python
 def expandLayersToCanvas(
     layeredImage: LayeredImage, imageFormat: str
-) -> list[Image]: ...
+) -> list[Image.Image]: ...
 ```
 
 #### See also

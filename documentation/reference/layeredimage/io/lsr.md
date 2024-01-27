@@ -10,7 +10,7 @@
 
 ## openLayer_LSR
 
-[Show source in lsr.py:13](../../../../layeredimage/io/lsr.py#L13)
+[Show source in lsr.py:14](../../../../layeredimage/io/lsr.py#L14)
 
 Open a .lsr file into a layered image.
 
@@ -28,7 +28,7 @@ def openLayer_LSR(file: str) -> LayeredImage: ...
 
 ## saveLayer_LSR
 
-[Show source in lsr.py:38](../../../../layeredimage/io/lsr.py#L38)
+[Show source in lsr.py:39](../../../../layeredimage/io/lsr.py#L39)
 
 Save a layered image as .lsr.
 

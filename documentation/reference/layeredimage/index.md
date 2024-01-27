@@ -9,7 +9,6 @@
 
 ## Modules
 
-- [Blend](./blend.md)
 - [Io](io/index.md)
 - [LayeredImage](./layeredimage.md)
 - [LayerGroup](./layergroup.md)

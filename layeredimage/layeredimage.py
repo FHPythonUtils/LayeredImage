@@ -3,13 +3,11 @@ from __future__ import annotations
 
 from typing import Any
 
-from blendmodes.imagetools import rasterImageOA, rasterImageOffset, renderWAlphaOffset
+import numpy as np
+from blendmodes.blend import blendLayersArray
 from PIL import Image
 
-from .blend import blendLayers
 from .layergroup import Group, Layer
-
-_ = (rasterImageOA, rasterImageOffset)
 
 
 class LayeredImage:
@@ -19,7 +17,7 @@ class LayeredImage:
 		self,
 		layersAndGroups: list[Layer | Group],
 		dimensions: tuple[int, int] | None = None,
-		**kwargs: Any,
+		**kwargs: dict[str, Any],
 	) -> None:
 		"""LayeredImage - representation of a layered image.
 
@@ -52,13 +50,8 @@ class LayeredImage:
 	def __str__(self) -> str:
 		"""Get the string representation."""
 		return (
-			"<LayeredImage ("
-			+ str(self.dimensions[0])
-			+ "x"
-			+ str(self.dimensions[1])
-			+ ") with "
-			+ str(len(self.layersAndGroups))
-			+ " children>"
+			f"<LayeredImage ({self.dimensions[0]}x{self.dimensions[1]}) with "
+			f"{len(self.layersAndGroups)} children>"
 		)
 
 	def json(self) -> dict[str, Any]:
@@ -83,57 +76,16 @@ class LayeredImage:
 		"""Remove a LayerOrGroup at a specific index."""
 		self.layersAndGroups.pop(index)
 
-	def addImageAsLayer(self, image: Image.Image, name: str) -> None:
-		"""Resize an image to the canvas and add as a layer."""
-		layer = renderWAlphaOffset(image, self.dimensions)
-		self.addLayerOrGroup(Layer(name, layer, self.dimensions))
-
-	def insertImageAsLayer(self, image: Image.Image, name: str, index: int) -> None:
-		"""Resize an image to the canvas  and insert the layer."""
-		layer = renderWAlphaOffset(image, self.dimensions)
-		self.insertLayerOrGroup(Layer(name, layer, self.dimensions), index)
-
 	# The user may want to flatten the layers
-	def getFlattenLayers(self, *, ignoreHidden: bool = True) -> Image.Image:
+	def getFlattenLayers(self) -> Image.Image:
 		"""Return an image for all flattened layers."""
-		return flattenAll(self.layersAndGroups, self.dimensions, ignoreHidden=ignoreHidden)
 
-	def getFlattenTwoLayers(
-		self,
-		background: int,
-		foreground: int,
-		*,
-		ignoreHidden: bool = True,
-	) -> Image.Image:
-		"""Return an image for two flattened layers."""
-		flattenedSoFar = flattenLayerOrGroup(
-			self.layersAndGroups[background], self.dimensions, ignoreHidden=ignoreHidden
-		)
-		return flattenLayerOrGroup(
-			self.layersAndGroups[foreground],
-			self.dimensions,
-			flattenedSoFar,
-			ignoreHidden=ignoreHidden,
-		)
+		project_image = np.zeros((self.dimensions[1], self.dimensions[0], 4), dtype=np.uint8)
+		for layerOrGroup in self.layersAndGroups:
+			if layerOrGroup.visible:
+				project_image = render(layerOrGroup, project_image)
 
-	def flattenTwoLayers(
-		self, background: int, foreground: int, *, ignoreHidden: bool = True
-	) -> None:
-		"""Flatten two layers."""
-		image = self.getFlattenTwoLayers(background, foreground, ignoreHidden=ignoreHidden)
-		self.removeLayerOrGroup(foreground)
-		self.layersAndGroups[background] = Layer(
-			f"{self.layersAndGroups[background].name} (flattened)", image, self.dimensions
-		)
-
-	def flattenLayers(self, *, ignoreHidden: bool = True) -> None:
-		"""Flatten all layers."""
-		image = self.getFlattenLayers(ignoreHidden=ignoreHidden)
-		self.layersAndGroups[0] = Layer(
-			f"{self.layersAndGroups[0].name} (flattened)", image, self.dimensions
-		)
-		for layer in range(1, len(self.layersAndGroups)):
-			self.removeLayerOrGroup(layer)
+		return Image.fromarray(np.uint8(np.around(project_image, 0)))
 
 	# The user may hate groups and just want the layers... or just want the
 	# groups
@@ -181,72 +133,40 @@ class LayeredImage:
 		self.groups = self.extractGroups()
 
 
-def flattenLayerOrGroup(
-	layerOrGroup: Layer | Group,
-	imageDimensions: tuple[int, int],
-	flattenedSoFar: Image.Image | None = None,
-	*,
-	ignoreHidden: bool = True,
-) -> Image.Image:
+def render(layerOrGroup: Layer | Group, project_image: np.ndarray) -> np.ndarray:
 	"""Flatten a layer or group on to an image of what has already been flattened.
 
 	Args:
 	----
 		layerOrGroup (Layer, Group): A layer or a group of layers
-		imageDimensions (tuple[int, int]): size of the image
-		flattenedSoFar (Image.Image, optional): the image of what has already
-		been flattened. Defaults to None.
-		ignoreHidden (bool, optional): ignore layers that are hidden. Defaults
-		to True.
+		project_image (np.ndarray, optional): the image of what has already
+		been flattened.
 
 	Returns:
 	-------
-		Image.Image: Flattened image
+		np.ndarray: Flattened image
 	"""
-	if ignoreHidden and not layerOrGroup.visible:
-		foregroundRender = Image.new("RGBA", imageDimensions)
-	elif isinstance(layerOrGroup, Group):
-		foregroundRender = renderWAlphaOffset(
-			flattenAll(layerOrGroup.layers, imageDimensions, ignoreHidden=ignoreHidden),
-			imageDimensions,
-			1,
+	if isinstance(layerOrGroup, Layer):
+		return blendLayersArray(
+			project_image,
+			layerOrGroup.image,
+			layerOrGroup.blendmode,
+			layerOrGroup.opacity,
 			layerOrGroup.offsets,
 		)
-	else:
-		# Get a rendered image and apply blending
-		foregroundRender = renderWAlphaOffset(
-			layerOrGroup.image, imageDimensions, 1, layerOrGroup.offsets
+	if isinstance(layerOrGroup, Group):
+		group_image = np.zeros(
+			(layerOrGroup.dimensions[1], layerOrGroup.dimensions[0], 4), dtype=np.uint8
 		)
-	if flattenedSoFar is None:
-		return foregroundRender
-	return blendLayers(
-		flattenedSoFar, foregroundRender, layerOrGroup.blendmode, layerOrGroup.opacity
-	)
-
-
-def flattenAll(
-	layers: list[Layer | Group] | list[Layer],
-	imageDimensions: tuple[int, int],
-	*,
-	ignoreHidden: bool = True,
-) -> Image.Image:
-	"""Flatten a list of layers and groups.
-
-	Args:
-	----
-		layers (list[Layer | Group] | list[Layer]): A list of layers and groups
-		imageDimensions (tuple[int, int]): size of the image
-		been flattened. Defaults to None.
-		ignoreHidden (bool, optional): ignore layers that are hidden. Defaults
-		to True.
-
-	Returns:
-	-------
-		Image.Image: Flattened image
-	"""
-	flattenedSoFar = flattenLayerOrGroup(layers[0], imageDimensions, ignoreHidden=ignoreHidden)
-	for layer in range(1, len(layers)):
-		flattenedSoFar = flattenLayerOrGroup(
-			layers[layer], imageDimensions, flattenedSoFar=flattenedSoFar, ignoreHidden=ignoreHidden
+		for item in layerOrGroup.layers:
+			group_image = render(item, group_image)
+		return blendLayersArray(
+			project_image,
+			group_image,
+			layerOrGroup.blendmode,
+			layerOrGroup.opacity,
+			layerOrGroup.offsets,
 		)
-	return flattenedSoFar
+
+	msg = "Unsupported type encountered"
+	raise TypeError(msg)

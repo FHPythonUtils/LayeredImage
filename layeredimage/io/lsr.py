@@ -3,7 +3,8 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from blendmodes.imagetools import renderWAlphaOffset
+from blendmodes.blend import blendLayers
+from PIL import Image
 
 from layeredimage.layeredimage import LayeredImage
 from layeredimage.layergroup import Group, Layer
@@ -46,7 +47,13 @@ def saveLayer_LSR(fileName: str, layeredImage: LayeredImage) -> None:
 		else:
 			imageData = [
 				pylsr.LSRImageData(
-					renderWAlphaOffset(layer.image, group.dimensions, layer.opacity, layer.offsets),
+					blendLayers(
+						background=Image.new("RGBA", group.dimensions, (0, 0, 0, 0)),
+						foreground=layer.image,
+						blendType=layer.blendmode,
+						opacity=layer.opacity,
+						offsets=layer.offsets,
+					),
 					layer.name,
 				)
 				for layer in group.layers
