@@ -3,9 +3,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from blendmodes.blend import blendLayers
-from PIL import Image
-
+from layeredimage.io.common import expandLayer
 from layeredimage.layeredimage import LayeredImage
 from layeredimage.layergroup import Group, Layer
 
@@ -47,10 +45,9 @@ def saveLayer_LSR(fileName: str, layeredImage: LayeredImage) -> None:
 		else:
 			imageData = [
 				pylsr.LSRImageData(
-					blendLayers(
-						background=Image.new("RGBA", group.dimensions, (0, 0, 0, 0)),
+					expandLayer(
+						dimensions=group.dimensions,
 						foreground=layer.image,
-						blendType=layer.blendmode,
 						opacity=layer.opacity,
 						offsets=layer.offsets,
 					),
