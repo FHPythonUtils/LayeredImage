@@ -37,6 +37,7 @@ class LayerGroup:
 			Defaults to True.
 			blendmode (Blendtype): The blending mode to use. Defaults to BlendType.NORMAL
 			**kwargs (Any): add any keyword args to self.extras
+
 		"""
 		self.name = name
 		self.offsets = offsets
@@ -96,6 +97,7 @@ class Layer(LayerGroup):
 			is often configured per layer or per group by an 'eye' icon).
 			Defaults to True.
 			blendmode (Blendtype): The blending mode to use. Defaults to BlendType.NORMAL
+
 		"""
 		super().__init__(
 			name, (0, 0), offsets=offsets, opacity=opacity, visible=visible, blendmode=blendmode
@@ -149,6 +151,7 @@ class Group(LayerGroup):
 			is often configured per layer or per group by an 'eye' icon).
 			Defaults to True.
 			blendmode (Blendtype): The blending mode to use. Defaults to BlendType.NORMAL
+
 		"""
 		# Initialise dimens to 0 and then calculate as below
 		super().__init__(

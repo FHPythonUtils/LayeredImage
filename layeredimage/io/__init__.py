@@ -47,6 +47,7 @@ def openLayerImage(file: str | Path) -> LayeredImage:
 	Returns:
 	-------
 		LayeredImage: a layered image object
+
 	"""
 	functionMap = {
 		".ora": openLayer_ORA,
@@ -87,6 +88,7 @@ def saveLayerImage(fileName: str | Path, layeredImage: LayeredImage) -> None:
 	Returns:
 	-------
 		None
+
 	"""
 	functionMap = {
 		".ora": saveLayer_ORA,

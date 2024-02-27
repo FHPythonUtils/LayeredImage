@@ -26,6 +26,7 @@ class LayeredImage:
 			layersAndGroups (list[Layer, Group]): List of layers and groups
 			dimensions (tuple[int, int], optional): dimensions of the canvas. Defaults to None.
 			**kwargs (Any): add any keyword args to self.extras
+
 		"""
 		# Write here
 		self.layersAndGroups = layersAndGroups
@@ -145,6 +146,7 @@ def render(layerOrGroup: Layer | Group, project_image: np.ndarray) -> np.ndarray
 	Returns:
 	-------
 		np.ndarray: Flattened image
+
 	"""
 	if isinstance(layerOrGroup, Layer):
 		return blendLayersArray(

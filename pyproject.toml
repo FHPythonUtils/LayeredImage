@@ -27,19 +27,18 @@ blendmodes = "<2026,>=2024.1"
 pylsr = "<2026,>=2024"
 pyora = "<2,>=0.3.11"
 pypdn = "<2,>=1.0.6"
-psd-tools = "<2,>=1.9.30"
+psd-tools = "<2,>=1.9.31"
 pillow = "<11,>=10.2.0"
 gimpformats = "<2025,>=2023.1"
 loguru = "<2,>=0.7.2"
 
 [tool.poetry.group.dev.dependencies]
 imgcompare = "^2.0.1"
-pytest = "^7.4.4"
+pytest = "^8.0.2"
 handsdown = "^2.1.0"
-coverage = "^7.4.1"
+coverage = "^7.4.3"
 ruff = "^0.1.13"
-blackt = "^2024.0.1"
-pyright = "^1.1.348"
+pyright = "^1.1.351"
 
 [build-system]
 requires = ["poetry-core"]
@@ -67,9 +66,11 @@ fixable = ["ALL"]
 [tool.ruff.lint.per-file-ignores]
 "**/{tests,docs,tools}/*" = ["D", "S101", "E402"]
 
-[tool.black]
-line-length = 100
-target-version = ["py38"]
+[tool.ruff.format]
+indent-style = "tab"
+docstring-code-format = true
+line-ending = "lf"
+
 
 [tool.pyright]
 venvPath = "."
