@@ -16,7 +16,7 @@
 
 ## Group
 
-[Show source in layergroup.py:121](../../../layeredimage/layergroup.py#L121)
+[Show source in layergroup.py:123](../../../layeredimage/layergroup.py#L123)
 
 A representation of an image group.
 
@@ -43,7 +43,7 @@ class Group(LayerGroup):
 
 ### Group().json
 
-[Show source in layergroup.py:169](../../../layeredimage/layergroup.py#L169)
+[Show source in layergroup.py:172](../../../layeredimage/layergroup.py#L172)
 
 Get the object as a dict.
 
@@ -57,7 +57,7 @@ def json(self) -> dict[str, Any]: ...
 
 ## Layer
 
-[Show source in layergroup.py:69](../../../layeredimage/layergroup.py#L69)
+[Show source in layergroup.py:70](../../../layeredimage/layergroup.py#L70)
 
 A representation of an image layer.
 
@@ -83,7 +83,7 @@ class Layer(LayerGroup):
 
 ### Layer().json
 
-[Show source in layergroup.py:108](../../../layeredimage/layergroup.py#L108)
+[Show source in layergroup.py:110](../../../layeredimage/layergroup.py#L110)
 
 Get the object as a dict.
 
@@ -119,7 +119,7 @@ class LayerGroup:
 
 ### LayerGroup().__repr__
 
-[Show source in layergroup.py:49](../../../layeredimage/layergroup.py#L49)
+[Show source in layergroup.py:50](../../../layeredimage/layergroup.py#L50)
 
 Get the string representation.
 
@@ -131,7 +131,7 @@ def __repr__(self) -> str: ...
 
 ### LayerGroup().__str__
 
-[Show source in layergroup.py:53](../../../layeredimage/layergroup.py#L53)
+[Show source in layergroup.py:54](../../../layeredimage/layergroup.py#L54)
 
 Get the string representation.
 
@@ -143,7 +143,7 @@ def __str__(self) -> str: ...
 
 ### LayerGroup().json
 
-[Show source in layergroup.py:57](../../../layeredimage/layergroup.py#L57)
+[Show source in layergroup.py:58](../../../layeredimage/layergroup.py#L58)
 
 Get the object as a dict.
 
