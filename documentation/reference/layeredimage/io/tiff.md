@@ -10,7 +10,7 @@
 
 ## openLayer_TIFF
 
-[Show source in tiff.py:14](../../../../layeredimage/io/tiff.py#L14)
+[Show source in tiff.py:13](../../../../layeredimage/io/tiff.py#L13)
 
 Open a .tiff or a .tif file into a layered image.
 
@@ -28,7 +28,7 @@ def openLayer_TIFF(file: str) -> LayeredImage: ...
 
 ## saveLayer_TIFF
 
-[Show source in tiff.py:53](../../../../layeredimage/io/tiff.py#L53)
+[Show source in tiff.py:52](../../../../layeredimage/io/tiff.py#L52)
 
 Save a layered image as .tiff or .tif.
 

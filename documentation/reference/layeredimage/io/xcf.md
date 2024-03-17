@@ -10,7 +10,7 @@
 
 ## openLayer_XCF
 
-[Show source in xcf.py:15](../../../../layeredimage/io/xcf.py#L15)
+[Show source in xcf.py:14](../../../../layeredimage/io/xcf.py#L14)
 
 Open an .xcf file into a layered image.
 
@@ -28,7 +28,7 @@ def openLayer_XCF(file: str) -> LayeredImage: ...
 
 ## saveLayer_XCF
 
-[Show source in xcf.py:135](../../../../layeredimage/io/xcf.py#L135)
+[Show source in xcf.py:134](../../../../layeredimage/io/xcf.py#L134)
 
 Save a layered image as .xcf.
 

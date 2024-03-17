@@ -3,6 +3,10 @@
 All major and minor version changes will be documented in this file. Details of
 patch-level version changes can be found in [commit messages](../../commits/master).
 
+## 2024.2.1 - 2024/03/17
+
+- use absolute imports
+
 ## 2024.2 - 2024/01/27
 
 - bug fixes

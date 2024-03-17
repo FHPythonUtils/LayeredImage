@@ -10,7 +10,7 @@
 
 ## openLayer_WEBP
 
-[Show source in webp.py:14](../../../../layeredimage/io/webp.py#L14)
+[Show source in webp.py:13](../../../../layeredimage/io/webp.py#L13)
 
 Open a .webp file into a layered image.
 
@@ -28,7 +28,7 @@ def openLayer_WEBP(file: str) -> LayeredImage: ...
 
 ## saveLayer_WEBP
 
-[Show source in webp.py:28](../../../../layeredimage/io/webp.py#L28)
+[Show source in webp.py:27](../../../../layeredimage/io/webp.py#L27)
 
 Save a layered image as .webp.
 

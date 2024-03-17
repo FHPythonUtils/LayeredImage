@@ -86,6 +86,10 @@ Extract the groups from the image.
 def extractGroups(self) -> list[Group]: ...
 ```
 
+#### See also
+
+- [Group](./layergroup.md#group)
+
 ### LayeredImage().extractLayers
 
 [Show source in layeredimage.py:94](../../../layeredimage/layeredimage.py#L94)
@@ -97,6 +101,10 @@ Extract the layers from the image.
 ```python
 def extractLayers(self) -> list[Layer]: ...
 ```
+
+#### See also
+
+- [Layer](./layergroup.md#layer)
 
 ### LayeredImage().getFlattenLayers
 
