@@ -23,13 +23,13 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = ">=3.9,<4.0"
-blendmodes = "<2026,>=2024.1"
+blendmodes = "<2026,>=2024.1.1"
 pylsr = "<2026,>=2024"
 pyora = "<2,>=0.3.11"
 pypdn = "<2,>=1.0.6"
 psd-tools = "<2,>=1.9.31"
 pillow = "<11,>=10.2.0"
-gimpformats = "<2025,>=2023.1"
+gimpformats = "<2026,>=2024"
 loguru = "<2,>=0.7.2"
 
 [tool.poetry.group.dev.dependencies]
@@ -37,7 +37,7 @@ imgcompare = "^2.0.1"
 pytest = "^8.1.1"
 handsdown = "^2.1.0"
 coverage = "^7.4.4"
-ruff = "^0.2.2"
+ruff = "^0.3.3"
 pyright = "^1.1.354"
 
 [build-system]

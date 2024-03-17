@@ -1,5 +1,5 @@
-blendmodes<2026,>=2024.1
-gimpformats<2025,>=2023.1
+blendmodes<2026,>=2024.1.1
+gimpformats<2026,>=2024
 loguru<2,>=0.7.2
 pillow<11,>=10.2.0
 psd-tools<2,>=1.9.31
