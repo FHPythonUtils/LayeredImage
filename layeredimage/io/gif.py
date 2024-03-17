@@ -1,4 +1,5 @@
 """Do file io - GIF."""
+
 from __future__ import annotations
 
 from PIL import Image

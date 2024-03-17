@@ -1,4 +1,4 @@
-"""Test module """
+"""Test module"""
 
 from __future__ import annotations
 

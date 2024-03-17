@@ -16,7 +16,7 @@
 
 ## Group
 
-[Show source in layergroup.py:123](../../../layeredimage/layergroup.py#L123)
+[Show source in layergroup.py:124](../../../layeredimage/layergroup.py#L124)
 
 A representation of an image group.
 
@@ -43,7 +43,7 @@ class Group(LayerGroup):
 
 ### Group().json
 
-[Show source in layergroup.py:172](../../../layeredimage/layergroup.py#L172)
+[Show source in layergroup.py:173](../../../layeredimage/layergroup.py#L173)
 
 Get the object as a dict.
 
@@ -57,7 +57,7 @@ def json(self) -> dict[str, Any]: ...
 
 ## Layer
 
-[Show source in layergroup.py:70](../../../layeredimage/layergroup.py#L70)
+[Show source in layergroup.py:71](../../../layeredimage/layergroup.py#L71)
 
 A representation of an image layer.
 
@@ -83,7 +83,7 @@ class Layer(LayerGroup):
 
 ### Layer().json
 
-[Show source in layergroup.py:110](../../../layeredimage/layergroup.py#L110)
+[Show source in layergroup.py:111](../../../layeredimage/layergroup.py#L111)
 
 Get the object as a dict.
 
@@ -97,7 +97,7 @@ def json(self) -> dict[str, Any]: ...
 
 ## LayerGroup
 
-[Show source in layergroup.py:10](../../../layeredimage/layergroup.py#L10)
+[Show source in layergroup.py:11](../../../layeredimage/layergroup.py#L11)
 
 A representation of an image layer or group.
 
@@ -119,7 +119,7 @@ class LayerGroup:
 
 ### LayerGroup().__repr__
 
-[Show source in layergroup.py:50](../../../layeredimage/layergroup.py#L50)
+[Show source in layergroup.py:51](../../../layeredimage/layergroup.py#L51)
 
 Get the string representation.
 
@@ -131,7 +131,7 @@ def __repr__(self) -> str: ...
 
 ### LayerGroup().__str__
 
-[Show source in layergroup.py:54](../../../layeredimage/layergroup.py#L54)
+[Show source in layergroup.py:55](../../../layeredimage/layergroup.py#L55)
 
 Get the string representation.
 
@@ -143,7 +143,7 @@ def __str__(self) -> str: ...
 
 ### LayerGroup().json
 
-[Show source in layergroup.py:58](../../../layeredimage/layergroup.py#L58)
+[Show source in layergroup.py:59](../../../layeredimage/layergroup.py#L59)
 
 Get the object as a dict.
 

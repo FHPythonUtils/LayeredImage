@@ -15,7 +15,7 @@
 
 ## _saveLayer_LAYERED
 
-[Show source in layered.py:104](../../../../layeredimage/io/layered.py#L104)
+[Show source in layered.py:105](../../../../layeredimage/io/layered.py#L105)
 
 Save a layered image as .layered.
 
@@ -35,7 +35,7 @@ def _saveLayer_LAYERED(
 
 ## grabLayer_LAYERED
 
-[Show source in layered.py:82](../../../../layeredimage/io/layered.py#L82)
+[Show source in layered.py:83](../../../../layeredimage/io/layered.py#L83)
 
 Grab an image from .layered.
 
@@ -55,7 +55,7 @@ def grabLayer_LAYERED(
 
 ## openLayer_LAYERED
 
-[Show source in layered.py:20](../../../../layeredimage/io/layered.py#L20)
+[Show source in layered.py:21](../../../../layeredimage/io/layered.py#L21)
 
 Open a .layered file into a layered image.
 
@@ -73,7 +73,7 @@ def openLayer_LAYERED(file: str) -> LayeredImage: ...
 
 ## openLayer_LAYEREDC
 
-[Show source in layered.py:141](../../../../layeredimage/io/layered.py#L141)
+[Show source in layered.py:142](../../../../layeredimage/io/layered.py#L142)
 
 Open a .layeredc file into a layered image.
 
@@ -91,7 +91,7 @@ def openLayer_LAYEREDC(file: str) -> LayeredImage: ...
 
 ## saveLayer_LAYERED
 
-[Show source in layered.py:99](../../../../layeredimage/io/layered.py#L99)
+[Show source in layered.py:100](../../../../layeredimage/io/layered.py#L100)
 
 Save a layered image as .layered.
 
@@ -109,7 +109,7 @@ def saveLayer_LAYERED(fileName: str, layeredImage: LayeredImage) -> None: ...
 
 ## saveLayer_LAYEREDC
 
-[Show source in layered.py:146](../../../../layeredimage/io/layered.py#L146)
+[Show source in layered.py:147](../../../../layeredimage/io/layered.py#L147)
 
 Save a layeredc image as .layered.
 
@@ -127,7 +127,7 @@ def saveLayer_LAYEREDC(fileName: str, layeredImage: LayeredImage) -> None: ...
 
 ## writeImage_LAYERED
 
-[Show source in layered.py:126](../../../../layeredimage/io/layered.py#L126)
+[Show source in layered.py:127](../../../../layeredimage/io/layered.py#L127)
 
 Write an image to the archive.
 

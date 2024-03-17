@@ -1,4 +1,5 @@
 """Do file io - PSD."""
+
 from __future__ import annotations
 
 from blendmodes.blend import BlendType

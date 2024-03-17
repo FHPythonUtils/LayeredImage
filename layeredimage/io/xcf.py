@@ -1,4 +1,5 @@
 """Do file io - XCF."""
+
 from __future__ import annotations
 
 from blendmodes.blend import BlendType
