@@ -6,10 +6,9 @@ from blendmodes.blend import BlendType
 from loguru import logger
 from PIL import Image
 
+from layeredimage.io.common import blendModeLookup
 from layeredimage.layeredimage import LayeredImage
 from layeredimage.layergroup import Layer
-
-from .common import blendModeLookup
 
 
 #### PDN ####

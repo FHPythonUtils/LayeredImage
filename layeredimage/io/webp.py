@@ -4,10 +4,9 @@ from __future__ import annotations
 
 from PIL import Image
 
+from layeredimage.io.common import expandLayersToCanvas
 from layeredimage.layeredimage import LayeredImage
 from layeredimage.layergroup import Layer
-
-from .common import expandLayersToCanvas
 
 
 ## WEBP ##

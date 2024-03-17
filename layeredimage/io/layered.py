@@ -11,10 +11,9 @@ from zipfile import ZipFile
 from blendmodes.blend import BlendType
 from PIL import Image
 
+from layeredimage.io.common import blendModeLookup
 from layeredimage.layeredimage import LayeredImage
 from layeredimage.layergroup import Group, Layer
-
-from .common import blendModeLookup
 
 
 ## LAYERED ##

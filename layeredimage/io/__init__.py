@@ -6,22 +6,21 @@ from pathlib import Path
 
 from loguru import logger
 
-from layeredimage.layeredimage import LayeredImage
-
-from .gif import openLayer_GIF, saveLayer_GIF
-from .layered import (
+from layeredimage.io.gif import openLayer_GIF, saveLayer_GIF
+from layeredimage.io.layered import (
 	openLayer_LAYERED,
 	openLayer_LAYEREDC,
 	saveLayer_LAYERED,
 	saveLayer_LAYEREDC,
 )
-from .lsr import openLayer_LSR, saveLayer_LSR
-from .ora import openLayer_ORA, saveLayer_ORA
-from .pdn import openLayer_PDN, saveLayer_PDN
-from .psd import openLayer_PSD, saveLayer_PSD
-from .tiff import openLayer_TIFF, saveLayer_TIFF
-from .webp import openLayer_WEBP, saveLayer_WEBP
-from .xcf import openLayer_XCF, saveLayer_XCF
+from layeredimage.io.lsr import openLayer_LSR, saveLayer_LSR
+from layeredimage.io.ora import openLayer_ORA, saveLayer_ORA
+from layeredimage.io.pdn import openLayer_PDN, saveLayer_PDN
+from layeredimage.io.psd import openLayer_PSD, saveLayer_PSD
+from layeredimage.io.tiff import openLayer_TIFF, saveLayer_TIFF
+from layeredimage.io.webp import openLayer_WEBP, saveLayer_WEBP
+from layeredimage.io.xcf import openLayer_XCF, saveLayer_XCF
+from layeredimage.layeredimage import LayeredImage
 
 
 def extNotRecognised(fileName: str) -> None:

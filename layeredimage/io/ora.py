@@ -6,10 +6,9 @@ from typing import Any
 
 from blendmodes.blend import BlendType
 
+from layeredimage.io.common import blendModeLookup
 from layeredimage.layeredimage import LayeredImage
 from layeredimage.layergroup import Group, Layer
-
-from .common import blendModeLookup
 
 
 #### ORA ####

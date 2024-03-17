@@ -8,7 +8,7 @@ import numpy as np
 from blendmodes.blend import blendLayersArray
 from PIL import Image
 
-from .layergroup import Group, Layer
+from layeredimage.layergroup import Group, Layer
 
 
 class LayeredImage:
