@@ -40,7 +40,7 @@ class LayeredImage:
 
 ### LayeredImage().__repr__
 
-[Show source in layeredimage.py:48](../../../layeredimage/layeredimage.py#L48)
+[Show source in layeredimage.py:49](../../../layeredimage/layeredimage.py#L49)
 
 Get the string representation.
 
@@ -52,7 +52,7 @@ def __repr__(self) -> str: ...
 
 ### LayeredImage().__str__
 
-[Show source in layeredimage.py:52](../../../layeredimage/layeredimage.py#L52)
+[Show source in layeredimage.py:53](../../../layeredimage/layeredimage.py#L53)
 
 Get the string representation.
 
@@ -64,7 +64,7 @@ def __str__(self) -> str: ...
 
 ### LayeredImage().addLayerOrGroup
 
-[Show source in layeredimage.py:69](../../../layeredimage/layeredimage.py#L69)
+[Show source in layeredimage.py:70](../../../layeredimage/layeredimage.py#L70)
 
 Add a LayerOrGroup.
 
@@ -76,7 +76,7 @@ def addLayerOrGroup(self, layerOrGroup: Layer | Group) -> None: ...
 
 ### LayeredImage().extractGroups
 
-[Show source in layeredimage.py:125](../../../layeredimage/layeredimage.py#L125)
+[Show source in layeredimage.py:126](../../../layeredimage/layeredimage.py#L126)
 
 Extract the groups from the image.
 
@@ -92,7 +92,7 @@ def extractGroups(self) -> list[Group]: ...
 
 ### LayeredImage().extractLayers
 
-[Show source in layeredimage.py:94](../../../layeredimage/layeredimage.py#L94)
+[Show source in layeredimage.py:95](../../../layeredimage/layeredimage.py#L95)
 
 Extract the layers from the image.
 
@@ -108,7 +108,7 @@ def extractLayers(self) -> list[Layer]: ...
 
 ### LayeredImage().getFlattenLayers
 
-[Show source in layeredimage.py:82](../../../layeredimage/layeredimage.py#L82)
+[Show source in layeredimage.py:83](../../../layeredimage/layeredimage.py#L83)
 
 Return an image for all flattened layers.
 
@@ -120,7 +120,7 @@ def getFlattenLayers(self) -> Image.Image: ...
 
 ### LayeredImage().getLayerOrGroup
 
-[Show source in layeredimage.py:65](../../../layeredimage/layeredimage.py#L65)
+[Show source in layeredimage.py:66](../../../layeredimage/layeredimage.py#L66)
 
 Get a LayerOrGroup.
 
@@ -132,7 +132,7 @@ def getLayerOrGroup(self, index: int) -> Layer | Group: ...
 
 ### LayeredImage().insertLayerOrGroup
 
-[Show source in layeredimage.py:73](../../../layeredimage/layeredimage.py#L73)
+[Show source in layeredimage.py:74](../../../layeredimage/layeredimage.py#L74)
 
 Insert a LayerOrGroup at a specific index.
 
@@ -144,7 +144,7 @@ def insertLayerOrGroup(self, layerOrGroup: Layer | Group, index: int) -> None: .
 
 ### LayeredImage().json
 
-[Show source in layeredimage.py:59](../../../layeredimage/layeredimage.py#L59)
+[Show source in layeredimage.py:60](../../../layeredimage/layeredimage.py#L60)
 
 Get the object as a dict.
 
@@ -156,7 +156,7 @@ def json(self) -> dict[str, Any]: ...
 
 ### LayeredImage().removeLayerOrGroup
 
-[Show source in layeredimage.py:77](../../../layeredimage/layeredimage.py#L77)
+[Show source in layeredimage.py:78](../../../layeredimage/layeredimage.py#L78)
 
 Remove a LayerOrGroup at a specific index.
 
@@ -168,7 +168,7 @@ def removeLayerOrGroup(self, index: int) -> None: ...
 
 ### LayeredImage().updateGroups
 
-[Show source in layeredimage.py:133](../../../layeredimage/layeredimage.py#L133)
+[Show source in layeredimage.py:134](../../../layeredimage/layeredimage.py#L134)
 
 Update the groups from the image.
 
@@ -180,7 +180,7 @@ def updateGroups(self) -> None: ...
 
 ### LayeredImage().updateLayers
 
-[Show source in layeredimage.py:121](../../../layeredimage/layeredimage.py#L121)
+[Show source in layeredimage.py:122](../../../layeredimage/layeredimage.py#L122)
 
 Update the layers from the image.
 
@@ -194,7 +194,7 @@ def updateLayers(self) -> None: ...
 
 ## render
 
-[Show source in layeredimage.py:138](../../../layeredimage/layeredimage.py#L138)
+[Show source in layeredimage.py:139](../../../layeredimage/layeredimage.py#L139)
 
 Flatten a layer or group on to an image of what has already been flattened.
 

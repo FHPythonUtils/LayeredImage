@@ -43,7 +43,7 @@ class Group(LayerGroup):
 
 ### Group().json
 
-[Show source in layergroup.py:173](../../../layeredimage/layergroup.py#L173)
+[Show source in layergroup.py:172](../../../layeredimage/layergroup.py#L172)
 
 Get the object as a dict.
 
