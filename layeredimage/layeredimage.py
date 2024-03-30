@@ -35,13 +35,14 @@ class LayeredImage:
 		self.groups = self.extractGroups()
 		self.layers = self.extractLayers()
 		# If the user does not specify the dimensions use the largest x and y of
-		# the layers and groups
+		# the layers and groups, include offsets
 		self.dimensions = dimensions or (0, 0)
+		lyrOrGrpX = [lyrOrGrp.dimensions[0] + lyrOrGrp.offsets[0] for lyrOrGrp in layersAndGroups]
+		lyrOrGrpY = [lyrOrGrp.dimensions[1] + lyrOrGrp.offsets[1] for lyrOrGrp in layersAndGroups]
 		if dimensions is None:
-			layerDimens = [layerOrGroup.dimensions for layerOrGroup in layersAndGroups]
 			self.dimensions = (
-				max(layerDimen[0] for layerDimen in layerDimens),
-				max(layerDimen[1] for layerDimen in layerDimens),
+				max(lyrOrGrpX or [0]),
+				max(lyrOrGrpY or [0]),
 			)
 		self.extras = kwargs
 

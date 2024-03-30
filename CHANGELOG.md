@@ -3,6 +3,10 @@
 All major and minor version changes will be documented in this file. Details of
 patch-level version changes can be found in [commit messages](../../commits/master).
 
+## 2024.3 - 2024/03/30
+
+- fix bug where dimensions auto-calculation disregards layer offsets https://github.com/FHPythonUtils/LayeredImage/issues/7
+
 ## 2024.2.1 - 2024/03/17
 
 - use absolute imports
