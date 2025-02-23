@@ -19,7 +19,7 @@ class LayerGroup:
 		opacity: float = 1.0,
 		*,
 		visible: bool = True,
-		blendmode: BlendType | tuple[str, ...] = BlendType.NORMAL,
+		blendmode: BlendType = BlendType.NORMAL,
 		**kwargs: dict[str, Any],
 	) -> None:
 		"""Represent an image layer or group.
@@ -80,7 +80,7 @@ class Layer(LayerGroup):
 		opacity: float = 1.0,
 		*,
 		visible: bool = True,
-		blendmode: BlendType | tuple[str, ...] = BlendType.NORMAL,
+		blendmode: BlendType = BlendType.NORMAL,
 	) -> None:
 		"""Representation of an image layer.
 
@@ -133,7 +133,7 @@ class Group(LayerGroup):
 		opacity: float = 1.0,
 		*,
 		visible: bool = True,
-		blendmode: BlendType | tuple[str, ...] = BlendType.NORMAL,
+		blendmode: BlendType = BlendType.NORMAL,
 	) -> None:
 		"""Representation of an image group.
 

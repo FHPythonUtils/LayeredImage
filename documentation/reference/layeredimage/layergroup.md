@@ -32,7 +32,7 @@ class Group(LayerGroup):
         offsets: tuple[int, int] = (0, 0),
         opacity: float = 1.0,
         visible: bool = True,
-        blendmode: BlendType | tuple[str, ...] = BlendType.NORMAL,
+        blendmode: BlendType = BlendType.NORMAL,
     ) -> None: ...
 ```
 
@@ -73,7 +73,7 @@ class Layer(LayerGroup):
         offsets: tuple[int, int] = (0, 0),
         opacity: float = 1.0,
         visible: bool = True,
-        blendmode: BlendType | tuple[str, ...] = BlendType.NORMAL,
+        blendmode: BlendType = BlendType.NORMAL,
     ) -> None: ...
 ```
 
@@ -112,7 +112,7 @@ class LayerGroup:
         offsets: tuple[int, int] = (0, 0),
         opacity: float = 1.0,
         visible: bool = True,
-        blendmode: BlendType | tuple[str, ...] = BlendType.NORMAL,
+        blendmode: BlendType = BlendType.NORMAL,
         **kwargs: dict[str, Any]
     ) -> None: ...
 ```
