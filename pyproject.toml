@@ -1,48 +1,48 @@
-[tool.poetry]
+[project]
 name = "layeredimage"
-version = "2024.3"
-license = "mit"
+version = "2025"
 description = "Use this module to read, and write to a number of layered image formats"
-authors = ["FredHappyface"]
-classifiers = [
-	"Environment :: Console",
-	"Development Status :: 5 - Production/Stable",
-	"Intended Audience :: Developers",
-	"Intended Audience :: Education",
-	"Natural Language :: English",
-	"Operating System :: OS Independent",
-	"Programming Language :: Python :: Implementation :: CPython",
-	"Topic :: Multimedia :: Graphics",
-	"Topic :: Software Development :: Libraries :: Python Modules",
-	"Topic :: Utilities",
-]
-homepage = "https://github.com/FHPythonUtils/LayeredImage"
-repository = "https://github.com/FHPythonUtils/LayeredImage"
-documentation = "https://github.com/FHPythonUtils/LayeredImage/blob/master/README.md"
+authors = [{ name = "FredHappyface" }]
+requires-python = ">=3.9,<4.0"
 readme = "README.md"
+license = "mit"
+classifiers = [
+    "Environment :: Console",
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Education",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Topic :: Multimedia :: Graphics",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Utilities",
+]
+dependencies = [
+    "blendmodes>=2025",
+    "gimpformats>=2025",
+    "loguru>=0.7.3",
+    "pillow>=10.4.0",
+    "psd-tools>=1.10.6",
+    "pylsr>=2024",
+    "pyora>=0.3.11",
+    "pypdn>=1.0.6",
+]
 
-[tool.poetry.dependencies]
-python = ">=3.9,<4.0"
-blendmodes = "<2026,>=2024.1.1"
-pylsr = "<2026,>=2024"
-pyora = "<2,>=0.3.11"
-pypdn = "<2,>=1.0.6"
-psd-tools = "<2,>=1.9.31"
-pillow = "<11,>=10.2.0"
-gimpformats = "<2026,>=2024"
-loguru = "<2,>=0.7.2"
+[project.urls]
+Homepage = "https://github.com/FHPythonUtils/LayeredImage"
+Repository = "https://github.com/FHPythonUtils/LayeredImage"
+Documentation = "https://github.com/FHPythonUtils/LayeredImage/blob/master/README.md"
 
-[tool.poetry.group.dev.dependencies]
-imgcompare = "^2.0.1"
-pytest = "^8.1.1"
-handsdown = "^2.1.0"
-coverage = "^7.4.4"
-ruff = "^0.3.3"
-pyright = "^1.1.354"
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+[dependency-groups]
+dev = [
+    "coverage>=7.6.12",
+    "handsdown>=2.1.0",
+    "imgcompare>=2.0.1",
+    "pyright>=1.1.394",
+    "pytest>=8.3.4",
+    "ruff>=0.9.7",
+]
 
 [tool.ruff]
 line-length = 100
@@ -52,7 +52,6 @@ target-version = "py38"
 [tool.ruff.lint]
 select = ["ALL"]
 ignore = [
-	"ANN101",  # type annotation for self in method
 	"COM812",  # enforce trailing comma
 	"D2",  # pydocstyle formatting
 	"ISC001",
@@ -96,3 +95,7 @@ deps =
 	pytest
 commands = pytest tests
 """
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

@@ -83,7 +83,7 @@ def grabLayer_LAYERED(
 	zipFile: ZipFile, layer: dict[str, Any], blendLookup: dict[str, Any]
 ) -> Layer:
 	"""Grab an image from .layered."""
-	with zipFile.open(f'data/{layer["name"]}.png') as layerImage:
+	with zipFile.open(f"data/{layer['name']}.png") as layerImage:
 		image = Image.open(layerImage).convert("RGBA")
 	return Layer(
 		name=layer["name"],

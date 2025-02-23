@@ -99,9 +99,8 @@ class LayeredImage:
 			if isinstance(layerOrGroup, Layer):
 				layers.append(layerOrGroup)
 			else:
-				for layer in layerOrGroup.layers:
-					# Render the layer
-					layers.append(
+				layers.extend(
+					[
 						Layer(
 							name=layer.name,
 							image=layer.image,
@@ -116,7 +115,9 @@ class LayeredImage:
 							opacity=layerOrGroup.opacity * layer.opacity,
 							visible=layerOrGroup.visible and layer.visible,
 						)
-					)
+						for layer in layerOrGroup.layers
+					]
+				)
 		return layers
 
 	def updateLayers(self) -> None:
@@ -150,6 +151,9 @@ def render(layerOrGroup: Layer | Group, project_image: np.ndarray) -> np.ndarray
 		np.ndarray: Flattened image
 
 	"""
+	if not layerOrGroup.visible:
+		return project_image
+
 	if isinstance(layerOrGroup, Layer):
 		return blendLayersArray(
 			project_image,

@@ -76,7 +76,7 @@ def addLayerOrGroup(self, layerOrGroup: Layer | Group) -> None: ...
 
 ### LayeredImage().extractGroups
 
-[Show source in layeredimage.py:126](../../../layeredimage/layeredimage.py#L126)
+[Show source in layeredimage.py:127](../../../layeredimage/layeredimage.py#L127)
 
 Extract the groups from the image.
 
@@ -168,7 +168,7 @@ def removeLayerOrGroup(self, index: int) -> None: ...
 
 ### LayeredImage().updateGroups
 
-[Show source in layeredimage.py:134](../../../layeredimage/layeredimage.py#L134)
+[Show source in layeredimage.py:135](../../../layeredimage/layeredimage.py#L135)
 
 Update the groups from the image.
 
@@ -180,7 +180,7 @@ def updateGroups(self) -> None: ...
 
 ### LayeredImage().updateLayers
 
-[Show source in layeredimage.py:122](../../../layeredimage/layeredimage.py#L122)
+[Show source in layeredimage.py:123](../../../layeredimage/layeredimage.py#L123)
 
 Update the layers from the image.
 
@@ -194,7 +194,7 @@ def updateLayers(self) -> None: ...
 
 ## render
 
-[Show source in layeredimage.py:139](../../../layeredimage/layeredimage.py#L139)
+[Show source in layeredimage.py:140](../../../layeredimage/layeredimage.py#L140)
 
 Flatten a layer or group on to an image of what has already been flattened.
 

@@ -1,11 +1,6 @@
 !test
-README.rst
-requirements_optional.txt
-tmp
+uv.lock
 profile.*
-
-# DepHell stuff
-poetry.lock
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
