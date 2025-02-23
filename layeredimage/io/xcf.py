@@ -13,7 +13,7 @@ from layeredimage.layergroup import Group, Layer
 #### XCF ####
 def openLayer_XCF(file: str) -> LayeredImage:
 	"""Open an .xcf file into a layered image."""
-	from gimpformats.gimpXcfDocument import GimpDocument
+	from gimpformats.gimpXcfDocument import GimpDocument, GimpGroup
 
 	blendLookup = {
 		0: BlendType.NORMAL,
@@ -67,66 +67,44 @@ def openLayer_XCF(file: str) -> LayeredImage:
 	project = GimpDocument(file)
 	# Iterate the layers and create a list of layers for each group, then remove
 	# these from the project layers
-	layers = project.layers[::-1]
-	index = 0
-	groupIndex = 0
-	groupLayers = [[]]
-	while index < len(layers):
-		layerOrGroup = layers[index]
-		if layerOrGroup.isGroup:
-			index -= 1
-			while layers[index].itemPath is not None:
-				layer = layers[index]
-				groupLayers[groupIndex].append(
+
+	root_group = project.walkTree()
+
+	def rec_walk(group: GimpGroup) -> list[Group | Layer]:
+		layers = []
+		for child in group.children[::-1]:
+			if isinstance(child, GimpGroup):
+				info = child.layer_options
+				if info is not None:
+					layers.append(
+						Group(
+							name=str(info.name),
+							layers=rec_walk(child),
+							dimensions=(info.width, info.height),
+							offsets=(0, 0),
+							opacity=info.opacity,
+							visible=info.visible,
+							blendmode=blendModeLookup(info.blendMode, blendLookup),
+						)
+					)
+			else:
+				layers.append(
 					Layer(
-						name=layer.name,
-						image=layer.image,
-						dimensions=(layer.width, layer.height),
+						name=str(child.name),
+						image=child.image,
+						dimensions=(child.width, child.height),
 						offsets=(
-							layer.xOffset - layerOrGroup.xOffset,
-							layer.yOffset - layerOrGroup.yOffset,
+							child.xOffset,
+							child.yOffset,
 						),
-						opacity=layer.opacity,
-						visible=layer.visible,
-						blendmode=blendModeLookup(layer.blendMode, blendLookup),
+						opacity=child.opacity,
+						visible=child.visible,
+						blendmode=blendModeLookup(child.blendMode, blendLookup),
 					)
 				)
-				layers.pop(index)
-				index -= 1
-			index += 2
-			groupIndex += 1
-			groupLayers.append([])
-		else:
-			index += 1
-	# Iterate the clean project layers and add the group layers in
-	groupIndex = 0
-	layersAndGroups = []
-	for layerOrGroup in layers:
-		if layerOrGroup.isGroup:
-			layersAndGroups.append(
-				Group(
-					name=layerOrGroup.name,
-					layers=groupLayers[groupIndex][::-1],
-					dimensions=(layerOrGroup.width, layerOrGroup.height),
-					offsets=(layerOrGroup.xOffset, layerOrGroup.yOffset),
-					opacity=layerOrGroup.opacity,
-					visible=layerOrGroup.visible,
-					blendmode=blendModeLookup(layerOrGroup.blendMode, blendLookup),
-				)
-			)
-			groupIndex += 1
-		else:
-			layersAndGroups.append(
-				Layer(
-					name=layerOrGroup.name,
-					image=layerOrGroup.image,
-					dimensions=(layerOrGroup.width, layerOrGroup.height),
-					offsets=(layerOrGroup.xOffset, layerOrGroup.yOffset),
-					opacity=layerOrGroup.opacity,
-					visible=layerOrGroup.visible,
-					blendmode=blendModeLookup(layerOrGroup.blendMode, blendLookup),
-				)
-			)
+		return layers
+
+	layersAndGroups = rec_walk(root_group)
 
 	return LayeredImage(layersAndGroups, (project.width, project.height))
 
